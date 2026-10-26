@@ -6,7 +6,8 @@
         "heading": "LE FRIANCE",
         "use_reference_images": true,
         "use_reference_wordmark": true,
-        "body": "<p>Thoughtfully crafted pieces that bring warmth, balance, and timeless style into your space.</p>",
+        "body": "<p>Thoughtfully crafted pieces that bring warmth, balance, </p>",
+        "body_muted": "and timeless style into your space.",
         "overlay_opacity": 60
       }
     }

@@ -55,7 +55,12 @@
           <span class="editorial-hero__card-blur" aria-hidden="true"></span>
         </div>
         {% if section.settings.detail_link != blank %}</a>{% endif %}
-        {% if section.settings.body != blank %}<div class="editorial-hero__body rte">{{ section.settings.body }}</div>{% endif %}
+        {% if section.settings.body != blank or section.settings.body_muted != blank %}
+          <div class="editorial-hero__body rte">
+            {% if section.settings.body != blank %}<span class="editorial-hero__body-primary">{{ section.settings.body }}</span>{% endif %}
+            {% if section.settings.body_muted != blank %}<span class="editorial-hero__body-muted">{{ section.settings.body_muted | escape }}</span>{% endif %}
+          </div>
+        {% endif %}
       </div>
     {% elsif section.settings.body != blank %}<div class="editorial-hero__body editorial-hero__body--alone rte">{{ section.settings.body }}</div>{% endif %}
   </div>
@@ -128,6 +133,12 @@
       "id": "body",
       "label": "Body text",
       "default": "<p>Share what makes your collection special.</p>"
+    },
+    {
+      "type": "text",
+      "id": "body_muted",
+      "label": "Muted body text",
+      "info": "Appears at lower opacity after the body text."
     },
     {
       "type": "color",

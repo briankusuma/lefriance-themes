@@ -304,10 +304,11 @@ Detail analisis, pemakai setiap grup setting, dokumentasi Shopify, batas katalog
 - [Browser lokal](validation/header-hero-cart-browser.json) dan [uji presentasi cart](validation/cart-presentations-browser.json): 99 assertion lulus, lima lebar dan tiga variasi konten; cart Ajax dimock, bukan backend Shopify. Perubahan warna/overlay/font akhir diperiksa ulang sesuai catatan validasi.
 - Native Chrome diperiksa untuk desktop dan susunan mobile; tidak mengklaim Theme Editor/checkout/Lighthouse lulus.
 - Follow-up schema: role gradient color scheme diperbaiki agar menunjuk ke `color_background`; nilai `background_gradient` tersedia pada current dan preset untuk mencegah pesan preview Shopify tentang color schemes yang tidak terdefinisi.
+- Follow-up hero detail `3646:1128`: ukuran, crop, radius, blur, tracking, serta pembagian copy putih/50% diperiksa dari design context. Theme Check Shopify CLI 4.9.4 bersih dan suite browser lokal tetap 99/99.
 
 ### Deviasi dan pekerjaan tersisa
 
-Work Sans tetap substitusi font Figma. Search/cart/account ditambahkan untuk commerce; mobile dan state transaksi adalah not in Figma. Readability scrim diperkuat untuk teks putih. Aset Figma digunakan sebagai opsi referensi sesuai instruksi implementasi; status hak distribusi tetap dicatat di [licenses](third-party-licenses.md).
+Work Sans tetap substitusi font Figma. Arsip Open Sauce One yang diberikan pengguna berlisensi OFL, tetapi tidak dibundel karena custom font ditolak untuk Theme Store. Detail card `3646:1128` disesuaikan ke geometri Figma dan copy utama/redup kini terpisah serta merchant-editable. Search/cart/account ditambahkan untuk commerce; mobile dan state transaksi adalah not in Figma. Readability scrim diperkuat untuk teks putih. Aset Figma digunakan sebagai opsi referensi sesuai instruksi implementasi; status hak distribusi tetap dicatat di [licenses](third-party-licenses.md).
 
 Perlu development-theme QA untuk editor, logo beragam rasio, localization/account services, inventory/discount/subscription/checkout/payment dan Lighthouse. Full editorial T03–T08 serta fitur Theme Store lain tetap belum selesai. Tidak ada commit, push, deploy, publish, atau plugin install pada follow-up ini.
 

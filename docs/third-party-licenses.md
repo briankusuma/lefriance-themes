@@ -18,7 +18,7 @@ Diunduh dari design context frame `3646:1124` yang diminta pengguna, tanpa mengg
 | `assets/le-friance-symbol.svg` | `3646:1147` | Header brand symbol |
 | `assets/icon-globe.svg` | Region `3646:1141` | Globe inline; ID export dihapus untuk mencegah duplikasi DOM, fill mengikuti currentColor |
 
-Nomor anak media/ikon harus dicocokkan kembali bila Figma diubah; frame dan aset yang diunduh adalah sumber utama. Font tidak diunduh; Shopify font picker tetap digunakan. Tidak ada library runtime pihak ketiga tambahan.
+Nomor anak media/ikon harus dicocokkan kembali bila Figma diubah; frame dan aset yang diunduh adalah sumber utama. Arsip Open Sauce One yang diberikan pengguna diperiksa dan memuat SIL Open Font License 1.1, tetapi font tidak disalin ke theme karena custom font tidak diterima Shopify Theme Store. Shopify font picker tetap digunakan. Tidak ada library runtime pihak ketiga tambahan.
 
 ## Aset Figma lainnya yang direncanakan
 

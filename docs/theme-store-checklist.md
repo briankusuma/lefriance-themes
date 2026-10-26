@@ -231,11 +231,11 @@ This checklist is a local working reference. Documentation maintenance does not 
 
 ## 15. Font picker
 
-- [ ] All fonts use `font_picker`
-- [ ] Default font set (for example `work_sans_n6`)
-- [ ] Defaults and presets use currently available fonts
-- [ ] CSS loads bold, italic, bold-italic using `font_modify`
-- [ ] No custom fonts
+- [x] All fonts use `font_picker`
+- [x] Default font set (Work Sans body, heading, and navigation)
+- [x] Defaults and presets use currently available fonts
+- [x] CSS loads bold, italic, bold-italic using `font_modify`
+- [x] No custom fonts
 
 ## 16. Color system
 
