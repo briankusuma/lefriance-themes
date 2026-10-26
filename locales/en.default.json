@@ -78,5 +78,13 @@
     "message": "Message",
     "send": "Send message",
     "success": "Thank you. Your message has been sent."
+  },
+  "header": {
+    "menu": "Menu",
+    "country": "Country and currency",
+    "language": "Language",
+    "apply": "Apply",
+    "account": "Account",
+    "cart_count": "Cart, {{ count }} items"
   }
 }

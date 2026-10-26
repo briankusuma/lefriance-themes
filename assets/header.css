@@ -1,0 +1,73 @@
+/* T01: scoped header, native disclosure navigation, and localization. */
+.site-header {
+  --icon-stroke-width: 1.5;
+  display: block;
+  position: relative;
+  z-index: 30;
+  width: 100%;
+}
+.site-header__inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  width: min(calc(100% - var(--page-margin) * 2), calc(var(--page-width) - var(--page-margin) * 2));
+  height: auto;
+  min-height: 4rem;
+  margin-inline: auto;
+  padding-block: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.25;
+}
+.site-header a { text-decoration: none; }
+.site-header a:hover { text-decoration: underline; }
+.site-header a, .site-header summary { min-height: 24px; }
+.site-header__brand { display: flex; align-items: center; justify-content: start; min-width: 0; max-width: 100%; }
+.site-header__logo { width: min(var(--header-logo-width), 100%); height: auto; max-height: 6rem; object-fit: contain; object-position: left center; }
+.site-header__shop-name { display: block; max-width: 100%; font-weight: 500; overflow-wrap: anywhere; }
+.site-header__actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: end; gap: 0.75rem; min-width: 0; }
+.site-header__utility, .site-header__account-icon { display: inline-flex; align-items: center; justify-content: center; min-height: 32px; min-width: 24px; }
+.site-header__account-icon svg, .site-header__cart svg { width: 20px; height: 20px; }
+.site-header shopify-account { display: inline-flex; flex: 0 0 auto; }
+.site-header__cart { position: relative; gap: 0.2rem; }
+.site-header__cart-count { font-size: 0.75rem; position: static; max-width: none; overflow: visible; }
+.site-header__desktop-nav, .site-header__desktop-localization, .site-header__cta { display: none; }
+.site-header__menu-list, .site-header__menu-list ul { list-style: none; padding: 0; margin: 0; }
+.site-header__menu-list a, .site-header__menu-list summary { display: block; padding-block: 0.65rem; overflow-wrap: anywhere; }
+.site-header details > summary { cursor: pointer; }
+.site-header__menu-list summary { display: list-item; list-style-position: inside; }
+.site-header details > summary::marker { font-size: 0.75em; }
+.site-header__mobile-panel { position: absolute; inset-inline: 0; inset-block-start: 100%; padding: 1rem; background: var(--color-background); color: var(--color-foreground); box-shadow: 0 0.5rem 1rem #0000001a; border: 1px solid var(--color-border); max-height: 75svh; overflow-y: auto; }
+.site-header__mobile-panel ul ul, .site-header__mobile-panel .site-header__submenu-panel { padding-inline-start: 1rem; }
+.site-header__mobile-cta { display: inline-block; padding-block: 0.75rem; }
+.site-header__mobile-localization { grid-column: 1 / -1; min-width: 0; }
+.site-header__mobile-localization:empty { display: none; }
+.site-header__mobile-localization select[name="country_code"] { flex-basis: 100%; width: 100%; }
+.site-header__localization { display: flex; align-items: center; flex-wrap: wrap; justify-content: end; gap: 0.5rem; }
+.site-header__localization select { min-height: 32px; min-width: 0; max-width: 100%; width: auto; flex: 1 1 7rem; border: 0; background: transparent; color: inherit; padding: 0.3rem; }
+.site-header__localization option { background: var(--color-background); color: var(--color-foreground); }
+.site-header__localization button { padding: 0.3rem 0.5rem; font-size: 0.875rem; }
+.site-header .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+.site-header [aria-current="page"] { text-decoration: underline; text-underline-offset: 0.25em; }
+.site-header:not(:has(.site-header__mobile-menu)) .site-header__cta { display: inline-flex; max-width: 10rem; }
+/* A long or numerous menu stays usable instead of forcing a desktop-only row. */
+@media (min-width: 1100px) {
+  .site-header__inner { grid-template-columns: minmax(5rem, 1fr) minmax(0, 1.1fr) minmax(0, 1.7fr); gap: 2rem; min-height: 3.5rem; font-size: 1.066rem; }
+  .site-header__desktop-nav { display: block; min-width: 0; }
+  .site-header__inner:not(:has(.site-header__desktop-nav)) { grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr); }
+  .site-header__menu-list { display: flex; flex-wrap: wrap; align-items: center; column-gap: 2rem; }
+  .site-header__menu-list > li { position: relative; min-width: 0; }
+  .site-header__desktop-localization { display: block; max-width: 20rem; }
+  .site-header__localization { flex-wrap: wrap; }
+  .site-header__localization select { max-width: 12rem; }
+  .site-header__mobile-menu, .site-header__mobile-localization { display: none; }
+  .site-header__cta { display: inline-flex; overflow-wrap: anywhere; max-width: 12rem; }
+  .site-header__submenu-panel { position: absolute; inset-block-start: 100%; inset-inline-start: 0; width: min(20rem, 50vw); max-height: 70svh; overflow-y: auto; padding: 1rem; background: var(--color-background); color: var(--color-foreground); border: 1px solid var(--color-border); box-shadow: 0 0.5rem 1rem #0000001a; z-index: 1; }
+  .site-header__submenu-panel ul { padding-inline-start: 0.75rem; }
+}
+/* T02 opts in with data-header-overlay on its first main section. Until then the header stays solid. */
+body:has(main > .shopify-section:first-child [data-header-overlay]) .site-header[data-home="true"][data-overlay-enabled="true"] { margin-block-end: calc(-1 * var(--header-height, 0px)); background-color: transparent; color: #fff; }
+.site-header:has(details[open]) { background-color: var(--color-background); color: var(--color-foreground); }
+
+body:has(main > .shopify-section:first-child [data-header-overlay]) .site-header[data-home="true"][data-overlay-enabled="true"]:has(details[open]) { background-color: var(--color-background); color: var(--color-foreground); }

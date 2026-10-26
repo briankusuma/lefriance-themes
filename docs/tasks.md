@@ -4,8 +4,8 @@
 
 - Tanggal: 2026-10-26
 - Zona waktu: Asia/Jakarta
-- Status: done
-- Task aktif: T00
+- Status: blocked
+- Task aktif: T01
 - Judul: Implementasi homepage bertahap dari Figma
 
 ### Tujuan
@@ -101,16 +101,16 @@ Kriteria selesai:
 
 Pekerjaan:
 
-- [ ] Bangun logo kecil, menu utama, selector negara/bahasa, dan CTA yang dapat diatur merchant.
-- [ ] Tambahkan akses search/cart dan komponen `<shopify-account>` desktop/mobile; rencanakan predictive search pada milestone search agar tidak mengklaim fitur lengkap dari tautan saja. Catat penyesuaian dari Figma.
-- [ ] Gunakan link_list dan link CTA; "Start building" hanya link yang dikonfigurasi, bukan konfigurator. Jangan membuat tujuan palsu jika link belum diisi.
-- [ ] Buat navigasi mobile, submenu, focus management, Escape, serta header yang tetap terbaca di atas hero maupun tanpa hero.
+- [x] Bangun logo kecil, menu utama, selector negara/bahasa, dan CTA yang dapat diatur merchant.
+- [x] Tambahkan akses search/cart dan komponen `<shopify-account>` desktop/mobile; rencanakan predictive search pada milestone search agar tidak mengklaim fitur lengkap dari tautan saja. Catat penyesuaian dari Figma.
+- [x] Gunakan link_list dan link CTA; "Start building" hanya link yang dikonfigurasi, bukan konfigurator. Jangan membuat tujuan palsu jika link belum diisi.
+- [x] Buat navigasi mobile, submenu, focus management, Escape, serta header yang tetap terbaca di atas hero maupun tanpa hero.
 
 Kriteria selesai:
 
-- [ ] Menu desktop/mobile dapat dipakai dengan keyboard dan tidak terpotong saat label panjang.
+- [x] Menu desktop/mobile dapat dipakai dengan keyboard dan tidak terpotong saat label panjang — verified in local browser fixture; Shopify server integration pending.
 - [ ] Logo beragam rasio dan menu kosong ditangani; pengaturan tampil langsung di Theme Editor.
-- [ ] Tautan memakai resource/rute toko, bukan URL demo; tambahan commerce dicatat sebagai not in Figma.
+- [x] Tautan memakai resource/rute toko, bukan URL demo; tambahan commerce dicatat sebagai not in Figma.
 
 ### T02 — Hero editorial
 
@@ -272,40 +272,39 @@ Kriteria selesai:
 
 ## Progres dan laporan — task aktif saja
 
-- ID laporan: T00
-- Mulai lanjutan: 2026-10-26, Asia/Jakarta
-- Selesai fondasi lokal: 2026-10-26T12:14:11+07:00
-- Ringkasan: seluruh pekerjaan/kriteria T00 untuk fondasi, token, mapping, dan panduan setup selesai. Status done tidak mencakup preview/editor, implementasi halaman commerce lengkap, atau kelulusan Theme Store. Kriteria T00 meminta kemampuan preview dan akses yang belum tersedia dilaporkan; keduanya tercatat di development.md.
+- ID laporan: T01
+- Mulai: 2026-10-26, Asia/Jakarta
+- Pembaruan: 2026-10-26T13:56:32+07:00
+- Status hasil: implementasi lokal dan pemeriksaan lokal selesai; blocked untuk kriteria verifikasi Theme Editor/logo nyata dan integrasi toko. Task T01 belum dicentang selesai.
 
 ### File yang berubah
 
-- templates/: 12 template JSON dan gift_card.liquid; template Liquid yang dipindah tidak dipertahankan sebagai duplikat.
-- sections/: main sections, main-contact, custom-liquid, header/footer dan groups. blocks/custom-liquid.liquid ditambahkan; header/footer block lama dan demo hello-world/liquid-tips dihapus setelah dipindah/tidak digunakan.
-- config/settings_schema.json dan settings_data.json: font picker body/heading, tiga color schemes, layout, logo/favicon.
-- layout/theme.liquid dan password.liquid, snippets/css-variables.liquid dan meta-tags.liquid, assets/foundation.css/base.css, locale en.default.json.
-- docs/design-tokens.md, section-mapping.md, development.md, figma-foundation.json, validation/*, provenance/lisensi/deviasi/checklist, serta README dan konteks proyek.
-- Metadata theme_info dan nama preset sementara tetap Skeleton; tidak membuat kontak dukungan fiktif. Identitas rilis harus diganti ketika kontak/dokumentasi merchant tersedia.
+- sections/header.liquid, snippets/header-menu.liquid, snippets/header-localization.liquid.
+- assets/header.css dan assets/header.js: responsive navigation, native details, Escape/outside close, custom-element lifecycle dan ukuran header.
+- locales/en.default.json: label header dan localization.
+- layout/theme.liquid serta snippets/css-variables.liquid: guard untuk error font yang terlihat pada preview toko.
+- Dokumentasi mapping/deviasi dan bukti pada docs/validation/t01-*.
 
 ### Validasi
 
-- Shopify CLI 4.9.4: Theme Check menghasilkan [] dan exit 0, tanpa menonaktifkan rule. Bukti: [hasil Theme Check](validation/t00-theme-check.json).
-- Graph 12 template JSON/section, layout password, gift-card exception, groups, schema ID/label dan default scheme diperiksa: [hasil struktur](validation/t00-structure.txt).
-- JSON config/template/locale dapat diparse dan tautan dokumentasi aktif valid.
-- Kontras pasangan solid default text/background dan button-label/button dihitung >= 4.5:1; [hasil kontras](validation/t00-contrast.txt). Ini bukan audit seluruh UI.
-- Figma design context/screenshot dibaca ulang dan variable definitions kosong; token diambil dari properti node. Bukti ringkas: [Figma](figma-foundation.json).
-- Sumber resmi yang digunakan tercantum di [setup development](development.md), diakses 2026-10-26.
-- Preview Shopify/Theme Editor, browser QA, pengiriman form dan Lighthouse belum dilakukan. Development store dan izin upload development theme belum tersedia; bukan pemeriksaan yang dianggap lulus.
+- Shopify CLI 4.9.4 Theme Check: [] dan exit 0. [Bukti](validation/t01-theme-check.json).
+- node --check assets/header.js: lulus.
+- 188 assertion browser lokal lulus pada lima lebar dan empat skenario; mencakup no-JS, menu kosong, CTA, Escape/fokus, overflow, form IDs dan reconnect. [Bukti dan batas fixture](validation/t01-browser.json).
+- Regresi font nil/string/unavailable variants lulus: [hasil](validation/t01-font-regression.json).
+- Native Chrome: menu mobile terbuka, Escape menutup dan mengembalikan fokus. Screenshot desktop/mobile fixture diperiksa dalam sesi.
+- [Catatan sumber dan keterbatasan](validation/t01-notes.md). Theme Editor, real logo, Shopify account service dan pengiriman localization belum diverifikasi. Tidak menganggap fixture sebagai Shopify server.
 
 ### Asumsi, penyimpangan, dan hambatan
 
-- Font Work Sans dan ukuran/foreground turunan dicatat di [deviasi](figma-deviations.md). Mobile belum memiliki referensi; belum ada klaim visual match homepage.
-- Aset foto/logo Figma belum diimpor; sumber node dan status lisensinya dicatat untuk task terkait.
-- Header/footer dan semua halaman toko masih baseline. Dukungan fitur commerce lengkap serta desain section adalah milestone berikutnya.
-- Schema color_scheme_group tidak menerima label; hanya input anak yang diberi label. Standar diperjelas mengikuti schema yang divalidasi.
+- Search/cart/account dan form bahasa/currency merupakan kebutuhan commerce di luar tampilan Figma; native select + Apply menggantikan label negara statis.
+- Logo memakai upload merchant dengan fallback nama toko; simbol brand Figma tidak dibundel karena lisensi distribusinya belum dikonfirmasi. Font tetap substitusi Work Sans/fallback dari T00.
+- Menu mobile, breakpoint 1100px, disclosure bertingkat dan state fokus adalah not in Figma.
+- Overlay tetap nonaktif default sampai ada section hero yang mendukung data-header-overlay (T02); integrasi nyata dan kontras di atas foto belum diuji.
+- Preview toko yang terbuka menunjukkan error font_url sebelum perubahan. Guard sudah diperbaiki lokal; tidak ada klaim error remote hilang sebelum kode terbaru diunggah dan diuji.
 
 ### Pekerjaan tersisa
 
-T01–T09 belum dieksekusi. T01 adalah langkah berikutnya yang disarankan, tetapi Task aktif tidak dimajukan otomatis. Pemeriksaan editor/runtime menunggu akses development store. Tidak ada plugin, upload, publish, perubahan toko live, atau commit.
+Verifikasi di development theme yang diotorisasi: update pengaturan secara live, logo landscape/portrait, submenu dan selector dengan data toko, account sheet, serta integrasi over-hero setelah T02. Domain preview sudah terlihat di browser tetapi kode lokal belum diunggah; akses/izin untuk menguji perubahan pada development theme masih perlu dipastikan. T02–T09 belum dikerjakan. Tidak ada publish, commit, plugin install, atau perubahan remote dari sesi ini.
 
 ---
 

@@ -1,0 +1,28 @@
+{% doc %}
+  Render native Shopify country/language selectors with an explicit submit button.
+  @param {string} instance_id - Unique section and placement identifier.
+{% enddoc %}
+{% if localization.available_countries.size > 1 or localization.available_languages.size > 1 %}
+  {% assign form_id = 'HeaderLocalization-' | append: instance_id %}
+  {% form 'localization', id: form_id, class: 'site-header__localization' %}
+    {% if localization.available_countries.size > 1 %}
+      <label class="visually-hidden" for="HeaderCountry-{{ instance_id }}">{{ 'header.country' | t }}</label>
+      <select id="HeaderCountry-{{ instance_id }}" name="country_code">
+        {% for country in localization.available_countries %}
+          <option value="{{ country.iso_code }}"{% if country.iso_code == localization.country.iso_code %} selected{% endif %}>
+            {{ country.name | escape }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+          </option>
+        {% endfor %}
+      </select>
+    {% endif %}
+    {% if localization.available_languages.size > 1 %}
+      <label class="visually-hidden" for="HeaderLanguage-{{ instance_id }}">{{ 'header.language' | t }}</label>
+      <select id="HeaderLanguage-{{ instance_id }}" name="language_code">
+        {% for language in localization.available_languages %}
+          <option value="{{ language.iso_code }}" lang="{{ language.iso_code }}"{% if language.iso_code == localization.language.iso_code %} selected{% endif %}>{{ language.endonym_name | escape }}</option>
+        {% endfor %}
+      </select>
+    {% endif %}
+    <button type="submit">{{ 'header.apply' | t }}</button>
+  {% endform %}
+{% endif %}

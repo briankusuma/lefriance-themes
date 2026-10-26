@@ -5,7 +5,7 @@ Sumber visual: file Figma `C2rhn7BP2nXA0LyByRDn09`, frame `3374:242`. Pemetaan i
 | Task | Node | Shopify target | Data merchant / status |
 | --- | --- | --- | --- |
 | T00 | 3374:242 | layout/theme.liquid, JSON templates, section groups, settings, locale | Fondasi; belum homepage final |
-| T01 | 3374:243 | sections/header.liquid dalam header-group.json | Main menu, logo, negara/bahasa, CTA; sekarang hanya header baseline Skeleton |
+| T01 | 3374:243 | sections/header.liquid dalam header-group.json | Main menu, logo merchant, localization, CTA dan commerce actions sudah diimplementasikan lokal; validasi Shopify editor masih pending |
 | T02 | 3374:243 | sections/hero-editorial.liquid (direncanakan) | Foto, wordmark, teks, focal point, link |
 | T03 | 3374:270 | sections/material-stories.liquid (direncanakan) | Blok cerita/kategori/media; hubungan kontrol perlu dipastikan |
 | T04 | 3374:305 | sections/collection-collage.liquid (direncanakan) | Blok foto dan promosi koleksi |
@@ -31,3 +31,9 @@ Nama file section rencana belum dibuat. Jangan membuat komponen kosong hanya unt
 Template contact adalah fondasi form, bukan klaim pengiriman teruji. Cart/product/search/collection/article masih baseline dan memerlukan milestone tersendiri (filter, varian, empty/error, penawaran, rich media, dan kebutuhan lain). Tidak ada konfigurator/digital passport, quick view, aplikasi, animasi, upload ke toko, atau publishing pada T00.
 
 Assets foto/logo Figma belum diunduh untuk digunakan. Tidak ada slot foto homepage yang dirender pada T00; asset dibawa saat section terkait dikerjakan dan hak penggunaannya dikonfirmasi. Daftar sumber ada di [lisensi](third-party-licenses.md).
+
+## Handoff T01 → T02
+
+Header memiliki setting overlay_home (default false). Hero T02 dapat menambahkan data-header-overlay pada wrapper section pertamanya; selector hanya mengaktifkan overlay pada home page ketika marker tersebut ada dan setting diaktifkan. Uji kontras di atas foto dan menu terbuka sebelum mengklaim integrasi selesai. Tidak perlu mengubah layout/header group untuk membuat hero.
+
+Header menggunakan native details, local assets/header.js, dan connected/disconnectedCallback agar event listener dibersihkan saat editor mengganti section. Validasi fixture tidak menggantikan pengujian editor nyata. Logo berasal dari settings.logo; pilih logo yang sesuai dengan color scheme. CTA hanya tampil jika label dan link terisi; Start building tidak membuat konfigurator.

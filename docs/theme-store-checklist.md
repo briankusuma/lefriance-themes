@@ -292,7 +292,7 @@ This checklist is a local working reference. Documentation maintenance does not 
 
 ## Repository and tooling gates
 
-- [x] `shopify theme check` clean for relevant findings — adapted T00 foundation, Shopify CLI 4.9.4, zero findings (2026-10-26); evidence docs/validation/t00-theme-check.json; rerun after changes.
+- [x] `shopify theme check` clean for relevant findings — adapted T00 foundation, Shopify CLI 4.9.4, zero findings (2026-10-26); evidence docs/validation/t01-theme-check.json for latest T01 changes; rerun after changes.
 - [ ] No disabled Theme Check rules without justification
 - [ ] Third-party assets and licenses recorded in `docs/third-party-licenses.md`
 - [ ] Figma deviations recorded in `docs/figma-deviations.md`

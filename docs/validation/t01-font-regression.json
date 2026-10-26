@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "checks": [
+    "null body and heading fonts",
+    "missing bold/italic variants",
+    "font_url skipped without valid drop",
+    "unresolved font strings fall back safely"
+  ]
+}

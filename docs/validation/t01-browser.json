@@ -1,0 +1,774 @@
+{
+  "date": "2026-10-26",
+  "scope": "Local LiquidJS fixture generated from actual header/snippets with production CSS/JS. Shopify localization form tag mocked; account component service not connected; not a Shopify Theme Editor test.",
+  "scenarios": [
+    "normal",
+    "empty",
+    "long",
+    "empty-cta"
+  ],
+  "widths": [
+    320,
+    375,
+    768,
+    1100,
+    1535
+  ],
+  "passed": 188,
+  "failed": 0,
+  "failures": [],
+  "checks": [
+    {
+      "passed": true,
+      "label": "normal 320: no horizontal overflow"
+    },
+    {
+      "passed": true,
+      "label": "normal 320: unique IDs"
+    },
+    {
+      "passed": true,
+      "label": "normal 320: country forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "normal 320: language forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "normal 320: localization labels resolve"
+    },
+    {
+      "passed": true,
+      "label": "normal 320: account element visible (service not tested)"
+    },
+    {
+      "passed": true,
+      "label": "normal 320: no JavaScript errors"
+    },
+    {
+      "passed": true,
+      "label": "normal 320: disclosure opens"
+    },
+    {
+      "passed": true,
+      "label": "normal 320: Escape closes and restores focus"
+    },
+    {
+      "passed": true,
+      "label": "normal 320: leaving header closes menus"
+    },
+    {
+      "passed": true,
+      "label": "normal 320: reconnect initializes ResizeObserver"
+    },
+    {
+      "passed": true,
+      "label": "normal 375: no horizontal overflow"
+    },
+    {
+      "passed": true,
+      "label": "normal 375: unique IDs"
+    },
+    {
+      "passed": true,
+      "label": "normal 375: country forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "normal 375: language forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "normal 375: localization labels resolve"
+    },
+    {
+      "passed": true,
+      "label": "normal 375: account element visible (service not tested)"
+    },
+    {
+      "passed": true,
+      "label": "normal 375: no JavaScript errors"
+    },
+    {
+      "passed": true,
+      "label": "normal 375: disclosure opens"
+    },
+    {
+      "passed": true,
+      "label": "normal 375: Escape closes and restores focus"
+    },
+    {
+      "passed": true,
+      "label": "normal 375: leaving header closes menus"
+    },
+    {
+      "passed": true,
+      "label": "normal 375: reconnect initializes ResizeObserver"
+    },
+    {
+      "passed": true,
+      "label": "normal 768: no horizontal overflow"
+    },
+    {
+      "passed": true,
+      "label": "normal 768: unique IDs"
+    },
+    {
+      "passed": true,
+      "label": "normal 768: country forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "normal 768: language forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "normal 768: localization labels resolve"
+    },
+    {
+      "passed": true,
+      "label": "normal 768: account element visible (service not tested)"
+    },
+    {
+      "passed": true,
+      "label": "normal 768: no JavaScript errors"
+    },
+    {
+      "passed": true,
+      "label": "normal 768: disclosure opens"
+    },
+    {
+      "passed": true,
+      "label": "normal 768: Escape closes and restores focus"
+    },
+    {
+      "passed": true,
+      "label": "normal 768: leaving header closes menus"
+    },
+    {
+      "passed": true,
+      "label": "normal 768: reconnect initializes ResizeObserver"
+    },
+    {
+      "passed": true,
+      "label": "normal 1100: no horizontal overflow"
+    },
+    {
+      "passed": true,
+      "label": "normal 1100: unique IDs"
+    },
+    {
+      "passed": true,
+      "label": "normal 1100: country forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "normal 1100: language forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "normal 1100: localization labels resolve"
+    },
+    {
+      "passed": true,
+      "label": "normal 1100: account element visible (service not tested)"
+    },
+    {
+      "passed": true,
+      "label": "normal 1100: no JavaScript errors"
+    },
+    {
+      "passed": true,
+      "label": "normal 1100: disclosure opens"
+    },
+    {
+      "passed": true,
+      "label": "normal 1100: Escape closes and restores focus"
+    },
+    {
+      "passed": true,
+      "label": "normal 1100: leaving header closes menus"
+    },
+    {
+      "passed": true,
+      "label": "normal 1100: reconnect initializes ResizeObserver"
+    },
+    {
+      "passed": true,
+      "label": "normal 1535: no horizontal overflow"
+    },
+    {
+      "passed": true,
+      "label": "normal 1535: unique IDs"
+    },
+    {
+      "passed": true,
+      "label": "normal 1535: country forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "normal 1535: language forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "normal 1535: localization labels resolve"
+    },
+    {
+      "passed": true,
+      "label": "normal 1535: account element visible (service not tested)"
+    },
+    {
+      "passed": true,
+      "label": "normal 1535: no JavaScript errors"
+    },
+    {
+      "passed": true,
+      "label": "normal 1535: disclosure opens"
+    },
+    {
+      "passed": true,
+      "label": "normal 1535: Escape closes and restores focus"
+    },
+    {
+      "passed": true,
+      "label": "normal 1535: leaving header closes menus"
+    },
+    {
+      "passed": true,
+      "label": "normal 1535: reconnect initializes ResizeObserver"
+    },
+    {
+      "passed": true,
+      "label": "empty 320: no horizontal overflow"
+    },
+    {
+      "passed": true,
+      "label": "empty 320: unique IDs"
+    },
+    {
+      "passed": true,
+      "label": "empty 320: country forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "empty 320: language forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "empty 320: localization labels resolve"
+    },
+    {
+      "passed": true,
+      "label": "empty 320: no JavaScript errors"
+    },
+    {
+      "passed": true,
+      "label": "empty 320: reconnect initializes ResizeObserver"
+    },
+    {
+      "passed": true,
+      "label": "empty 375: no horizontal overflow"
+    },
+    {
+      "passed": true,
+      "label": "empty 375: unique IDs"
+    },
+    {
+      "passed": true,
+      "label": "empty 375: country forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "empty 375: language forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "empty 375: localization labels resolve"
+    },
+    {
+      "passed": true,
+      "label": "empty 375: no JavaScript errors"
+    },
+    {
+      "passed": true,
+      "label": "empty 375: reconnect initializes ResizeObserver"
+    },
+    {
+      "passed": true,
+      "label": "empty 768: no horizontal overflow"
+    },
+    {
+      "passed": true,
+      "label": "empty 768: unique IDs"
+    },
+    {
+      "passed": true,
+      "label": "empty 768: country forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "empty 768: language forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "empty 768: localization labels resolve"
+    },
+    {
+      "passed": true,
+      "label": "empty 768: no JavaScript errors"
+    },
+    {
+      "passed": true,
+      "label": "empty 768: reconnect initializes ResizeObserver"
+    },
+    {
+      "passed": true,
+      "label": "empty 1100: no horizontal overflow"
+    },
+    {
+      "passed": true,
+      "label": "empty 1100: unique IDs"
+    },
+    {
+      "passed": true,
+      "label": "empty 1100: country forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "empty 1100: language forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "empty 1100: localization labels resolve"
+    },
+    {
+      "passed": true,
+      "label": "empty 1100: no JavaScript errors"
+    },
+    {
+      "passed": true,
+      "label": "empty 1100: reconnect initializes ResizeObserver"
+    },
+    {
+      "passed": true,
+      "label": "empty 1535: no horizontal overflow"
+    },
+    {
+      "passed": true,
+      "label": "empty 1535: unique IDs"
+    },
+    {
+      "passed": true,
+      "label": "empty 1535: country forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "empty 1535: language forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "empty 1535: localization labels resolve"
+    },
+    {
+      "passed": true,
+      "label": "empty 1535: no JavaScript errors"
+    },
+    {
+      "passed": true,
+      "label": "empty 1535: reconnect initializes ResizeObserver"
+    },
+    {
+      "passed": true,
+      "label": "long 320: no horizontal overflow"
+    },
+    {
+      "passed": true,
+      "label": "long 320: unique IDs"
+    },
+    {
+      "passed": true,
+      "label": "long 320: country forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "long 320: language forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "long 320: localization labels resolve"
+    },
+    {
+      "passed": true,
+      "label": "long 320: account element visible (service not tested)"
+    },
+    {
+      "passed": true,
+      "label": "long 320: no JavaScript errors"
+    },
+    {
+      "passed": true,
+      "label": "long 320: disclosure opens"
+    },
+    {
+      "passed": true,
+      "label": "long 320: Escape closes and restores focus"
+    },
+    {
+      "passed": true,
+      "label": "long 320: leaving header closes menus"
+    },
+    {
+      "passed": true,
+      "label": "long 320: reconnect initializes ResizeObserver"
+    },
+    {
+      "passed": true,
+      "label": "long 375: no horizontal overflow"
+    },
+    {
+      "passed": true,
+      "label": "long 375: unique IDs"
+    },
+    {
+      "passed": true,
+      "label": "long 375: country forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "long 375: language forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "long 375: localization labels resolve"
+    },
+    {
+      "passed": true,
+      "label": "long 375: account element visible (service not tested)"
+    },
+    {
+      "passed": true,
+      "label": "long 375: no JavaScript errors"
+    },
+    {
+      "passed": true,
+      "label": "long 375: disclosure opens"
+    },
+    {
+      "passed": true,
+      "label": "long 375: Escape closes and restores focus"
+    },
+    {
+      "passed": true,
+      "label": "long 375: leaving header closes menus"
+    },
+    {
+      "passed": true,
+      "label": "long 375: reconnect initializes ResizeObserver"
+    },
+    {
+      "passed": true,
+      "label": "long 768: no horizontal overflow"
+    },
+    {
+      "passed": true,
+      "label": "long 768: unique IDs"
+    },
+    {
+      "passed": true,
+      "label": "long 768: country forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "long 768: language forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "long 768: localization labels resolve"
+    },
+    {
+      "passed": true,
+      "label": "long 768: account element visible (service not tested)"
+    },
+    {
+      "passed": true,
+      "label": "long 768: no JavaScript errors"
+    },
+    {
+      "passed": true,
+      "label": "long 768: disclosure opens"
+    },
+    {
+      "passed": true,
+      "label": "long 768: Escape closes and restores focus"
+    },
+    {
+      "passed": true,
+      "label": "long 768: leaving header closes menus"
+    },
+    {
+      "passed": true,
+      "label": "long 768: reconnect initializes ResizeObserver"
+    },
+    {
+      "passed": true,
+      "label": "long 1100: no horizontal overflow"
+    },
+    {
+      "passed": true,
+      "label": "long 1100: unique IDs"
+    },
+    {
+      "passed": true,
+      "label": "long 1100: country forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "long 1100: language forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "long 1100: localization labels resolve"
+    },
+    {
+      "passed": true,
+      "label": "long 1100: account element visible (service not tested)"
+    },
+    {
+      "passed": true,
+      "label": "long 1100: no JavaScript errors"
+    },
+    {
+      "passed": true,
+      "label": "long 1100: disclosure opens"
+    },
+    {
+      "passed": true,
+      "label": "long 1100: Escape closes and restores focus"
+    },
+    {
+      "passed": true,
+      "label": "long 1100: leaving header closes menus"
+    },
+    {
+      "passed": true,
+      "label": "long 1100: reconnect initializes ResizeObserver"
+    },
+    {
+      "passed": true,
+      "label": "long 1535: no horizontal overflow"
+    },
+    {
+      "passed": true,
+      "label": "long 1535: unique IDs"
+    },
+    {
+      "passed": true,
+      "label": "long 1535: country forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "long 1535: language forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "long 1535: localization labels resolve"
+    },
+    {
+      "passed": true,
+      "label": "long 1535: account element visible (service not tested)"
+    },
+    {
+      "passed": true,
+      "label": "long 1535: no JavaScript errors"
+    },
+    {
+      "passed": true,
+      "label": "long 1535: disclosure opens"
+    },
+    {
+      "passed": true,
+      "label": "long 1535: Escape closes and restores focus"
+    },
+    {
+      "passed": true,
+      "label": "long 1535: leaving header closes menus"
+    },
+    {
+      "passed": true,
+      "label": "long 1535: reconnect initializes ResizeObserver"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 320: no horizontal overflow"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 320: unique IDs"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 320: country forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 320: language forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 320: localization labels resolve"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 320: account element visible (service not tested)"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 320: no JavaScript errors"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 320: reconnect initializes ResizeObserver"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 375: no horizontal overflow"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 375: unique IDs"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 375: country forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 375: language forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 375: localization labels resolve"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 375: account element visible (service not tested)"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 375: no JavaScript errors"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 375: reconnect initializes ResizeObserver"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 768: no horizontal overflow"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 768: unique IDs"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 768: country forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 768: language forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 768: localization labels resolve"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 768: account element visible (service not tested)"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 768: no JavaScript errors"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 768: reconnect initializes ResizeObserver"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 1100: no horizontal overflow"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 1100: unique IDs"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 1100: country forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 1100: language forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 1100: localization labels resolve"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 1100: account element visible (service not tested)"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 1100: no JavaScript errors"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 1100: reconnect initializes ResizeObserver"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 1535: no horizontal overflow"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 1535: unique IDs"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 1535: country forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 1535: language forms rendered"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 1535: localization labels resolve"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 1535: account element visible (service not tested)"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 1535: no JavaScript errors"
+    },
+    {
+      "passed": true,
+      "label": "empty-cta 1535: reconnect initializes ResizeObserver"
+    },
+    {
+      "passed": true,
+      "label": "no JS: mobile disclosure opens natively"
+    },
+    {
+      "passed": true,
+      "label": "no JS: localization retains native select and submit"
+    },
+    {
+      "passed": true,
+      "label": "no JS: header enhancement is absent"
+    }
+  ]
+}

@@ -10,11 +10,11 @@
       2. Preload only the critical font variant (base weight)
       3. Additional variants load on-demand via @font-face
     {% endcomment %}
-    {% unless settings.type_primary_font.system? %}
+    {% if settings.type_primary_font.family != blank and settings.type_primary_font.system? == false %}
 
       {% comment %} Preload the base font variant for initial page render {% endcomment %}
       {{ settings.type_primary_font | font_url | preload_tag: as: 'font', crossorigin: 'anonymous' }}
-    {% endunless %}
+    {% endif %}
 
     {% # Load and preload the critical CSS %}
     {{ 'critical.css' | asset_url | stylesheet_tag: preload: true }}

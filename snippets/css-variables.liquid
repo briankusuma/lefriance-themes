@@ -1,30 +1,38 @@
 {% style %}
   {% assign body_font = settings.type_primary_font %}
   {% assign heading_font = settings.type_heading_font %}
-  {{ body_font | font_face: font_display: 'swap' }}
-  {{ body_font | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}
-  {{ body_font | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
-  {{ body_font | font_modify: 'weight', 'bold' | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
-  {% unless heading_font == body_font %}
+  {% if body_font.family != blank %}
+    {{ body_font | font_face: font_display: 'swap' }}
+    {% assign body_bold = body_font | font_modify: 'weight', 'bold' %}
+    {% assign body_italic = body_font | font_modify: 'style', 'italic' %}
+    {% if body_bold != blank %}{% assign body_bold_italic = body_bold | font_modify: 'style', 'italic' %}{% endif %}
+    {% if body_bold != blank %}{{ body_bold | font_face: font_display: 'swap' }}{% endif %}
+    {% if body_italic != blank %}{{ body_italic | font_face: font_display: 'swap' }}{% endif %}
+    {% if body_bold_italic != blank %}{{ body_bold_italic | font_face: font_display: 'swap' }}{% endif %}
+  {% endif %}
+  {% if heading_font.family != blank and heading_font != body_font %}
     {{ heading_font | font_face: font_display: 'swap' }}
-    {{ heading_font | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}
-    {{ heading_font | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
-    {{ heading_font | font_modify: 'weight', 'bold' | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
-  {% endunless %}
+    {% assign heading_bold = heading_font | font_modify: 'weight', 'bold' %}
+    {% assign heading_italic = heading_font | font_modify: 'style', 'italic' %}
+    {% if heading_bold != blank %}{% assign heading_bold_italic = heading_bold | font_modify: 'style', 'italic' %}{% endif %}
+    {% if heading_bold != blank %}{{ heading_bold | font_face: font_display: 'swap' }}{% endif %}
+    {% if heading_italic != blank %}{{ heading_italic | font_face: font_display: 'swap' }}{% endif %}
+    {% if heading_bold_italic != blank %}{{ heading_bold_italic | font_face: font_display: 'swap' }}{% endif %}
+  {% endif %}
   :root {
-    --font-primary--family: {{ body_font.family }}, {{ body_font.fallback_families }};
-    --font-primary--style: {{ body_font.style }};
-    --font-primary--weight: {{ body_font.weight }};
-    --font-heading--family: {{ heading_font.family }}, {{ heading_font.fallback_families }};
-    --font-heading--style: {{ heading_font.style }};
-    --font-heading--weight: {{ heading_font.weight }};
-    --page-width: {{ settings.max_page_width }};
-    --page-margin: clamp(1.25rem, 3.333vw, {{ settings.min_page_margin }}px);
+    --font-primary--family: {% if body_font.family != blank %}{{ body_font.family }}, {{ body_font.fallback_families }}{% else %}sans-serif{% endif %};
+    --font-primary--style: {{ body_font.style | default: 'normal' }};
+    --font-primary--weight: {{ body_font.weight | default: 400 }};
+    --font-heading--family: {% if heading_font.family != blank %}{{ heading_font.family }}, {{ heading_font.fallback_families }}{% else %}var(--font-primary--family){% endif %};
+    --font-heading--style: {{ heading_font.style | default: 'normal' }};
+    --font-heading--weight: {{ heading_font.weight | default: 400 }};
+    --page-width: {{ settings.max_page_width | default: '1535px' }};
+    --page-margin: clamp(1.25rem, 3.333vw, {{ settings.min_page_margin | default: 51 }}px);
     --color-background: {{ settings.default_color_scheme.settings.background | default: '#F8F0E8' }};
     --color-foreground: {{ settings.default_color_scheme.settings.text | default: '#171513' }};
     --color-button: {{ settings.default_color_scheme.settings.button | default: '#3A322B' }};
     --color-button-label: {{ settings.default_color_scheme.settings.button_label | default: '#FFFFFF' }};
-    --style-border-radius-inputs: {{ settings.input_corner_radius }}px;
+    --style-border-radius-inputs: {{ settings.input_corner_radius | default: 13 }}px;
     --radius-card: 0.66625rem;
     --space-unit: 0.2665rem;
     --grid-gap: 1.332rem;
