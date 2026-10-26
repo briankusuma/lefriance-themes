@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-26",
+  "scope": "Local Chrome fixture using current Liquid, CSS, and JavaScript with mocked Shopify Ajax responses",
+  "total_suite_assertions": 99,
+  "presentation_assertions": [
+    "drawer opens and retains shared cart behavior",
+    "floating panel opens below the cart icon",
+    "floating panel width follows the global schema token",
+    "floating panel closes from its outside area and restores focus",
+    "quick add anchors the floating panel to the header cart icon",
+    "cart page mode renders no dialog and keeps the locale-aware cart link",
+    "cart page mode leaves product form submission native"
+  ],
+  "result": "pass",
+  "limitations": "No Shopify backend, Theme Editor save, checkout, or payment service was connected."
+}

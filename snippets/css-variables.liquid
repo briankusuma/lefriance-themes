@@ -44,6 +44,7 @@
     --page-width: {{ settings.max_page_width | default: '1535px' }};
     --page-margin: clamp(1.25rem, 3.333vw, {{ settings.min_page_margin | default: 51 }}px);
     --color-background: {{ settings.default_color_scheme.settings.background | default: '#F8F0E8' }};
+    --color-background-gradient: {{ settings.default_color_scheme.settings.background_gradient | default: settings.default_color_scheme.settings.background | default: '#F8F0E8' }};
     --color-foreground: {{ settings.default_color_scheme.settings.text | default: '#171513' }};
     --color-button: {{ settings.default_color_scheme.settings.button | default: '#3A322B' }};
     --color-button-label: {{ settings.default_color_scheme.settings.button_label | default: '#FFFFFF' }};
@@ -60,6 +61,8 @@
     --card-fit: {{ settings.card_image_fit | default: 'cover' }};
     --card-alignment: {{ settings.card_alignment | default: 'left' }};
     --cart-drawer-width: {{ settings.cart_drawer_width | default: 480 }}px;
+    --cart-popover-width: {{ settings.cart_popover_width | default: 400 }}px;
+    --cart-popover-offset: {{ settings.cart_popover_offset | default: 12 }}px;
     --text-caption: {{ settings.caption_size | default: 15 }}px;
     --text-body: {{ settings.body_size | default: 17 }}px;
     --text-lead: calc(var(--text-body) * 1.125);
@@ -77,6 +80,7 @@
   {% for scheme in settings.color_schemes %}
     .color-{{ scheme.id }} {
       --color-background: {{ scheme.settings.background }};
+      --color-background-gradient: {{ scheme.settings.background_gradient | default: scheme.settings.background }};
       --color-foreground: {{ scheme.settings.text }};
       --color-button: {{ scheme.settings.button }};
       --color-button-label: {{ scheme.settings.button_label }};
@@ -84,7 +88,7 @@
       --color-muted: {{ scheme.settings.muted_text }};
       --color-card: {{ scheme.settings.card_background }};
       --color-card-text: {{ scheme.settings.card_text }};
-      background-color: var(--color-background);
+      background: var(--color-background-gradient);
       color: var(--color-foreground);
     }
   {% endfor %}

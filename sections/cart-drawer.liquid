@@ -1,7 +1,18 @@
-<dialog id="CartDrawer" scroll-lock class="cart-drawer color-{{ settings.cart_color_scheme }}" aria-labelledby="CartDrawerTitle">
-  <div scroll-lock class="cart-drawer__heading"><h2 id="CartDrawerTitle">{{ 'cart.title' | t }}</h2><button type="button" data-cart-close aria-label="{{ 'commerce.close_cart' | t }}">{{ 'commerce.close' | t }}</button></div>
+<dialog
+  id="CartPanel"
+  scroll-lock
+  class="cart-panel cart-panel--{{ settings.cart_type }} color-{{ settings.cart_color_scheme }}"
+  aria-labelledby="CartPanelTitle"
+  data-cart-panel
+  data-cart-presentation="{{ settings.cart_type }}"
+  data-cart-offset="{{ settings.cart_popover_offset }}"
+>
+  <div class="cart-panel__heading">
+    <h2 id="CartPanelTitle">{{ 'cart.title' | t }}</h2>
+    <button type="button" data-cart-close aria-label="{{ 'commerce.close_cart' | t }}">{{ 'commerce.close' | t }}</button>
+  </div>
   <p class="commerce-error" data-cart-error role="alert" hidden></p>
   {% render 'cart-content', instance_id: section.id %}
-  <a href="{{ routes.cart_url }}">{{ 'commerce.view_cart' | t }}</a>
+  <a class="cart-panel__page-link" href="{{ routes.cart_url }}">{{ 'commerce.view_cart' | t }}</a>
 </dialog>
-{% schema %}{"name":"Cart drawer","settings":[]}{% endschema %}
+{% schema %}{"name":"Cart panel","settings":[]}{% endschema %}

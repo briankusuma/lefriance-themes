@@ -278,6 +278,7 @@ Kriteria selesai:
 - [x] Hubungkan global settings ke CSS, kartu produk, cart page/drawer, dan essentials.
 - [x] Sediakan featured collection, rich text, newsletter dan announcement bar reusable; tidak merakit seluruh backlog homepage.
 - [x] Cart Ajax enhancement, native fallback, empty/error, quantities, notes, discounts dan selling plans dalam markup cart.
+- [x] Cart type tersedia sebagai drawer, link ke cart page, atau floating panel yang terhubung ke ikon cart dan dapat diatur dari Theme settings.
 - [x] Product form berbasis blocks, varian/harga/quantity/media, accelerated checkout native dan kartu bersama untuk collection.
 - [ ] Uji Theme Editor, cart/checkout/payment/subscription dan data toko nyata di development theme.
 - [ ] Lighthouse home/collection/product dan perbandingan akhir Figma dengan font/media toko.
@@ -300,8 +301,9 @@ Detail analisis, pemakai setiap grup setting, dokumentasi Shopify, batas katalog
 
 - Shopify CLI 4.9.4 [Theme Check](validation/header-hero-cart-theme-check.json).
 - `node --check` pada header.js, commerce.js dan product.js.
-- [Browser lokal](validation/header-hero-cart-browser.json): 91 assertion lulus, lima lebar dan tiga variasi konten; cart Ajax dimock, bukan backend Shopify. Perubahan warna/overlay/font akhir diperiksa ulang sesuai catatan validasi.
+- [Browser lokal](validation/header-hero-cart-browser.json) dan [uji presentasi cart](validation/cart-presentations-browser.json): 99 assertion lulus, lima lebar dan tiga variasi konten; cart Ajax dimock, bukan backend Shopify. Perubahan warna/overlay/font akhir diperiksa ulang sesuai catatan validasi.
 - Native Chrome diperiksa untuk desktop dan susunan mobile; tidak mengklaim Theme Editor/checkout/Lighthouse lulus.
+- Follow-up schema: role gradient color scheme diperbaiki agar menunjuk ke `color_background`; nilai `background_gradient` tersedia pada current dan preset untuk mencegah pesan preview Shopify tentang color schemes yang tidak terdefinisi.
 
 ### Deviasi dan pekerjaan tersisa
 

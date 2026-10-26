@@ -198,6 +198,11 @@
             "default": "#F8F0E8"
           },
           {
+            "type": "color_background",
+            "id": "background_gradient",
+            "label": "Background gradient"
+          },
+          {
             "type": "color",
             "id": "text",
             "label": "Text",
@@ -244,7 +249,7 @@
           "text": "text",
           "background": {
             "solid": "background",
-            "gradient": "background"
+            "gradient": "background_gradient"
           },
           "links": "text",
           "icons": "text",
@@ -441,7 +446,11 @@
           },
           {
             "value": "page",
-            "label": "Page"
+            "label": "Cart page"
+          },
+          {
+            "value": "popover",
+            "label": "Floating panel"
           }
         ],
         "default": "drawer"
@@ -460,6 +469,26 @@
         "max": 640,
         "step": 20,
         "default": 480,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "cart_popover_width",
+        "label": "Floating panel width",
+        "min": 320,
+        "max": 520,
+        "step": 20,
+        "default": 400,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "cart_popover_offset",
+        "label": "Floating panel spacing",
+        "min": 4,
+        "max": 40,
+        "step": 2,
+        "default": 12,
         "unit": "px"
       },
       {

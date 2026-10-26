@@ -4,6 +4,7 @@
       "scheme-light": {
         "settings": {
           "background": "#F8F0E8",
+          "background_gradient": "",
           "text": "#171513",
           "button": "#3A322B",
           "button_label": "#FFFFFF",
@@ -16,6 +17,7 @@
       "scheme-dark": {
         "settings": {
           "background": "#3A322B",
+          "background_gradient": "",
           "text": "#FFFFFF",
           "button": "#FFFFFF",
           "button_label": "#171513",
@@ -28,6 +30,7 @@
       "scheme-footer": {
         "settings": {
           "background": "#171513",
+          "background_gradient": "",
           "text": "#FFFFFF",
           "button": "#FFFFFF",
           "button_label": "#171513",
@@ -46,6 +49,7 @@
         "scheme-light": {
           "settings": {
             "background": "#F8F0E8",
+            "background_gradient": "",
             "text": "#171513",
             "button": "#3A322B",
             "button_label": "#FFFFFF",
@@ -58,6 +62,7 @@
         "scheme-dark": {
           "settings": {
             "background": "#3A322B",
+            "background_gradient": "",
             "text": "#FFFFFF",
             "button": "#FFFFFF",
             "button_label": "#171513",
@@ -70,6 +75,7 @@
         "scheme-footer": {
           "settings": {
             "background": "#171513",
+            "background_gradient": "",
             "text": "#FFFFFF",
             "button": "#FFFFFF",
             "button_label": "#171513",

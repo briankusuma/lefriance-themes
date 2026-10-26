@@ -40,7 +40,7 @@
           <span class="site-header__account-icon" slot="signed-out-avatar" aria-label="{{ 'header.account' | t }}">{{ 'icon-account.svg' | inline_asset_content }}</span>
         </shopify-account>
       {% endif %}
-      <a class="site-header__utility site-header__cart" data-cart-open data-cart-label="{{ 'cart.title' | t }}" href="{{ routes.cart_url }}" aria-label="{{ 'header.cart_count' | t: count: cart.item_count }}">
+      <a class="site-header__utility site-header__cart" data-cart-open data-cart-label="{{ 'cart.title' | t }}" href="{{ routes.cart_url }}" aria-label="{{ 'header.cart_count' | t: count: cart.item_count }}"{% if settings.cart_type != 'page' and request.page_type != 'cart' %} aria-haspopup="dialog" aria-controls="CartPanel" aria-expanded="false"{% endif %}>
         <span aria-hidden="true">{{ 'icon-cart.svg' | inline_asset_content }}</span>
         <span class="site-header__cart-count" data-cart-count aria-hidden="true"{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span>
       </a>

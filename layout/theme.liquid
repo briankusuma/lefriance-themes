@@ -38,7 +38,7 @@
     </main>
 
     {% sections 'footer-group' %}
-    {% if settings.cart_type == 'drawer' and request.page_type != 'cart' %}{% section 'cart-drawer' %}{% endif %}
+    {% if settings.cart_type != 'page' and request.page_type != 'cart' %}{% section 'cart-drawer' %}{% endif %}
     <p class="visually-hidden" role="status" data-cart-status></p>
   </body>
 </html>

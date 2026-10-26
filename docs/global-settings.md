@@ -25,10 +25,10 @@ Tidak semua properti Figma menjadi setting global. Tinggi hero, logo besar, dan 
 | --- | --- | --- |
 | Typography | Body, heading, navigation font pickers; ukuran body/heading/navigation/caption; line height; tracking | Foundation, header, hero copy, kartu, commerce |
 | Layout | Page maximum, section full/contained, container width, margin desktop/mobile, section spacing, grid gap | `.section-shell`, `.container`, `.section-content`, product grid; hero memakai tinggi tersendiri |
-| Colors | Background/text, button/label, border, muted, card background/text, tiga skema awal | Global default dan section color scheme. Card foreground/background dipasangkan |
+| Colors | Background/gradient/text, button/label, border, muted, card background/text, tiga skema awal | Global default dan section color scheme. Role solid dan gradient mengikuti tipe setting Shopify; card foreground/background dipasangkan |
 | Buttons and inputs | Radius tombol/input, ketebalan border | Kontrol native; brand accelerated checkout tidak diubah |
 | Product cards | Radius, ratio, fit, alignment, vendor, secondary image, badge, swatch, quick add, currency code | `product-card` di collection dan featured collection |
-| Cart | Drawer/page, skema drawer, lebar, notes, vendor, accelerated checkout, continue link | `cart-drawer`, `main-cart`, shared `cart-content`, `commerce.js` |
+| Cart | Drawer/cart page/floating panel, skema, lebar drawer/panel, jarak panel, notes, vendor, accelerated checkout, continue link | `cart-drawer`, `main-cart`, shared `cart-content`, `commerce.js` |
 
 Font Figma Open Sauce One/SF Pro menggunakan substitusi sementara Work Sans dari Shopify font library. Tidak membundel custom font. Merchant dapat menggantinya melalui font picker.
 
@@ -43,9 +43,9 @@ Font Figma Open Sauce One/SF Pro menggunakan substitusi sementara Work Sans dari
 
 ## Perilaku commerce
 
-Cart page dan drawer memakai markup bersama, harga/final totals/discounts dari server Shopify. Form POST, quantity, note, remove link, checkout dan product variant select tersedia tanpa JS. Untuk meninjau harga/availability varian tanpa JS tersedia form GET "Review variant".
+Cart page, drawer, dan floating panel memakai markup bersama, harga/final totals/discounts dari server Shopify. `Cart type` tersedia di Theme settings. Mode page membiarkan ikon menuju route cart; drawer membuka panel penuh dari kanan; floating panel selalu membuka kartu di bawah ikon cart, termasuk setelah quick add dari bagian lain halaman, dan menyesuaikan posisinya dari ukuran header aktual. Form POST, quantity, note, remove link, checkout dan product variant select tersedia tanpa JS. Untuk meninjau harga/availability varian tanpa JS tersedia form GET "Review variant".
 
-Enhancement drawer memakai route toko yang locale-aware dan Ajax Cart API dengan bundled section rendering. Add membuka dialog native, quantity/remove/update merender ulang semua baris dan total, badge diperbarui, error diumumkan, kontrol dipulihkan setelah error. Respons section `null` memicu pembacaan ulang section tanpa mengulangi mutasi add. Refresh lama tidak boleh menimpa respons terbaru. Checkout tetap form native. Accelerated checkout ditampilkan pada cart page, bukan diduplikasi di drawer. Pada route cart, drawer tidak dirender sehingga form note hanya memiliki satu instance.
+Enhancement drawer/floating panel memakai route toko yang locale-aware dan Ajax Cart API dengan bundled section rendering. Keduanya memakai dialog native untuk Escape, focus containment dan focus restore; floating panel memakai backdrop transparan serta menutup saat area luar diklik. Add membuka presentasi yang dipilih, quantity/remove/update merender ulang semua baris dan total, badge diperbarui, error diumumkan, kontrol dipulihkan setelah error. Respons section `null` memicu pembacaan ulang section tanpa mengulangi mutasi add. Refresh lama tidak boleh menimpa respons terbaru. Checkout tetap form native. Accelerated checkout ditampilkan pada cart page, bukan diduplikasi di panel. Pada route cart, panel tidak dirender sehingga form note hanya memiliki satu instance.
 
 Kartu menampilkan price range, compare-at, unit price, sale/sold out dan swatch yang benar-benar tersedia. Quick add hanya untuk produk satu varian yang tersedia tanpa selling plan wajib; lainnya membuka produk. Ini perluasan scope eksplisit terbaru tentang cards/commerce, bukan penyelesaian desain tab T05.
 
@@ -54,7 +54,7 @@ Product form memperbarui harga/status/jumlah/media dan URL varian; selling plans
 ## Validasi dan batasnya
 
 - [Theme Check](validation/header-hero-cart-theme-check.json): Shopify CLI 4.9.4; lihat hasil aktual, bukan catatan historis.
-- [Browser fixture](validation/header-hero-cart-browser.json) dan [metode/batas](validation/header-hero-cart-notes.md): 91 assertion lulus pada Chrome lokal; normal/empty/long, lebar 320/375/768/1100/1535, mobile Escape, overlay, overflow, ID, cart empty/add/quantity/update/remove/422/null section, locale route, focus, product availability/price/quantity/URL/reconnect.
+- [Browser fixture](validation/header-hero-cart-browser.json), [uji presentasi cart](validation/cart-presentations-browser.json), dan [metode/batas](validation/header-hero-cart-notes.md): 99 assertion lulus pada Chrome lokal; normal/empty/long, lebar 320/375/768/1100/1535, mobile Escape, overlay, overflow, ID, tiga mode cart, cart empty/add/quantity/update/remove/422/null section, locale route, focus, product availability/price/quantity/URL/reconnect.
 - Fixture merender Liquid aktual memakai LiquidJS dengan mock object/filter/form Shopify dan mock Ajax responses. Bukan Shopify server dan bukan bukti payment, subscription checkout, persediaan nyata, atau Theme Editor lulus.
 - Komposisi desktop dan mobile diperiksa di browser. Frame mobile tidak tersedia; susunan mobile merupakan turunan token, bukan pixel match Figma.
 - Aset upload memakai `image_url`/`image_tag` responsif dan focal point. Foto referensi asset memakai `asset_img_url` dengan srcset; CDN resizing/format, Lighthouse dengan konten toko, dan contrast foto merchant belum terukur pada Shopify.
