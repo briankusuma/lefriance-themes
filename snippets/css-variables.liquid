@@ -19,7 +19,22 @@
     {% if heading_italic != blank %}{{ heading_italic | font_face: font_display: 'swap' }}{% endif %}
     {% if heading_bold_italic != blank %}{{ heading_bold_italic | font_face: font_display: 'swap' }}{% endif %}
   {% endif %}
+  {% assign navigation_font = settings.type_navigation_font %}
+  {% if navigation_font.family != blank and navigation_font != body_font and navigation_font != heading_font %}
+    {{ navigation_font | font_face: font_display: 'swap' }}
+    {% assign navigation_bold = navigation_font | font_modify: 'weight', 'bold' %}
+    {% assign navigation_italic = navigation_font | font_modify: 'style', 'italic' %}
+    {% if navigation_bold != blank %}
+      {{ navigation_bold | font_face: font_display: 'swap' }}
+      {% assign navigation_bold_italic = navigation_bold | font_modify: 'style', 'italic' %}
+      {% if navigation_bold_italic != blank %}{{ navigation_bold_italic | font_face: font_display: 'swap' }}{% endif %}
+    {% endif %}
+    {% if navigation_italic != blank %}{{ navigation_italic | font_face: font_display: 'swap' }}{% endif %}
+  {% endif %}
   :root {
+    --font-navigation--weight: {{ navigation_font.weight | default: 400 }};
+    --font-navigation--style: {{ navigation_font.style | default: 'normal' }};
+    --font-navigation--family: {% if navigation_font.family != blank %}{{ navigation_font.family }}, {{ navigation_font.fallback_families }}{% else %}var(--font-primary--family){% endif %};
     --font-primary--family: {% if body_font.family != blank %}{{ body_font.family }}, {{ body_font.fallback_families }}{% else %}sans-serif{% endif %};
     --font-primary--style: {{ body_font.style | default: 'normal' }};
     --font-primary--weight: {{ body_font.weight | default: 400 }};
@@ -33,14 +48,31 @@
     --color-button: {{ settings.default_color_scheme.settings.button | default: '#3A322B' }};
     --color-button-label: {{ settings.default_color_scheme.settings.button_label | default: '#FFFFFF' }};
     --style-border-radius-inputs: {{ settings.input_corner_radius | default: 13 }}px;
-    --radius-card: 0.66625rem;
+    --container-width: {{ settings.container_width | default: 1440 }}px;
+    --section-max-width: {% if settings.section_width == 'contained' %}var(--page-width){% else %}100%{% endif %};
+    --section-spacing: {{ settings.section_spacing | default: 80 }}px;
+    --grid-gap: {{ settings.grid_gap | default: 21 }}px;
+    --radius-card: {{ settings.card_radius | default: 11 }}px;
+    --radius-button: {{ settings.button_radius | default: 13 }}px;
+    --button-border: {{ settings.button_border | default: 1 }}px;
+    --input-border: {{ settings.input_border | default: 1 }}px;
+    --card-ratio: {{ settings.card_ratio | default: '10 / 11' }};
+    --card-fit: {{ settings.card_image_fit | default: 'cover' }};
+    --card-alignment: {{ settings.card_alignment | default: 'left' }};
+    --cart-drawer-width: {{ settings.cart_drawer_width | default: 480 }}px;
+    --text-caption: {{ settings.caption_size | default: 15 }}px;
+    --text-body: {{ settings.body_size | default: 17 }}px;
+    --text-lead: calc(var(--text-body) * 1.125);
+    --text-card: calc(var(--text-body) * 1.25);
+    --text-heading: clamp(2rem, 3.333vw, {{ settings.heading_size | default: 51 }}px);
+    --text-navigation: {{ settings.navigation_size | default: 17 }}px;
+    --body-line-height: {{ settings.body_line_height | default: 1.5 }};
+    --heading-tracking: {{ settings.heading_tracking | default: -1.5 }}px;
+    --color-muted: {{ settings.default_color_scheme.settings.muted_text | default: '#655B52' }};
+    --color-border: {{ settings.default_color_scheme.settings.border | default: '#5B5148' }};
+    --color-card: {{ settings.default_color_scheme.settings.card_background | default: '#E7DBD0' }};
+    --color-card-text: {{ settings.default_color_scheme.settings.card_text | default: '#171513' }};
     --space-unit: 0.2665rem;
-    --grid-gap: 1.332rem;
-    --text-caption: 0.933rem;
-    --text-body: 1.066rem;
-    --text-lead: 1.199rem;
-    --text-card: 1.332rem;
-    --text-heading: clamp(2rem, 3.333vw, 3.198rem);
   }
   {% for scheme in settings.color_schemes %}
     .color-{{ scheme.id }} {
@@ -49,8 +81,14 @@
       --color-button: {{ scheme.settings.button }};
       --color-button-label: {{ scheme.settings.button_label }};
       --color-border: {{ scheme.settings.border }};
+      --color-muted: {{ scheme.settings.muted_text }};
+      --color-card: {{ scheme.settings.card_background }};
+      --color-card-text: {{ scheme.settings.card_text }};
       background-color: var(--color-background);
       color: var(--color-foreground);
     }
   {% endfor %}
+  @media (max-width: 749px) {
+    :root { --page-margin: {{ settings.mobile_page_margin | default: 20 }}px; }
+  }
 {% endstyle %}

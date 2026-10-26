@@ -1,0 +1,22 @@
+{% doc %}
+  A reusable product card using real catalog data and global settings.
+  @param {product} card_product - Product to display.
+  @param {string} instance_id - Unique card placement.
+{% enddoc %}
+<article class="product-card">
+  <a class="product-card__media" href="{{ card_product.url }}" aria-label="{{ card_product.title | escape }}">
+    {% if card_product.featured_image %}{{ card_product.featured_image | image_url: width: 900 | image_tag: widths: '240, 400, 600, 900', sizes: '(min-width: 1100px) 25vw, 50vw', loading: 'lazy', alt: card_product.featured_image.alt }}{% else %}{{ 'product-1' | placeholder_svg_tag }}{% endif %}
+    {% if settings.card_secondary_image and card_product.images[1] %}{{ card_product.images[1] | image_url: width: 900 | image_tag: widths: '240, 400, 600, 900', sizes: '(min-width: 1100px) 25vw, 50vw', loading: 'lazy', alt: '', class: 'product-card__secondary' }}{% endif %}
+    {% if settings.card_show_badges %}{% unless card_product.available %}<span class="product-card__badge">{{ 'commerce.sold_out' | t }}</span>{% else %}{% if card_product.compare_at_price > card_product.price %}<span class="product-card__badge">{{ 'commerce.sale' | t }}</span>{% endif %}{% endunless %}{% endif %}
+  </a>
+  {% if settings.card_show_vendor %}<small>{{ card_product.vendor | escape }}</small>{% endif %}
+  <h3><a href="{{ card_product.url }}">{{ card_product.title | escape }}</a></h3>
+  {% render 'price', item: card_product %}
+  {% if settings.card_show_swatches %}<div class="product-card__swatches">{% for option in card_product.options_with_values %}{% for value in option.values %}{% if value.swatch and value.variant %}<a class="product-swatch" href="{{ value.variant.url }}" aria-label="{{ option.name | escape }}: {{ value | escape }}" title="{{ value | escape }}">{% if value.swatch.image %}{{ value.swatch.image | image_url: width: 60 | image_tag: alt: value, loading: 'lazy' }}{% elsif value.swatch.color %}<span style="background: {{ value.swatch.color }}"></span>{% endif %}</a>{% endif %}{% endfor %}{% endfor %}</div>{% endif %}
+  {% if settings.card_quick_add %}
+    {% if card_product.has_only_default_variant and card_product.available and card_product.requires_selling_plan == false %}
+      {% assign card_form_id = 'QuickAdd-' | append: instance_id | append: '-' | append: card_product.id %}
+      {% form 'product', card_product, id: card_form_id, data-product-form: '' %}<input type="hidden" name="id" value="{{ card_product.selected_or_first_available_variant.id }}"><button type="submit">{{ 'commerce.add_to_cart' | t }}</button><p data-product-error role="alert" hidden></p>{% endform %}
+    {% else %}<a href="{{ card_product.url }}">{{ 'commerce.choose_options' | t }}</a>{% endif %}
+  {% endif %}
+</article>

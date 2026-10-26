@@ -1,0 +1,7 @@
+<dialog id="CartDrawer" scroll-lock class="cart-drawer color-{{ settings.cart_color_scheme }}" aria-labelledby="CartDrawerTitle">
+  <div scroll-lock class="cart-drawer__heading"><h2 id="CartDrawerTitle">{{ 'cart.title' | t }}</h2><button type="button" data-cart-close aria-label="{{ 'commerce.close_cart' | t }}">{{ 'commerce.close' | t }}</button></div>
+  <p class="commerce-error" data-cart-error role="alert" hidden></p>
+  {% render 'cart-content', instance_id: section.id %}
+  <a href="{{ routes.cart_url }}">{{ 'commerce.view_cart' | t }}</a>
+</dialog>
+{% schema %}{"name":"Cart drawer","settings":[]}{% endschema %}

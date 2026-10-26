@@ -25,5 +25,35 @@
     "Open_Sauce_One:Medium",
     "Inter_Variable:Regular",
     "Inter_Display:Regular"
-  ]
+  ],
+  "headerHeroFollowup": {
+    "inspectedOn": "2026-10-26",
+    "nodeId": "3646:1124",
+    "size": {
+      "width": 1535,
+      "height": 1091.5555
+    },
+    "navbar": {
+      "nodeId": "3646:1135",
+      "x": 51.164,
+      "y": 16.0088,
+      "width": 1433.6085,
+      "height": 26.843
+    },
+    "wordmark": {
+      "nodeId": "3646:1134",
+      "x": 51.164,
+      "y": 66.0896,
+      "width": 1432.6666,
+      "height": 404.3028
+    },
+    "detailCard": {
+      "nodeId": "3646:1128",
+      "x": 51.164,
+      "y": 808.007,
+      "width": 191.875,
+      "height": 236.104
+    },
+    "implementationReport": "global-settings.md"
+  }
 }

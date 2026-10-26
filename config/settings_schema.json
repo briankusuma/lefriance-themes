@@ -25,6 +25,71 @@
         "id": "type_heading_font",
         "default": "work_sans_n5",
         "label": "Heading font"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_navigation_font",
+        "label": "Navigation font",
+        "default": "work_sans_n4"
+      },
+      {
+        "type": "range",
+        "id": "body_size",
+        "label": "Body size",
+        "min": 14,
+        "max": 22,
+        "step": 1,
+        "default": 17,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "heading_size",
+        "label": "Heading size",
+        "min": 32,
+        "max": 80,
+        "step": 1,
+        "default": 51,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "navigation_size",
+        "label": "Navigation size",
+        "min": 14,
+        "max": 22,
+        "step": 1,
+        "default": 17,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "caption_size",
+        "label": "Caption size",
+        "min": 12,
+        "max": 18,
+        "step": 1,
+        "default": 15,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "body_line_height",
+        "label": "Body line height",
+        "min": 1.2,
+        "max": 2,
+        "step": 0.1,
+        "default": 1.5
+      },
+      {
+        "type": "range",
+        "id": "heading_tracking",
+        "label": "Heading letter spacing",
+        "min": -3,
+        "max": 2,
+        "step": 0.1,
+        "default": -1.5,
+        "unit": "px"
       }
     ]
   },
@@ -60,6 +125,62 @@
         "unit": "px",
         "label": "t:labels.page_margin",
         "default": 51
+      },
+      {
+        "type": "select",
+        "id": "section_width",
+        "label": "Section width",
+        "options": [
+          {
+            "value": "full",
+            "label": "Full width"
+          },
+          {
+            "value": "contained",
+            "label": "Contained"
+          }
+        ],
+        "default": "full"
+      },
+      {
+        "type": "range",
+        "id": "container_width",
+        "label": "Container maximum width",
+        "min": 960,
+        "max": 1920,
+        "step": 20,
+        "default": 1440,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "mobile_page_margin",
+        "label": "Mobile side spacing",
+        "min": 12,
+        "max": 32,
+        "step": 1,
+        "default": 20,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "section_spacing",
+        "label": "Section spacing",
+        "min": 0,
+        "max": 160,
+        "step": 4,
+        "default": 80,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "grid_gap",
+        "label": "Grid spacing",
+        "min": 8,
+        "max": 48,
+        "step": 1,
+        "default": 21,
+        "unit": "px"
       }
     ]
   },
@@ -99,6 +220,24 @@
             "id": "border",
             "label": "Border",
             "default": "#5B5148"
+          },
+          {
+            "type": "color",
+            "id": "muted_text",
+            "label": "Secondary text",
+            "default": "#655B52"
+          },
+          {
+            "type": "color",
+            "id": "card_background",
+            "label": "Card background",
+            "default": "#E7DBD0"
+          },
+          {
+            "type": "color",
+            "id": "card_text",
+            "label": "Card text",
+            "default": "#171513"
           }
         ],
         "role": {
@@ -147,6 +286,205 @@
         "type": "image_picker",
         "id": "favicon",
         "label": "Favicon"
+      }
+    ]
+  },
+  {
+    "name": "Buttons and inputs",
+    "settings": [
+      {
+        "type": "range",
+        "id": "button_radius",
+        "label": "Button corner radius",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "default": 13,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "button_border",
+        "label": "Button border width",
+        "min": 0,
+        "max": 3,
+        "step": 1,
+        "default": 1,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "input_border",
+        "label": "Input border width",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "default": 1,
+        "unit": "px"
+      }
+    ]
+  },
+  {
+    "name": "Product cards",
+    "settings": [
+      {
+        "type": "range",
+        "id": "card_radius",
+        "label": "Corner radius",
+        "min": 0,
+        "max": 32,
+        "step": 1,
+        "default": 11,
+        "unit": "px"
+      },
+      {
+        "type": "select",
+        "id": "card_ratio",
+        "label": "Image aspect ratio",
+        "options": [
+          {
+            "value": "1 / 1",
+            "label": "Square"
+          },
+          {
+            "value": "10 / 11",
+            "label": "Portrait"
+          },
+          {
+            "value": "auto",
+            "label": "Adapt to image"
+          }
+        ],
+        "default": "10 / 11"
+      },
+      {
+        "type": "select",
+        "id": "card_image_fit",
+        "label": "Image fit",
+        "options": [
+          {
+            "value": "cover",
+            "label": "Fill"
+          },
+          {
+            "value": "contain",
+            "label": "Fit"
+          }
+        ],
+        "default": "cover"
+      },
+      {
+        "type": "select",
+        "id": "card_alignment",
+        "label": "Text alignment",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "default": "left"
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_vendor",
+        "label": "Show vendor",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "card_secondary_image",
+        "label": "Show second image on hover",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_badges",
+        "label": "Show sale and sold out badges",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_swatches",
+        "label": "Show available color swatches",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "card_quick_add",
+        "label": "Show quick add",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_currency_code",
+        "label": "Show currency codes",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Cart type",
+        "options": [
+          {
+            "value": "drawer",
+            "label": "Drawer"
+          },
+          {
+            "value": "page",
+            "label": "Page"
+          }
+        ],
+        "default": "drawer"
+      },
+      {
+        "type": "color_scheme",
+        "id": "cart_color_scheme",
+        "label": "Color scheme",
+        "default": "scheme-light"
+      },
+      {
+        "type": "range",
+        "id": "cart_drawer_width",
+        "label": "Drawer width",
+        "min": 320,
+        "max": 640,
+        "step": 20,
+        "default": 480,
+        "unit": "px"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_note",
+        "label": "Show order note",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_vendor",
+        "label": "Show vendor",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_accelerated_checkout",
+        "label": "Show accelerated checkout on cart page",
+        "default": true
+      },
+      {
+        "type": "url",
+        "id": "cart_continue_link",
+        "label": "Continue shopping link",
+        "info": "Uses the all products collection when empty."
       }
     ]
   }

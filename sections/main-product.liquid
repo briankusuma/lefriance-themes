@@ -1,53 +1,55 @@
-{% comment %}Skeleton baseline migrated to JSON sections in T00. Full page features are a later milestone.{% endcomment %}
- <div class="page-shell">
-  <div class="product-images">
-    {% for image in product.images %}
-      {% render 'image', class: 'product-image', image: image %}
-    {% endfor %}
+<script src="{{ 'product.js' | asset_url }}" defer></script>
+<section class="section-shell color-{{ section.settings.color_scheme }}"><div class="container section-content product-layout">
+  <div class="product-gallery">
+    {% for media in product.media %}<div id="ProductMedia-{{ section.id }}-{{ media.id }}" data-product-media="{{ media.id }}">{% if media.media_type == 'image' %}{% assign media_loading = 'lazy' %}{% if forloop.first %}{% assign media_loading = 'eager' %}{% endif %}{{ media | image_url: width: 1800 | image_tag: widths: '400, 800, 1200, 1800', sizes: '(min-width: 990px) 55vw, 100vw', loading: media_loading, alt: media.alt }}{% else %}{{ media | media_tag: image_size: '1200x', controls: true }}{% endif %}</div>{% endfor %}
   </div>
-
-  <div class="product-info">
-    <h1>{{ product.title }}</h1>
-    <p>{{ product.price | money }}</p>
-    <div class="rte">{{ product.description }}</div>
+  <div class="product-details">
+    {% for block in section.blocks %}<div {{ block.shopify_attributes }}>{% case block.type %}
+      {% when 'title' %}<h1>{{ product.title | escape }}</h1>
+      {% when 'buy_buttons' %}{% render 'product-form', product: product, instance_id: section.id, accelerated: block.settings.accelerated %}
+      {% when 'description' %}<div class="rte">{{ product.description }}</div>
+      {% when '@app' %}{% render block %}
+      {% when 'custom_liquid' %}{{ block.settings.code }}
+    {% endcase %}</div>{% endfor %}
   </div>
-
-  <div class="product-form">
-    {% form 'product', product %}
-      {% assign current_variant = product.selected_or_first_available_variant %}
-
-      <select name="id">
-        {% for variant in product.variants %}
-          <option
-            value="{{ variant.id }}"
-            {% if variant == current_variant %}
-              selected="selected"
-            {% endif %}
-          >
-            {{ variant.title }} - {{ variant.price | money }}
-          </option>
-        {% endfor %}
-      </select>
-
-      <input type="text" name="quantity" min="1" value="1">
-
-      <input type="submit" value="Add to cart">
-      {{ form | payment_button }}
-    {% endform %}
-  </div>
-</div>
-{% for block in section.blocks %}
-  {% case block.type %}
-    {% when '@app' %}{% render block %}
-    {% when 'custom_liquid' %}<div {{ block.shopify_attributes }}>{{ block.settings.code }}</div>
-  {% endcase %}
-{% endfor %}
+</div></section>
+<script type="application/ld+json">{{ product | structured_data }}</script>
 
 {% schema %}
 {
   "name": "Main product",
-  "settings": [],
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-light"
+    }
+  ],
   "blocks": [
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1
+    },
+    {
+      "type": "buy_buttons",
+      "name": "Product form",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "accelerated",
+          "label": "Show accelerated checkout",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "description",
+      "name": "Description",
+      "limit": 1
+    },
     {
       "type": "@app"
     },

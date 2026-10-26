@@ -1,0 +1,18 @@
+.editorial-hero { position: relative; min-height: max(40rem, min(var(--hero-height), 71.14vw)); color: var(--hero-copy-color); background: var(--hero-background-color); overflow: clip; }
+.editorial-hero__media, .editorial-hero__media picture, .editorial-hero__shade { position: absolute; inset: 0; }
+.editorial-hero__photo { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center top; transform: scale(var(--hero-image-zoom)); transform-origin: center top; }
+.editorial-hero__placeholder { width: 100%; height: 100%; object-fit: cover; }
+.editorial-hero__shade { background: linear-gradient(var(--hero-overlay-color), transparent 50%, var(--hero-overlay-color)); opacity: var(--hero-overlay-opacity); pointer-events: none; }
+.editorial-hero__content { position: relative; min-height: inherit; padding-top: 4.13rem; display: flex; flex-direction: column; align-items: start; }
+.editorial-hero__wordmark { width: 100%; height: auto; margin: 0; }
+.editorial-hero__heading { font-size: clamp(3rem, 12vw, 12rem); line-height: .95; letter-spacing: -.04em; width: 100%; }
+.editorial-hero__detail { width: 12rem; max-width: 100%; margin-top: auto; padding-block: 3rem; }
+.editorial-hero__card { position: relative; width: 9.194rem; height: 9.194rem; padding: .4rem; border-radius: .666rem; background: #fff; overflow: hidden; }
+.editorial-hero__card img { width: 100%; height: 6.33rem; object-fit: cover; border-radius: .2665rem; }
+.editorial-hero__card-blur { position: absolute; inset: 2.4rem .4rem .4rem; border-radius: .533rem; backdrop-filter: blur(17.589px); background: linear-gradient(transparent 0%,#fffa 65%,#fff); }
+.editorial-hero__body { margin-top: 1.0625rem; font-size: var(--text-caption); line-height: 1.2; letter-spacing: -.03em; }
+.editorial-hero__body--alone { margin-top: auto; padding-bottom: 3rem; max-width: 22rem; }
+@media(max-width:749px) { .editorial-hero { min-height: max(30rem, var(--hero-mobile-height)); } .editorial-hero__content { padding-top: 9rem; } .editorial-hero__detail { padding-bottom: 2rem; } .editorial-hero__photo { object-position: 55% top; } }
+@supports not (backdrop-filter: blur(1px)) { .editorial-hero__card-blur { background: linear-gradient(transparent,#fff); } }
+
+.editorial-hero__wordmark { max-height: clamp(6rem, 26.34vw, 25.3rem); object-fit: contain; object-position: left center; }

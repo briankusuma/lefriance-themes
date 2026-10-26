@@ -75,7 +75,7 @@ This checklist is a local working reference. Documentation maintenance does not 
 - [x] All templates (except account, gift card, checkout) are JSON and reference existing sections — static structure verified T00; editor behavior pending.
 - [ ] Custom Liquid section with a `liquid` setting, available on all section-capable templates
 - [ ] Header and footer rendered through section groups
-- [ ] Main product section uses blocks for all or most elements
+- [x] Main product section uses blocks for all or most elements — title/form/description/app/Custom Liquid; static structure verified in T01/T02/G01 follow-up (2026-10-26); editor behavior pending.
 - [ ] `@app` blocks supported in main product and featured product sections
 - [ ] Custom Liquid block (with `liquid` setting) where an app block would go
 - [ ] `config/markets.json` is **not** included
@@ -292,8 +292,12 @@ This checklist is a local working reference. Documentation maintenance does not 
 
 ## Repository and tooling gates
 
-- [x] `shopify theme check` clean for relevant findings — adapted T00 foundation, Shopify CLI 4.9.4, zero findings (2026-10-26); evidence docs/validation/t01-theme-check.json for latest T01 changes; rerun after changes.
+- [x] `shopify theme check` clean for relevant findings — adapted T00 foundation, Shopify CLI 4.9.4, zero findings (2026-10-26); evidence docs/validation/header-hero-cart-theme-check.json for latest T01/T02/G01 changes; rerun after changes.
 - [ ] No disabled Theme Check rules without justification
 - [ ] Third-party assets and licenses recorded in `docs/third-party-licenses.md`
 - [ ] Figma deviations recorded in `docs/figma-deviations.md`
 - [ ] Final re-read of the official requirements page completed on: ____-__-__
+
+## Follow-up T01/T02/G01 evidence, 2026-10-26
+
+[Global settings report](global-settings.md) records the scoped changes and outstanding checks. Local fixture verifies responsive header/hero, cart controller and basic product variants; it does not check a live Shopify service. Cart/features/accessibility/performance submission items stay unchecked until their store/browser criteria are satisfied.

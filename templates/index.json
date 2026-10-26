@@ -1,11 +1,17 @@
 {
   "sections": {
-    "main": {
-      "type": "main-index",
-      "settings": {}
+    "hero": {
+      "type": "hero-editorial",
+      "settings": {
+        "heading": "LE FRIANCE",
+        "use_reference_images": true,
+        "use_reference_wordmark": true,
+        "body": "<p>Thoughtfully crafted pieces that bring warmth, balance, and timeless style into your space.</p>",
+        "overlay_opacity": 60
+      }
     }
   },
   "order": [
-    "main"
+    "hero"
   ]
 }

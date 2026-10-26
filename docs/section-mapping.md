@@ -37,3 +37,7 @@ Assets foto/logo Figma belum diunduh untuk digunakan. Tidak ada slot foto homepa
 Header memiliki setting overlay_home (default false). Hero T02 dapat menambahkan data-header-overlay pada wrapper section pertamanya; selector hanya mengaktifkan overlay pada home page ketika marker tersebut ada dan setting diaktifkan. Uji kontras di atas foto dan menu terbuka sebelum mengklaim integrasi selesai. Tidak perlu mengubah layout/header group untuk membuat hero.
 
 Header menggunakan native details, local assets/header.js, dan connected/disconnectedCallback agar event listener dibersihkan saat editor mengganti section. Validasi fixture tidak menggantikan pengujian editor nyata. Logo berasal dari settings.logo; pilih logo yang sesuai dengan color scheme. CTA hanya tampil jika label dan link terisi; Start building tidak membuat konfigurator.
+
+## Follow-up 2026-10-26: frame 3646:1124 dan global commerce
+
+Header tetap `sections/header.liquid` dalam header group; hero menjadi `sections/hero-editorial.liquid` di index. `cart-drawer` dirender global secara kondisional dari layout. Main cart dan drawer berbagi `cart-content`; collection dan featured collection berbagi `product-card`/`price`. Product form menjadi block di main product, bersama title, description, Custom Liquid dan app blocks. Essentials tambahan: announcement-bar, rich-text, newsletter. Lihat [mapping settings dan batas scope](global-settings.md). T03–T08 tidak otomatis selesai.

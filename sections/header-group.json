@@ -4,7 +4,9 @@
   "sections": {
     "header": {
       "type": "header",
-      "settings": {}
+      "settings": {
+        "overlay_home": true
+      }
     }
   },
   "order": [

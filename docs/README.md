@@ -38,3 +38,5 @@ Snapshot kondisi dan review bertanggal adalah catatan historis; inspeksi repo da
 | [third-party-licenses.md](third-party-licenses.md) | Sumber dan lisensi aset yang benar-benar digunakan |
 
 Checklist Theme Store bukan daftar pekerjaan harian. Centang hanya persyaratan yang benar-benar telah diverifikasi sesuai jenis pemeriksaannya.
+
+- [Global settings dan commerce](global-settings.md): analisis homepage, schema merchant, header/hero baru, cart/cards/essentials dan batas validasi 2026-10-26.

@@ -86,5 +86,41 @@
     "apply": "Apply",
     "account": "Account",
     "cart_count": "Cart, {{ count }} items"
+  },
+  "hero": {
+    "reference_alt": "Furniture in a warm, sunlit living room",
+    "detail_alt": "Furniture material detail"
+  },
+  "commerce": {
+    "empty_cart": "Your cart is empty.",
+    "continue_shopping": "Continue shopping",
+    "quantity": "Quantity",
+    "remove_item": "Remove {{ title }}",
+    "order_note": "Order note",
+    "estimated_total": "Estimated total",
+    "tax_included": "Taxes included. Shipping calculated at checkout.",
+    "tax_at_checkout": "Taxes and shipping calculated at checkout.",
+    "close_cart": "Close cart",
+    "close": "Close",
+    "view_cart": "View cart",
+    "sold_out": "Sold out",
+    "sale": "Sale",
+    "add_to_cart": "Add to cart",
+    "choose_options": "Choose options",
+    "cart_error": "The cart could not be updated. Try again or open the cart page.",
+    "cart_updated": "Cart updated: {{ count }} items",
+    "empty_collection": "No products are available in this collection.",
+    "variant": "Variant",
+    "unavailable": "Unavailable",
+    "description": "Description",
+    "subscribe": "Subscribe",
+    "email": "Email",
+    "newsletter_success": "Thank you for subscribing.",
+    "newsletter_heading": "Newsletter",
+    "variant_prompt": "Choose a variant",
+    "selling_plan": "Purchase option",
+    "one_time": "One-time purchase",
+    "cart_updated_label": "Cart updated",
+    "review_variant": "Review variant"
   }
 }

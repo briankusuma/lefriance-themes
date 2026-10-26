@@ -3,16 +3,19 @@
 {% liquid
   assign desktop_id = section.id | append: '-desktop'
   assign mobile_id = section.id | append: '-mobile'
-  assign logo_alt = settings.logo.alt | default: shop.name
+  assign header_logo = section.settings.logo | default: settings.logo
+  assign logo_alt = header_logo.alt | default: shop.name
 %}
 {% style %}
-  #shopify-section-{{ section.id }} { --header-logo-width: {{ section.settings.logo_width }}px; }
+  #shopify-section-{{ section.id }} { --header-logo-width: {{ section.settings.logo_width }}px; --header-padding-y: {{ section.settings.padding_y }}px; position: relative; z-index: 30; }
 {% endstyle %}
 <lefriance-header class="site-header color-{{ section.settings.color_scheme }}" data-overlay-enabled="{{ section.settings.overlay_home }}" data-home="{% if request.page_type == 'index' %}true{% else %}false{% endif %}">
-  <header class="site-header__inner">
+  <header class="site-header__inner site-header__inner--{{ section.settings.width }}">
     <a class="site-header__brand" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">
-      {% if settings.logo != blank %}
-        {{ settings.logo | image_url: width: 480 | image_tag: widths: '80, 160, 240, 320, 480', sizes: '(max-width: 749px) 120px, 160px', alt: logo_alt, class: 'site-header__logo' }}
+      {% if header_logo != blank %}
+        {{ header_logo | image_url: width: 480 | image_tag: widths: '80, 160, 240, 320, 480', sizes: '(max-width: 749px) 120px, 160px', alt: logo_alt, class: 'site-header__logo' }}
+      {% elsif section.settings.use_reference_brand %}
+        <img class="site-header__reference-symbol" src="{{ 'le-friance-symbol.svg' | asset_url }}" width="76" height="27" alt="{{ shop.name | escape }}">
       {% else %}
         <span class="site-header__shop-name">{{ shop.name | escape }}</span>
       {% endif %}
@@ -26,7 +29,7 @@
 
     <div class="site-header__actions">
       <div class="site-header__desktop-localization">
-        {% render 'header-localization', instance_id: desktop_id %}
+        {% if section.settings.show_localization %}{% render 'header-region', instance_id: desktop_id %}{% endif %}
       </div>
       {% if section.settings.button_label != blank and section.settings.button_link != blank %}
         <a class="site-header__cta" href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }}</a>
@@ -37,9 +40,9 @@
           <span class="site-header__account-icon" slot="signed-out-avatar" aria-label="{{ 'header.account' | t }}">{{ 'icon-account.svg' | inline_asset_content }}</span>
         </shopify-account>
       {% endif %}
-      <a class="site-header__utility site-header__cart" href="{{ routes.cart_url }}" aria-label="{{ 'header.cart_count' | t: count: cart.item_count }}">
+      <a class="site-header__utility site-header__cart" data-cart-open data-cart-label="{{ 'cart.title' | t }}" href="{{ routes.cart_url }}" aria-label="{{ 'header.cart_count' | t: count: cart.item_count }}">
         <span aria-hidden="true">{{ 'icon-cart.svg' | inline_asset_content }}</span>
-        {% if cart.item_count > 0 %}<span class="site-header__cart-count" aria-hidden="true">{{ cart.item_count }}</span>{% endif %}
+        <span class="site-header__cart-count" data-cart-count aria-hidden="true"{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span>
       </a>
       {% if section.settings.menu.links != blank %}
         <details class="site-header__mobile-menu">
@@ -56,23 +59,111 @@
       {% endif %}
     </div>
     <div class="site-header__mobile-localization">
-      {% render 'header-localization', instance_id: mobile_id %}
+      {% if section.settings.show_localization %}{% render 'header-region', instance_id: mobile_id %}{% endif %}
     </div>
   </header>
 </lefriance-header>
+
 {% schema %}
 {
   "name": "Header",
   "limit": 1,
-  "enabled_on": {"groups": ["header"]},
+  "enabled_on": {
+    "groups": [
+      "header"
+    ]
+  },
   "settings": [
-    {"type":"link_list","id":"menu","label":"Main menu","default":"main-menu"},
-    {"type":"link_list","id":"customer_account_menu","label":"Customer account menu","default":"main-menu"},
-    {"type":"range","id":"logo_width","label":"Logo width","min":60,"max":240,"step":4,"unit":"px","default":76},
-    {"type":"color_scheme","id":"color_scheme","label":"Color scheme","default":"scheme-light"},
-    {"type":"checkbox","id":"overlay_home","label":"Use overlaid header on home page","info":"Applies when the first home page section supports a header overlay. The menu keeps a solid background when opened.","default":false},
-    {"type":"text","id":"button_label","label":"Button label","info":"Add a label and link to show the button."},
-    {"type":"url","id":"button_link","label":"Button link"}
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Main menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "link_list",
+      "id": "customer_account_menu",
+      "label": "Customer account menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo width",
+      "min": 60,
+      "max": 240,
+      "step": 4,
+      "unit": "px",
+      "default": 76
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-light"
+    },
+    {
+      "type": "checkbox",
+      "id": "overlay_home",
+      "label": "Use overlaid header on home page",
+      "info": "Applies when the first home page section supports a header overlay. The menu keeps a solid background when opened.",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "info": "Add a label and link to show the button.",
+      "default": "Start building"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo override"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_reference_brand",
+      "label": "Use LE FRIANCE reference symbol when no logo is selected",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_localization",
+      "label": "Show country and language",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "Content width",
+      "options": [
+        {
+          "value": "container",
+          "label": "Container"
+        },
+        {
+          "value": "full",
+          "label": "Full width"
+        }
+      ],
+      "default": "container"
+    },
+    {
+      "type": "range",
+      "id": "padding_y",
+      "label": "Vertical spacing",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "default": 16,
+      "unit": "px"
+    }
   ]
 }
 {% endschema %}

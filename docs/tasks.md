@@ -4,8 +4,8 @@
 
 - Tanggal: 2026-10-26
 - Zona waktu: Asia/Jakarta
-- Status: blocked
-- Task aktif: T01
+- Status: in_progress
+- Task aktif: T01 + T02 + G01
 - Judul: Implementasi homepage bertahap dari Figma
 
 ### Tujuan
@@ -43,7 +43,7 @@ Cocokkan file key `C2rhn7BP2nXA0LyByRDn09` dan node berikut, lalu baca rincian t
 | Node | Target |
 | --- | --- |
 | `3374:242` | Homepage; pilih section sesuai instruksi, bukan otomatis T00–T09 |
-| `3374:243` | T01 header / T02 hero; bedakan dari nama section yang diminta |
+| `3374:243`, `3646:1124` | T01 header / T02 hero; frame baru `3646:1124` dipakai pada follow-up pengguna |
 | `3374:270` | T03 modular system |
 | `3374:305` | T04 kolase koleksi |
 | `3374:326` | T05 produk unggulan |
@@ -95,7 +95,7 @@ Kriteria selesai:
 
 ### T01 — Header dan navigasi
 
-- Figma: [node 3374:243](https://www.figma.com/design/C2rhn7BP2nXA0LyByRDn09/Speedtest?node-id=3374-243).
+- Figma: [node 3646:1124](https://www.figma.com/design/C2rhn7BP2nXA0LyByRDn09/Speedtest?node-id=3646-1124), menggantikan referensi awal `3374:243` pada follow-up pengguna.
 - Dependensi: T00
 - Mapping: Section header dalam header group; terpisah dari hero meskipun berbagi frame.
 
@@ -114,21 +114,21 @@ Kriteria selesai:
 
 ### T02 — Hero editorial
 
-- Figma: [node 3374:243](https://www.figma.com/design/C2rhn7BP2nXA0LyByRDn09/Speedtest?node-id=3374-243).
+- Figma: [node 3646:1124](https://www.figma.com/design/C2rhn7BP2nXA0LyByRDn09/Speedtest?node-id=3646-1124), menggantikan referensi awal `3374:243` pada follow-up pengguna.
 - Dependensi: T00, T01
 - Mapping: Section hero editorial pada index; logo besar berbeda dari logo navigasi.
 
 Pekerjaan:
 
-- [ ] Bangun foto lifestyle penuh, wordmark besar, kartu gambar kecil, dan deskripsi kiri bawah sesuai komposisi referensi.
-- [ ] Sediakan gambar desktop/mobile, focal point, logo/wordmark, teks, warna overlay, serta link kartu opsional sebagai pengaturan.
-- [ ] Pertahankan proporsi dan keterbacaan saat logo/teks berubah; gambar hero diprioritaskan untuk LCP, aset lain tidak ikut diprioritaskan.
-- [ ] Turunkan komposisi mobile dari token; jangan mengecilkan desktop secara keseluruhan.
+- [x] Bangun foto lifestyle penuh, wordmark besar, kartu gambar kecil, dan deskripsi kiri bawah sesuai komposisi referensi.
+- [x] Sediakan gambar desktop/mobile, focal point, logo/wordmark, teks, warna overlay, serta link kartu opsional sebagai pengaturan.
+- [x] Pertahankan proporsi dan keterbacaan saat logo/teks berubah; gambar hero diprioritaskan untuk LCP, aset lain tidak ikut diprioritaskan.
+- [x] Turunkan komposisi mobile dari token; jangan mengecilkan desktop secara keseluruhan.
 
 Kriteria selesai:
 
 - [ ] Foto, logo, kartu, dan teks mengikuti referensi desktop; keputusan mobile dicatat.
-- [ ] Tidak ada overflow atau teks penting tertutup pada 375, 768, dan 1535 px.
+- [x] Tidak ada overflow pada 375, 768, dan 1535 px dalam fixture; screenshot desktop/mobile diperiksa. QA dengan font/media toko tetap terbuka.
 - [ ] Gambar kosong, teks panjang, serta logo dengan rasio berbeda tidak merusak section.
 
 ### T03 — Modular system / cerita material
@@ -270,41 +270,44 @@ Kriteria selesai:
 - [ ] Theme Check bersih untuk temuan relevan; homepage memenuhi target performa/aksesibilitas proyek pada pengujian yang dicatat.
 - [ ] Laporan tidak mengklaim tema siap submission: halaman collection/product/cart/search dan persyaratan lain tetap memerlukan milestone tersendiri.
 
+### G01 — Global settings dan commerce essentials (follow-up pengguna)
+
+- Sumber: homepage `3374:242` dan header/hero baru `3646:1124`.
+- Scope eksplisit 2026-10-26: font, color, section/container width, cart dan card; perilaku commerce seperti kemampuan inti Dawn, dengan kode independen Skeleton.
+- [x] Analisis per section dan mapping pengaturan global/section: [global-settings.md](global-settings.md).
+- [x] Hubungkan global settings ke CSS, kartu produk, cart page/drawer, dan essentials.
+- [x] Sediakan featured collection, rich text, newsletter dan announcement bar reusable; tidak merakit seluruh backlog homepage.
+- [x] Cart Ajax enhancement, native fallback, empty/error, quantities, notes, discounts dan selling plans dalam markup cart.
+- [x] Product form berbasis blocks, varian/harga/quantity/media, accelerated checkout native dan kartu bersama untuk collection.
+- [ ] Uji Theme Editor, cart/checkout/payment/subscription dan data toko nyata di development theme.
+- [ ] Lighthouse home/collection/product dan perbandingan akhir Figma dengan font/media toko.
+- High-variant/combined listings, filtering, predictive search, pickup/recommendations/gift card recipient dan full media QA memerlukan milestone lanjutan. G01 tidak mengklaim seluruh fitur Dawn/Theme Store selesai.
+
 ## Progres dan laporan — task aktif saja
 
-- ID laporan: T01
-- Mulai: 2026-10-26, Asia/Jakarta
-- Pembaruan: 2026-10-26T13:56:32+07:00
-- Status hasil: implementasi lokal dan pemeriksaan lokal selesai; blocked untuk kriteria verifikasi Theme Editor/logo nyata dan integrasi toko. Task T01 belum dicentang selesai.
+- ID laporan: T01 + T02 + G01
+- Tanggal: 2026-10-26, Asia/Jakarta
+- Status: implementasi lokal dan validasi scoped selesai; verifikasi Shopify runtime/Theme Editor/performance masih terbuka. T01/T02/G01 belum dinyatakan done.
+- Target langsung pengguna: `3646:1124`; homepage `3374:242` dianalisis untuk global settings. Arsip T01 lama: [2026-10-26-04](task-history/2026-10-26-04.md).
 
-### File yang berubah
+### Hasil
 
-- sections/header.liquid, snippets/header-menu.liquid, snippets/header-localization.liquid.
-- assets/header.css dan assets/header.js: responsive navigation, native details, Escape/outside close, custom-element lifecycle dan ukuran header.
-- locales/en.default.json: label header dan localization.
-- layout/theme.liquid serta snippets/css-variables.liquid: guard untuk error font yang terlihat pada preview toko.
-- Dokumentasi mapping/deviasi dan bukti pada docs/validation/t01-*.
+Header/navbar diganti mengikuti frame baru dan hero editorial terpisah dipasang pada index. Merchant dapat mengubah menu, logo, CTA, localization, hero images/wordmark/copy/card/overlay/height. Global schema diperluas untuk typography, colors, layout, cards, buttons/inputs dan cart. Kartu produk, cart drawer/page, product form serta reusable essentials sudah memakai pengaturan tersebut.
+
+Detail analisis, pemakai setiap grup setting, dokumentasi Shopify, batas katalog dan pengujian: [global settings](global-settings.md). Cart memakai native form plus Ajax enhancement; tidak menyalin Dawn dan tidak membuat configurator dari CTA.
 
 ### Validasi
 
-- Shopify CLI 4.9.4 Theme Check: [] dan exit 0. [Bukti](validation/t01-theme-check.json).
-- node --check assets/header.js: lulus.
-- 188 assertion browser lokal lulus pada lima lebar dan empat skenario; mencakup no-JS, menu kosong, CTA, Escape/fokus, overflow, form IDs dan reconnect. [Bukti dan batas fixture](validation/t01-browser.json).
-- Regresi font nil/string/unavailable variants lulus: [hasil](validation/t01-font-regression.json).
-- Native Chrome: menu mobile terbuka, Escape menutup dan mengembalikan fokus. Screenshot desktop/mobile fixture diperiksa dalam sesi.
-- [Catatan sumber dan keterbatasan](validation/t01-notes.md). Theme Editor, real logo, Shopify account service dan pengiriman localization belum diverifikasi. Tidak menganggap fixture sebagai Shopify server.
+- Shopify CLI 4.9.4 [Theme Check](validation/header-hero-cart-theme-check.json).
+- `node --check` pada header.js, commerce.js dan product.js.
+- [Browser lokal](validation/header-hero-cart-browser.json): 91 assertion lulus, lima lebar dan tiga variasi konten; cart Ajax dimock, bukan backend Shopify. Perubahan warna/overlay/font akhir diperiksa ulang sesuai catatan validasi.
+- Native Chrome diperiksa untuk desktop dan susunan mobile; tidak mengklaim Theme Editor/checkout/Lighthouse lulus.
 
-### Asumsi, penyimpangan, dan hambatan
+### Deviasi dan pekerjaan tersisa
 
-- Search/cart/account dan form bahasa/currency merupakan kebutuhan commerce di luar tampilan Figma; native select + Apply menggantikan label negara statis.
-- Logo memakai upload merchant dengan fallback nama toko; simbol brand Figma tidak dibundel karena lisensi distribusinya belum dikonfirmasi. Font tetap substitusi Work Sans/fallback dari T00.
-- Menu mobile, breakpoint 1100px, disclosure bertingkat dan state fokus adalah not in Figma.
-- Overlay tetap nonaktif default sampai ada section hero yang mendukung data-header-overlay (T02); integrasi nyata dan kontras di atas foto belum diuji.
-- Preview toko yang terbuka menunjukkan error font_url sebelum perubahan. Guard sudah diperbaiki lokal; tidak ada klaim error remote hilang sebelum kode terbaru diunggah dan diuji.
+Work Sans tetap substitusi font Figma. Search/cart/account ditambahkan untuk commerce; mobile dan state transaksi adalah not in Figma. Readability scrim diperkuat untuk teks putih. Aset Figma digunakan sebagai opsi referensi sesuai instruksi implementasi; status hak distribusi tetap dicatat di [licenses](third-party-licenses.md).
 
-### Pekerjaan tersisa
-
-Verifikasi di development theme yang diotorisasi: update pengaturan secara live, logo landscape/portrait, submenu dan selector dengan data toko, account sheet, serta integrasi over-hero setelah T02. Domain preview sudah terlihat di browser tetapi kode lokal belum diunggah; akses/izin untuk menguji perubahan pada development theme masih perlu dipastikan. T02–T09 belum dikerjakan. Tidak ada publish, commit, plugin install, atau perubahan remote dari sesi ini.
+Perlu development-theme QA untuk editor, logo beragam rasio, localization/account services, inventory/discount/subscription/checkout/payment dan Lighthouse. Full editorial T03–T08 serta fitur Theme Store lain tetap belum selesai. Tidak ada commit, push, deploy, publish, atau plugin install pada follow-up ini.
 
 ---
 

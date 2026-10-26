@@ -1,0 +1,13 @@
+{% doc %}
+  Compact country display with an accessible native localization form.
+  @param {string} instance_id - Unique placement identifier.
+{% enddoc %}
+{% capture region_label %}{{ localization.country.name }}{% if localization.country.iso_code != blank %} ({{ localization.country.iso_code }}){% endif %}{% endcapture %}
+{% if localization.available_countries.size > 1 or localization.available_languages.size > 1 %}
+  <details class="site-header__region">
+    <summary><span class="site-header__globe" aria-hidden="true">{{ 'icon-globe.svg' | inline_asset_content }}</span>{{ region_label | strip | escape }}{% if localization.available_languages.size > 1 %} · {{ localization.language.endonym_name | escape }}{% endif %}</summary>
+    <div class="site-header__localization-panel">{% render 'header-localization', instance_id: instance_id %}</div>
+  </details>
+{% elsif localization.country.name != blank %}
+  <span class="site-header__region-label"><span class="site-header__globe" aria-hidden="true">{{ 'icon-globe.svg' | inline_asset_content }}</span>{{ region_label | strip | escape }}</span>
+{% endif %}
