@@ -1,0 +1,23 @@
+<div class="page-shell">
+  <h1>{{ page.title | escape }}</h1>
+  <div class="rte">{{ page.content }}</div>
+  {% assign form_id = 'Contact-' | append: section.id %}
+  {% form 'contact', id: form_id %}
+    {{ form.errors | default_errors }}
+    {% if form.posted_successfully? %}<p role="status">{{ 'contact.success' | t }}</p>{% endif %}
+    <label for="ContactName-{{ section.id }}">{{ 'contact.name' | t }}</label>
+    <input id="ContactName-{{ section.id }}" name="contact[name]" autocomplete="name" value="{{ form.name | escape }}">
+    <label for="ContactEmail-{{ section.id }}">{{ 'contact.email' | t }}</label>
+    <input id="ContactEmail-{{ section.id }}" type="email" name="contact[email]" autocomplete="email" value="{{ form.email | escape }}" required>
+    <label for="ContactBody-{{ section.id }}">{{ 'contact.message' | t }}</label>
+    <textarea id="ContactBody-{{ section.id }}" name="contact[body]" required>{{ form.body | escape }}</textarea>
+    <button type="submit">{{ 'contact.send' | t }}</button>
+  {% endform %}
+</div>
+
+{% schema %}
+{
+  "name": "Contact form",
+  "settings": []
+}
+{% endschema %}

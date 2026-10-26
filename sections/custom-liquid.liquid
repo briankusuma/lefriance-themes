@@ -1,0 +1,28 @@
+{% if section.settings.code != blank %}
+  <div class="page-shell color-{{ section.settings.color_scheme }}">{{ section.settings.code }}</div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Custom Liquid",
+  "settings": [
+    {
+      "type": "liquid",
+      "id": "code",
+      "label": "Liquid code",
+      "info": "Add HTML or Liquid code."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-light"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Liquid"
+    }
+  ]
+}
+{% endschema %}

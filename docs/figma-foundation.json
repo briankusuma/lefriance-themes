@@ -1,0 +1,29 @@
+{
+  "fileKey": "C2rhn7BP2nXA0LyByRDn09",
+  "nodeId": "3374:242",
+  "inspectedOn": "2026-10-26",
+  "variables": {},
+  "source": "Figma get_design_context, direct node properties; no named variables returned",
+  "colors": [
+    "#3a322b",
+    "#5b5148",
+    "#463d35",
+    "#4e4742",
+    "#f8f0e8",
+    "#e5e3d3",
+    "#e7dbd0",
+    "#383736",
+    "#dbd2c9",
+    "#efe6dc",
+    "#b7aca0",
+    "#171513",
+    "#d2d2d2"
+  ],
+  "fonts": [
+    "SF_Pro_Display:Light",
+    "Open_Sauce_One:Regular",
+    "Open_Sauce_One:Medium",
+    "Inter_Variable:Regular",
+    "Inter_Display:Regular"
+  ]
+}

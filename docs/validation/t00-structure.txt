@@ -1,0 +1,2 @@
+2026-10-26: PASS — 12 JSON templates/reference graph; password layout; gift card Liquid; header/footer group references; section/block schema IDs and labels; global setting IDs; default color scheme references; recommended Theme Check configuration.
+Static checks only; no Shopify server/editor/rendering verification.

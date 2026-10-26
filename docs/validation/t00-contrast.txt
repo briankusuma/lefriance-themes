@@ -1,0 +1,7 @@
+Default solid color pairs only; calculated from hex, not a full accessibility audit.
+scheme-light: text/background = 16.15:1
+scheme-light: button_label/button = 12.57:1
+scheme-dark: text/background = 12.57:1
+scheme-dark: button_label/button = 18.21:1
+scheme-footer: text/background = 18.21:1
+scheme-footer: button_label/button = 18.21:1
