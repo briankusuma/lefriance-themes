@@ -21,6 +21,8 @@
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'foundation.css' | asset_url | stylesheet_tag }}
     {{ 'commerce.css' | asset_url | stylesheet_tag }}
+    {{ 'theme-motion.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'theme-motion.js' | asset_url }}" data-swiper-src="{{ 'vendor-swiper-14.3.0.js' | asset_url }}" data-swiper-css="{{ 'vendor-swiper-14.3.0.css' | asset_url }}" data-lenis-src="{{ 'vendor-lenis-1.3.27.js' | asset_url }}" data-lenis-css="{{ 'vendor-lenis-1.3.27.css' | asset_url }}" data-lenis-enabled="{{ settings.enable_smooth_scroll }}" data-design-mode="{{ request.design_mode }}" defer></script>
     <script src="{{ 'commerce.js' | asset_url }}" defer></script>
 
     {% # Social, title, etc. %}

@@ -2,8 +2,10 @@ if (!customElements.get("footer-gallery")) {
   customElements.define(
     "footer-gallery",
     class extends HTMLElement {
-      connectedCallback() {
+      async connectedCallback() {
+        if (!window.ThemeMotion) return;
         this.controller?.abort();
+        this.swiper?.destroy(true, true);
         this.controller = new AbortController();
         const { signal } = this.controller;
         this.slides = [...this.querySelectorAll("[data-footer-slide]")];
@@ -53,11 +55,32 @@ if (!customElements.get("footer-gallery")) {
           },
           { signal },
         );
+        const swiper = await ThemeMotion.create(this, this.slides, {
+          slidesPerView: 1,
+          effect: "fade",
+          fadeEffect: { crossFade: true },
+          rewind: true,
+          on: { slideChange: (swiper) => this.paint(swiper.realIndex) },
+        });
+        if (signal.aborted) {
+          swiper?.destroy(true, true);
+          return;
+        }
+        this.swiper = swiper;
+        if (!swiper) {
+          if (controls) controls.hidden = true;
+          return;
+        }
         this.select(0);
       }
       select(index) {
+        this.swiper?.slideTo(index, ThemeMotion.speed);
+        this.paint(index);
+      }
+      paint(index) {
         this.slides.forEach((slide, i) => {
-          slide.hidden = i !== index;
+          slide.inert = i !== index;
+          slide.setAttribute("aria-hidden", String(i !== index));
         });
         this.buttons.forEach((button, i) =>
           button.setAttribute("aria-pressed", String(i === index)),
@@ -65,6 +88,7 @@ if (!customElements.get("footer-gallery")) {
       }
       disconnectedCallback() {
         this.controller?.abort();
+        this.swiper?.destroy(true, true);
       }
     },
   );

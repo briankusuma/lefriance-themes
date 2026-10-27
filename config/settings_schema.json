@@ -516,5 +516,17 @@
         "info": "Uses the all products collection when empty."
       }
     ]
+  },
+  {
+    "name": "Motion",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_smooth_scroll",
+        "label": "Enable smooth page scrolling",
+        "info": "Uses Lenis for mouse wheel scrolling. Touch scrolling stays native. Disabled for reduced motion and in the theme editor.",
+        "default": true
+      }
+    ]
   }
 ]

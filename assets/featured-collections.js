@@ -2,9 +2,11 @@ if (!customElements.get("featured-collections")) {
   customElements.define(
     "featured-collections",
     class extends HTMLElement {
-      connectedCallback() {
+      async connectedCallback() {
+        if (!window.ThemeMotion) return;
         this.controller?.abort();
-        this.observer?.disconnect();
+        this.swipers?.forEach((swiper) => swiper?.destroy(true, true));
+        this.swipers = new Map();
         this.controller = new AbortController();
         const { signal } = this.controller;
         this.tabs = [...this.querySelectorAll("[data-featured-tab]")];
@@ -12,16 +14,10 @@ if (!customElements.get("featured-collections")) {
         this.classList.add("is-enhanced");
         this.querySelector("[data-featured-tabs]").hidden =
           this.tabs.length < 2;
-        this.observer = new ResizeObserver(() => this.updateArrows());
         this.panels.forEach((panel, index) => {
           panel.setAttribute("role", "tabpanel");
           panel.setAttribute("aria-labelledby", this.tabs[index].id);
           const rail = panel.querySelector("[data-featured-products]");
-          this.observer.observe(rail);
-          rail.addEventListener("scroll", () => this.updateArrows(), {
-            signal,
-            passive: true,
-          });
           panel.querySelector("[data-featured-arrows]").hidden = false;
         });
         this.addEventListener(
@@ -29,21 +25,6 @@ if (!customElements.get("featured-collections")) {
           (event) => {
             const tab = event.target.closest("[data-featured-tab]");
             if (tab) this.select(Number(tab.dataset.featuredTab), true);
-            const arrow = event.target.closest(
-              "[data-featured-previous], [data-featured-next]",
-            );
-            if (!arrow) return;
-            const rail = arrow
-              .closest("[data-featured-panel]")
-              .querySelector("[data-featured-products]");
-            const rtl = getComputedStyle(rail).direction === "rtl";
-            const direction = arrow.hasAttribute("data-featured-next") ? 1 : -1;
-            rail.scrollBy({
-              left: direction * (rtl ? -1 : 1) * rail.clientWidth,
-              behavior: matchMedia("(prefers-reduced-motion: reduce)").matches
-                ? "instant"
-                : "smooth",
-            });
           },
           { signal },
         );
@@ -88,6 +69,35 @@ if (!customElements.get("featured-collections")) {
             : 0,
           false,
         );
+        await Promise.all(
+          this.panels.map(async (panel) => {
+            const rail = panel.querySelector("[data-featured-products]");
+            const swiper = await ThemeMotion.create(
+              rail,
+              [...rail.querySelectorAll(".product-card")],
+              {
+                slidesPerView: 1,
+                spaceBetween: 21,
+                breakpoints: {
+                  600: { slidesPerView: 2 },
+                  990: { slidesPerView: 4 },
+                },
+                observer: true,
+                observeParents: true,
+                navigation: {
+                  prevEl: panel.querySelector("[data-featured-previous]"),
+                  nextEl: panel.querySelector("[data-featured-next]"),
+                },
+              },
+            );
+            if (signal.aborted) {
+              swiper?.destroy(true, true);
+              return;
+            }
+            this.swipers.set(panel, swiper);
+          }),
+        );
+        this.updateArrows();
       }
 
       select(index, announce) {
@@ -107,17 +117,17 @@ if (!customElements.get("featured-collections")) {
       updateArrows() {
         const panel = this.panels.find((item) => !item.hidden);
         if (!panel) return;
-        const rail = panel.querySelector("[data-featured-products]");
-        const position = Math.abs(rail.scrollLeft);
-        const max = rail.scrollWidth - rail.clientWidth;
-        panel.querySelector("[data-featured-previous]").disabled = position < 2;
+        const swiper = this.swipers.get(panel);
+        swiper?.update();
+        panel.querySelector("[data-featured-previous]").disabled =
+          !swiper || swiper.isBeginning || swiper.isLocked;
         panel.querySelector("[data-featured-next]").disabled =
-          position >= max - 2;
+          !swiper || swiper.isEnd || swiper.isLocked;
       }
 
       disconnectedCallback() {
         this.controller?.abort();
-        this.observer?.disconnect();
+        this.swipers?.forEach((swiper) => swiper?.destroy(true, true));
       }
     },
   );

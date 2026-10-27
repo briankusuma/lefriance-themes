@@ -3,7 +3,10 @@ if (!customElements.get("material-story")) {
     "material-story",
     class extends HTMLElement {
       connectedCallback() {
+        if (!window.ThemeMotion) return;
         this.controller?.abort();
+        this.swiper?.destroy(true, true);
+        this.swiperCategory = null;
         this.controller = new AbortController();
         const { signal } = this.controller;
         this.items = [...this.querySelectorAll("[data-story-item]")];
@@ -95,9 +98,63 @@ if (!customElements.get("material-story")) {
         );
       }
 
-      update(announce) {
+      async update(announce) {
+        const visible = this.items.filter((item) => this.matchesCategory(item));
+        if (this.swiperCategory !== this.category) {
+          this.swiper?.destroy(true, true);
+          this.swiperCategory = this.category;
+          this.items.forEach((item) => {
+            item.hidden = !this.matchesCategory(item);
+          });
+          const swiper = await ThemeMotion.create(
+            this.querySelector(".material-story__stories"),
+            visible,
+            {
+              slidesPerView: 1,
+              autoHeight: true,
+              effect: "fade",
+              fadeEffect: { crossFade: true },
+              rewind: true,
+              on: {
+                slideChange: (swiper) => {
+                  this.activeIndex = this.items.indexOf(
+                    visible[swiper.realIndex],
+                  );
+                  this.paint(false);
+                },
+              },
+            },
+          );
+          if (this.controller.signal.aborted) {
+            swiper?.destroy(true, true);
+            return;
+          }
+          this.swiper = swiper;
+          if (!swiper && visible.length) {
+            this.classList.remove("is-enhanced");
+            this.items.forEach((item) => {
+              item.hidden = false;
+              item.inert = false;
+              item.removeAttribute("aria-hidden");
+            });
+            this.querySelectorAll("[data-story-controls]").forEach(
+              (control) => (control.hidden = true),
+            );
+            return;
+          }
+        }
+        const index = visible.indexOf(this.items[this.activeIndex]);
+        this.swiper?.slideTo(
+          Math.max(0, index),
+          announce ? ThemeMotion.speed : 0,
+        );
+        this.paint(announce);
+      }
+
+      paint(announce) {
         this.items.forEach((item, index) => {
-          item.hidden = index !== this.activeIndex;
+          item.inert = index !== this.activeIndex;
+          item.setAttribute("aria-hidden", String(index !== this.activeIndex));
         });
         this.categories.forEach((button) => {
           button.setAttribute(
@@ -124,6 +181,7 @@ if (!customElements.get("material-story")) {
 
       disconnectedCallback() {
         this.controller?.abort();
+        this.swiper?.destroy(true, true);
       }
     },
   );

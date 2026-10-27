@@ -1,5 +1,7 @@
 # Theme Store submission checklist
 
+2026-10-27 motion integration: empat slider memakai Swiper 14.3.0 subset lokal, Lenis 1.3.27 opsional. Theme Check bersih; 101/101 integrasi + 30/30 state checks lokal. Lisensi/integrity dan payload gzip dicatat di `vendor/motion-libraries.md`. Reduced-motion preference disimulasikan pada fixture; live editor, browser/perangkat lain dan Lighthouse masih terbuka. Tidak menutup persyaratan submission global.
+
 Source: https://shopify.dev/docs/storefronts/themes/store/requirements
 Last full verification recorded: **2026-10-01** (existing record, not re-certified).
 Scoped review: **2026-10-26** — see [review notes](shopify-review.md).

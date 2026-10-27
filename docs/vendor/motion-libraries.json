@@ -1,0 +1,38 @@
+{
+  "swiper": {
+    "version": "14.3.0",
+    "license": "MIT",
+    "source": "https://registry.npmjs.org/swiper/-/swiper-14.3.0.tgz",
+    "integrity": "sha512-qw0Xv1+sylM8KCQxWxV2iYAK2G6XjFGPZ/8F1baEsY8DK4A3sTnLx6jUJ0G71rDbVQ05JHMWkcWmJ5NvlxZO0w==",
+    "assets": {
+      "assets/vendor-swiper-14.3.0.js": {
+        "bytes": 177927,
+        "gzip_bytes": 35267,
+        "sha256": "30e7f8b5c50ca60eb060447bdfa19e1c9d05e90944465a84949a2f8ca6c43b78"
+      },
+      "assets/vendor-swiper-14.3.0.css": {
+        "bytes": 6476,
+        "gzip_bytes": 1654,
+        "sha256": "36a9738cb1f36fdc2ab8be31177f11a6ac7ce297556456e5b9448873219b68d7"
+      }
+    }
+  },
+  "lenis": {
+    "version": "1.3.27",
+    "license": "MIT",
+    "source": "https://registry.npmjs.org/lenis/-/lenis-1.3.27.tgz",
+    "integrity": "sha512-QIHNH4LIfWyLfgH/5K0aTGZgyFJJ7GfHNcaH/AIgyKjb8gstLh5siNGvrVqz1w5ClLXzOvllBVk7vby8JzUVPQ==",
+    "assets": {
+      "assets/vendor-lenis-1.3.27.js": {
+        "bytes": 35530,
+        "gzip_bytes": 8976,
+        "sha256": "5670f5d1a591dae543024bdf27c41d044389e110be599ae5ad965e100ec3f4a1"
+      },
+      "assets/vendor-lenis-1.3.27.css": {
+        "bytes": 513,
+        "gzip_bytes": 242,
+        "sha256": "2f668ae84a668327f246faf8a770383a2bf69196d214290fbc4d5548910606c5"
+      }
+    }
+  }
+}

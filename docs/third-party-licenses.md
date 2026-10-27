@@ -1,5 +1,7 @@
 # Third-Party Assets and Licenses
 
+2026-10-27 motion migration: Swiper 14.3.0 and Lenis 1.3.27 added at the user's explicit request, both MIT. Distributed locally in theme assets with full license notices in JS; license copies under `docs/licenses/`. Swiper is a readable Core/Navigation/A11y/EffectFade build; Lenis uses its readable official distribution. Version, npm integrity, asset hashes, build details and performance rationale: [motion libraries](vendor/motion-libraries.md), [manifest](vendor/motion-libraries.json). No runtime CDN or new paid service.
+
 2026-10-27 Journal follow-up: `assets/journal-finishing-generated.jpg` and `assets/journal-timber-generated.jpg` were created using the built-in imagegen tool at the user's request; illustrative AI-generated workshop scenes, not sourced third-party photography or merchant process documentation. Optimized JPEGs are 960 x 960px. Prompts and generation method: [journal image prompts](validation/journal-image-prompts.md). No external library or font introduced; original Figma images retain their separately recorded rights status.
 
 Record every third-party asset (fonts, icons, external libraries, images) used in the theme, along with source and license details.
