@@ -4,6 +4,7 @@ Document every intentional or necessary deviation from the Figma designs, includ
 
 | Date | Component / Section | Figma Frame / Node | Deviation | Reason (Shopify / A11y / Performance) |
 | --- | --- | --- | --- | --- |
+| 2026-10-27 | Material stories | 3374:270 | Work Sans font picker; foreground kontras dari color scheme; Traceable dikoreksi; tiga indikator mengikuti tiga blok; footer digital passport diganti narasi material; mobile dan interaksi manual adalah turunan | Keterbacaan, jumlah konten nyata, tidak menjanjikan layanan yang belum tersedia; detail di validation/material-story-notes.md |
 | 2026-10-26 | Global typography | 3374:242, 3646:1128 | Arsip Open Sauce One dari pengguna diverifikasi berlisensi OFL, tetapi tidak dibundel; Work Sans dari font picker tetap menjadi substitusi dan bukan kecocokan identik | Persyaratan Theme Store mewajibkan font picker dan menolak custom font |
 | 2026-10-26 | Global geometry | 3374:242 | Margin 51.167 px dinormalisasi ke setting 51 px; ukuran rem dan tinggi konten responsif | Responsive dan preferensi ukuran font |
 | 2026-10-26 | Foreground dan border UI | 3374:270, 3374:431 | Default foreground opak; garis UI lebih kuat daripada opacity teks/border dekoratif sumber | Keterbacaan; verifikasi kontras setiap state saat section dibuat |

@@ -1,4 +1,11 @@
 {
+  "material_story": {
+    "all": "All",
+    "categories": "Story categories",
+    "select_story": "Select a story",
+    "show_story": "Show story: {{ title }}",
+    "empty": "No stories to display."
+  },
   "404": {
     "title": "404",
     "not_found": "Page not found.",

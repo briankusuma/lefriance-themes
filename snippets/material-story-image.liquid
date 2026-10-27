@@ -1,0 +1,37 @@
+{% comment %}Shared image rendering for story cards and their thumbnail controls.{% endcomment %}
+{% liquid
+  assign image_sizes = '(min-width: 990px) 44vw, 90vw'
+  assign image_widths = '320, 480, 680, 960, 1360'
+  assign image_width = 1360
+  if thumbnail
+    assign image_sizes = '(min-width: 990px) 6vw, 64px'
+    assign image_widths = '80, 120, 180'
+    assign image_width = 180
+  endif
+  assign image_alt = block.settings.image.alt | default: block.settings.title
+  if thumbnail
+    assign image_alt = ''
+  endif
+  assign reference_asset = ''
+  if use_reference_images
+    case block.settings.reference_image
+      when 'chair'
+        assign reference_asset = 'material-story-chair.png'
+      when 'table'
+        assign reference_asset = 'material-story-table.png'
+      when 'room'
+        assign reference_asset = 'material-story-room.png'
+    endcase
+  endif
+%}
+{% if block.settings.image != blank %}
+  {{ block.settings.image | image_url: width: image_width | image_tag: widths: image_widths, sizes: image_sizes, loading: 'lazy', alt: image_alt }}
+{% elsif reference_asset != blank %}
+  {% if thumbnail %}
+    <img src="{{ reference_asset | asset_img_url: '180x' }}" width="180" height="225" alt="" loading="lazy">
+  {% else %}
+    <img src="{{ reference_asset | asset_img_url: '960x' }}" srcset="{{ reference_asset | asset_img_url: '320x' }} 320w, {{ reference_asset | asset_img_url: '480x' }} 480w, {{ reference_asset | asset_img_url: '680x' }} 680w, {{ reference_asset | asset_img_url: '960x' }} 960w" sizes="{{ image_sizes }}" width="960" height="1200" alt="{{ image_alt | escape }}" loading="lazy">
+  {% endif %}
+{% else %}
+  {{ 'image' | placeholder_svg_tag: 'material-story__placeholder' }}
+{% endif %}

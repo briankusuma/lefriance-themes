@@ -3,6 +3,7 @@
 Source: https://shopify.dev/docs/storefronts/themes/store/requirements
 Last full verification recorded: **2026-10-01** (existing record, not re-certified).
 Scoped review: **2026-10-26** — see [review notes](shopify-review.md).
+Scoped follow-up **2026-10-27**: T03 inspected against current requirements; local behavior and limits are recorded in [material stories validation](validation/material-story-notes.md). Global submission checks remain open.
 Re-verify at the start of every milestone and again right before submission. Update the date above when you do.
 
 Treat applicable requirements as submission gates. Mark an item only after verifying it using the appropriate method: repository inspection for file structure, source and license review for assets, a development store for storefront and Theme Editor behavior, and browser measurements for accessibility and performance. Record evidence in the active task report or a linked verification report. Code presence alone does not prove working behavior.

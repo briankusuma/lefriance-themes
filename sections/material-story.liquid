@@ -1,0 +1,104 @@
+{{ 'material-story.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'material-story.js' | asset_url }}" defer></script>
+{% liquid
+  assign categories = section.blocks | map: 'settings' | map: 'category' | uniq
+  assign initial_index = section.settings.initial_item | minus: 1
+%}
+<material-story class="material-story section-shell color-{{ section.settings.color_scheme }}" data-initial-index="{{ initial_index }}" aria-labelledby="MaterialHeading-{{ section.id }}">
+  <div class="material-story__layout container">
+    <h2 class="material-story__heading" id="MaterialHeading-{{ section.id }}">
+      {{ section.settings.heading | escape }}
+      {% if section.settings.heading_secondary != blank %}<span>{{ section.settings.heading_secondary | escape }}</span>{% endif %}
+    </h2>
+    <div class="material-story__left">
+      <div class="material-story__categories" data-story-controls hidden>
+        <div class="material-story__filters" role="group" aria-label="{{ 'material_story.categories' | t | escape }}">
+          <button type="button" data-story-category="" aria-pressed="true">{{ 'material_story.all' | t }}</button>
+          {% for category in categories %}
+            {% assign category_name = category | strip %}
+            {% if category_name != blank %}<button type="button" data-story-category="{{ category_name | escape }}" aria-pressed="false">{{ category_name | escape }}</button>{% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      <div class="material-story__intro rte">{{ section.settings.intro }}</div>
+    </div>
+    <div class="material-story__stories" id="MaterialStories-{{ section.id }}">
+      {% for block in section.blocks %}
+        <article class="material-story__card" id="MaterialStory-{{ section.id }}-{{ block.id }}" data-story-item data-story-category-name="{{ block.settings.category | strip | escape }}" data-story-title="{{ block.settings.title | escape }}" {{ block.shopify_attributes }}>
+          <div class="material-story__image">
+            {% render 'material-story-image', block: block, use_reference_images: section.settings.use_reference_images, thumbnail: false %}
+          </div>
+          <div class="material-story__blur" aria-hidden="true"></div>
+          <div class="material-story__copy">
+            {% if block.settings.title != blank %}<h3>{{ block.settings.title | escape }}</h3>{% endif %}
+            <div class="material-story__description rte">{{ block.settings.description }}</div>
+            {% if block.settings.link != blank and block.settings.link_label != blank %}<a class="material-story__link" href="{{ block.settings.link }}">{{ block.settings.link_label | escape }}</a>{% endif %}
+          </div>
+        </article>
+      {% endfor %}
+      <p class="material-story__empty" data-story-empty{% if section.blocks.size > 0 %} hidden{% endif %}>{{ 'material_story.empty' | t }}</p>
+    </div>
+    <div class="material-story__right">
+    <div class="material-story__thumbnails" data-story-controls role="group" aria-label="{{ 'material_story.select_story' | t | escape }}" hidden>
+      {% for block in section.blocks %}
+        <button class="material-story__thumbnail" type="button" data-story-select="{{ forloop.index0 }}" aria-controls="MaterialStory-{{ section.id }}-{{ block.id }}" aria-label="{{ 'material_story.show_story' | t: title: block.settings.title | escape }}" aria-pressed="false">
+          {% render 'material-story-image', block: block, use_reference_images: section.settings.use_reference_images, thumbnail: true %}
+        </button>
+      {% endfor %}
+    </div>
+    <div class="material-story__aside">
+      <div class="material-story__aside-copy rte">{{ section.settings.aside }}</div>
+      <div class="material-story__indicators" data-story-controls role="group" aria-label="{{ 'material_story.select_story' | t | escape }}" hidden>
+        {% for block in section.blocks %}
+          <button class="material-story__indicator" type="button" data-story-select="{{ forloop.index0 }}" aria-controls="MaterialStory-{{ section.id }}-{{ block.id }}" aria-label="{{ 'material_story.show_story' | t: title: block.settings.title | escape }}" aria-pressed="false">
+            <span aria-hidden="true"></span>
+            <img src="{{ 'material-story-active.svg' | asset_url }}" width="12.7917" height="12.7917" alt="" loading="lazy" aria-hidden="true">
+          </button>
+        {% endfor %}
+      </div>
+    </div>
+    </div>
+    <div class="material-story__footer rte">{{ section.settings.footer_text }}</div>
+    <p class="visually-hidden" data-story-status role="status" aria-atomic="true"></p>
+  </div>
+</material-story>
+
+{% schema %}
+{
+  "name": "Material stories",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "max_blocks": 12,
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-dark" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Tell your material story" },
+    { "type": "text", "id": "heading_secondary", "label": "Secondary heading", "default": "from the inside out" },
+    { "type": "richtext", "id": "intro", "label": "Introductory text" },
+    { "type": "richtext", "id": "aside", "label": "Supporting text" },
+    { "type": "richtext", "id": "footer_text", "label": "Closing text" },
+    { "type": "range", "id": "initial_item", "label": "Initial story", "min": 1, "max": 12, "step": 1, "default": 2, "info": "Uses the first story if this position is empty." },
+    { "type": "checkbox", "id": "use_reference_images", "label": "Use reference images when empty", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "story",
+      "name": "Story",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "select", "id": "reference_image", "label": "Reference image", "default": "none", "options": [
+          { "value": "none", "label": "None" },
+          { "value": "chair", "label": "Chair workshop" },
+          { "value": "table", "label": "Table workshop" },
+          { "value": "room", "label": "Furniture studio" }
+        ], "info": "Used only when reference images are enabled and no image is selected." },
+        { "type": "text", "id": "title", "label": "Heading", "default": "Introduce a material or process" },
+        { "type": "richtext", "id": "description", "label": "Description", "default": "<p>Describe what makes this detail special.</p>" },
+        { "type": "text", "id": "category", "label": "Category", "info": "Stories with the same category share a filter." },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "text", "id": "link_label", "label": "Link label" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Material stories", "blocks": [{ "type": "story" }, { "type": "story" }, { "type": "story" }] }]
+}
+{% endschema %}

@@ -22,6 +22,8 @@ Nomor anak media/ikon harus dicocokkan kembali bila Figma diubah; frame dan aset
 
 ## Aset Figma lainnya yang direncanakan
 
+T03 pada 2026-10-27 menggunakan aset asli node `3374:270`: `assets/material-story-chair.png` (`3374:287`), `material-story-table.png` (`3374:288`/`3374:301`), `material-story-room.png` (`3374:289`), serta `material-story-active.svg` (`3374:279`). Ketiga foto asli 960 x 1200px; SVG 12.7917 x 12.7917px. Sumber adalah URL aset response design context, disimpan lokal dan dirender melalui Shopify asset filters. Status hak distribusi sama dengan aset Figma sebelumnya: belum dikonfirmasi sebelum rilis. Tidak ada library baru.
+
 | Asset | Referensi node | Status hak penggunaan | Rencana |
 | --- | --- | --- | --- |
 | Foto proses/material | 3374:287–289, 3374:301 | Belum dikonfirmasi | T03 dan media footer T08 |

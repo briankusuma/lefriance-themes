@@ -10,9 +10,50 @@
         "body_muted": "and timeless style into your space.",
         "overlay_opacity": 60
       }
+    },
+    "materials": {
+      "type": "material-story",
+      "settings": {
+        "color_scheme": "scheme-dark",
+        "heading": "Design freely with",
+        "heading_secondary": "a fully modular system",
+        "intro": "<p>Fewer parts, fast swaps, and repairable modules cut TCO from day one.</p>",
+        "aside": "<p>Design volume instead of square meters — better yield without bigger plans.</p>",
+        "footer_text": "<p>Discover the materials, thoughtful details, and considered design behind the collection.</p>",
+        "initial_item": 2,
+        "use_reference_images": true
+      },
+      "blocks": {
+        "chair": {
+          "type": "story",
+          "settings": {
+            "reference_image": "chair",
+            "title": "Thoughtful details, from the frame up.",
+            "description": "<p>Explore the craft behind the collection.</p>",
+            "category": "Quality Materials"
+          }
+        },
+        "table": {
+          "type": "story",
+          "settings": {
+            "reference_image": "table",
+            "title": "Be the first to hear about lineup drops.",
+            "description": "<p>Exclusive access, and limited releases.</p>",
+            "category": "Design for Disassembly"
+          }
+        },
+        "room": {
+          "type": "story",
+          "settings": {
+            "reference_image": "room",
+            "title": "A closer look at where it begins.",
+            "description": "<p>Discover the people and processes behind each piece.</p>",
+            "category": "Traceable"
+          }
+        }
+      },
+      "block_order": ["chair", "table", "room"]
     }
   },
-  "order": [
-    "hero"
-  ]
+  "order": ["hero", "materials"]
 }

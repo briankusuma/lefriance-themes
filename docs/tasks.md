@@ -2,10 +2,10 @@
 
 ## Brief
 
-- Tanggal: 2026-10-26
+- Tanggal: 2026-10-27
 - Zona waktu: Asia/Jakarta
 - Status: in_progress
-- Task aktif: T01 + T02 + G01
+- Task aktif: T03
 - Judul: Implementasi homepage bertahap dari Figma
 
 ### Tujuan
@@ -139,16 +139,16 @@ Kriteria selesai:
 
 Pekerjaan:
 
-- [ ] Bangun grid gelap tiga kolom, judul dua tone, kartu foto putih, thumbnail, kategori kiri, indikator, serta teks pendukung.
-- [ ] Sediakan blok foto, judul, deskripsi, kategori, dan link opsional; kategori bekerja pada blok konten, bukan menyamar sebagai filter katalog.
-- [ ] Definisikan hubungan kategori, thumbnail, dan indikator dari konten yang benar-benar tersedia. Jumlah indikator mengikuti jumlah item; jangan hard-code lima slide dari gambar.
-- [ ] Usulkan perilaku klik dalam mapping sebelum coding. Jika hubungan kontrol belum dapat dipastikan, catat keputusan yang perlu diklarifikasi; jangan mengarang konfigurator atau digital passport.
-- [ ] Perbaiki Traceable, periksa kontras, gunakan perpindahan manual tanpa autoplay sebagai usulan implementasi; pada mobile urutkan judul, kategori, kartu, lalu teks.
+- [x] Bangun grid gelap tiga kolom, judul dua tone, kartu foto putih, thumbnail, kategori kiri, indikator, serta teks pendukung.
+- [x] Sediakan blok foto, judul, deskripsi, kategori, dan link opsional; kategori bekerja pada blok konten, bukan menyamar sebagai filter katalog.
+- [x] Definisikan hubungan kategori, thumbnail, dan indikator dari konten yang benar-benar tersedia. Jumlah indikator mengikuti jumlah item; jangan hard-code lima slide dari gambar.
+- [x] Usulkan perilaku klik dalam mapping sebelum coding. Kategori menyaring story; thumbnail/indikator memilih item secara manual. Tidak ada konfigurator/digital passport.
+- [x] Perbaiki Traceable, periksa kontras, gunakan perpindahan manual tanpa autoplay; mobile memakai urutan judul, kategori, kartu, thumbnail, lalu teks.
 
 Kriteria selesai:
 
-- [ ] Kategori dan pemilih item menampilkan konten yang benar, termasuk kategori kosong dan satu item.
-- [ ] Keyboard, selected state, area tekan, dan pembacaan teks bekerja; semua konten penting tetap dapat diakses tanpa JS.
+- [x] Kategori dan pemilih item menampilkan konten yang benar, termasuk kategori kosong dan satu item — browser lokal, backend tidak diperlukan.
+- [x] Keyboard, selected state, area tekan, dan pembacaan teks bekerja; semua konten penting tetap dapat diakses tanpa JS — validasi DOM/keyboard lokal; screen reader manual belum diuji.
 - [ ] Section mendukung add/remove/reorder blok di editor; perbedaan copy dan interaksi terdokumentasi.
 
 ### T04 — Kolase koleksi
@@ -286,31 +286,28 @@ Kriteria selesai:
 
 ## Progres dan laporan — task aktif saja
 
-- ID laporan: T01 + T02 + G01
-- Tanggal: 2026-10-26, Asia/Jakarta
-- Status: implementasi lokal dan validasi scoped selesai; verifikasi Shopify runtime/Theme Editor/performance masih terbuka. T01/T02/G01 belum dinyatakan done.
-- Target langsung pengguna: `3646:1124`; homepage `3374:242` dianalisis untuk global settings. Arsip T01 lama: [2026-10-26-04](task-history/2026-10-26-04.md).
+- ID laporan: T03
+- Tanggal: 2026-10-27, Asia/Jakarta
+- Status: implementasi lokal selesai; Theme Editor dan Lighthouse masih perlu verifikasi. Status task tetap in_progress.
+- Target langsung pengguna: `3374:270`. Laporan sebelumnya: [T01 + T02 + G01](task-history/2026-10-26-05.md).
 
 ### Hasil
 
-Header/navbar diganti mengikuti frame baru dan hero editorial terpisah dipasang pada index. Merchant dapat mengubah menu, logo, CTA, localization, hero images/wordmark/copy/card/overlay/height. Global schema diperluas untuk typography, colors, layout, cards, buttons/inputs dan cart. Kartu produk, cart drawer/page, product form serta reusable essentials sudah memakai pengaturan tersebut.
+Section Material stories dibangun dan dipasang setelah hero. Komposisi desktop mengikuti grid tiga kolom Figma: judul dua tone, kartu foto putih dengan blur, kategori di kiri, thumbnail serta indikator di kanan, dan teks penutup. Mobile memakai susunan turunan yang terdokumentasi.
 
-Detail analisis, pemakai setiap grup setting, dokumentasi Shopify, batas katalog dan pengujian: [global settings](global-settings.md). Cart memakai native form plus Ajax enhancement; tidak menyalin Dawn dan tidak membuat configurator dari CTA.
+Schema menyediakan color scheme, heading dua bagian, teks pendukung, pilihan item awal, serta hingga 12 story blocks dengan gambar, heading, deskripsi, kategori, dan link opsional. Kategori berasal dari konten; thumbnail dan indikator mengikuti jumlah blok. Perpindahan manual tanpa autoplay. Tanpa JS, semua cerita tetap terbaca. Detail mapping, interaksi, sumber Shopify dan batas validasi: [catatan T03](validation/material-story-notes.md).
 
 ### Validasi
 
-- Shopify CLI 4.9.4 [Theme Check](validation/header-hero-cart-theme-check.json).
-- `node --check` pada header.js, commerce.js dan product.js.
-- [Browser lokal](validation/header-hero-cart-browser.json) dan [uji presentasi cart](validation/cart-presentations-browser.json): 99 assertion lulus, lima lebar dan tiga variasi konten; cart Ajax dimock, bukan backend Shopify. Perubahan warna/overlay/font akhir diperiksa ulang sesuai catatan validasi.
-- Native Chrome diperiksa untuk desktop dan susunan mobile; tidak mengklaim Theme Editor/checkout/Lighthouse lulus.
-- Follow-up schema: role gradient color scheme diperbaiki agar menunjuk ke `color_background`; nilai `background_gradient` tersedia pada current dan preset untuk mencegah pesan preview Shopify tentang color schemes yang tidak terdefinisi.
-- Follow-up hero detail `3646:1128`: ukuran, crop, radius, blur, tracking, serta pembagian copy putih/50% diperiksa dari design context. Theme Check Shopify CLI 4.9.4 bersih dan suite browser lokal tetap 99/99.
+- Shopify CLI 4.9.4 Theme Check: `[]`; JavaScript syntax dan JSON parsing lulus.
+- Browser lokal dari actual Liquid: 7 variasi konten, 5 lebar; kategori, pemilih, keyboard, empty state, no-JS, overflow, asset loading, dan simulated editor block selection. Hasil di [browser T03](validation/material-story-browser.json).
+- Perbandingan visual desktop dan preview mobile dilakukan di Chrome. Font fixture memiliki fallback lokal; tidak ada klaim pixel match font atau Theme Editor/Lighthouse lulus.
 
 ### Deviasi dan pekerjaan tersisa
 
-Work Sans tetap substitusi font Figma. Arsip Open Sauce One yang diberikan pengguna berlisensi OFL, tetapi tidak dibundel karena custom font ditolak untuk Theme Store. Detail card `3646:1128` disesuaikan ke geometri Figma dan copy utama/redup kini terpisah serta merchant-editable. Search/cart/account ditambahkan untuk commerce; mobile dan state transaksi adalah not in Figma. Readability scrim diperkuat untuk teks putih. Aset Figma digunakan sebagai opsi referensi sesuai instruksi implementasi; status hak distribusi tetap dicatat di [licenses](third-party-licenses.md).
+Work Sans tetap substitusi font picker. Kontras teks/kontrol diperkuat; Traceable dikoreksi. Tiga blok menghasilkan tiga indikator. Teks digital passport diganti agar tidak menjanjikan layanan yang belum tersedia. Mobile dan perilaku manual merupakan turunan, not in Figma. Foto/SVG asli dibundel sebagai opsi referensi; hak distribusi sebelum rilis masih terbuka di [licenses](third-party-licenses.md).
 
-Perlu development-theme QA untuk editor, logo beragam rasio, localization/account services, inventory/discount/subscription/checkout/payment dan Lighthouse. Full editorial T03–T08 serta fitur Theme Store lain tetap belum selesai. Tidak ada commit, push, deploy, publish, atau plugin install pada follow-up ini.
+Perlu development-theme QA untuk add/remove/reorder blok, penggantian gambar/focal point, color schemes dan live preview, ditambah Lighthouse. T04–T08 serta fitur Theme Store lainnya belum dikerjakan pada task ini. Tidak ada commit/push/deploy/publish.
 
 ---
 
