@@ -8,6 +8,14 @@
  * ------------------------------------------------------------
  */
 {
+  "featured_collections": {
+    "collections": "Featured collections",
+    "collection": "Collection",
+    "view_collection": "View collection",
+    "previous": "Show previous products",
+    "next": "Show next products",
+    "empty": "No products to display in this collection."
+  },
   "material_story": {
     "all": "All",
     "categories": "Story categories",

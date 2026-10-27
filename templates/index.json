@@ -30,6 +30,60 @@
         "overlay_opacity": 60
       }
     },
+    "featured": {
+      "type": "featured-collections",
+      "settings": {
+        "color_scheme": "scheme-light",
+        "intro": "<p>Thoughtfully crafted pieces that bring warmth, balance, and timeless style into your space.</p>",
+        "initial_tab": 2,
+        "products_to_show": 8
+      },
+      "blocks": {
+        "all": {
+          "type": "collection",
+          "settings": {
+            "label": "All",
+            "heading": "Furniture for thoughtful spaces.",
+            "link_label": "View collection"
+          }
+        },
+        "chair": {
+          "type": "collection",
+          "settings": {
+            "label": "Chair",
+            "heading": "Chairs designed for comfort and character.",
+            "description": "<p>Each chair is built with premium materials and ergonomic precision, blending natural textures with modern design.</p>",
+            "note": "<p>Be the first to discover new arrivals.</p>",
+            "link_label": "View all chairs"
+          }
+        },
+        "sofa": {
+          "type": "collection",
+          "settings": {
+            "label": "Sofa",
+            "heading": "Sofas for everyday comfort.",
+            "link_label": "View all sofas"
+          }
+        },
+        "lounge": {
+          "type": "collection",
+          "settings": {
+            "label": "Lounge",
+            "heading": "Make room to unwind.",
+            "link_label": "View lounge collection"
+          }
+        },
+        "dining": {
+          "type": "collection",
+          "settings": {
+            "label": "Dining",
+            "heading": "Gather around thoughtful design.",
+            "link_label": "View dining collection"
+          }
+        }
+      },
+      "block_order": ["all", "chair", "sofa", "lounge", "dining"]
+    },
     "collage": {
       "type": "collection-collage",
       "settings": {
@@ -159,5 +213,5 @@
       }
     }
   },
-  "order": ["hero", "materials", "collage"]
+  "order": ["hero", "materials", "collage", "featured"]
 }

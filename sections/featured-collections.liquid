@@ -1,0 +1,74 @@
+{{ 'featured-collections.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'featured-collections.js' | asset_url }}" defer></script>
+{% assign default_collection_label = 'featured_collections.collection' | t %}
+{% assign default_link_label = 'featured_collections.view_collection' | t %}
+<featured-collections class="featured-collections section-shell color-{{ section.settings.color_scheme }}" data-initial-index="{{ section.settings.initial_tab | minus: 1 }}">
+  <div class="featured-collections__layout container">
+    <div class="featured-collections__tabs" role="tablist" aria-label="{{ 'featured_collections.collections' | t | escape }}" data-featured-tabs hidden>
+      {% for block in section.blocks %}
+        <button type="button" role="tab" id="CollectionTab-{{ section.id }}-{{ block.id }}" aria-controls="CollectionPanel-{{ section.id }}-{{ block.id }}" aria-selected="false" tabindex="-1" data-featured-tab="{{ forloop.index0 }}">{{ block.settings.label | default: block.settings.collection.title | default: default_collection_label | escape }}</button>
+      {% endfor %}
+    </div>
+    {% for block in section.blocks %}
+      {% assign collection_heading = block.settings.heading | default: block.settings.collection.title %}
+      <div class="featured-collections__panel" id="CollectionPanel-{{ section.id }}-{{ block.id }}" data-featured-panel {{ block.shopify_attributes }}>
+        <div class="featured-collections__intro">
+          <div class="featured-collections__brand">
+            <img src="{{ 'featured-chair.svg' | asset_url }}" width="34.1111" height="34.1111" alt="" loading="lazy">
+            <div class="rte">{{ section.settings.intro }}</div>
+          </div>
+          {% if collection_heading != blank %}<h2>{{ collection_heading | escape }}</h2>{% endif %}
+        </div>
+        <div class="featured-collections__details">
+          <div class="featured-collections__arrows" data-featured-arrows hidden>
+            <button type="button" data-featured-previous aria-label="{{ 'featured_collections.previous' | t | escape }}" disabled><span style="--featured-arrow: url('{{ 'featured-previous.svg' | asset_url }}');" aria-hidden="true"></span></button>
+            <button type="button" data-featured-next aria-label="{{ 'featured_collections.next' | t | escape }}" disabled><span style="--featured-arrow: url('{{ 'featured-next.svg' | asset_url }}');" aria-hidden="true"></span></button>
+          </div>
+          <div class="featured-collections__description rte">{{ block.settings.description }}</div>
+          <div class="featured-collections__note rte">{{ block.settings.note }}</div>
+        </div>
+        <div class="featured-collections__view">
+          {% if block.settings.collection != blank %}<a class="button" href="{{ block.settings.collection.url }}">{{ block.settings.link_label | default: default_link_label | escape }}</a>{% endif %}
+        </div>
+        <div class="featured-collections__products" data-featured-products tabindex="0" aria-label="{{ collection_heading | default: block.settings.label | escape }}">
+          {% for product in block.settings.collection.products limit: section.settings.products_to_show %}
+            {% assign card_id = section.id | append: '-' | append: block.id | append: '-' | append: forloop.index %}
+            {% render 'product-card', card_product: product, instance_id: card_id, editorial: true, disable_quick_add: true %}
+          {% else %}
+            <p class="featured-collections__empty">{{ 'featured_collections.empty' | t }}</p>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+    {% if section.blocks.size == 0 %}<p class="featured-collections__empty">{{ 'featured_collections.empty' | t }}</p>{% endif %}
+    <p class="visually-hidden" role="status" data-featured-status></p>
+  </div>
+</featured-collections>
+
+{% schema %}
+{
+  "name": "Featured collections",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "max_blocks": 5,
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-light" },
+    { "type": "richtext", "id": "intro", "label": "Introductory text", "default": "<p>Introduce the character and craft behind your collections.</p>" },
+    { "type": "range", "id": "initial_tab", "label": "Initial collection", "min": 1, "max": 5, "step": 1, "default": 2, "info": "Uses the first block if this position is empty." },
+    { "type": "range", "id": "products_to_show", "label": "Products per collection", "min": 4, "max": 12, "step": 1, "default": 8 }
+  ],
+  "blocks": [{
+    "type": "collection",
+    "name": "Collection",
+    "settings": [
+      { "type": "collection", "id": "collection", "label": "Collection", "info": "Select a collection for every tab, including All." },
+      { "type": "text", "id": "label", "label": "Tab label", "info": "Leave empty to use the collection title." },
+      { "type": "text", "id": "heading", "label": "Heading", "default": "Discover your next favorite piece" },
+      { "type": "richtext", "id": "description", "label": "Description" },
+      { "type": "richtext", "id": "note", "label": "Supporting text" },
+      { "type": "text", "id": "link_label", "label": "Link label" }
+    ]
+  }],
+  "presets": [{ "name": "Featured collections", "blocks": [{ "type": "collection" }, { "type": "collection" }] }]
+}
+{% endschema %}

@@ -5,7 +5,7 @@
 - Tanggal: 2026-10-27
 - Zona waktu: Asia/Jakarta
 - Status: in_progress
-- Task aktif: T04
+- Task aktif: T05
 - Judul: Implementasi homepage bertahap dari Figma
 
 ### Tujuan
@@ -178,12 +178,12 @@ Kriteria selesai:
 
 Pekerjaan:
 
-- [ ] Bangun heading, deskripsi, panah, tab kategori, empat kartu produk desktop, dan tautan lihat koleksi.
-- [ ] Gunakan collection picker per tab; All adalah koleksi yang dipilih merchant, bukan gabungan otomatis seluruh toko. Heading dan CTA mengikuti tab aktif.
-- [ ] Ambil gambar, judul, URL, harga, harga bervariasi, sale, sold out, unit price, dan swatch dari data produk nyata sesuai kebutuhan yang berlaku.
-- [ ] Swatch dipetakan ke varian valid dan media terkait; sediakan nama opsi dan status pilihan. Jangan hard-code harga euro atau bulatan warna.
-- [ ] Usulan mobile: grid dua kolom, satu kolom bila konten tidak muat; tab dapat digulir dalam wadahnya. Panah hanya aktif bila ada produk lain yang dapat ditampilkan.
-- [ ] Jangan menambah quick add, wishlist, atau quick view di luar task; kartu tetap membuka halaman produk.
+- [x] Bangun heading, deskripsi, panah, tab kategori, empat kartu produk desktop, dan tautan lihat koleksi.
+- [x] Collection picker per tab; All memakai koleksi pilihan merchant. Heading/CTA mengikuti tab aktif.
+- [x] Gambar, judul, URL, harga/rentang, sale, sold out, unit price dan swatch berasal dari data produk. Browser memakai fixtures; integrasi katalog toko masih terbuka.
+- [x] Swatch menaut ke varian/product_url nyata, dengan nama opsi dan current state. Media terkait dibuka di halaman varian; tidak membuat preview/harga palsu di card.
+- [x] Dua kolom mulai 600px, satu di bawahnya; tab scrollable. Panah hanya aktif sesuai overflow produk.
+- [x] Tidak menambah quick add/wishlist/quick view; kartu membuka halaman produk.
 
 Kriteria selesai:
 
@@ -286,16 +286,20 @@ Kriteria selesai:
 
 ## Progres dan laporan — task aktif saja
 
-- ID laporan: T04
+- ID laporan: T05
 - Tanggal: 2026-10-27, Asia/Jakarta
-- Status: implementasi dan validasi lokal selesai; Theme Editor/Lighthouse masih terbuka.
-- Target: `3374:305`. Laporan T03 diarsipkan ke [2026-10-27](task-history/2026-10-27.md).
+- Status: implementasi dan validasi lokal selesai; konfigurasi koleksi serta Theme Editor/Lighthouse belum terverifikasi.
+- Target: `3374:326`. Arsip T04: [laporan sebelumnya](task-history/2026-10-27-02.md).
 
-Section `collection-collage` dipasang setelah Material stories. Grid desktop empat kolom berisi enam foto dan dua panel promosi sesuai Figma. Schema menyediakan color scheme, heading/deskripsi, hingga 16 blok gambar/promosi, collection picker, link override, supporting text dan posisi plus. Foto merchant mengambil prioritas; preset baru memakai placeholder. Plus memakai SVG asli dengan warna dari scheme; tujuan default adalah katalog melalui routes bila koleksi/link belum dipilih. Tidak ada JavaScript tambahan.
+Section `featured-collections` dipasang setelah kolase. Lima blok tab awal mengikuti Figma; masing-masing memiliki collection picker, label, heading, description, supporting text dan CTA. All memakai koleksi yang dipilih merchant. Produk tidak dibuat atau dipalsukan; **pilih koleksi pada setiap blok agar produk muncul**. Maksimum lima koleksi, 4–12 produk per koleksi; empat kartu desktop, dua tablet, satu layar kecil. Panah menggeser rail dan disable pada batas; tab mendukung keyboard serta pemilihan blok editor. Tanpa JS semua koleksi terbaca.
 
-Validasi: Shopify CLI 4.9.4 Theme Check `[]`, format dan diff check bersih. Browser lokal dari actual Liquid: **210/210** pemeriksaan pada lima lebar (320/390/749/990/1535), enam kondisi (normal, sedikit/banyak blok, panjang, kosong, upload). Mencakup overflow, aset, routing/nama link, kolom, containment copy, target tekan dan crop upload. Bukti: [browser](validation/collection-collage-browser.json).
+Snippet bersama `product-card` diperluas lewat opsi editorial dan disable_quick_add. Harga, gambar, badge sale/sold out, unit price dan swatch tetap berasal dari produk/varian Shopify. Swatch berupa tautan varian dengan label opsi dan penanda current; tidak mengubah harga/media secara lokal. Collection cards di luar T05 mempertahankan pengaturan quick add global.
 
-Deviasi: font picker tetap Work Sans; kontras teks diperkuat. Crop khusus sofa mengikuti transform Figma, hanya untuk gambar referensi. Desktop ditinjau visual; mobile memakai grid dua/satu kolom turunan, not in Figma. Hak distribusi aset, pengujian focal point/add/remove/reorder/live preview di Theme Editor, dan Lighthouse masih terbuka. Tidak ada commit/push/deploy/publish.
+Validasi: Shopify CLI 4.9.4 Theme Check `[]`; JavaScript syntax dan diff check bersih. Browser actual Liquid dengan catalog fixtures: **325/325** pada lima lebar, enam skenario (normal/empty/single/long/no-JS/RTL), termasuk harga, badge, swatch, tab, CTA, panah, keyboard, simulated block selection dan overflow. [Bukti](validation/featured-collections-browser.json). Desktop/mobile ditinjau visual; font fixture fallback lokal.
+
+Deviasi: font Work Sans; foreground/border diperkuat, kartu memakai pengaturan global rasio/fit dan data katalog, swatch tidak menyalin dekorasi warna Figma. Ikon kursi/panah Figma asli disimpan; foto produk hanya diunduh ke folder sementara untuk fixture visual, tidak dibundel sebagai katalog theme. Garis dekoratif dibuat dengan CSS. Mobile turunan, not in Figma. Theme Editor real, focal point/combined listings dengan katalog asli, checkout serta Lighthouse belum diuji. Tidak ada commit/push/deploy/publish.
+
+Dokumentasi resmi: [collection](https://shopify.dev/docs/api/liquid/objects/collection), [product option value](https://shopify.dev/docs/api/liquid/objects/product_option_value), [swatch](https://shopify.dev/docs/api/liquid/objects/swatch), [Theme Store requirements](https://shopify.dev/docs/storefronts/themes/store/requirements).
 ---
 
 ## Aturan pencatatan dan eksekusi

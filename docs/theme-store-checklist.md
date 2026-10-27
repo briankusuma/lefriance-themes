@@ -5,6 +5,7 @@ Last full verification recorded: **2026-10-01** (existing record, not re-certifi
 Scoped review: **2026-10-26** — see [review notes](shopify-review.md).
 Scoped follow-up **2026-10-27**: T03 inspected against current requirements; local behavior and limits are recorded in [material stories validation](validation/material-story-notes.md). Global submission checks remain open.
 T04 scoped check: Theme Check bersih, 210/210 browser checks lokal; schema/block editing dan Lighthouse belum diuji di development theme. Lihat [laporan task](tasks.md).
+T05 scoped check: Theme Check bersih dan 325/325 browser checks lokal, termasuk tab, keyboard, harga, badge dan swatch. Koleksi asli, Theme Editor dan Lighthouse masih perlu diverifikasi; global submission checks tetap terbuka.
 Re-verify at the start of every milestone and again right before submission. Update the date above when you do.
 
 Treat applicable requirements as submission gates. Mark an item only after verifying it using the appropriate method: repository inspection for file structure, source and license review for assets, a development store for storefront and Theme Editor behavior, and browser measurements for accessibility and performance. Record evidence in the active task report or a linked verification report. Code presence alone does not prove working behavior.
