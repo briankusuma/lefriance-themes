@@ -10,6 +10,9 @@ if (!customElements.get("journal-stories")) {
         this.rail = this.querySelector("[data-journal-rail]");
         this.cards = [...this.querySelectorAll("[data-journal-card]")];
         this.numbers = [...this.querySelectorAll("[data-journal-select]")];
+        this.activeIndex = this.cards[Number(this.dataset.initialIndex)]
+          ? Number(this.dataset.initialIndex)
+          : 0;
         this.classList.add("is-enhanced");
         this.querySelectorAll("[data-journal-controls]").forEach((control) => {
           control.hidden = this.cards.length < 2;
@@ -62,6 +65,7 @@ if (!customElements.get("journal-stories")) {
         this.rail.addEventListener(
           "scroll",
           () => {
+            if (this.resizing) return;
             this.update();
             clearTimeout(this.scrollTimer);
             this.scrollTimer = setTimeout(() => {
@@ -80,21 +84,45 @@ if (!customElements.get("journal-stories")) {
               this.numbers.forEach((number, index) =>
                 number.setAttribute("aria-pressed", String(index === nearest)),
               );
+              this.activeIndex = nearest;
+              this.select(nearest, false);
             }, 120);
           },
           { signal, passive: true },
         );
-        this.observer = new ResizeObserver(() => this.update());
+        this.observer = new ResizeObserver(() => this.resize());
         this.observer.observe(this.rail);
-        this.select(
-          this.cards[Number(this.dataset.initialIndex)]
-            ? Number(this.dataset.initialIndex)
-            : 0,
-          false,
+        this.resize();
+      }
+      resize() {
+        const width = this.rail.clientWidth;
+        if (width === this.railWidth) return;
+        this.railWidth = width;
+        clearTimeout(this.scrollTimer);
+        cancelAnimationFrame(this.resizeFrame);
+        clearTimeout(this.resizeTimer);
+        const index = this.activeIndex;
+        this.resizing = true;
+        const gap = parseFloat(getComputedStyle(this.rail).columnGap) || 0;
+        const size = matchMedia("(min-width: 990px)").matches
+          ? (width - gap * 2) / 3
+          : width * 0.85;
+        this.rail.style.setProperty("--journal-card-size", `${size}px`);
+        this.rail.style.setProperty(
+          "--journal-edge",
+          `${(width - size) / 2}px`,
         );
+        this.resizeFrame = requestAnimationFrame(() => {
+          this.select(index, false);
+          this.resizeTimer = setTimeout(() => {
+            this.select(index, false);
+            this.resizing = false;
+          }, 80);
+        });
       }
       select(index, announce) {
         if (!this.cards[index]) return;
+        this.activeIndex = index;
         this.numbers.forEach((number, i) =>
           number.setAttribute("aria-pressed", String(i === index)),
         );
@@ -116,24 +144,26 @@ if (!customElements.get("journal-stories")) {
         this.update();
       }
       move(direction) {
-        const rtl = getComputedStyle(this.rail).direction === "rtl";
-        this.rail.scrollBy({
-          left: direction * (rtl ? -1 : 1) * this.rail.clientWidth,
-          behavior: matchMedia("(prefers-reduced-motion: reduce)").matches
-            ? "instant"
-            : "smooth",
-        });
+        this.select(
+          Math.max(
+            0,
+            Math.min(this.cards.length - 1, this.activeIndex + direction),
+          ),
+          true,
+        );
       }
       update() {
-        const position = Math.abs(this.rail.scrollLeft);
-        this.querySelector("[data-journal-previous]").disabled = position < 2;
+        this.querySelector("[data-journal-previous]").disabled =
+          this.activeIndex <= 0;
         this.querySelector("[data-journal-next]").disabled =
-          position >= this.rail.scrollWidth - this.rail.clientWidth - 2;
+          this.activeIndex >= this.cards.length - 1;
       }
       disconnectedCallback() {
         this.controller?.abort();
         this.observer?.disconnect();
         clearTimeout(this.scrollTimer);
+        cancelAnimationFrame(this.resizeFrame);
+        clearTimeout(this.resizeTimer);
       }
     },
   );

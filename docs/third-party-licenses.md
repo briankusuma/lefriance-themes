@@ -1,5 +1,7 @@
 # Third-Party Assets and Licenses
 
+2026-10-27 Journal follow-up: `assets/journal-finishing-generated.jpg` and `assets/journal-timber-generated.jpg` were created using the built-in imagegen tool at the user's request; illustrative AI-generated workshop scenes, not sourced third-party photography or merchant process documentation. Optimized JPEGs are 960 x 960px. Prompts and generation method: [journal image prompts](validation/journal-image-prompts.md). No external library or font introduced; original Figma images retain their separately recorded rights status.
+
 Record every third-party asset (fonts, icons, external libraries, images) used in the theme, along with source and license details.
 
 | Asset | Type | Source / Author | License | Notes |

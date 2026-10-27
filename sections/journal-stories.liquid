@@ -27,12 +27,19 @@
             assign story_excerpt = block.settings.article.excerpt_or_content | strip_html | truncatewords: 35
             assign story_category = block.settings.category | default: block.settings.article.tags.first
             assign reference_asset = ''
+            assign reference_height = 1200
             if section.settings.use_reference_images
               case block.settings.reference_image
                 when 'balance'
                   assign reference_asset = 'journal-balance.png'
                 when 'workshop'
                   assign reference_asset = 'journal-workshop.png'
+                when 'finishing'
+                  assign reference_asset = 'journal-finishing-generated.jpg'
+                  assign reference_height = 960
+                when 'timber'
+                  assign reference_asset = 'journal-timber-generated.jpg'
+                  assign reference_height = 960
               endcase
             endif
           %}
@@ -53,7 +60,7 @@
                 {% if story_image != blank %}
                   {{ story_image | image_url: width: 1000 | image_tag: widths: '320, 480, 680, 1000', sizes: '(min-width: 990px) 23vw, (min-width: 600px) 42vw, 85vw', loading: 'lazy', alt: story_image.alt }}
                 {% elsif reference_asset != blank %}
-                  <img src="{{ reference_asset | asset_img_url: '960x' }}" srcset="{{ reference_asset | asset_img_url: '320x' }} 320w, {{ reference_asset | asset_img_url: '680x' }} 680w, {{ reference_asset | asset_img_url: '960x' }} 960w" sizes="(min-width: 990px) 23vw, (min-width: 600px) 42vw, 85vw" width="960" height="1200" alt="{{ story_title | escape }}" loading="lazy">
+                  <img src="{{ reference_asset | asset_img_url: '960x' }}" srcset="{{ reference_asset | asset_img_url: '320x' }} 320w, {{ reference_asset | asset_img_url: '680x' }} 680w, {{ reference_asset | asset_img_url: '960x' }} 960w" sizes="(min-width: 990px) 23vw, (min-width: 600px) 42vw, 85vw" width="960" height="{{ reference_height }}" alt="{{ story_title | escape }}" loading="lazy">
                 {% else %}{{ 'image' | placeholder_svg_tag }}{% endif %}
                 {% if story_link != blank and story_title != blank %}</a>{% endif %}
               </div>
@@ -92,7 +99,7 @@
     { "type": "richtext", "id": "text", "label": "Fallback text" },
     { "type": "text", "id": "category", "label": "Category" },
     { "type": "url", "id": "link", "label": "Fallback link" },
-    { "type": "select", "id": "reference_image", "label": "Reference image", "default": "none", "options": [{ "value": "none", "label": "None" }, { "value": "balance", "label": "Chair workshop" }, { "value": "workshop", "label": "Table workshop" }] }
+    { "type": "select", "id": "reference_image", "label": "Reference image", "default": "none", "options": [{ "value": "none", "label": "None" }, { "value": "balance", "label": "Chair workshop" }, { "value": "workshop", "label": "Table workshop" }, { "value": "finishing", "label": "Finishing study (AI generated)" }, { "value": "timber", "label": "Timber study (AI generated)" }] }
   ] }],
   "presets": [{ "name": "Journal stories", "blocks": [{ "type": "story" }, { "type": "story", "settings": { "layout": "text" } }, { "type": "story" }] }]
 }

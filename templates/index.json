@@ -299,12 +299,51 @@
             "link": "",
             "reference_image": "workshop"
           }
+        },
+        "finishing": {
+          "type": "story",
+          "settings": {
+            "article": "",
+            "layout": "image",
+            "heading": "The finishing touch",
+            "text": "",
+            "category": "Craft",
+            "link": "",
+            "reference_image": "finishing"
+          }
+        },
+        "details": {
+          "type": "story",
+          "settings": {
+            "article": "",
+            "layout": "text",
+            "heading": "Made for everyday living",
+            "text": "<p>Thoughtful proportions, tactile materials, and details that make a piece feel at home.</p>",
+            "category": "Design",
+            "link": "",
+            "reference_image": "none"
+          }
+        },
+        "timber": {
+          "type": "story",
+          "settings": {
+            "article": "",
+            "layout": "image",
+            "heading": "A closer look at the grain",
+            "text": "",
+            "category": "Materials",
+            "link": "",
+            "reference_image": "timber"
+          }
         }
       },
       "block_order": [
         "balance",
         "process",
-        "workshop"
+        "workshop",
+        "finishing",
+        "details",
+        "timber"
       ],
       "settings": {
         "color_scheme": "scheme-light",
