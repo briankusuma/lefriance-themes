@@ -8,7 +8,33 @@ if (!customElements.get("journal-stories")) {
         this.controller = new AbortController();
         const { signal } = this.controller;
         this.rail = this.querySelector("[data-journal-rail]");
+        this.rail
+          .querySelectorAll("[data-journal-clone]")
+          .forEach((card) => card.remove());
         this.cards = [...this.querySelectorAll("[data-journal-card]")];
+        this.cards.forEach((card, index) => (card.dataset.storyIndex = index));
+        if (this.cards.length > 1) {
+          for (const position of ["before", "after"]) {
+            const fragment = document.createDocumentFragment();
+            this.cards.forEach((card) => {
+              const clone = card.cloneNode(true);
+              clone.dataset.journalClone = "";
+              clone.removeAttribute("data-journal-card");
+              clone.removeAttribute("data-shopify-editor-block");
+              clone.removeAttribute("id");
+              clone
+                .querySelectorAll("[id]")
+                .forEach((element) => element.removeAttribute("id"));
+              clone.setAttribute("aria-hidden", "true");
+              clone.inert = true;
+              fragment.append(clone);
+            });
+            if (position === "before") this.rail.prepend(fragment);
+            else this.rail.append(fragment);
+          }
+        }
+        this.slides = [...this.rail.querySelectorAll("[data-story-index]")];
+        this.railWidth = null;
         this.numbers = [...this.querySelectorAll("[data-journal-select]")];
         this.activeIndex = this.cards[Number(this.dataset.initialIndex)]
           ? Number(this.dataset.initialIndex)
@@ -72,20 +98,19 @@ if (!customElements.get("journal-stories")) {
               const bounds = this.rail.getBoundingClientRect();
               const center = bounds.left + bounds.width / 2;
               let nearest = 0;
-              this.cards.forEach((card, index) => {
+              this.slides.forEach((card, index) => {
                 const rect = card.getBoundingClientRect();
-                const current = this.cards[nearest].getBoundingClientRect();
+                const current = this.slides[nearest].getBoundingClientRect();
                 if (
                   Math.abs(rect.left + rect.width / 2 - center) <
                   Math.abs(current.left + current.width / 2 - center)
                 )
                   nearest = index;
               });
-              this.numbers.forEach((number, index) =>
-                number.setAttribute("aria-pressed", String(index === nearest)),
+              this.select(
+                Number(this.slides[nearest].dataset.storyIndex),
+                false,
               );
-              this.activeIndex = nearest;
-              this.select(nearest, false);
             }, 120);
           },
           { signal, passive: true },
@@ -120,14 +145,20 @@ if (!customElements.get("journal-stories")) {
           }, 80);
         });
       }
-      select(index, announce) {
+      select(index, announce, target = this.cards[index]) {
         if (!this.cards[index]) return;
         this.activeIndex = index;
+        this.slides.forEach((card) =>
+          card.classList.toggle(
+            "is-active",
+            Number(card.dataset.storyIndex) === index,
+          ),
+        );
         this.numbers.forEach((number, i) =>
           number.setAttribute("aria-pressed", String(i === index)),
         );
         const railRect = this.rail.getBoundingClientRect();
-        const cardRect = this.cards[index].getBoundingClientRect();
+        const cardRect = target.getBoundingClientRect();
         this.rail.scrollBy({
           left:
             cardRect.left -
@@ -144,19 +175,22 @@ if (!customElements.get("journal-stories")) {
         this.update();
       }
       move(direction) {
-        this.select(
-          Math.max(
-            0,
-            Math.min(this.cards.length - 1, this.activeIndex + direction),
-          ),
-          true,
-        );
+        if (this.cards.length < 2) return;
+        const next = this.activeIndex + direction;
+        const index = (next + this.cards.length) % this.cards.length;
+        const target =
+          next < 0
+            ? this.slides[this.cards.length - 1]
+            : next >= this.cards.length
+              ? this.slides[this.cards.length * 2]
+              : this.cards[index];
+        this.select(index, true, target);
       }
       update() {
         this.querySelector("[data-journal-previous]").disabled =
-          this.activeIndex <= 0;
+          this.cards.length < 2;
         this.querySelector("[data-journal-next]").disabled =
-          this.activeIndex >= this.cards.length - 1;
+          this.cards.length < 2;
       }
       disconnectedCallback() {
         this.controller?.abort();

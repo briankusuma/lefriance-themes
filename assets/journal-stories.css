@@ -183,6 +183,40 @@
 .journal-stories__card--text > .journal-stories__caption {
   display: none;
 }
+.journal-stories:not(.is-enhanced)
+  .journal-stories__card--text
+  .journal-stories__image,
+.journal-stories:not(.is-enhanced)
+  .journal-stories__card--image
+  .journal-stories__text {
+  display: none;
+}
+.journal-stories.is-enhanced .journal-stories__card {
+  padding-top: 0;
+}
+.journal-stories.is-enhanced .journal-stories__caption {
+  display: flex;
+}
+.journal-stories.is-enhanced .journal-stories__text {
+  display: none;
+  min-height: 0;
+  aspect-ratio: 1;
+}
+.journal-stories.is-enhanced
+  .journal-stories__card.is-active
+  .journal-stories__caption {
+  visibility: hidden;
+}
+.journal-stories.is-enhanced
+  .journal-stories__card.is-active
+  .journal-stories__image {
+  display: none;
+}
+.journal-stories.is-enhanced
+  .journal-stories__card.is-active
+  .journal-stories__text {
+  display: flex;
+}
 .journal-stories__arrow {
   display: grid;
   place-items: center;

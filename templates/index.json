@@ -270,8 +270,8 @@
             "article": "",
             "layout": "image",
             "heading": "Finding the right balance",
-            "text": "",
-            "category": "",
+            "text": "<p>Explore how proportion, a curved frame, and a woven seat bring comfort and character into balance.</p>",
+            "category": "Design",
             "link": "",
             "reference_image": "balance"
           }
@@ -285,7 +285,7 @@
             "text": "<p>A look at how our materials come together, from raw walnut to the final piece in your home.</p>",
             "category": "Process",
             "link": "",
-            "reference_image": "none"
+            "reference_image": "finishing"
           }
         },
         "workshop": {
@@ -294,8 +294,8 @@
             "article": "",
             "layout": "image",
             "heading": "Be the first to hear about lineup drops.",
-            "text": "",
-            "category": "",
+            "text": "<p>A closer look at the workshop, where familiar materials become thoughtful pieces for everyday spaces.</p>",
+            "category": "Studio",
             "link": "",
             "reference_image": "workshop"
           }
@@ -306,7 +306,7 @@
             "article": "",
             "layout": "image",
             "heading": "The finishing touch",
-            "text": "",
+            "text": "<p>Follow the grain, soften each edge, and bring out the natural warmth of walnut with the final finish.</p>",
             "category": "Craft",
             "link": "",
             "reference_image": "finishing"
@@ -321,7 +321,7 @@
             "text": "<p>Thoughtful proportions, tactile materials, and details that make a piece feel at home.</p>",
             "category": "Design",
             "link": "",
-            "reference_image": "none"
+            "reference_image": "timber"
           }
         },
         "timber": {
@@ -330,7 +330,7 @@
             "article": "",
             "layout": "image",
             "heading": "A closer look at the grain",
-            "text": "",
+            "text": "<p>Every board has its own character. Discover the grain, texture, and subtle tones that shape a finished piece.</p>",
             "category": "Materials",
             "link": "",
             "reference_image": "timber"

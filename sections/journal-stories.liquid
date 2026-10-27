@@ -48,13 +48,11 @@
               <h3>{% if story_link != blank and story_title != blank %}<a href="{{ story_link }}">{{ story_title | escape }}</a>{% else %}{{ story_title | escape }}{% endif %}</h3>
               <span>{% if forloop.index < 100 %}0{% endif %}{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
             </div>
-            {% if block.settings.layout == 'text' %}
               <div class="journal-stories__text color-{{ section.settings.card_color_scheme }}">
                 <div class="journal-stories__meta"><span>{{ story_category | escape }}</span><span>{% if forloop.index < 100 %}0{% endif %}{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span></div>
                 <h3>{% if story_link != blank and story_title != blank %}<a href="{{ story_link }}">{{ story_title | escape }}</a>{% else %}{{ story_title | escape }}{% endif %}</h3>
                 <div class="journal-stories__excerpt rte">{% if block.settings.article != blank %}<p>{{ story_excerpt | escape }}</p>{% else %}{{ block.settings.text }}{% endif %}</div>
               </div>
-            {% else %}
               <div class="journal-stories__image">
                 {% if story_link != blank and story_title != blank %}<a href="{{ story_link }}" aria-label="{{ story_title | escape }}">{% endif %}
                 {% if story_image != blank %}
@@ -64,7 +62,6 @@
                 {% else %}{{ 'image' | placeholder_svg_tag }}{% endif %}
                 {% if story_link != blank and story_title != blank %}</a>{% endif %}
               </div>
-            {% endif %}
           </article>
         {% endfor %}
         {% if section.blocks.size == 0 %}<p>{{ 'journal_stories.empty' | t }}</p>{% endif %}
@@ -93,7 +90,7 @@
   ],
   "blocks": [{ "type": "story", "name": "Story", "settings": [
     { "type": "article", "id": "article", "label": "Article", "info": "Uses the article title, excerpt and URL. An image below overrides its featured image." },
-    { "type": "select", "id": "layout", "label": "Card style", "default": "image", "options": [{ "value": "image", "label": "Image" }, { "value": "text", "label": "Text" }] },
+    { "type": "select", "id": "layout", "label": "Static card style", "info": "Used when the slider is unavailable. The active slide always shows text.", "default": "image", "options": [{ "value": "image", "label": "Image" }, { "value": "text", "label": "Text" }] },
     { "type": "image_picker", "id": "image", "label": "Image" },
     { "type": "text", "id": "heading", "label": "Fallback heading", "default": "Introduce a studio story" },
     { "type": "richtext", "id": "text", "label": "Fallback text" },
