@@ -12,6 +12,7 @@ T05 koreksi final: target empat produk berbeda dikonfirmasi pada katalog All pro
 T06 scoped check: Theme Check bersih, 132/132 browser checks lokal untuk Journal; editor asli, screen reader dan Lighthouse belum diuji. Bukti pada laporan task aktif.
 T07/T08 scoped check: footer/editorial + newsletter native, Theme Check bersih dan 208/208 browser checks lokal. Submit backend, Theme Editor dan Lighthouse belum diuji; tidak menutup checklist submission global.
 Footer visual follow-up 2026-10-27: proporsi newsletter, placeholder dan crop khusus wordmark referensi; Theme Check bersih, 322/322 browser checks lokal. Bukti `validation/footer-refinement-browser.json`; signup backend, editor dan Lighthouse tetap terbuka.
+Footer copy follow-up: detail bawah dimatikan sesuai pilihan merchant, tetap tersedia lewat setting; placeholder independen dan GET CONTACT / Your Email / SEND. Theme Check bersih, 426/426 checks lokal (`validation/footer-copy-browser.json`); bukan sertifikasi submission.
 Re-verify at the start of every milestone and again right before submission. Update the date above when you do.
 
 Treat applicable requirements as submission gates. Mark an item only after verifying it using the appropriate method: repository inspection for file structure, source and license review for assets, a development store for storefront and Theme Editor behavior, and browser measurements for accessibility and performance. Record evidence in the active task report or a linked verification report. Code presence alone does not prove working behavior.

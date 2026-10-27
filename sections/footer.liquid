@@ -80,7 +80,7 @@
             <input type="hidden" name="contact[tags]" value="newsletter">
             <label for="{{ form_id }}-Email">{{ block.settings.email_label | escape }}</label>
             <div class="editorial-footer__email-row">
-              <input type="email" id="{{ form_id }}-Email" name="contact[email]" value="{{ form.email | escape }}" placeholder="{{ block.settings.email_label | escape }}" autocomplete="email" autocorrect="off" autocapitalize="off" required{% if form.errors %} aria-invalid="true" aria-describedby="{{ form_id }}-Error"{% endif %}>
+              <input type="email" id="{{ form_id }}-Email" name="contact[email]" value="{{ form.email | escape }}" placeholder="{{ block.settings.email_placeholder | escape }}" autocomplete="email" autocorrect="off" autocapitalize="off" required{% if form.errors %} aria-invalid="true" aria-describedby="{{ form_id }}-Error"{% endif %}>
               <button type="submit">{{ block.settings.button_label | escape }}</button>
             </div>
             {% if block.settings.help_text != blank %}<div class="editorial-footer__help rte">{{ block.settings.help_text }}</div>{% endif %}
@@ -97,11 +97,13 @@
         <img src="{{ 'le-friance-wordmark.svg' | asset_url }}" width="1433" height="404" alt="{{ shop.name | escape }}" loading="lazy">
       {% else %}<p>{{ shop.name | escape }}</p>{% endif %}
     </div>
+    {% if section.settings.show_footer_details %}
     <div class="editorial-footer__bottom">
       <small>&copy; {{ 'now' | date: '%Y' }} {{ shop.name | link_to: routes.root_url }}, {{ powered_by_link }}</small>
       <ul>{% for policy in shop.policies %}{% if policy != blank %}<li><a href="{{ policy.url }}">{{ policy.title | escape }}</a></li>{% endif %}{% endfor %}</ul>
       {% if section.settings.show_payment_icons %}<div class="editorial-footer__payments">{% for type in shop.enabled_payment_types %}{{ type | payment_type_svg_tag }}{% endfor %}</div>{% endif %}
     </div>
+    {% endif %}
   </div>
 </footer>
 {% schema %}
@@ -126,12 +128,14 @@
     { "type": "richtext", "id": "image_caption", "label": "Reference image caption" },
     { "type": "image_picker", "id": "wordmark", "label": "Display wordmark" },
     { "type": "checkbox", "id": "use_reference_wordmark", "label": "Use LE FRIANCE reference wordmark", "default": false },
+    { "type": "checkbox", "id": "show_footer_details", "label": "Show footer details", "info": "Displays copyright, Shopify credit, policy links, and enabled payment icons below the wordmark.", "default": true },
     { "type": "checkbox", "id": "show_payment_icons", "label": "Show payment icons", "default": true }
   ],
   "blocks": [
     { "type": "newsletter", "name": "Newsletter", "limit": 1, "settings": [
       { "type": "text", "id": "heading", "label": "Heading", "default": "Subscribe for collection updates" },
       { "type": "text", "id": "email_label", "label": "Email label", "default": "Your email" },
+      { "type": "text", "id": "email_placeholder", "label": "Email placeholder", "default": "Your Email" },
       { "type": "text", "id": "button_label", "label": "Button label", "default": "Subscribe" },
       { "type": "richtext", "id": "help_text", "label": "Help text" }
     ] },

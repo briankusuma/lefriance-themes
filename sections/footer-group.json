@@ -17,6 +17,7 @@
         "color_scheme": "scheme-footer",
         "use_reference_images": true,
         "use_reference_wordmark": true,
+        "show_footer_details": false,
         "social_text": "<p>Stay in touch with our studio.</p>",
         "studio_text": "<p>Thoughtful furniture, considered materials, and the people behind every piece.</p>",
         "brand_text": "<p>We design and craft furniture that brings warmth, simplicity, and lasting quality into everyday spaces.</p>",
@@ -27,8 +28,9 @@
           "type": "newsletter",
           "settings": {
             "heading": "Get updates on new collections, materials, and stories from our workshop.",
-            "email_label": "Your email",
-            "button_label": "Subscribe"
+            "email_label": "GET CONTACT",
+            "email_placeholder": "Your Email",
+            "button_label": "SEND"
           }
         }
       },
