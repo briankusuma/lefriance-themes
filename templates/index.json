@@ -1,18 +1,77 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "hero-editorial",
       "settings": {
-        "heading": "LE FRIANCE",
         "use_reference_images": true,
+        "image_zoom": 106,
+        "heading": "LE FRIANCE",
         "use_reference_wordmark": true,
         "body": "<p>Thoughtfully crafted pieces that bring warmth, balance, </p>",
         "body_muted": "and timeless style into your space.",
+        "background_color": "#3a322b",
+        "text_color": "#ffffff",
+        "show_detail_card": true,
+        "detail_link": "",
+        "detail_link_label": "",
+        "desktop_height": 1092,
+        "mobile_height": 680,
+        "allow_header_overlay": true,
+        "overlay_color": "#000000",
         "overlay_opacity": 60
       }
     },
     "materials": {
       "type": "material-story",
+      "blocks": {
+        "chair": {
+          "type": "story",
+          "settings": {
+            "reference_image": "chair",
+            "title": "Thoughtful details, from the frame up.",
+            "description": "<p>Explore the craft behind the collection.</p>",
+            "category": "Quality Materials",
+            "link": "",
+            "link_label": ""
+          }
+        },
+        "table": {
+          "type": "story",
+          "settings": {
+            "reference_image": "table",
+            "title": "Be the first to hear about lineup drops.",
+            "description": "<p>Exclusive access, and limited releases.</p>",
+            "category": "Design for Disassembly",
+            "link": "",
+            "link_label": ""
+          }
+        },
+        "room": {
+          "type": "story",
+          "settings": {
+            "reference_image": "room",
+            "title": "A closer look at where it begins.",
+            "description": "<p>Discover the people and processes.</p>",
+            "category": "Traceable",
+            "link": "",
+            "link_label": ""
+          }
+        }
+      },
+      "block_order": [
+        "chair",
+        "table",
+        "room"
+      ],
       "settings": {
         "color_scheme": "scheme-dark",
         "heading": "Design freely with",
@@ -22,38 +81,11 @@
         "footer_text": "<p>Discover the materials, thoughtful details, and considered design behind the collection.</p>",
         "initial_item": 2,
         "use_reference_images": true
-      },
-      "blocks": {
-        "chair": {
-          "type": "story",
-          "settings": {
-            "reference_image": "chair",
-            "title": "Thoughtful details, from the frame up.",
-            "description": "<p>Explore the craft behind the collection.</p>",
-            "category": "Quality Materials"
-          }
-        },
-        "table": {
-          "type": "story",
-          "settings": {
-            "reference_image": "table",
-            "title": "Be the first to hear about lineup drops.",
-            "description": "<p>Exclusive access, and limited releases.</p>",
-            "category": "Design for Disassembly"
-          }
-        },
-        "room": {
-          "type": "story",
-          "settings": {
-            "reference_image": "room",
-            "title": "A closer look at where it begins.",
-            "description": "<p>Discover the people and processes behind each piece.</p>",
-            "category": "Traceable"
-          }
-        }
-      },
-      "block_order": ["chair", "table", "room"]
+      }
     }
   },
-  "order": ["hero", "materials"]
+  "order": [
+    "hero",
+    "materials"
+  ]
 }
