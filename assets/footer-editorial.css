@@ -205,12 +205,16 @@
 .editorial-footer__email-row input {
   min-width: 0;
   width: 100%;
-  padding: 0.5rem 0;
+  padding: 0rem;
   border: 0;
   border-radius: 0;
   background: transparent;
   color: inherit;
   font-size: var(--text-card);
+}
+.editorial-footer__email-row input::placeholder {
+  color: inherit;
+  opacity: 1;
 }
 .editorial-footer__email-row button {
   flex-shrink: 0;
@@ -231,6 +235,7 @@
   padding-top: 2rem;
 }
 .editorial-footer__newsletter::before,
+.editorial-footer__newsletter::after,
 .editorial-footer__wordmark::before {
   content: "";
   position: absolute;
@@ -242,9 +247,19 @@
   background: var(--footer-ornament-color);
   pointer-events: none;
 }
+.editorial-footer__newsletter::after {
+  top: auto;
+  bottom: -1.066px;
+}
 .editorial-footer__wordmark img {
   width: 100%;
   height: auto;
+}
+.editorial-footer__wordmark--reference {
+  /* The Figma frame ends partway through the oversized display lettering. */
+  height: auto;
+  aspect-ratio: 1432.667 / 269.7;
+  overflow: hidden;
 }
 .editorial-footer__wordmark p {
   font-family: var(--font-heading--family);
@@ -324,7 +339,37 @@
     padding-inline-start: 0;
   }
   .editorial-footer__newsletter {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.9fr) minmax(0, 1fr);
-    gap: var(--grid-gap);
+    grid-template-columns: minmax(0, 25.86fr) minmax(0, 47.93fr) minmax(
+        0,
+        23.21fr
+      );
+    gap: 1.5%;
+    padding-block: clamp(2rem, 2.778vw, 2.665rem);
+  }
+  .editorial-footer__brand-copy {
+    padding-top: 0.6rem;
+    font-size: clamp(1rem, 1.25vw, 1.199rem);
+    color: color-mix(in srgb, var(--color-foreground) 70%, transparent);
+  }
+  .editorial-footer__newsletter h2 {
+    text-wrap: balance;
+    font-size: clamp(2rem, 3.333vw, 3.198rem);
+    line-height: 1.0833;
+    letter-spacing: -0.03em;
+  }
+  .editorial-footer__form {
+    padding-bottom: 0;
+  }
+  .editorial-footer__email-row {
+    border-color: color-mix(in srgb, var(--color-foreground) 50%, transparent);
+  }
+  .editorial-footer__email-row input {
+    font-size: clamp(1rem, 1.389vw, 1.332rem);
+  }
+  .editorial-footer__email-row button {
+    padding-inline-end: 0;
+  }
+  .editorial-footer__wordmark {
+    padding-top: clamp(1.5rem, 2.014vw, 1.932rem);
   }
 }

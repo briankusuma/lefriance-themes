@@ -80,7 +80,7 @@
             <input type="hidden" name="contact[tags]" value="newsletter">
             <label for="{{ form_id }}-Email">{{ block.settings.email_label | escape }}</label>
             <div class="editorial-footer__email-row">
-              <input type="email" id="{{ form_id }}-Email" name="contact[email]" value="{{ form.email | escape }}" autocomplete="email" autocorrect="off" autocapitalize="off" required{% if form.errors %} aria-invalid="true" aria-describedby="{{ form_id }}-Error"{% endif %}>
+              <input type="email" id="{{ form_id }}-Email" name="contact[email]" value="{{ form.email | escape }}" placeholder="{{ block.settings.email_label | escape }}" autocomplete="email" autocorrect="off" autocapitalize="off" required{% if form.errors %} aria-invalid="true" aria-describedby="{{ form_id }}-Error"{% endif %}>
               <button type="submit">{{ block.settings.button_label | escape }}</button>
             </div>
             {% if block.settings.help_text != blank %}<div class="editorial-footer__help rte">{{ block.settings.help_text }}</div>{% endif %}
@@ -90,7 +90,7 @@
         </div>
       {% endif %}
     {% endfor %}
-    <div class="editorial-footer__wordmark">
+    <div class="editorial-footer__wordmark{% if section.settings.wordmark == blank and section.settings.use_reference_wordmark %} editorial-footer__wordmark--reference{% endif %}">
       {% if section.settings.wordmark != blank %}
         {{ section.settings.wordmark | image_url: width: 2400 | image_tag: widths: '480, 960, 1440, 2400', sizes: '93vw', loading: 'lazy', alt: shop.name }}
       {% elsif section.settings.use_reference_wordmark %}
