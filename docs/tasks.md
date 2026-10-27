@@ -295,6 +295,7 @@ Kriteria selesai:
 ## Progres dan laporan — task aktif saja
 
 - ID laporan: T07 + T08
+- Koreksi sambungan kolase/Featured collections: border bawah kolase sebelumnya masih memakai warna border UI global yang gelap. Kini memakai ornament #E5E3D3 setebal 1.066px, senada dengan frame vertikal section berikutnya.
 - Follow-up T05/T06 ornament: properti asli `3660:1345` dan `3660:1298` diperiksa; keduanya memakai stroke SOLID #E5E3D3 alpha 1 (bukan gradient footer). Frame vertikal/garis tengah serta horizontal full bleed kini memakai token ornament khusus, tebal 1.066px; setting Ornament color tersedia per section. Theme Check bersih; [36/36 pemeriksaan scoped](validation/light-ornaments-browser.json) lulus untuk warna, full width, konfigurasi warna dan overflow di 320/749/1535px. Kedua section ditinjau visual.
 - Tanggal: 2026-10-27, Asia/Jakarta
 - Target: `3660:1365`, diterapkan langsung ke `sections/footer.liquid` dalam footer group.

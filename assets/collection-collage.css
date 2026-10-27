@@ -1,6 +1,6 @@
 .collection-collage {
   padding-block: var(--section-spacing) 2.133rem;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1.066px solid var(--collage-ornament-color, #e5e3d3);
 }
 
 .collection-collage__intro {
