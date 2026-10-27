@@ -30,6 +30,47 @@
         "overlay_opacity": 60
       }
     },
+    "journal": {
+      "type": "journal-stories",
+      "settings": {
+        "color_scheme": "scheme-light",
+        "card_color_scheme": "scheme-dark",
+        "intro": "<p>Step inside our studio and see how each detail is carefully made and finished by hand.</p>",
+        "note": "<p>Be the first to discover new arrivals.</p>",
+        "heading": "Thoughts, stories, and a closer look at what we make.",
+        "description": "<p>We share a bit of our process, the materials we love, and the ideas behind each piece.</p>",
+        "initial_story": 2,
+        "use_reference_images": true
+      },
+      "blocks": {
+        "balance": {
+          "type": "story",
+          "settings": {
+            "layout": "image",
+            "reference_image": "balance",
+            "heading": "Finding the right balance"
+          }
+        },
+        "process": {
+          "type": "story",
+          "settings": {
+            "layout": "text",
+            "heading": "From wood to chair",
+            "category": "Process",
+            "text": "<p>A look at how our materials come together, from raw walnut to the final piece in your home.</p>"
+          }
+        },
+        "workshop": {
+          "type": "story",
+          "settings": {
+            "layout": "image",
+            "reference_image": "workshop",
+            "heading": "Be the first to hear about lineup drops."
+          }
+        }
+      },
+      "block_order": ["balance", "process", "workshop"]
+    },
     "featured": {
       "type": "featured-collections",
       "settings": {
@@ -213,5 +254,5 @@
       }
     }
   },
-  "order": ["hero", "materials", "collage", "featured"]
+  "order": ["hero", "materials", "collage", "featured", "journal"]
 }

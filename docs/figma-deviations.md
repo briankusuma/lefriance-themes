@@ -4,6 +4,7 @@ Document every intentional or necessary deviation from the Figma designs, includ
 
 | Date | Component / Section | Figma Frame / Node | Deviation | Reason (Shopify / A11y / Performance) |
 | --- | --- | --- | --- | --- |
+| 2026-10-27 | Journal stories | 3660:1302 | Work Sans; kontras teks diperkuat; nomor mengikuti tiga blok, bukan enam statis; panah disable tanpa overflow; garis CSS dan mobile turunan | Data tersedia, aksesibilitas dan konten dinamis; artikel dapat dipilih merchant |
 | 2026-10-27 | Featured collections | 3374:326 | Produk/harga/swatch berasal dari koleksi merchant; dekorasi swatch Figma tidak ditiru. Font picker Work Sans, kontras diperkuat, kartu memakai rasio/fit global. Mobile dan navigasi manual turunan | Data commerce nyata, aksesibilitas dan pengaturan merchant; semua tab perlu dipilihkan koleksinya |
 | 2026-10-27 | Collection collage | 3374:305 | Work Sans dari font picker; teks sekunder memakai muted color opak; mobile dua/satu kolom turunan; plus menuju katalog bila tujuan belum dipilih | Kontras, responsivitas, tautan native; tidak ada modal atau quick shop |
 | 2026-10-27 | Material stories | 3374:270 | Work Sans font picker; foreground kontras dari color scheme; Traceable dikoreksi; tiga indikator mengikuti tiga blok; footer digital passport diganti narasi material; mobile dan interaksi manual adalah turunan | Keterbacaan, jumlah konten nyata, tidak menjanjikan layanan yang belum tersedia; detail di validation/material-story-notes.md |

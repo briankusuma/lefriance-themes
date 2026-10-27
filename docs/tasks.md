@@ -5,7 +5,7 @@
 - Tanggal: 2026-10-27
 - Zona waktu: Asia/Jakarta
 - Status: in_progress
-- Task aktif: T05
+- Task aktif: T06
 - Judul: Implementasi homepage bertahap dari Figma
 
 ### Tujuan
@@ -48,6 +48,7 @@ Cocokkan file key `C2rhn7BP2nXA0LyByRDn09` dan node berikut, lalu baca rincian t
 | `3374:305` | T04 kolase koleksi |
 | `3374:326` | T05 produk unggulan |
 | `3374:388` | T06 journal |
+| `3660:1302` | T06 journal, versi implementasi terbaru |
 | `3374:431` | T07 newsletter / T08 footer; bedakan dari instruksi |
 
 Node anak dipetakan ke section induknya setelah inspeksi. Tautan file berbeda harus diperiksa sebagai sumber baru. Jika ada beberapa kandidat yang berdampak pada lingkup kerja, tanyakan hanya pilihan tersebut.
@@ -193,6 +194,8 @@ Kriteria selesai:
 
 ### T06 — Journal dan cerita studio
 
+Referensi implementasi terbaru: [node 3660:1302](https://www.figma.com/design/C2rhn7BP2nXA0LyByRDn09/Speedtest?node-id=3660-1302), sesuai permintaan 2026-10-27. Scope lokal dibangun; editor/store QA masih terbuka.
+
 - Figma: [node 3374:388](https://www.figma.com/design/C2rhn7BP2nXA0LyByRDn09/Speedtest?node-id=3374-388).
 - Dependensi: T00
 - Mapping: Section featured journal; kartu dari article picker dalam blok.
@@ -286,20 +289,18 @@ Kriteria selesai:
 
 ## Progres dan laporan — task aktif saja
 
-- ID laporan: T05
+- ID laporan: T06
 - Tanggal: 2026-10-27, Asia/Jakarta
-- Status: implementasi dan validasi lokal selesai; konfigurasi koleksi serta Theme Editor/Lighthouse belum terverifikasi.
-- Target: `3374:326`. Arsip T04: [laporan sebelumnya](task-history/2026-10-27-02.md).
+- Target baru: `3660:1302`, menggantikan referensi awal `3374:388` untuk implementasi ini.
+- Status: implementasi lokal selesai; Theme Editor dan Lighthouse belum diverifikasi. Arsip T05: [laporan sebelumnya](task-history/2026-10-27-03.md).
 
-Section `featured-collections` dipasang setelah kolase. Lima blok tab awal mengikuti Figma; masing-masing memiliki collection picker, label, heading, description, supporting text dan CTA. All memakai koleksi yang dipilih merchant. Produk tidak dibuat atau dipalsukan; **pilih koleksi pada setiap blok agar produk muncul**. Maksimum lima koleksi, 4–12 produk per koleksi; empat kartu desktop, dua tablet, satu layar kecil. Panah menggeser rail dan disable pada batas; tab mendukung keyboard serta pemilihan blok editor. Tanpa JS semua koleksi terbaca.
+`journal-stories` dipasang setelah Featured collections: intro studio, heading tengah, nomor pemilih, dua kartu foto referensi dan kartu teks. Schema mendukung hingga 12 story blocks, article picker, image override, fallback heading/text/link, kategori, jenis kartu dan dua color schemes. Bila artikel dipilih, judul/excerpt/URL berasal dari artikel asli. Nomor mengikuti jumlah blok; tiga cerita menghasilkan tiga nomor. Panah disable jika tidak ada overflow. Tanpa JS, semua cerita tampil dalam grid. Pemilihan nomor, keyboard Home/End/panah dan pemilihan blok editor menavigasi kartu. Mobile turunan satu/dua kartu; desktop tiga kartu.
 
-Snippet bersama `product-card` diperluas lewat opsi editorial dan disable_quick_add. Harga, gambar, badge sale/sold out, unit price dan swatch tetap berasal dari produk/varian Shopify. Swatch berupa tautan varian dengan label opsi dan penanda current; tidak mengubah harga/media secara lokal. Collection cards di luar T05 mempertahankan pengaturan quick add global.
+Validasi: Theme Check Shopify CLI 4.9.4 `[]`; JS syntax dan diff check lulus. **132/132** browser checks pada 320/749/1535px, tujuh kondisi (normal/empty/single/12 items/long/no-JS/article). Mencakup overflow, aset, tinggi kartu teks, nomor, keyboard, simulated block selection dan data artikel. [Bukti](validation/journal-stories-browser.json). Desktop ditinjau visual; font fixture fallback lokal.
 
-Validasi: Shopify CLI 4.9.4 Theme Check `[]`; JavaScript syntax dan diff check bersih. Browser actual Liquid dengan catalog fixtures: **325/325** pada lima lebar, enam skenario (normal/empty/single/long/no-JS/RTL), termasuk harga, badge, swatch, tab, CTA, panah, keyboard, simulated block selection dan overflow. [Bukti](validation/featured-collections-browser.json). Desktop/mobile ditinjau visual; font fixture fallback lokal.
+Deviasi: Work Sans font picker, kontras foreground diperkuat, garis dekoratif CSS, tiga nomor nyata alih-alih enam statis. Hak distribusi aset Figma belum dikonfirmasi. Add/remove/reorder, article/image/focal point di Theme Editor asli dan Lighthouse masih terbuka. Temuan audit T05 sebelumnya tidak diperbaiki pada scope T06 ini. Tidak ada commit/push/deploy/publish.
 
-Deviasi: font Work Sans; foreground/border diperkuat, kartu memakai pengaturan global rasio/fit dan data katalog, swatch tidak menyalin dekorasi warna Figma. Ikon kursi/panah Figma asli disimpan; foto produk hanya diunduh ke folder sementara untuk fixture visual, tidak dibundel sebagai katalog theme. Garis dekoratif dibuat dengan CSS. Mobile turunan, not in Figma. Theme Editor real, focal point/combined listings dengan katalog asli, checkout serta Lighthouse belum diuji. Tidak ada commit/push/deploy/publish.
-
-Dokumentasi resmi: [collection](https://shopify.dev/docs/api/liquid/objects/collection), [product option value](https://shopify.dev/docs/api/liquid/objects/product_option_value), [swatch](https://shopify.dev/docs/api/liquid/objects/swatch), [Theme Store requirements](https://shopify.dev/docs/storefronts/themes/store/requirements).
+Sumber Shopify: [article](https://shopify.dev/docs/api/liquid/objects/article), [section schema](https://shopify.dev/docs/storefronts/themes/architecture/sections/section-schema).
 ---
 
 ## Aturan pencatatan dan eksekusi

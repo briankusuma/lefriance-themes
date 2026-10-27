@@ -8,6 +8,12 @@
  * ------------------------------------------------------------
  */
 {
+  "journal_stories": {
+    "choose": "Choose a studio story",
+    "previous": "Show previous stories",
+    "next": "Show next stories",
+    "empty": "No stories to display."
+  },
   "featured_collections": {
     "collections": "Featured collections",
     "collection": "Collection",

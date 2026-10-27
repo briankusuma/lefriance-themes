@@ -22,6 +22,8 @@ Nomor anak media/ikon harus dicocokkan kembali bila Figma diubah; frame dan aset
 
 ## Aset Figma lainnya yang direncanakan
 
+T06 pada 2026-10-27: node `3660:1302` menyuplai `assets/journal-balance.png` (`3660:1306`) dan `journal-workshop.png` (`3660:1308`), keduanya 960 x 1200px; `journal-icon.svg` (`3660:1317`, 34.1111 x 34.3776px), `journal-next.svg` (`3660:1341`) dan `journal-previous.svg` (`3660:1343`, slot 21.319px). Sumber response design context, disimpan lokal. Hak distribusi belum dikonfirmasi sebelum rilis; merchant dapat mengganti foto. Tidak ada library baru.
+
 T05 pada 2026-10-27: `assets/featured-chair.svg` dari `3374:372` (34.1111px), `featured-next.svg` dari `3374:382`, dan `featured-previous.svg` dari `3374:385` (25.5833px), sumber response design context node `3374:326`. Ikon panah dipakai sebagai mask dengan warna scheme dan orientasi sesuai desain. Status hak distribusi sebelum rilis belum dikonfirmasi. Foto produk/swatches tidak dibundel; media runtime berasal dari katalog merchant. Empat foto referensi hanya disimpan sementara untuk validasi lokal, di luar theme.
 
 T04 pada 2026-10-27: enam PNG 960 x 1200px dari node `3374:305`, disimpan sebagai `assets/collage-desk.png` (`3374:311`), `collage-sofa.png` (`3374:308`), `collage-console.png` (`3374:309`), `collage-shelf.png` (`3374:310`), `collage-chair.png` (`3374:306`), `collage-table.png` (`3374:307`), serta SVG 29.8472px `collage-plus-table.svg` (`3374:317`) dan `collage-plus-chair.svg` (`3374:321`). Aset asli diunduh melalui response design context; SVG dipakai sebagai mask agar warna mengikuti scheme. Hak distribusi belum dikonfirmasi sebelum rilis. Tidak ada library tambahan.

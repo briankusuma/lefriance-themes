@@ -1,0 +1,98 @@
+{{ 'journal-stories.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'journal-stories.js' | asset_url }}" defer></script>
+<journal-stories class="journal-stories section-shell color-{{ section.settings.color_scheme }}" data-initial-index="{{ section.settings.initial_story | minus: 1 }}">
+  <div class="container">
+    <div class="journal-stories__studio">
+      <img src="{{ 'journal-icon.svg' | asset_url }}" width="34.1111" height="34.3776" alt="" loading="lazy">
+      <div class="journal-stories__intro rte">{{ section.settings.intro }}</div>
+      <div class="journal-stories__note rte">{{ section.settings.note }}</div>
+      <div class="journal-stories__numbers" role="group" aria-label="{{ 'journal_stories.choose' | t | escape }}" data-journal-controls hidden>
+        {% for block in section.blocks %}
+          <button type="button" data-journal-select="{{ forloop.index0 }}" aria-controls="JournalCard-{{ section.id }}-{{ block.id }}" aria-pressed="false">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</button>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="journal-stories__heading">
+      {% if section.settings.heading != blank %}<h2>{{ section.settings.heading | escape }}</h2>{% endif %}
+      <div class="rte">{{ section.settings.description }}</div>
+    </div>
+    <div class="journal-stories__carousel">
+      <button class="journal-stories__arrow journal-stories__arrow--previous" type="button" data-journal-previous data-journal-controls aria-label="{{ 'journal_stories.previous' | t | escape }}" hidden disabled><span style="--journal-arrow: url('{{ 'journal-previous.svg' | asset_url }}');" aria-hidden="true"></span></button>
+      <div class="journal-stories__rail" data-journal-rail tabindex="0" aria-label="{{ 'journal_stories.choose' | t | escape }}">
+        {% for block in section.blocks %}
+          {% liquid
+            assign story_title = block.settings.article.title | default: block.settings.heading
+            assign story_image = block.settings.image | default: block.settings.article.image
+            assign story_link = block.settings.article.url | default: block.settings.link
+            assign story_excerpt = block.settings.article.excerpt_or_content | strip_html | truncatewords: 35
+            assign story_category = block.settings.category | default: block.settings.article.tags.first
+            assign reference_asset = ''
+            if section.settings.use_reference_images
+              case block.settings.reference_image
+                when 'balance'
+                  assign reference_asset = 'journal-balance.png'
+                when 'workshop'
+                  assign reference_asset = 'journal-workshop.png'
+              endcase
+            endif
+          %}
+          <article class="journal-stories__card journal-stories__card--{{ block.settings.layout }}" id="JournalCard-{{ section.id }}-{{ block.id }}" data-journal-card {{ block.shopify_attributes }}>
+            <div class="journal-stories__caption">
+              <h3>{% if story_link != blank and story_title != blank %}<a href="{{ story_link }}">{{ story_title | escape }}</a>{% else %}{{ story_title | escape }}{% endif %}</h3>
+              <span>{% if forloop.index < 100 %}0{% endif %}{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
+            </div>
+            {% if block.settings.layout == 'text' %}
+              <div class="journal-stories__text color-{{ section.settings.card_color_scheme }}">
+                <div class="journal-stories__meta"><span>{{ story_category | escape }}</span><span>{% if forloop.index < 100 %}0{% endif %}{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span></div>
+                <h3>{% if story_link != blank and story_title != blank %}<a href="{{ story_link }}">{{ story_title | escape }}</a>{% else %}{{ story_title | escape }}{% endif %}</h3>
+                <div class="journal-stories__excerpt rte">{% if block.settings.article != blank %}<p>{{ story_excerpt | escape }}</p>{% else %}{{ block.settings.text }}{% endif %}</div>
+              </div>
+            {% else %}
+              <div class="journal-stories__image">
+                {% if story_link != blank and story_title != blank %}<a href="{{ story_link }}" aria-label="{{ story_title | escape }}">{% endif %}
+                {% if story_image != blank %}
+                  {{ story_image | image_url: width: 1000 | image_tag: widths: '320, 480, 680, 1000', sizes: '(min-width: 990px) 23vw, (min-width: 600px) 42vw, 85vw', loading: 'lazy', alt: story_image.alt }}
+                {% elsif reference_asset != blank %}
+                  <img src="{{ reference_asset | asset_img_url: '960x' }}" srcset="{{ reference_asset | asset_img_url: '320x' }} 320w, {{ reference_asset | asset_img_url: '680x' }} 680w, {{ reference_asset | asset_img_url: '960x' }} 960w" sizes="(min-width: 990px) 23vw, (min-width: 600px) 42vw, 85vw" width="960" height="1200" alt="{{ story_title | escape }}" loading="lazy">
+                {% else %}{{ 'image' | placeholder_svg_tag }}{% endif %}
+                {% if story_link != blank and story_title != blank %}</a>{% endif %}
+              </div>
+            {% endif %}
+          </article>
+        {% endfor %}
+        {% if section.blocks.size == 0 %}<p>{{ 'journal_stories.empty' | t }}</p>{% endif %}
+      </div>
+      <button class="journal-stories__arrow journal-stories__arrow--next" type="button" data-journal-next data-journal-controls aria-label="{{ 'journal_stories.next' | t | escape }}" hidden disabled><span style="--journal-arrow: url('{{ 'journal-next.svg' | asset_url }}');" aria-hidden="true"></span></button>
+    </div>
+    <p class="visually-hidden" data-journal-status role="status"></p>
+  </div>
+</journal-stories>
+{% schema %}
+{
+  "name": "Journal stories",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "max_blocks": 12,
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-light" },
+    { "type": "color_scheme", "id": "card_color_scheme", "label": "Text card color scheme", "default": "scheme-dark" },
+    { "type": "richtext", "id": "intro", "label": "Studio introduction" },
+    { "type": "richtext", "id": "note", "label": "Supporting text" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Share stories from your studio" },
+    { "type": "richtext", "id": "description", "label": "Description" },
+    { "type": "range", "id": "initial_story", "label": "Initial story", "min": 1, "max": 12, "step": 1, "default": 2 },
+    { "type": "checkbox", "id": "use_reference_images", "label": "Use reference images when empty", "default": false }
+  ],
+  "blocks": [{ "type": "story", "name": "Story", "settings": [
+    { "type": "article", "id": "article", "label": "Article", "info": "Uses the article title, excerpt and URL. An image below overrides its featured image." },
+    { "type": "select", "id": "layout", "label": "Card style", "default": "image", "options": [{ "value": "image", "label": "Image" }, { "value": "text", "label": "Text" }] },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "heading", "label": "Fallback heading", "default": "Introduce a studio story" },
+    { "type": "richtext", "id": "text", "label": "Fallback text" },
+    { "type": "text", "id": "category", "label": "Category" },
+    { "type": "url", "id": "link", "label": "Fallback link" },
+    { "type": "select", "id": "reference_image", "label": "Reference image", "default": "none", "options": [{ "value": "none", "label": "None" }, { "value": "balance", "label": "Chair workshop" }, { "value": "workshop", "label": "Table workshop" }] }
+  ] }],
+  "presets": [{ "name": "Journal stories", "blocks": [{ "type": "story" }, { "type": "story", "settings": { "layout": "text" } }, { "type": "story" }] }]
+}
+{% endschema %}
