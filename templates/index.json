@@ -172,23 +172,35 @@
         "all": {
           "type": "collection",
           "settings": {
-            "collection": "frontpage",
+            "collection": "all",
             "label": "All",
             "heading": "Furniture for thoughtful spaces.",
             "description": "",
             "note": "",
-            "link_label": "View collection"
+            "link_label": "View collection",
+            "products": [
+              "walnut-accent-chair",
+              "sculpted-wood-lounge-chair",
+              "modern-walnut-armchair",
+              "contour-upholstered-chair"
+            ]
           }
         },
         "chair": {
           "type": "collection",
           "settings": {
-            "collection": "frontpage",
+            "collection": "all",
             "label": "Chair",
             "heading": "Chairs designed for comfort and character.",
             "description": "<p>Each chair is built with premium materials and ergonomic precision, blending natural textures with modern design.</p>",
             "note": "<p>Be the first to discover new arrivals.</p>",
-            "link_label": "View all chairs"
+            "link_label": "View all chairs",
+            "products": [
+              "walnut-accent-chair",
+              "sculpted-wood-lounge-chair",
+              "modern-walnut-armchair",
+              "contour-upholstered-chair"
+            ]
           }
         },
         "sofa": {
@@ -236,8 +248,8 @@
         "color_scheme": "scheme-light",
         "ornament_color": "#e5e3d3",
         "intro": "<p>Thoughtfully crafted pieces that bring warmth, balance, and timeless style into your space.</p>",
-        "initial_tab": 2,
-        "products_to_show": 8
+        "initial_tab": 1,
+        "products_to_show": 4
       }
     },
     "journal": {
