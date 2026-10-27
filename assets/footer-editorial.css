@@ -268,7 +268,7 @@
   overflow-wrap: anywhere;
 }
 .editorial-footer__bottom {
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
