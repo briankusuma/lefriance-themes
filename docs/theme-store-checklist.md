@@ -7,6 +7,7 @@ Scoped follow-up **2026-10-27**: T03 inspected against current requirements; loc
 T04 scoped check: Theme Check bersih, 210/210 browser checks lokal; schema/block editing dan Lighthouse belum diuji di development theme. Lihat [laporan task](tasks.md).
 T05 scoped check: Theme Check bersih dan 325/325 browser checks lokal, termasuk tab, keyboard, harga, badge dan swatch. Koleksi asli, Theme Editor dan Lighthouse masih perlu diverifikasi; global submission checks tetap terbuka.
 T06 scoped check: Theme Check bersih, 132/132 browser checks lokal untuk Journal; editor asli, screen reader dan Lighthouse belum diuji. Bukti pada laporan task aktif.
+T07/T08 scoped check: footer/editorial + newsletter native, Theme Check bersih dan 208/208 browser checks lokal. Submit backend, Theme Editor dan Lighthouse belum diuji; tidak menutup checklist submission global.
 Re-verify at the start of every milestone and again right before submission. Update the date above when you do.
 
 Treat applicable requirements as submission gates. Mark an item only after verifying it using the appropriate method: repository inspection for file structure, source and license review for assets, a development store for storefront and Theme Editor behavior, and browser measurements for accessibility and performance. Record evidence in the active task report or a linked verification report. Code presence alone does not prove working behavior.

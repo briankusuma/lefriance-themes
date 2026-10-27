@@ -22,6 +22,8 @@ Nomor anak media/ikon harus dicocokkan kembali bila Figma diubah; frame dan aset
 
 ## Aset Figma lainnya yang direncanakan
 
+T07/T08 pada 2026-10-27 menggunakan ulang aset identik dari node `3660:1365`: `collage-sofa.png` (`3660:1383`), `collage-console.png` (`3660:1384`), `material-story-room.png` (`3660:1397`), `le-friance-wordmark.svg` (`3660:1366`), `material-story-active.svg` (`3660:1401`). Ikon asli tambahan: `footer-facebook.svg` (`3660:1391`), `footer-x.svg` (`3660:1393`), `footer-linkedin.svg` (`3660:1395`), masing-masing slot 34.111px. Sumber response design context; hak distribusi belum dikonfirmasi sebelum rilis. Foto/wordmark dapat diganti merchant dan sosial membutuhkan URL nyata.
+
 T06 pada 2026-10-27: node `3660:1302` menyuplai `assets/journal-balance.png` (`3660:1306`) dan `journal-workshop.png` (`3660:1308`), keduanya 960 x 1200px; `journal-icon.svg` (`3660:1317`, 34.1111 x 34.3776px), `journal-next.svg` (`3660:1341`) dan `journal-previous.svg` (`3660:1343`, slot 21.319px). Sumber response design context, disimpan lokal. Hak distribusi belum dikonfirmasi sebelum rilis; merchant dapat mengganti foto. Tidak ada library baru.
 
 T05 pada 2026-10-27: `assets/featured-chair.svg` dari `3374:372` (34.1111px), `featured-next.svg` dari `3374:382`, dan `featured-previous.svg` dari `3374:385` (25.5833px), sumber response design context node `3374:326`. Ikon panah dipakai sebagai mask dengan warna scheme dan orientasi sesuai desain. Status hak distribusi sebelum rilis belum dikonfirmasi. Foto produk/swatches tidak dibundel; media runtime berasal dari katalog merchant. Empat foto referensi hanya disimpan sementara untuk validasi lokal, di luar theme.

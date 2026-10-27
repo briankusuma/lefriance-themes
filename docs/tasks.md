@@ -5,7 +5,7 @@
 - Tanggal: 2026-10-27
 - Zona waktu: Asia/Jakarta
 - Status: in_progress
-- Task aktif: T06
+- Task aktif: T07 + T08
 - Judul: Implementasi homepage bertahap dari Figma
 
 ### Tujuan
@@ -49,6 +49,7 @@ Cocokkan file key `C2rhn7BP2nXA0LyByRDn09` dan node berikut, lalu baca rincian t
 | `3374:326` | T05 produk unggulan |
 | `3374:388` | T06 journal |
 | `3660:1302` | T06 journal, versi implementasi terbaru |
+| `3660:1365` | T07 newsletter + T08 footer, versi implementasi terbaru |
 | `3374:431` | T07 newsletter / T08 footer; bedakan dari instruksi |
 
 Node anak dipetakan ke section induknya setelah inspeksi. Tautan file berbeda harus diperiksa sebagai sumber baru. Jika ada beberapa kandidat yang berdampak pada lingkup kerja, tanyakan hanya pilihan tersebut.
@@ -216,6 +217,8 @@ Kriteria selesai:
 
 ### T07 — Newsletter
 
+Implementasi terbaru mengikuti `3660:1365` di footer yang sama; validasi lokal selesai, signup backend belum diuji.
+
 - Figma: [node 3374:431](https://www.figma.com/design/C2rhn7BP2nXA0LyByRDn09/Speedtest?node-id=3374-431).
 - Dependensi: T00
 - Mapping: Blok newsletter di footer; bukan form duplikat pada homepage.
@@ -234,6 +237,8 @@ Kriteria selesai:
 - [ ] Blok bisa dinonaktifkan tanpa menyisakan ruang kosong atau merusak footer.
 
 ### T08 — Footer editorial
+
+Implementasi terbaru mengikuti `3660:1365` dan mengganti footer foundation; editor/store QA masih terbuka.
 
 - Figma: [node 3374:431](https://www.figma.com/design/C2rhn7BP2nXA0LyByRDn09/Speedtest?node-id=3374-431).
 - Dependensi: T00, T07
@@ -289,18 +294,20 @@ Kriteria selesai:
 
 ## Progres dan laporan — task aktif saja
 
-- ID laporan: T06
+- ID laporan: T07 + T08
 - Tanggal: 2026-10-27, Asia/Jakarta
-- Target baru: `3660:1302`, menggantikan referensi awal `3374:388` untuk implementasi ini.
-- Status: implementasi lokal selesai; Theme Editor dan Lighthouse belum diverifikasi. Arsip T05: [laporan sebelumnya](task-history/2026-10-27-03.md).
+- Target: `3660:1365`, diterapkan langsung ke `sections/footer.liquid` dalam footer group.
+- Status: implementasi/validasi lokal selesai; Theme Editor, pengiriman newsletter dan Lighthouse belum diuji. Arsip T06: [laporan sebelumnya](task-history/2026-10-27-04.md).
 
-`journal-stories` dipasang setelah Featured collections: intro studio, heading tengah, nomor pemilih, dua kartu foto referensi dan kartu teks. Schema mendukung hingga 12 story blocks, article picker, image override, fallback heading/text/link, kategori, jenis kartu dan dua color schemes. Bila artikel dipilih, judul/excerpt/URL berasal dari artikel asli. Nomor mengikuti jumlah blok; tiga cerita menghasilkan tiga nomor. Panah disable jika tidak ada overflow. Tanpa JS, semua cerita tampil dalam grid. Pemilihan nomor, keyboard Home/End/panah dan pemilihan blok editor menavigasi kartu. Mobile turunan satu/dua kartu; desktop tiga kartu.
+Footer foundation diganti grid editorial gelap: thumbnail, menu bertingkat, sosial, foto studio/slider manual, copy furnitur, newsletter native dan wordmark. Pengaturan menu/payment lama dipertahankan. Schema menambah media/wordmark merchant, color scheme, copy, URL sosial, hingga enam blok foto dan satu blok newsletter yang dapat dihapus. Kebijakan berasal dari shop.policies; copyright, powered_by_link dan payment icons native tetap tersedia. URL sosial kosong tidak membuat akun/link palsu. Reference assets dapat dimatikan.
 
-Validasi: Theme Check Shopify CLI 4.9.4 `[]`; JS syntax dan diff check lulus. **132/132** browser checks pada 320/749/1535px, tujuh kondisi (normal/empty/single/12 items/long/no-JS/article). Mencakup overflow, aset, tinggi kartu teks, nomor, keyboard, simulated block selection dan data artikel. [Bukti](validation/journal-stories-browser.json). Desktop ditinjau visual; font fixture fallback lokal.
+Newsletter memakai form customer, contact[email], tag newsletter, label terkait, required/email/autocomplete, error terkait input dan pesan sukses. Tidak ada submit Ajax atau daftar email eksternal. Gallery hanya memiliki indikator untuk >=2 slide; no-JS menampilkan seluruh foto. Indikator mengikuti jumlah slide, mendukung keyboard serta block selection editor.
 
-Deviasi: Work Sans font picker, kontras foreground diperkuat, garis dekoratif CSS, tiga nomor nyata alih-alih enam statis. Hak distribusi aset Figma belum dikonfirmasi. Add/remove/reorder, article/image/focal point di Theme Editor asli dan Lighthouse masih terbuka. Temuan audit T05 sebelumnya tidak diperbaiki pada scope T06 ini. Tidak ada commit/push/deploy/publish.
+Validasi: Shopify CLI 4.9.4 Theme Check `[]`, JS syntax/diff check bersih. **208/208** browser checks lokal di 320/749/1100/1535px: normal/empty/slides/no-JS/long/error/success. Email validity browser dan markup respons server disimulasikan; **tidak membuktikan signup backend**. [Bukti](validation/footer-editorial-browser.json). Desktop ditinjau visual.
 
-Sumber Shopify: [article](https://shopify.dev/docs/api/liquid/objects/article), [section schema](https://shopify.dev/docs/storefronts/themes/architecture/sections/section-schema).
+Deviasi: font picker Work Sans, kontras diperkuat, GET CONTACT/SEND menjadi label email/Subscribe, copy musik diganti furnitur, satu foto referensi tanpa lima indikator mati, wordmark ditampilkan utuh. Mobile turunan. Hak distribusi Figma masih terbuka; development-theme QA untuk newsletter nyata, editor, logo beragam rasio, kebijakan/payment dan Lighthouse diperlukan. Temuan audit T05 tidak berubah. Tidak ada commit/push/deploy/publish.
+
+Sumber resmi: [email consent](https://shopify.dev/docs/storefronts/themes/customer-engagement/email-consent), [form](https://shopify.dev/docs/api/liquid/tags/form), [shop](https://shopify.dev/docs/api/liquid/objects/shop).
 ---
 
 ## Aturan pencatatan dan eksekusi

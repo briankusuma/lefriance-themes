@@ -8,6 +8,13 @@
  * ------------------------------------------------------------
  */
 {
+  "editorial_footer": {
+    "menu": "Footer menu",
+    "studio_image": "Furniture studio and workshop",
+    "photos": "Studio photos",
+    "show_photo": "Show studio photo {{ number }}",
+    "subscribed": "Thank you for subscribing."
+  },
   "journal_stories": {
     "choose": "Choose a studio story",
     "previous": "Show previous stories",
