@@ -169,6 +169,23 @@
     "featured": {
       "type": "featured-collections",
       "blocks": {
+        "all": {
+          "type": "collection",
+          "settings": {
+            "products": [
+              "walnut-accent-chair",
+              "sculpted-wood-lounge-chair",
+              "modern-walnut-armchair",
+              "contour-upholstered-chair"
+            ],
+            "collection": "all",
+            "label": "All",
+            "heading": "Furniture for thoughtful spaces.",
+            "description": "",
+            "note": "",
+            "link_label": "View collection"
+          }
+        },
         "chair": {
           "type": "collection",
           "settings": {
@@ -185,10 +202,56 @@
             "note": "<p>Be the first to discover new arrivals.</p>",
             "link_label": "View all chairs"
           }
+        },
+        "sofa": {
+          "type": "collection",
+          "settings": {
+            "products": [
+              "modern-walnut-armchair"
+            ],
+            "collection": "frontpage",
+            "label": "Sofa",
+            "heading": "Sofas for everyday comfort.",
+            "description": "",
+            "note": "",
+            "link_label": "View all sofas"
+          }
+        },
+        "lounge": {
+          "type": "collection",
+          "settings": {
+            "products": [
+              "contour-upholstered-chair"
+            ],
+            "collection": "frontpage",
+            "label": "Lounge",
+            "heading": "Make room to unwind.",
+            "description": "",
+            "note": "",
+            "link_label": "View lounge collection"
+          }
+        },
+        "dining": {
+          "type": "collection",
+          "settings": {
+            "products": [
+              "sculpted-wood-lounge-chair"
+            ],
+            "collection": "frontpage",
+            "label": "Dining",
+            "heading": "Gather around thoughtful design.",
+            "description": "",
+            "note": "",
+            "link_label": "View dining collection"
+          }
         }
       },
       "block_order": [
-        "chair"
+        "all",
+        "chair",
+        "sofa",
+        "lounge",
+        "dining"
       ],
       "settings": {
         "color_scheme": "scheme-light",
