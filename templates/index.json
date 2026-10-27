@@ -30,6 +30,85 @@
         "overlay_opacity": 60
       }
     },
+    "collage": {
+      "type": "collection-collage",
+      "settings": {
+        "heading": "We design furniture to stand the test of time.",
+        "description": "<p>Our furniture is crafted for simple disassembly. Each piece uses robust materials, ensuring easy repairs and a lifetime of use.</p>",
+        "color_scheme": "scheme-light",
+        "use_reference_images": true
+      },
+      "blocks": {
+        "desk": {
+          "type": "image",
+          "settings": {
+            "reference_image": "desk",
+            "alt": "Oak desk with a green writing mat and open notebook"
+          }
+        },
+        "tables": {
+          "type": "promotion",
+          "settings": {
+            "heading": "Explore our latest table collections",
+            "text": "<p>Designed with purpose, made with care.</p>",
+            "layout": "top"
+          }
+        },
+        "sofa": {
+          "type": "image",
+          "settings": {
+            "reference_image": "sofa",
+            "alt": "Soft green throw draped over an upholstered sofa"
+          }
+        },
+        "console": {
+          "type": "image",
+          "settings": {
+            "reference_image": "console",
+            "alt": "Wooden console with ceramics and a leafy stem"
+          }
+        },
+        "shelf": {
+          "type": "image",
+          "settings": {
+            "reference_image": "shelf",
+            "alt": "Ceramics and books on a wooden shelf"
+          }
+        },
+        "chair": {
+          "type": "image",
+          "settings": {
+            "reference_image": "chair",
+            "alt": "Curved wooden chair with woven seat"
+          }
+        },
+        "table": {
+          "type": "image",
+          "settings": {
+            "reference_image": "table",
+            "alt": "Close view of a wooden table corner and joinery"
+          }
+        },
+        "chairs": {
+          "type": "promotion",
+          "settings": {
+            "heading": "Discover our new chair designs.",
+            "text": "<p>Timeless design meets everyday functionality.</p>",
+            "layout": "bottom"
+          }
+        }
+      },
+      "block_order": [
+        "desk",
+        "tables",
+        "sofa",
+        "console",
+        "shelf",
+        "chair",
+        "table",
+        "chairs"
+      ]
+    },
     "materials": {
       "type": "material-story",
       "blocks": {
@@ -67,11 +146,7 @@
           }
         }
       },
-      "block_order": [
-        "chair",
-        "table",
-        "room"
-      ],
+      "block_order": ["chair", "table", "room"],
       "settings": {
         "color_scheme": "scheme-dark",
         "heading": "Design freely with",
@@ -84,8 +159,5 @@
       }
     }
   },
-  "order": [
-    "hero",
-    "materials"
-  ]
+  "order": ["hero", "materials", "collage"]
 }

@@ -1,0 +1,105 @@
+{{ 'collection-collage.css' | asset_url | stylesheet_tag }}
+<section class="collection-collage section-shell color-{{ section.settings.color_scheme }}">
+  <div class="container">
+    <div class="collection-collage__intro">
+      {% if section.settings.heading != blank %}<h2>{{ section.settings.heading | escape }}</h2>{% endif %}
+      {% if section.settings.description != blank %}<div class="collection-collage__description rte">{{ section.settings.description }}</div>{% endif %}
+    </div>
+    <div class="collection-collage__grid">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'image' %}
+            {% liquid
+              assign reference_asset = ''
+              if section.settings.use_reference_images and block.settings.reference_image != 'none'
+                assign reference_asset = 'collage-' | append: block.settings.reference_image | append: '.png'
+              endif
+              assign reference_crop = false
+              if block.settings.image == blank and reference_asset == 'collage-sofa.png'
+                assign reference_crop = true
+              endif
+            %}
+            <div class="collection-collage__image{% if reference_crop %} collection-collage__image--sofa{% endif %}" {{ block.shopify_attributes }}>
+              {% if block.settings.image != blank %}
+                {{ block.settings.image | image_url: width: 1000 | image_tag: widths: '240, 360, 540, 720, 1000', sizes: '(min-width: 990px) 23vw, (min-width: 600px) 46vw, 90vw', loading: 'lazy', alt: block.settings.image.alt }}
+              {% elsif reference_asset != blank %}
+                <img src="{{ reference_asset | asset_img_url: '960x' }}" srcset="{{ reference_asset | asset_img_url: '360x' }} 360w, {{ reference_asset | asset_img_url: '720x' }} 720w, {{ reference_asset | asset_img_url: '960x' }} 960w" sizes="(min-width: 990px) 23vw, (min-width: 600px) 46vw, 90vw" width="960" height="1200" alt="{{ block.settings.alt | escape }}" loading="lazy">
+              {% else %}
+                {{ 'image' | placeholder_svg_tag: 'collection-collage__placeholder' }}
+              {% endif %}
+            </div>
+          {% when 'promotion' %}
+            {% liquid
+              assign destination = block.settings.link | default: block.settings.collection.url | default: routes.all_products_collection_url
+              assign promotion_heading = block.settings.heading | default: block.settings.collection.title
+              assign icon_asset = 'collage-plus-table.svg'
+              if block.settings.layout == 'bottom'
+                assign icon_asset = 'collage-plus-chair.svg'
+              endif
+            %}
+            <div class="collection-collage__promotion collection-collage__promotion--{{ block.settings.layout }}" {{ block.shopify_attributes }}>
+              <div class="collection-collage__statement rte">{{ block.settings.text }}</div>
+              {% if promotion_heading != blank %}<h3>{{ promotion_heading | escape }}</h3>{% endif %}
+              {% if destination != blank and promotion_heading != blank %}
+                <a class="collection-collage__plus" href="{{ destination }}" aria-label="{{ promotion_heading | escape }}">
+                  <span style="--collage-plus-icon: url('{{ icon_asset | asset_url }}');" aria-hidden="true"></span>
+                </a>
+              {% endif %}
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection collage",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "max_blocks": 16,
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-light" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Introduce your collection" },
+    { "type": "richtext", "id": "description", "label": "Description", "default": "<p>Share the ideas and details behind your furniture.</p>" },
+    { "type": "checkbox", "id": "use_reference_images", "label": "Use reference images when empty", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "1:1 aspect ratio recommended. Adjust the image focal point to change the crop." },
+        { "type": "text", "id": "alt", "label": "Reference image description" },
+        { "type": "select", "id": "reference_image", "label": "Reference image", "default": "none", "options": [
+          { "value": "none", "label": "None" },
+          { "value": "desk", "label": "Desk" },
+          { "value": "sofa", "label": "Sofa detail" },
+          { "value": "console", "label": "Console" },
+          { "value": "shelf", "label": "Shelf detail" },
+          { "value": "chair", "label": "Chair detail" },
+          { "value": "table", "label": "Table detail" }
+        ], "info": "Used when reference images are enabled and no image is selected." }
+      ]
+    },
+    {
+      "type": "promotion",
+      "name": "Collection promotion",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Explore a collection", "info": "Leave empty to use the collection title." },
+        { "type": "richtext", "id": "text", "label": "Supporting text", "default": "<p>Describe the details that bring this collection together.</p>" },
+        { "type": "url", "id": "link", "label": "Link", "info": "Overrides the collection link. Uses the full catalog if both are empty." },
+        { "type": "select", "id": "layout", "label": "Plus position", "default": "top", "options": [
+          { "value": "top", "label": "Top right" },
+          { "value": "bottom", "label": "Bottom right" }
+        ] }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Collection collage", "blocks": [
+    { "type": "image" }, { "type": "promotion" }, { "type": "image" }, { "type": "image" },
+    { "type": "image" }, { "type": "image" }, { "type": "image" }, { "type": "promotion", "settings": { "layout": "bottom" } }
+  ] }]
+}
+{% endschema %}

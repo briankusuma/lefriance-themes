@@ -5,7 +5,7 @@
 - Tanggal: 2026-10-27
 - Zona waktu: Asia/Jakarta
 - Status: in_progress
-- Task aktif: T03
+- Task aktif: T04
 - Judul: Implementasi homepage bertahap dari Figma
 
 ### Tujuan
@@ -159,15 +159,15 @@ Kriteria selesai:
 
 Pekerjaan:
 
-- [ ] Bangun heading, deskripsi, enam foto, teks editorial, serta dua CTA bertanda plus sesuai grid asimetris.
-- [ ] Sediakan blok gambar dan blok promosi koleksi dengan collection picker atau link; plus diusulkan sebagai tautan koleksi, bukan modal/quick shop.
-- [ ] Gunakan gambar responsif dan focal point; tentukan fallback untuk jumlah blok berbeda agar komposisi tidak bergantung pada tepat enam foto.
-- [ ] Pada mobile susun konten mengikuti urutan baca; judul dan tautan tetap berdekatan dengan gambar terkait.
+- [x] Bangun heading, deskripsi, enam foto, teks editorial, serta dua CTA bertanda plus sesuai grid asimetris.
+- [x] Sediakan blok gambar dan blok promosi koleksi dengan collection picker atau link; plus merupakan tautan navigasi.
+- [x] Gunakan gambar responsif/image_tag untuk focal point; grid mengalir mengikuti jumlah blok. Uji focal point Shopify runtime masih terbuka.
+- [x] Mobile mengikuti urutan blok; judul dan tautan berada dalam panel yang sama.
 
 Kriteria selesai:
 
 - [ ] Kolase sesuai referensi desktop dan CTA menuju tujuan yang dikonfigurasi.
-- [ ] Jumlah gambar sedikit/banyak, rasio campuran, dan deskripsi panjang tetap rapi.
+- [x] Jumlah gambar sedikit/banyak dan deskripsi panjang tetap rapi pada browser lokal; upload campuran memerlukan uji data toko.
 - [ ] Blok bisa ditambah, dihapus, dan diurutkan; gambar dekoratif tidak membuat kontrol tanpa nama.
 
 ### T05 — Produk unggulan dan tab koleksi
@@ -286,29 +286,16 @@ Kriteria selesai:
 
 ## Progres dan laporan — task aktif saja
 
-- ID laporan: T03
+- ID laporan: T04
 - Tanggal: 2026-10-27, Asia/Jakarta
-- Status: implementasi lokal selesai; Theme Editor dan Lighthouse masih perlu verifikasi. Status task tetap in_progress.
-- Target langsung pengguna: `3374:270`. Laporan sebelumnya: [T01 + T02 + G01](task-history/2026-10-26-05.md).
+- Status: implementasi dan validasi lokal selesai; Theme Editor/Lighthouse masih terbuka.
+- Target: `3374:305`. Laporan T03 diarsipkan ke [2026-10-27](task-history/2026-10-27.md).
 
-### Hasil
+Section `collection-collage` dipasang setelah Material stories. Grid desktop empat kolom berisi enam foto dan dua panel promosi sesuai Figma. Schema menyediakan color scheme, heading/deskripsi, hingga 16 blok gambar/promosi, collection picker, link override, supporting text dan posisi plus. Foto merchant mengambil prioritas; preset baru memakai placeholder. Plus memakai SVG asli dengan warna dari scheme; tujuan default adalah katalog melalui routes bila koleksi/link belum dipilih. Tidak ada JavaScript tambahan.
 
-Section Material stories dibangun dan dipasang setelah hero. Komposisi desktop mengikuti grid tiga kolom Figma: judul dua tone, kartu foto putih dengan blur, kategori di kiri, thumbnail serta indikator di kanan, dan teks penutup. Mobile memakai susunan turunan yang terdokumentasi.
+Validasi: Shopify CLI 4.9.4 Theme Check `[]`, format dan diff check bersih. Browser lokal dari actual Liquid: **210/210** pemeriksaan pada lima lebar (320/390/749/990/1535), enam kondisi (normal, sedikit/banyak blok, panjang, kosong, upload). Mencakup overflow, aset, routing/nama link, kolom, containment copy, target tekan dan crop upload. Bukti: [browser](validation/collection-collage-browser.json).
 
-Schema menyediakan color scheme, heading dua bagian, teks pendukung, pilihan item awal, serta hingga 12 story blocks dengan gambar, heading, deskripsi, kategori, dan link opsional. Kategori berasal dari konten; thumbnail dan indikator mengikuti jumlah blok. Perpindahan manual tanpa autoplay. Tanpa JS, semua cerita tetap terbaca. Detail mapping, interaksi, sumber Shopify dan batas validasi: [catatan T03](validation/material-story-notes.md).
-
-### Validasi
-
-- Shopify CLI 4.9.4 Theme Check: `[]`; JavaScript syntax dan JSON parsing lulus.
-- Browser lokal dari actual Liquid: 7 variasi konten, 5 lebar; kategori, pemilih, keyboard, empty state, no-JS, overflow, asset loading, dan simulated editor block selection. Hasil di [browser T03](validation/material-story-browser.json).
-- Perbandingan visual desktop dan preview mobile dilakukan di Chrome. Font fixture memiliki fallback lokal; tidak ada klaim pixel match font atau Theme Editor/Lighthouse lulus.
-
-### Deviasi dan pekerjaan tersisa
-
-Work Sans tetap substitusi font picker. Kontras teks/kontrol diperkuat; Traceable dikoreksi. Tiga blok menghasilkan tiga indikator. Teks digital passport diganti agar tidak menjanjikan layanan yang belum tersedia. Mobile dan perilaku manual merupakan turunan, not in Figma. Foto/SVG asli dibundel sebagai opsi referensi; hak distribusi sebelum rilis masih terbuka di [licenses](third-party-licenses.md).
-
-Perlu development-theme QA untuk add/remove/reorder blok, penggantian gambar/focal point, color schemes dan live preview, ditambah Lighthouse. T04–T08 serta fitur Theme Store lainnya belum dikerjakan pada task ini. Tidak ada commit/push/deploy/publish.
-
+Deviasi: font picker tetap Work Sans; kontras teks diperkuat. Crop khusus sofa mengikuti transform Figma, hanya untuk gambar referensi. Desktop ditinjau visual; mobile memakai grid dua/satu kolom turunan, not in Figma. Hak distribusi aset, pengujian focal point/add/remove/reorder/live preview di Theme Editor, dan Lighthouse masih terbuka. Tidak ada commit/push/deploy/publish.
 ---
 
 ## Aturan pencatatan dan eksekusi
