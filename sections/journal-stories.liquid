@@ -1,6 +1,6 @@
 {{ 'journal-stories.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'journal-stories.js' | asset_url }}" defer></script>
-<journal-stories class="journal-stories section-shell color-{{ section.settings.color_scheme }}" data-initial-index="{{ section.settings.initial_story | minus: 1 }}">
+<journal-stories class="journal-stories section-shell color-{{ section.settings.color_scheme }}" data-initial-index="{{ section.settings.initial_story | minus: 1 }}" style="--journal-ornament-color: {{ section.settings.ornament_color | default: '#E5E3D3' }};">
   <div class="container">
     <div class="journal-stories__studio">
       <img src="{{ 'journal-icon.svg' | asset_url }}" width="34.1111" height="34.3776" alt="" loading="lazy">
@@ -75,6 +75,7 @@
   "max_blocks": 12,
   "settings": [
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-light" },
+    { "type": "color", "id": "ornament_color", "label": "Ornament color", "default": "#E5E3D3" },
     { "type": "color_scheme", "id": "card_color_scheme", "label": "Text card color scheme", "default": "scheme-dark" },
     { "type": "richtext", "id": "intro", "label": "Studio introduction" },
     { "type": "richtext", "id": "note", "label": "Supporting text" },

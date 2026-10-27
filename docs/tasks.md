@@ -295,8 +295,10 @@ Kriteria selesai:
 ## Progres dan laporan — task aktif saja
 
 - ID laporan: T07 + T08
+- Follow-up T05/T06 ornament: properti asli `3660:1345` dan `3660:1298` diperiksa; keduanya memakai stroke SOLID #E5E3D3 alpha 1 (bukan gradient footer). Frame vertikal/garis tengah serta horizontal full bleed kini memakai token ornament khusus, tebal 1.066px; setting Ornament color tersedia per section. Theme Check bersih; [36/36 pemeriksaan scoped](validation/light-ornaments-browser.json) lulus untuk warna, full width, konfigurasi warna dan overflow di 320/749/1535px. Kedua section ditinjau visual.
 - Tanggal: 2026-10-27, Asia/Jakarta
 - Target: `3660:1365`, diterapkan langsung ke `sections/footer.liquid` dalam footer group.
+- Follow-up ornament `3660:1408`: stroke dekoratif khusus `#5B5148` (setting Ornament color), garis horizontal full bleed, frame vertikal top-to-bottom alpha fade hingga wordmark. Paint asli diperiksa lewat Figma Plugin API: stroke vertikal `#5B5148` alpha 1 ke `#C1AC99` alpha 0; photo fill hitam opacity 0.1 dengan stop CSS 39.015%–110.42%, blur CSS 17.589px dan mask transisi. Border global/UI tidak diubah. Validasi lanjutan [274/274](validation/footer-ornament-browser.json), termasuk warna/fade/overlay dan overflow; ditinjau visual di Chrome.
 - Status: implementasi/validasi lokal selesai; Theme Editor, pengiriman newsletter dan Lighthouse belum diuji. Arsip T06: [laporan sebelumnya](task-history/2026-10-27-04.md).
 
 Footer foundation diganti grid editorial gelap: thumbnail, menu bertingkat, sosial, foto studio/slider manual, copy furnitur, newsletter native dan wordmark. Pengaturan menu/payment lama dipertahankan. Schema menambah media/wordmark merchant, color scheme, copy, URL sosial, hingga enam blok foto dan satu blok newsletter yang dapat dihapus. Kebijakan berasal dari shop.policies; copyright, powered_by_link dan payment icons native tetap tersedia. URL sosial kosong tidak membuat akun/link palsu. Reference assets dapat dimatikan.

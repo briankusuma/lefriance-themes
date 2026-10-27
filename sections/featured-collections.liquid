@@ -2,7 +2,7 @@
 <script src="{{ 'featured-collections.js' | asset_url }}" defer></script>
 {% assign default_collection_label = 'featured_collections.collection' | t %}
 {% assign default_link_label = 'featured_collections.view_collection' | t %}
-<featured-collections class="featured-collections section-shell color-{{ section.settings.color_scheme }}" data-initial-index="{{ section.settings.initial_tab | minus: 1 }}">
+<featured-collections class="featured-collections section-shell color-{{ section.settings.color_scheme }}" data-initial-index="{{ section.settings.initial_tab | minus: 1 }}" style="--featured-ornament-color: {{ section.settings.ornament_color | default: '#E5E3D3' }};">
   <div class="featured-collections__layout container">
     <div class="featured-collections__tabs" role="tablist" aria-label="{{ 'featured_collections.collections' | t | escape }}" data-featured-tabs hidden>
       {% for block in section.blocks %}
@@ -53,6 +53,7 @@
   "max_blocks": 5,
   "settings": [
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-light" },
+    { "type": "color", "id": "ornament_color", "label": "Ornament color", "default": "#E5E3D3" },
     { "type": "richtext", "id": "intro", "label": "Introductory text", "default": "<p>Introduce the character and craft behind your collections.</p>" },
     { "type": "range", "id": "initial_tab", "label": "Initial collection", "min": 1, "max": 5, "step": 1, "default": 2, "info": "Uses the first block if this position is empty." },
     { "type": "range", "id": "products_to_show", "label": "Products per collection", "min": 4, "max": 12, "step": 1, "default": 8 }

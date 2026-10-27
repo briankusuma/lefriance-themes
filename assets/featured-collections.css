@@ -1,6 +1,8 @@
 .featured-collections {
+  --featured-ornament-color: #e5e3d3;
   display: block;
   position: relative;
+  overflow: clip;
   padding-block: 3.2rem;
 }
 
@@ -8,7 +10,7 @@
   content: "";
   position: absolute;
   inset: 0 max(0px, calc(var(--page-margin) - 1.066rem));
-  border-inline: 1px solid var(--color-border);
+  border-inline: 1.066px solid var(--featured-ornament-color);
   pointer-events: none;
 }
 
@@ -36,11 +38,22 @@
 }
 
 .featured-collections__intro {
+  position: relative;
   grid-row: 1;
   display: grid;
   gap: 2rem;
   padding-bottom: 2.5rem;
-  border-bottom: 1px solid var(--color-border);
+}
+.featured-collections__intro::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  height: 1.066px;
+  transform: translateX(-50%);
+  background: var(--featured-ornament-color);
+  pointer-events: none;
 }
 
 .featured-collections__brand {
@@ -245,8 +258,12 @@
 
 @media (min-width: 990px) {
   .featured-collections::before {
-    background: linear-gradient(var(--color-border), var(--color-border))
-      center / 1px 100% no-repeat;
+    /* The source center stroke is solid; both gradient stops are identical. */
+    background: linear-gradient(
+        var(--featured-ornament-color),
+        var(--featured-ornament-color)
+      )
+      center / 1.066px 100% no-repeat;
   }
 
   .featured-collections__intro {

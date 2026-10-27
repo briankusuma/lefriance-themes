@@ -1,7 +1,7 @@
 {{ 'footer-editorial.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'footer-gallery.js' | asset_url }}" defer></script>
 {% assign media_blocks = section.blocks | where: 'type', 'media' %}
-<footer class="editorial-footer section-shell color-{{ section.settings.color_scheme }}">
+<footer class="editorial-footer section-shell color-{{ section.settings.color_scheme }}" style="--footer-ornament-color: {{ section.settings.ornament_color | default: '#5B5148' }};">
   <div class="container">
     <div class="editorial-footer__top">
       <div class="editorial-footer__identity">
@@ -112,6 +112,7 @@
   "max_blocks": 7,
   "settings": [
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-footer" },
+    { "type": "color", "id": "ornament_color", "label": "Ornament color", "default": "#5B5148" },
     { "type": "link_list", "id": "menu", "label": "Footer menu", "default": "footer" },
     { "type": "image_picker", "id": "thumbnail_one", "label": "First thumbnail" },
     { "type": "image_picker", "id": "thumbnail_two", "label": "Second thumbnail" },
