@@ -30,180 +30,6 @@
         "overlay_opacity": 60
       }
     },
-    "journal": {
-      "type": "journal-stories",
-      "settings": {
-        "color_scheme": "scheme-light",
-        "card_color_scheme": "scheme-dark",
-        "intro": "<p>Step inside our studio and see how each detail is carefully made and finished by hand.</p>",
-        "note": "<p>Be the first to discover new arrivals.</p>",
-        "heading": "Thoughts, stories, and a closer look at what we make.",
-        "description": "<p>We share a bit of our process, the materials we love, and the ideas behind each piece.</p>",
-        "initial_story": 2,
-        "use_reference_images": true
-      },
-      "blocks": {
-        "balance": {
-          "type": "story",
-          "settings": {
-            "layout": "image",
-            "reference_image": "balance",
-            "heading": "Finding the right balance"
-          }
-        },
-        "process": {
-          "type": "story",
-          "settings": {
-            "layout": "text",
-            "heading": "From wood to chair",
-            "category": "Process",
-            "text": "<p>A look at how our materials come together, from raw walnut to the final piece in your home.</p>"
-          }
-        },
-        "workshop": {
-          "type": "story",
-          "settings": {
-            "layout": "image",
-            "reference_image": "workshop",
-            "heading": "Be the first to hear about lineup drops."
-          }
-        }
-      },
-      "block_order": ["balance", "process", "workshop"]
-    },
-    "featured": {
-      "type": "featured-collections",
-      "settings": {
-        "color_scheme": "scheme-light",
-        "intro": "<p>Thoughtfully crafted pieces that bring warmth, balance, and timeless style into your space.</p>",
-        "initial_tab": 2,
-        "products_to_show": 8
-      },
-      "blocks": {
-        "all": {
-          "type": "collection",
-          "settings": {
-            "label": "All",
-            "heading": "Furniture for thoughtful spaces.",
-            "link_label": "View collection"
-          }
-        },
-        "chair": {
-          "type": "collection",
-          "settings": {
-            "label": "Chair",
-            "heading": "Chairs designed for comfort and character.",
-            "description": "<p>Each chair is built with premium materials and ergonomic precision, blending natural textures with modern design.</p>",
-            "note": "<p>Be the first to discover new arrivals.</p>",
-            "link_label": "View all chairs"
-          }
-        },
-        "sofa": {
-          "type": "collection",
-          "settings": {
-            "label": "Sofa",
-            "heading": "Sofas for everyday comfort.",
-            "link_label": "View all sofas"
-          }
-        },
-        "lounge": {
-          "type": "collection",
-          "settings": {
-            "label": "Lounge",
-            "heading": "Make room to unwind.",
-            "link_label": "View lounge collection"
-          }
-        },
-        "dining": {
-          "type": "collection",
-          "settings": {
-            "label": "Dining",
-            "heading": "Gather around thoughtful design.",
-            "link_label": "View dining collection"
-          }
-        }
-      },
-      "block_order": ["all", "chair", "sofa", "lounge", "dining"]
-    },
-    "collage": {
-      "type": "collection-collage",
-      "settings": {
-        "heading": "We design furniture to stand the test of time.",
-        "description": "<p>Our furniture is crafted for simple disassembly. Each piece uses robust materials, ensuring easy repairs and a lifetime of use.</p>",
-        "color_scheme": "scheme-light",
-        "use_reference_images": true
-      },
-      "blocks": {
-        "desk": {
-          "type": "image",
-          "settings": {
-            "reference_image": "desk",
-            "alt": "Oak desk with a green writing mat and open notebook"
-          }
-        },
-        "tables": {
-          "type": "promotion",
-          "settings": {
-            "heading": "Explore our latest table collections",
-            "text": "<p>Designed with purpose, made with care.</p>",
-            "layout": "top"
-          }
-        },
-        "sofa": {
-          "type": "image",
-          "settings": {
-            "reference_image": "sofa",
-            "alt": "Soft green throw draped over an upholstered sofa"
-          }
-        },
-        "console": {
-          "type": "image",
-          "settings": {
-            "reference_image": "console",
-            "alt": "Wooden console with ceramics and a leafy stem"
-          }
-        },
-        "shelf": {
-          "type": "image",
-          "settings": {
-            "reference_image": "shelf",
-            "alt": "Ceramics and books on a wooden shelf"
-          }
-        },
-        "chair": {
-          "type": "image",
-          "settings": {
-            "reference_image": "chair",
-            "alt": "Curved wooden chair with woven seat"
-          }
-        },
-        "table": {
-          "type": "image",
-          "settings": {
-            "reference_image": "table",
-            "alt": "Close view of a wooden table corner and joinery"
-          }
-        },
-        "chairs": {
-          "type": "promotion",
-          "settings": {
-            "heading": "Discover our new chair designs.",
-            "text": "<p>Timeless design meets everyday functionality.</p>",
-            "layout": "bottom"
-          }
-        }
-      },
-      "block_order": [
-        "desk",
-        "tables",
-        "sofa",
-        "console",
-        "shelf",
-        "chair",
-        "table",
-        "chairs"
-      ]
-    },
     "materials": {
       "type": "material-story",
       "blocks": {
@@ -241,7 +67,11 @@
           }
         }
       },
-      "block_order": ["chair", "table", "room"],
+      "block_order": [
+        "chair",
+        "table",
+        "room"
+      ],
       "settings": {
         "color_scheme": "scheme-dark",
         "heading": "Design freely with",
@@ -252,7 +82,227 @@
         "initial_item": 2,
         "use_reference_images": true
       }
+    },
+    "collage": {
+      "type": "collection-collage",
+      "blocks": {
+        "desk": {
+          "type": "image",
+          "settings": {
+            "alt": "Oak desk with a green writing mat and open notebook",
+            "reference_image": "desk"
+          }
+        },
+        "tables": {
+          "type": "promotion",
+          "settings": {
+            "collection": "",
+            "heading": "Explore our latest table collections",
+            "text": "<p>Designed with purpose, made with care.</p>",
+            "link": "",
+            "layout": "top"
+          }
+        },
+        "sofa": {
+          "type": "image",
+          "settings": {
+            "alt": "Soft green throw draped over an upholstered sofa",
+            "reference_image": "sofa"
+          }
+        },
+        "console": {
+          "type": "image",
+          "settings": {
+            "alt": "Wooden console with ceramics and a leafy stem",
+            "reference_image": "console"
+          }
+        },
+        "shelf": {
+          "type": "image",
+          "settings": {
+            "alt": "Ceramics and books on a wooden shelf",
+            "reference_image": "shelf"
+          }
+        },
+        "chair": {
+          "type": "image",
+          "settings": {
+            "alt": "Curved wooden chair with woven seat",
+            "reference_image": "chair"
+          }
+        },
+        "table": {
+          "type": "image",
+          "settings": {
+            "alt": "Close view of a wooden table corner and joinery",
+            "reference_image": "table"
+          }
+        },
+        "chairs": {
+          "type": "promotion",
+          "settings": {
+            "collection": "",
+            "heading": "Discover our new chair designs.",
+            "text": "<p>Timeless design meets everyday functionality.</p>",
+            "link": "",
+            "layout": "bottom"
+          }
+        }
+      },
+      "block_order": [
+        "desk",
+        "tables",
+        "sofa",
+        "console",
+        "shelf",
+        "chair",
+        "table",
+        "chairs"
+      ],
+      "settings": {
+        "color_scheme": "scheme-light",
+        "heading": "We design furniture to stand the test of time.",
+        "description": "<p>Our furniture is crafted for simple disassembly. Each piece uses robust materials, ensuring easy repairs and a lifetime of use.</p>",
+        "use_reference_images": true
+      }
+    },
+    "featured": {
+      "type": "featured-collections",
+      "blocks": {
+        "all": {
+          "type": "collection",
+          "settings": {
+            "collection": "frontpage",
+            "label": "All",
+            "heading": "Furniture for thoughtful spaces.",
+            "description": "",
+            "note": "",
+            "link_label": "View collection"
+          }
+        },
+        "chair": {
+          "type": "collection",
+          "settings": {
+            "collection": "frontpage",
+            "label": "Chair",
+            "heading": "Chairs designed for comfort and character.",
+            "description": "<p>Each chair is built with premium materials and ergonomic precision, blending natural textures with modern design.</p>",
+            "note": "<p>Be the first to discover new arrivals.</p>",
+            "link_label": "View all chairs"
+          }
+        },
+        "sofa": {
+          "type": "collection",
+          "settings": {
+            "collection": "frontpage",
+            "label": "Sofa",
+            "heading": "Sofas for everyday comfort.",
+            "description": "",
+            "note": "",
+            "link_label": "View all sofas"
+          }
+        },
+        "lounge": {
+          "type": "collection",
+          "settings": {
+            "collection": "frontpage",
+            "label": "Lounge",
+            "heading": "Make room to unwind.",
+            "description": "",
+            "note": "",
+            "link_label": "View lounge collection"
+          }
+        },
+        "dining": {
+          "type": "collection",
+          "settings": {
+            "collection": "frontpage",
+            "label": "Dining",
+            "heading": "Gather around thoughtful design.",
+            "description": "",
+            "note": "",
+            "link_label": "View dining collection"
+          }
+        }
+      },
+      "block_order": [
+        "all",
+        "chair",
+        "sofa",
+        "lounge",
+        "dining"
+      ],
+      "settings": {
+        "color_scheme": "scheme-light",
+        "ornament_color": "#e5e3d3",
+        "intro": "<p>Thoughtfully crafted pieces that bring warmth, balance, and timeless style into your space.</p>",
+        "initial_tab": 2,
+        "products_to_show": 8
+      }
+    },
+    "journal": {
+      "type": "journal-stories",
+      "blocks": {
+        "balance": {
+          "type": "story",
+          "settings": {
+            "article": "",
+            "layout": "image",
+            "heading": "Finding the right balance",
+            "text": "",
+            "category": "",
+            "link": "",
+            "reference_image": "balance"
+          }
+        },
+        "process": {
+          "type": "story",
+          "settings": {
+            "article": "",
+            "layout": "text",
+            "heading": "From wood to chair",
+            "text": "<p>A look at how our materials come together, from raw walnut to the final piece in your home.</p>",
+            "category": "Process",
+            "link": "",
+            "reference_image": "none"
+          }
+        },
+        "workshop": {
+          "type": "story",
+          "settings": {
+            "article": "",
+            "layout": "image",
+            "heading": "Be the first to hear about lineup drops.",
+            "text": "",
+            "category": "",
+            "link": "",
+            "reference_image": "workshop"
+          }
+        }
+      },
+      "block_order": [
+        "balance",
+        "process",
+        "workshop"
+      ],
+      "settings": {
+        "color_scheme": "scheme-light",
+        "ornament_color": "#e5e3d3",
+        "card_color_scheme": "scheme-dark",
+        "intro": "<p>Step inside our studio and see how each detail is carefully made and finished by hand.</p>",
+        "note": "<p>Be the first to discover new arrivals.</p>",
+        "heading": "Thoughts, stories, and a closer look at what we make.",
+        "description": "<p>We share a bit of our process, the materials we love, and the ideas behind each piece.</p>",
+        "initial_story": 2,
+        "use_reference_images": true
+      }
     }
   },
-  "order": ["hero", "materials", "collage", "featured", "journal"]
+  "order": [
+    "hero",
+    "materials",
+    "collage",
+    "featured",
+    "journal"
+  ]
 }
