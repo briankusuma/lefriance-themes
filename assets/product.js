@@ -48,7 +48,12 @@ if (!customElements.get('lefriance-product')) {
       if (variantChanged) quantity.value = variant.min;
       if (variantChanged) {
         const url = new URL(location.href); url.searchParams.set('variant', variant.id); history.replaceState({}, '', url);
-        if (variant.media) this.closest('section')?.querySelector(`[data-product-media="${variant.media}"]`)?.scrollIntoView({ block: 'nearest', behavior: 'instant' });
+        if (variant.media) {
+          const section = this.closest('section');
+          const gallery = section?.querySelector('product-detail-gallery');
+          if (typeof gallery?.selectMedia === 'function') gallery.selectMedia(variant.media);
+          else section?.querySelector(`[data-product-media="${variant.media}"]`)?.scrollIntoView({ block: 'nearest', behavior: 'instant' });
+        }
       }
     }
   });

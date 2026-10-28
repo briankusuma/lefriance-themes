@@ -1,5 +1,7 @@
 # Theme Store submission checklist
 
+2026-10-28 P01 product gallery: main product memakai main media + thumbnail dua kolom dari katalog dan Swiper lokal; gambar varian/form dipertahankan. Theme Check `[]`, 131/131 checks browser fixture lokal dan tinjauan visual desktop/mobile. [Bukti dan batasan](validation/product-detail-gallery.md). Live Theme Editor, rich-media services dan Lighthouse belum diuji; tidak menutup checklist submission global.
+
 2026-10-28 Product Color connection: metafield kategori standar dipakai sebagai fallback palette kartu dan blok Colors di main product; native variant swatches/URL dipertahankan. Namespace/access diperiksa read-only di Admin, Theme Check bersih, 42/42 browser fixture checks lokal. Live preview/editor dan Lighthouse tetap terbuka; lihat `catalog-swatches/README.md`.
 
 2026-10-27 motion integration: empat slider memakai Swiper 14.3.0 subset lokal, Lenis 1.3.27 opsional. Theme Check bersih; 101/101 integrasi + 30/30 state checks lokal. Lisensi/integrity dan payload gzip dicatat di `vendor/motion-libraries.md`. Reduced-motion preference disimulasikan pada fixture; live editor, browser/perangkat lain dan Lighthouse masih terbuka. Tidak menutup persyaratan submission global.

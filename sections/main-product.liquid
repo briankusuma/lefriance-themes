@@ -1,8 +1,40 @@
 <script src="{{ 'product.js' | asset_url }}" defer></script>
-<section class="section-shell color-{{ section.settings.color_scheme }}"><div class="container section-content product-layout">
-  <div class="product-gallery">
-    {% for media in product.media %}<div id="ProductMedia-{{ section.id }}-{{ media.id }}" data-product-media="{{ media.id }}">{% if media.media_type == 'image' %}{% assign media_loading = 'lazy' %}{% if forloop.first %}{% assign media_loading = 'eager' %}{% endif %}{{ media | image_url: width: 1800 | image_tag: widths: '400, 800, 1200, 1800', sizes: '(min-width: 990px) 55vw, 100vw', loading: media_loading, alt: media.alt }}{% else %}{{ media | media_tag: image_size: '1200x', controls: true }}{% endif %}</div>{% endfor %}
-  </div>
+<script src="{{ 'product-detail-gallery.js' | asset_url }}" defer></script>
+{{ 'product-detail.css' | asset_url | stylesheet_tag }}
+<section class="section-shell product-detail color-{{ section.settings.color_scheme }}"><div class="container section-content product-layout">
+  {% assign initial_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media | default: product.media.first %}
+  {% if product.media.size > 0 %}
+    <product-detail-gallery class="product-gallery" data-initial-media="{{ initial_media.id }}">
+      <div class="product-detail__stage" role="region" aria-label="{{ 'product_gallery.media' | t | escape }}">
+        {% for media in product.media %}
+          {% liquid
+            assign media_loading = 'lazy'
+            if media.id == initial_media.id
+              assign media_loading = 'eager'
+            endif
+            assign media_alt = media.alt | default: product.title
+          %}
+          <div class="product-detail__media" id="ProductMedia-{{ section.id }}-{{ media.id }}" data-product-media="{{ media.id }}">
+            {% if media.media_type == 'image' %}
+              {{ media | image_url: width: 1800 | image_tag: widths: '400, 800, 1200, 1800', sizes: '(min-width: 990px) 50vw, 100vw', loading: media_loading, alt: media_alt }}
+            {% else %}
+              {{ media | media_tag: image_size: '1200x', controls: true }}
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+      {% if product.media.size > 1 %}
+        <div class="product-detail__thumbnails" role="group" aria-label="{{ 'product_gallery.choose' | t | escape }}">
+          {% for media in product.media %}
+            <a class="product-detail__thumbnail" href="#ProductMedia-{{ section.id }}-{{ media.id }}" data-media-target="{{ media.id }}" aria-label="{{ 'product_gallery.show' | t: number: forloop.index | escape }}"{% if media.id == initial_media.id %} aria-current="true"{% endif %}>
+              {{ media.preview_image | image_url: width: 600 | image_tag: widths: '160, 320, 600', sizes: '(min-width: 990px) 25vw, 50vw', loading: 'lazy', alt: '' }}
+              {% unless media.media_type == 'image' %}<span class="product-detail__media-type">{{ media.media_type | replace: '_', ' ' | escape }}</span>{% endunless %}
+            </a>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </product-detail-gallery>
+  {% endif %}
   <div class="product-details">
     {% for block in section.blocks %}<div {{ block.shopify_attributes }}>{% case block.type %}
       {% when 'title' %}<h1>{{ product.title | escape }}</h1>

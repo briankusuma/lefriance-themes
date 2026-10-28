@@ -1,12 +1,12 @@
-# Task aktif — homepage LE FRIANCE
+# Task aktif — product detail LE FRIANCE
 
 ## Brief
 
-- Tanggal: 2026-10-27
+- Tanggal: 2026-10-28
 - Zona waktu: Asia/Jakarta
 - Status: in_progress
-- Task aktif: T07 + T08
-- Judul: Implementasi homepage bertahap dari Figma
+- Task aktif: P01
+- Judul: Galeri detail produk dari Figma 3713:1522
 
 ### Tujuan
 
@@ -292,26 +292,26 @@ Kriteria selesai:
 - [ ] Lighthouse home/collection/product dan perbandingan akhir Figma dengan font/media toko.
 - High-variant/combined listings, filtering, predictive search, pickup/recommendations/gift card recipient dan full media QA memerlukan milestone lanjutan. G01 tidak mengklaim seluruh fitur Dawn/Theme Store selesai.
 
+### P01 — Product detail gallery (follow-up pengguna)
+
+- Referensi: [image-left](https://www.figma.com/design/C2rhn7BP2nXA0LyByRDn09/Speedtest?node-id=3713-1522).
+- Scope: mengganti grid media pada main product dengan gambar utama dan thumbnail dua kolom. Node bukan frame halaman produk lengkap; informasi/form yang ada tetap dipakai.
+- Mapping: group galeri → markup `main-product`; gambar Figma → `product.media`; perubahan pilihan → controller galeri Swiper yang sudah tersedia; warna → token color scheme `--color-card`.
+- [x] Rasio 10:11, gap utama 24px, gap thumbnail 16px, sudut persegi; menyesuaikan lebar container.
+- [x] Thumbnail mengganti gambar utama; gambar varian disinkronkan; media berasal dari produk.
+- [x] Responsif, keyboard, single/empty/many media, fallback tanpa slider dan section reconnect diperiksa lokal.
+- [x] Theme Check dan pemeriksaan syntax/diff bersih.
+- [ ] Verifikasi development Theme Editor, rich-media layanan asli dan Lighthouse.
+
 ## Progres dan laporan — task aktif saja
 
-- ID laporan: T07 + T08
-- Koreksi sambungan kolase/Featured collections: border bawah kolase sebelumnya masih memakai warna border UI global yang gelap. Kini memakai ornament #E5E3D3 setebal 1.066px, senada dengan frame vertikal section berikutnya.
-- Follow-up T05/T06 ornament: properti asli `3660:1345` dan `3660:1298` diperiksa; keduanya memakai stroke SOLID #E5E3D3 alpha 1 (bukan gradient footer). Frame vertikal/garis tengah serta horizontal full bleed kini memakai token ornament khusus, tebal 1.066px; setting Ornament color tersedia per section. Theme Check bersih; [36/36 pemeriksaan scoped](validation/light-ornaments-browser.json) lulus untuk warna, full width, konfigurasi warna dan overflow di 320/749/1535px. Kedua section ditinjau visual.
-- Tanggal: 2026-10-27, Asia/Jakarta
-- Target: `3660:1365`, diterapkan langsung ke `sections/footer.liquid` dalam footer group.
-- Follow-up ornament `3660:1408`: stroke dekoratif khusus `#5B5148` (setting Ornament color), garis horizontal full bleed, frame vertikal top-to-bottom alpha fade hingga wordmark. Paint asli diperiksa lewat Figma Plugin API: stroke vertikal `#5B5148` alpha 1 ke `#C1AC99` alpha 0; photo fill hitam opacity 0.1 dengan stop CSS 39.015%–110.42%, blur CSS 17.589px dan mask transisi. Border global/UI tidak diubah. Validasi lanjutan [274/274](validation/footer-ornament-browser.json), termasuk warna/fade/overlay dan overflow; ditinjau visual di Chrome.
-- Status: implementasi/validasi lokal selesai; Theme Editor, pengiriman newsletter dan Lighthouse belum diuji. Arsip T06: [laporan sebelumnya](task-history/2026-10-27-04.md).
-
-Footer foundation diganti grid editorial gelap: thumbnail, menu bertingkat, sosial, foto studio/slider manual, copy furnitur, newsletter native dan wordmark. Pengaturan menu/payment lama dipertahankan. Schema menambah media/wordmark merchant, color scheme, copy, URL sosial, hingga enam blok foto dan satu blok newsletter yang dapat dihapus. Kebijakan berasal dari shop.policies; copyright, powered_by_link dan payment icons native tetap tersedia. URL sosial kosong tidak membuat akun/link palsu. Reference assets dapat dimatikan.
-
-Newsletter memakai form customer, contact[email], tag newsletter, label terkait, required/email/autocomplete, error terkait input dan pesan sukses. Tidak ada submit Ajax atau daftar email eksternal. Gallery hanya memiliki indikator untuk >=2 slide; no-JS menampilkan seluruh foto. Indikator mengikuti jumlah slide, mendukung keyboard serta block selection editor.
-
-Validasi: Shopify CLI 4.9.4 Theme Check `[]`, JS syntax/diff check bersih. **208/208** browser checks lokal di 320/749/1100/1535px: normal/empty/slides/no-JS/long/error/success. Email validity browser dan markup respons server disimulasikan; **tidak membuktikan signup backend**. [Bukti](validation/footer-editorial-browser.json). Desktop ditinjau visual.
-
-Deviasi: font picker Work Sans, kontras diperkuat, GET CONTACT/SEND menjadi label email/Subscribe, copy musik diganti furnitur, satu foto referensi tanpa lima indikator mati, wordmark ditampilkan utuh. Mobile turunan. Hak distribusi Figma masih terbuka; development-theme QA untuk newsletter nyata, editor, logo beragam rasio, kebijakan/payment dan Lighthouse diperlukan. Temuan audit T05 tidak berubah. Tidak ada commit/push/deploy/publish.
-
-Sumber resmi: [email consent](https://shopify.dev/docs/storefronts/themes/customer-engagement/email-consent), [form](https://shopify.dev/docs/api/liquid/tags/form), [shop](https://shopify.dev/docs/api/liquid/objects/shop).
----
+- ID laporan: P01 — product detail gallery.
+- Tanggal: 2026-10-28, Asia/Jakarta.
+- Target: Figma `C2rhn7BP2nXA0LyByRDn09`, node `3713:1522` (`image-left`).
+- Status: implementasi dan validasi lokal selesai; QA development theme/Theme Editor dan Lighthouse masih terbuka.
+- Hasil: satu gambar utama dengan thumbnail dua kolom, data media produk asli, Swiper lokal, sinkronisasi gambar varian, keyboard, fallback tanpa JS/library, dan cleanup saat section diganti.
+- [Laporan dan sumber Shopify](validation/product-detail-gallery.md); [bukti 131/131 browser checks lokal](validation/product-detail-gallery-browser.json).
+- [Laporan aktif sebelumnya](task-history/2026-10-28.md) diarsipkan tanpa menutup pemeriksaan footer yang belum dilakukan.
 
 ## Aturan pencatatan dan eksekusi
 

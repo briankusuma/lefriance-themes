@@ -1,0 +1,532 @@
+{
+  "scope": "Product detail gallery Figma 3713:1522",
+  "passed": 131,
+  "total": 131,
+  "results": [
+    {
+      "name": "normal 1200 initializes",
+      "passed": true
+    },
+    {
+      "name": "normal 1200 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "normal 1200 form and title retained",
+      "passed": true
+    },
+    {
+      "name": "normal 1200 no runtime errors",
+      "passed": true
+    },
+    {
+      "name": "normal 1200 one active media accessible",
+      "passed": true
+    },
+    {
+      "name": "normal 1200 main ratio 10:11",
+      "passed": true
+    },
+    {
+      "name": "normal 1200 details alongside gallery",
+      "passed": true
+    },
+    {
+      "name": "normal 1200 two thumbnail columns",
+      "passed": true
+    },
+    {
+      "name": "normal 1200 16px thumbnail gap",
+      "passed": true
+    },
+    {
+      "name": "normal 1200 thumbnail selects image",
+      "passed": true
+    },
+    {
+      "name": "normal 1200 keyboard End selects last",
+      "passed": true
+    },
+    {
+      "name": "normal 1200 keyboard Home selects first",
+      "passed": true
+    },
+    {
+      "name": "normal 1200 variant selects its media",
+      "passed": true
+    },
+    {
+      "name": "normal 1200 sold out state retained",
+      "passed": true
+    },
+    {
+      "name": "normal 1200 no active hidden controls",
+      "passed": true
+    },
+    {
+      "name": "normal 1200 disconnect cleans wrapper",
+      "passed": true
+    },
+    {
+      "name": "normal 1200 editor reinsert initializes once",
+      "passed": true
+    },
+    {
+      "name": "normal 390 initializes",
+      "passed": true
+    },
+    {
+      "name": "normal 390 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "normal 390 form and title retained",
+      "passed": true
+    },
+    {
+      "name": "normal 390 no runtime errors",
+      "passed": true
+    },
+    {
+      "name": "normal 390 one active media accessible",
+      "passed": true
+    },
+    {
+      "name": "normal 390 main ratio 10:11",
+      "passed": true
+    },
+    {
+      "name": "normal 390 details below gallery",
+      "passed": true
+    },
+    {
+      "name": "normal 390 two thumbnail columns",
+      "passed": true
+    },
+    {
+      "name": "normal 390 16px thumbnail gap",
+      "passed": true
+    },
+    {
+      "name": "normal 390 thumbnail selects image",
+      "passed": true
+    },
+    {
+      "name": "normal 390 keyboard End selects last",
+      "passed": true
+    },
+    {
+      "name": "normal 390 keyboard Home selects first",
+      "passed": true
+    },
+    {
+      "name": "normal 390 variant selects its media",
+      "passed": true
+    },
+    {
+      "name": "normal 390 sold out state retained",
+      "passed": true
+    },
+    {
+      "name": "normal 390 no active hidden controls",
+      "passed": true
+    },
+    {
+      "name": "normal 320 initializes",
+      "passed": true
+    },
+    {
+      "name": "normal 320 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "normal 320 form and title retained",
+      "passed": true
+    },
+    {
+      "name": "normal 320 no runtime errors",
+      "passed": true
+    },
+    {
+      "name": "normal 320 one active media accessible",
+      "passed": true
+    },
+    {
+      "name": "normal 320 main ratio 10:11",
+      "passed": true
+    },
+    {
+      "name": "normal 320 details below gallery",
+      "passed": true
+    },
+    {
+      "name": "normal 320 two thumbnail columns",
+      "passed": true
+    },
+    {
+      "name": "normal 320 16px thumbnail gap",
+      "passed": true
+    },
+    {
+      "name": "normal 320 thumbnail selects image",
+      "passed": true
+    },
+    {
+      "name": "normal 320 keyboard End selects last",
+      "passed": true
+    },
+    {
+      "name": "normal 320 keyboard Home selects first",
+      "passed": true
+    },
+    {
+      "name": "normal 320 variant selects its media",
+      "passed": true
+    },
+    {
+      "name": "normal 320 sold out state retained",
+      "passed": true
+    },
+    {
+      "name": "normal 320 no active hidden controls",
+      "passed": true
+    },
+    {
+      "name": "single 390 initializes",
+      "passed": true
+    },
+    {
+      "name": "single 390 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "single 390 form and title retained",
+      "passed": true
+    },
+    {
+      "name": "single 390 no runtime errors",
+      "passed": true
+    },
+    {
+      "name": "single 390 one active media accessible",
+      "passed": true
+    },
+    {
+      "name": "single 390 main ratio 10:11",
+      "passed": true
+    },
+    {
+      "name": "single 390 details below gallery",
+      "passed": true
+    },
+    {
+      "name": "empty 390 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "empty 390 form and title retained",
+      "passed": true
+    },
+    {
+      "name": "empty 390 no runtime errors",
+      "passed": true
+    },
+    {
+      "name": "empty 390 no empty gallery",
+      "passed": true
+    },
+    {
+      "name": "many 1200 initializes",
+      "passed": true
+    },
+    {
+      "name": "many 1200 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "many 1200 form and title retained",
+      "passed": true
+    },
+    {
+      "name": "many 1200 no runtime errors",
+      "passed": true
+    },
+    {
+      "name": "many 1200 one active media accessible",
+      "passed": true
+    },
+    {
+      "name": "many 1200 main ratio 10:11",
+      "passed": true
+    },
+    {
+      "name": "many 1200 details alongside gallery",
+      "passed": true
+    },
+    {
+      "name": "many 1200 two thumbnail columns",
+      "passed": true
+    },
+    {
+      "name": "many 1200 16px thumbnail gap",
+      "passed": true
+    },
+    {
+      "name": "many 1200 thumbnail selects image",
+      "passed": true
+    },
+    {
+      "name": "many 1200 keyboard End selects last",
+      "passed": true
+    },
+    {
+      "name": "many 1200 keyboard Home selects first",
+      "passed": true
+    },
+    {
+      "name": "many 1200 variant selects its media",
+      "passed": true
+    },
+    {
+      "name": "many 1200 sold out state retained",
+      "passed": true
+    },
+    {
+      "name": "many 1200 no active hidden controls",
+      "passed": true
+    },
+    {
+      "name": "rich 390 initializes",
+      "passed": true
+    },
+    {
+      "name": "rich 390 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "rich 390 form and title retained",
+      "passed": true
+    },
+    {
+      "name": "rich 390 no runtime errors",
+      "passed": true
+    },
+    {
+      "name": "rich 390 one active media accessible",
+      "passed": true
+    },
+    {
+      "name": "rich 390 main ratio 10:11",
+      "passed": true
+    },
+    {
+      "name": "rich 390 details below gallery",
+      "passed": true
+    },
+    {
+      "name": "rich 390 two thumbnail columns",
+      "passed": true
+    },
+    {
+      "name": "rich 390 16px thumbnail gap",
+      "passed": true
+    },
+    {
+      "name": "rich 390 thumbnail selects image",
+      "passed": true
+    },
+    {
+      "name": "rich 390 keyboard End selects last",
+      "passed": true
+    },
+    {
+      "name": "rich 390 keyboard Home selects first",
+      "passed": true
+    },
+    {
+      "name": "rich 390 variant selects its media",
+      "passed": true
+    },
+    {
+      "name": "rich 390 sold out state retained",
+      "passed": true
+    },
+    {
+      "name": "rich 390 no active hidden controls",
+      "passed": true
+    },
+    {
+      "name": "rich 390 native video retained",
+      "passed": true
+    },
+    {
+      "name": "rich 390 model media retained",
+      "passed": true
+    },
+    {
+      "name": "nojs 390 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "nojs 390 form and title retained",
+      "passed": true
+    },
+    {
+      "name": "nojs 390 no runtime errors",
+      "passed": true
+    },
+    {
+      "name": "nojs 390 fallback all media visible",
+      "passed": true
+    },
+    {
+      "name": "nojs 390 fallback anchors target real media",
+      "passed": true
+    },
+    {
+      "name": "reduced 390 initializes",
+      "passed": true
+    },
+    {
+      "name": "reduced 390 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "reduced 390 form and title retained",
+      "passed": true
+    },
+    {
+      "name": "reduced 390 no runtime errors",
+      "passed": true
+    },
+    {
+      "name": "reduced 390 one active media accessible",
+      "passed": true
+    },
+    {
+      "name": "reduced 390 main ratio 10:11",
+      "passed": true
+    },
+    {
+      "name": "reduced 390 details below gallery",
+      "passed": true
+    },
+    {
+      "name": "reduced 390 two thumbnail columns",
+      "passed": true
+    },
+    {
+      "name": "reduced 390 16px thumbnail gap",
+      "passed": true
+    },
+    {
+      "name": "reduced 390 thumbnail selects image",
+      "passed": true
+    },
+    {
+      "name": "reduced 390 keyboard End selects last",
+      "passed": true
+    },
+    {
+      "name": "reduced 390 keyboard Home selects first",
+      "passed": true
+    },
+    {
+      "name": "reduced 390 variant selects its media",
+      "passed": true
+    },
+    {
+      "name": "reduced 390 sold out state retained",
+      "passed": true
+    },
+    {
+      "name": "reduced 390 no active hidden controls",
+      "passed": true
+    },
+    {
+      "name": "reduced 390 reduced motion zero transition",
+      "passed": true
+    },
+    {
+      "name": "rtl 1200 initializes",
+      "passed": true
+    },
+    {
+      "name": "rtl 1200 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "rtl 1200 form and title retained",
+      "passed": true
+    },
+    {
+      "name": "rtl 1200 no runtime errors",
+      "passed": true
+    },
+    {
+      "name": "rtl 1200 one active media accessible",
+      "passed": true
+    },
+    {
+      "name": "rtl 1200 main ratio 10:11",
+      "passed": true
+    },
+    {
+      "name": "rtl 1200 details alongside gallery",
+      "passed": true
+    },
+    {
+      "name": "rtl 1200 two thumbnail columns",
+      "passed": true
+    },
+    {
+      "name": "rtl 1200 16px thumbnail gap",
+      "passed": true
+    },
+    {
+      "name": "rtl 1200 thumbnail selects image",
+      "passed": true
+    },
+    {
+      "name": "rtl 1200 keyboard End selects last",
+      "passed": true
+    },
+    {
+      "name": "rtl 1200 keyboard Home selects first",
+      "passed": true
+    },
+    {
+      "name": "rtl 1200 variant selects its media",
+      "passed": true
+    },
+    {
+      "name": "rtl 1200 sold out state retained",
+      "passed": true
+    },
+    {
+      "name": "rtl 1200 no active hidden controls",
+      "passed": true
+    },
+    {
+      "name": "failed 390 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "failed 390 form and title retained",
+      "passed": true
+    },
+    {
+      "name": "failed 390 no runtime errors",
+      "passed": true
+    },
+    {
+      "name": "failed 390 fallback all media visible",
+      "passed": true
+    },
+    {
+      "name": "failed 390 fallback anchors target real media",
+      "passed": true
+    }
+  ],
+  "limits": "Actual Liquid rendered locally; Shopify image/form/media services mocked. Reduced motion modeled using matchMedia. No live Theme Editor, purchase backend, physical touch, Lighthouse or screen reader test."
+}
