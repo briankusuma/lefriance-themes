@@ -515,11 +515,18 @@
     gap: 4rem;
   }
 }
-@media (max-width: 414px) {
+@media (max-width: 374px) {
   .product-grid {
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 400px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 749px) {
   .cart-panel--popover {
     inset-inline: var(--page-margin);
