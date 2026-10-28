@@ -164,6 +164,89 @@
 .product-card form {
   margin-top: 0.75rem;
 }
+.product-card--catalog {
+  container-type: inline-size;
+  text-align: start;
+}
+.product-card--catalog h3 {
+  margin-block: 1.066rem 0.8rem;
+  padding-block-end: 0.8rem;
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--text-card);
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+.product-card--catalog h3 a {
+  text-decoration: none;
+}
+.product-card--catalog .product-card__meta {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: "price action" "swatches action";
+  gap: 0.25rem 0.75rem;
+  align-items: end;
+}
+.product-card--catalog .price {
+  grid-area: price;
+  justify-content: start;
+  color: var(--color-muted);
+  font-size: var(--text-caption);
+  overflow-wrap: anywhere;
+}
+.product-card--catalog .product-card__swatches {
+  grid-area: swatches;
+  flex-wrap: wrap;
+  justify-content: start;
+  margin: 0;
+}
+.product-card--catalog .product-color-palette {
+  gap: 2px;
+}
+.product-card--catalog .product-swatch--attribute {
+  width: 17.056px;
+  height: 17.056px;
+  padding: 0;
+  border: 0;
+}
+.product-card__action {
+  grid-area: action;
+  max-width: 100%;
+}
+.product-card__action form {
+  margin: 0;
+}
+.product-card__action :is(button, a) {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 44px;
+  max-width: 100%;
+  padding: 0.666rem 1.199rem;
+  border: 0;
+  border-radius: var(--radius-button);
+  background: var(--color-button);
+  color: var(--color-button-label);
+  font: inherit;
+  font-size: var(--text-body);
+  line-height: 1.08;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.product-card__action :is(button, a):focus-visible {
+  outline: 2px solid var(--color-foreground);
+  outline-offset: 3px;
+}
+@container (max-width: 280px) {
+  .product-card--catalog .product-card__meta {
+    grid-template-areas: "price price" "swatches swatches" "action action";
+    row-gap: 0.5rem;
+  }
+  .product-card__action :is(button, a) {
+    width: 100%;
+  }
+}
 .product-card__swatches {
   display: flex;
   gap: 0.4rem;

@@ -1,5 +1,7 @@
 # Theme Store submission checklist
 
+2026-10-28 C01: kartu katalog mengikuti layout harga/swatch kiri dan aksi kanan. Theme Check bersih dan 85/85 browser fixture checks lokal; live cart/editor dan Lighthouse tetap terbuka. [Laporan](validation/catalog-card.md).
+
 2026-10-28 P01 controls: radio varian, quantity stepper dan blok editor terpisah diuji dengan 125/125 checks fixture lokal; Theme Check bersih. Native form association tetap benar setelah reorder/removal, no-JS fallback tersedia. Checkout bermerek tidak diwarnai ulang. Live Theme Editor, accelerated checkout asli dan Lighthouse tetap terbuka.
 
 2026-10-28 P01 product gallery: main product memakai main media + thumbnail dua kolom dari katalog dan Swiper lokal; gambar varian/form dipertahankan. Theme Check `[]`, 131/131 checks browser fixture lokal dan tinjauan visual desktop/mobile. [Bukti dan batasan](validation/product-detail-gallery.md). Live Theme Editor, rich-media services dan Lighthouse belum diuji; tidak menutup checklist submission global.

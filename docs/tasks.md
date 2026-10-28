@@ -1,12 +1,12 @@
-# Task aktif — product detail LE FRIANCE
+# Task aktif — kartu katalog LE FRIANCE
 
 ## Brief
 
 - Tanggal: 2026-10-28
 - Zona waktu: Asia/Jakarta
 - Status: in_progress
-- Task aktif: P01
-- Judul: Galeri detail produk dari Figma 3713:1522
+- Task aktif: C01
+- Judul: Kartu katalog dari Figma 3716:1529
 
 ### Tujuan
 
@@ -303,16 +303,21 @@ Kriteria selesai:
 - [x] Theme Check dan pemeriksaan syntax/diff bersih.
 - [ ] Verifikasi development Theme Editor, rich-media layanan asli dan Lighthouse.
 
+### C01 — Kartu katalog
+
+- Target: Figma `C2rhn7BP2nXA0LyByRDn09`, `3716:1529`.
+- Mapping: reusable product-card katalog → gambar/title native, price + swatch kiri, native quick add kanan; token global untuk warna/font/radius. Homepage editorial tetap memakai variasinya.
+- [x] Susunan Figma, real catalog data, responsive action dan state quick add diuji lokal.
+- [x] Theme Check bersih; 85/85 browser fixture checks.
+- [ ] Live Theme Editor/cart backend dan Lighthouse.
+
 ## Progres dan laporan — task aktif saja
 
-- ID laporan: P01 — product detail gallery dan kontrol produk.
-- Tanggal: 2026-10-28, Asia/Jakarta.
-- Target: Figma `C2rhn7BP2nXA0LyByRDn09`, node `3713:1522` (`image-left`).
-- Status: implementasi dan validasi lokal selesai; QA development theme/Theme Editor dan Lighthouse masih terbuka.
-- Hasil: satu gambar utama dengan thumbnail dua kolom, data media produk asli, Swiper lokal, sinkronisasi gambar varian, keyboard, fallback tanpa JS/library, dan cleanup saat section diganti.
-- [Laporan dan sumber Shopify](validation/product-detail-gallery.md); [bukti 131/131 browser checks lokal](validation/product-detail-gallery-browser.json).
-- Follow-up kontrol: thumbnail radius 10.66px; quantity −/+ lebar 140px tanpa border; native radio varian; blok Price, Variant picker, Quantity dan Tax note terpisah/reorderable/removable. Buy buttons memiliki checkbox accelerated checkout. Unbranded Buy it now memakai warna tombol tema, warna wallet bermerek tetap native. [125/125 checks lokal](validation/product-controls-browser.json); checkout/editor asli dan Lighthouse tetap terbuka.
-- [Laporan aktif sebelumnya](task-history/2026-10-28.md) diarsipkan tanpa menutup pemeriksaan footer yang belum dilakukan.
+- ID laporan: C01, 2026-10-28 Asia/Jakarta.
+- Status: implementasi dan verifikasi lokal selesai; QA toko masih terbuka.
+- File: snippets/product-card.liquid dan assets/commerce.css.
+- [Laporan](validation/catalog-card.md), [85/85 pemeriksaan lokal](validation/catalog-card-browser.json).
+- [Arsip laporan P01](task-history/2026-10-28-02.md); pemeriksaan yang belum dilakukan tetap terbuka.
 
 ## Aturan pencatatan dan eksekusi
 
