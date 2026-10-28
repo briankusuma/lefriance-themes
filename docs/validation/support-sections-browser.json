@@ -1,0 +1,1236 @@
+{
+  "scope": "Unstyled sections editorial pass",
+  "passed": 307,
+  "total": 307,
+  "results": [
+    {
+      "name": "320normal page no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "320normalmain-404 contained",
+      "passed": true
+    },
+    {
+      "name": "320normalmain-page contained",
+      "passed": true
+    },
+    {
+      "name": "320normalmain-list-collections contained",
+      "passed": true
+    },
+    {
+      "name": "320normalmain-blog contained",
+      "passed": true
+    },
+    {
+      "name": "320normalmain-article contained",
+      "passed": true
+    },
+    {
+      "name": "320normalmain-article inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "320normalmain-article touch targets",
+      "passed": true
+    },
+    {
+      "name": "320normalmain-search contained",
+      "passed": true
+    },
+    {
+      "name": "320normalmain-search inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "320normalmain-search touch targets",
+      "passed": true
+    },
+    {
+      "name": "320normalmain-contact contained",
+      "passed": true
+    },
+    {
+      "name": "320normalmain-contact inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "320normalmain-contact touch targets",
+      "passed": true
+    },
+    {
+      "name": "320normalmain-password contained",
+      "passed": true
+    },
+    {
+      "name": "320normalmain-password inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "320normalmain-password touch targets",
+      "passed": true
+    },
+    {
+      "name": "320normalmain-index contained",
+      "passed": true
+    },
+    {
+      "name": "320normalrich-text contained",
+      "passed": true
+    },
+    {
+      "name": "320normalnewsletter contained",
+      "passed": true
+    },
+    {
+      "name": "320normalnewsletter inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "320normalnewsletter touch targets",
+      "passed": true
+    },
+    {
+      "name": "320normalfeatured-collection contained",
+      "passed": true
+    },
+    {
+      "name": "320normalfeatured-collection inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "320normalfeatured-collection touch targets",
+      "passed": true
+    },
+    {
+      "name": "320normal search reuses product card",
+      "passed": true
+    },
+    {
+      "name": "320normal password remains native",
+      "passed": true
+    },
+    {
+      "name": "320normal 404 shopping action",
+      "passed": true
+    },
+    {
+      "name": "320empty page no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "320emptymain-404 contained",
+      "passed": true
+    },
+    {
+      "name": "320emptymain-page contained",
+      "passed": true
+    },
+    {
+      "name": "320emptymain-list-collections contained",
+      "passed": true
+    },
+    {
+      "name": "320emptymain-blog contained",
+      "passed": true
+    },
+    {
+      "name": "320emptymain-article contained",
+      "passed": true
+    },
+    {
+      "name": "320emptymain-article inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "320emptymain-article touch targets",
+      "passed": true
+    },
+    {
+      "name": "320emptymain-search contained",
+      "passed": true
+    },
+    {
+      "name": "320emptymain-search inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "320emptymain-search touch targets",
+      "passed": true
+    },
+    {
+      "name": "320emptymain-contact contained",
+      "passed": true
+    },
+    {
+      "name": "320emptymain-contact inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "320emptymain-contact touch targets",
+      "passed": true
+    },
+    {
+      "name": "320emptymain-password contained",
+      "passed": true
+    },
+    {
+      "name": "320emptymain-password inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "320emptymain-password touch targets",
+      "passed": true
+    },
+    {
+      "name": "320emptymain-index contained",
+      "passed": true
+    },
+    {
+      "name": "320emptyrich-text contained",
+      "passed": true
+    },
+    {
+      "name": "320emptynewsletter contained",
+      "passed": true
+    },
+    {
+      "name": "320emptynewsletter inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "320emptynewsletter touch targets",
+      "passed": true
+    },
+    {
+      "name": "320emptyfeatured-collection contained",
+      "passed": true
+    },
+    {
+      "name": "320 empty blog message",
+      "passed": true
+    },
+    {
+      "name": "320 empty collections message",
+      "passed": true
+    },
+    {
+      "name": "320empty password remains native",
+      "passed": true
+    },
+    {
+      "name": "320empty 404 shopping action",
+      "passed": true
+    },
+    {
+      "name": "320long page no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "320longmain-404 contained",
+      "passed": true
+    },
+    {
+      "name": "320longmain-page contained",
+      "passed": true
+    },
+    {
+      "name": "320longmain-list-collections contained",
+      "passed": true
+    },
+    {
+      "name": "320longmain-blog contained",
+      "passed": true
+    },
+    {
+      "name": "320longmain-article contained",
+      "passed": true
+    },
+    {
+      "name": "320longmain-article inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "320longmain-article touch targets",
+      "passed": true
+    },
+    {
+      "name": "320longmain-search contained",
+      "passed": true
+    },
+    {
+      "name": "320longmain-search inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "320longmain-search touch targets",
+      "passed": true
+    },
+    {
+      "name": "320longmain-contact contained",
+      "passed": true
+    },
+    {
+      "name": "320longmain-contact inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "320longmain-contact touch targets",
+      "passed": true
+    },
+    {
+      "name": "320longmain-password contained",
+      "passed": true
+    },
+    {
+      "name": "320longmain-password inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "320longmain-password touch targets",
+      "passed": true
+    },
+    {
+      "name": "320longmain-index contained",
+      "passed": true
+    },
+    {
+      "name": "320longrich-text contained",
+      "passed": true
+    },
+    {
+      "name": "320longnewsletter contained",
+      "passed": true
+    },
+    {
+      "name": "320longnewsletter inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "320longnewsletter touch targets",
+      "passed": true
+    },
+    {
+      "name": "320longfeatured-collection contained",
+      "passed": true
+    },
+    {
+      "name": "320longfeatured-collection inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "320longfeatured-collection touch targets",
+      "passed": true
+    },
+    {
+      "name": "320long search reuses product card",
+      "passed": true
+    },
+    {
+      "name": "320long password remains native",
+      "passed": true
+    },
+    {
+      "name": "320long 404 shopping action",
+      "passed": true
+    },
+    {
+      "name": "320error page no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "320errormain-404 contained",
+      "passed": true
+    },
+    {
+      "name": "320errormain-page contained",
+      "passed": true
+    },
+    {
+      "name": "320errormain-list-collections contained",
+      "passed": true
+    },
+    {
+      "name": "320errormain-blog contained",
+      "passed": true
+    },
+    {
+      "name": "320errormain-article contained",
+      "passed": true
+    },
+    {
+      "name": "320errormain-article inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "320errormain-article touch targets",
+      "passed": true
+    },
+    {
+      "name": "320errormain-search contained",
+      "passed": true
+    },
+    {
+      "name": "320errormain-search inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "320errormain-search touch targets",
+      "passed": true
+    },
+    {
+      "name": "320errormain-contact contained",
+      "passed": true
+    },
+    {
+      "name": "320errormain-contact inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "320errormain-contact touch targets",
+      "passed": true
+    },
+    {
+      "name": "320errormain-password contained",
+      "passed": true
+    },
+    {
+      "name": "320errormain-password inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "320errormain-password touch targets",
+      "passed": true
+    },
+    {
+      "name": "320errormain-index contained",
+      "passed": true
+    },
+    {
+      "name": "320errorrich-text contained",
+      "passed": true
+    },
+    {
+      "name": "320errornewsletter contained",
+      "passed": true
+    },
+    {
+      "name": "320errornewsletter inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "320errornewsletter touch targets",
+      "passed": true
+    },
+    {
+      "name": "320errorfeatured-collection contained",
+      "passed": true
+    },
+    {
+      "name": "320errorfeatured-collection inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "320errorfeatured-collection touch targets",
+      "passed": true
+    },
+    {
+      "name": "320error search reuses product card",
+      "passed": true
+    },
+    {
+      "name": "320error password remains native",
+      "passed": true
+    },
+    {
+      "name": "320error 404 shopping action",
+      "passed": true
+    },
+    {
+      "name": "native errors visible",
+      "passed": true
+    },
+    {
+      "name": "320success page no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "320successmain-404 contained",
+      "passed": true
+    },
+    {
+      "name": "320successmain-page contained",
+      "passed": true
+    },
+    {
+      "name": "320successmain-list-collections contained",
+      "passed": true
+    },
+    {
+      "name": "320successmain-blog contained",
+      "passed": true
+    },
+    {
+      "name": "320successmain-article contained",
+      "passed": true
+    },
+    {
+      "name": "320successmain-article inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "320successmain-article touch targets",
+      "passed": true
+    },
+    {
+      "name": "320successmain-search contained",
+      "passed": true
+    },
+    {
+      "name": "320successmain-search inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "320successmain-search touch targets",
+      "passed": true
+    },
+    {
+      "name": "320successmain-contact contained",
+      "passed": true
+    },
+    {
+      "name": "320successmain-contact inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "320successmain-contact touch targets",
+      "passed": true
+    },
+    {
+      "name": "320successmain-password contained",
+      "passed": true
+    },
+    {
+      "name": "320successmain-password inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "320successmain-password touch targets",
+      "passed": true
+    },
+    {
+      "name": "320successmain-index contained",
+      "passed": true
+    },
+    {
+      "name": "320successrich-text contained",
+      "passed": true
+    },
+    {
+      "name": "320successnewsletter contained",
+      "passed": true
+    },
+    {
+      "name": "320successnewsletter inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "320successnewsletter touch targets",
+      "passed": true
+    },
+    {
+      "name": "320successfeatured-collection contained",
+      "passed": true
+    },
+    {
+      "name": "320successfeatured-collection inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "320successfeatured-collection touch targets",
+      "passed": true
+    },
+    {
+      "name": "320success search reuses product card",
+      "passed": true
+    },
+    {
+      "name": "320success password remains native",
+      "passed": true
+    },
+    {
+      "name": "320success 404 shopping action",
+      "passed": true
+    },
+    {
+      "name": "native contact/newsletter success messages",
+      "passed": true
+    },
+    {
+      "name": "749normal page no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "749normalmain-404 contained",
+      "passed": true
+    },
+    {
+      "name": "749normalmain-page contained",
+      "passed": true
+    },
+    {
+      "name": "749normalmain-list-collections contained",
+      "passed": true
+    },
+    {
+      "name": "749normalmain-blog contained",
+      "passed": true
+    },
+    {
+      "name": "749normalmain-article contained",
+      "passed": true
+    },
+    {
+      "name": "749normalmain-article inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "749normalmain-article touch targets",
+      "passed": true
+    },
+    {
+      "name": "749normalmain-search contained",
+      "passed": true
+    },
+    {
+      "name": "749normalmain-search inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "749normalmain-search touch targets",
+      "passed": true
+    },
+    {
+      "name": "749normalmain-contact contained",
+      "passed": true
+    },
+    {
+      "name": "749normalmain-contact inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "749normalmain-contact touch targets",
+      "passed": true
+    },
+    {
+      "name": "749normalmain-password contained",
+      "passed": true
+    },
+    {
+      "name": "749normalmain-password inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "749normalmain-password touch targets",
+      "passed": true
+    },
+    {
+      "name": "749normalmain-index contained",
+      "passed": true
+    },
+    {
+      "name": "749normalrich-text contained",
+      "passed": true
+    },
+    {
+      "name": "749normalnewsletter contained",
+      "passed": true
+    },
+    {
+      "name": "749normalnewsletter inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "749normalnewsletter touch targets",
+      "passed": true
+    },
+    {
+      "name": "749normalfeatured-collection contained",
+      "passed": true
+    },
+    {
+      "name": "749normalfeatured-collection inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "749normalfeatured-collection touch targets",
+      "passed": true
+    },
+    {
+      "name": "749normal search reuses product card",
+      "passed": true
+    },
+    {
+      "name": "749normal password remains native",
+      "passed": true
+    },
+    {
+      "name": "749normal 404 shopping action",
+      "passed": true
+    },
+    {
+      "name": "749empty page no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "749emptymain-404 contained",
+      "passed": true
+    },
+    {
+      "name": "749emptymain-page contained",
+      "passed": true
+    },
+    {
+      "name": "749emptymain-list-collections contained",
+      "passed": true
+    },
+    {
+      "name": "749emptymain-blog contained",
+      "passed": true
+    },
+    {
+      "name": "749emptymain-article contained",
+      "passed": true
+    },
+    {
+      "name": "749emptymain-article inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "749emptymain-article touch targets",
+      "passed": true
+    },
+    {
+      "name": "749emptymain-search contained",
+      "passed": true
+    },
+    {
+      "name": "749emptymain-search inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "749emptymain-search touch targets",
+      "passed": true
+    },
+    {
+      "name": "749emptymain-contact contained",
+      "passed": true
+    },
+    {
+      "name": "749emptymain-contact inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "749emptymain-contact touch targets",
+      "passed": true
+    },
+    {
+      "name": "749emptymain-password contained",
+      "passed": true
+    },
+    {
+      "name": "749emptymain-password inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "749emptymain-password touch targets",
+      "passed": true
+    },
+    {
+      "name": "749emptymain-index contained",
+      "passed": true
+    },
+    {
+      "name": "749emptyrich-text contained",
+      "passed": true
+    },
+    {
+      "name": "749emptynewsletter contained",
+      "passed": true
+    },
+    {
+      "name": "749emptynewsletter inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "749emptynewsletter touch targets",
+      "passed": true
+    },
+    {
+      "name": "749emptyfeatured-collection contained",
+      "passed": true
+    },
+    {
+      "name": "749 empty blog message",
+      "passed": true
+    },
+    {
+      "name": "749 empty collections message",
+      "passed": true
+    },
+    {
+      "name": "749empty password remains native",
+      "passed": true
+    },
+    {
+      "name": "749empty 404 shopping action",
+      "passed": true
+    },
+    {
+      "name": "749long page no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "749longmain-404 contained",
+      "passed": true
+    },
+    {
+      "name": "749longmain-page contained",
+      "passed": true
+    },
+    {
+      "name": "749longmain-list-collections contained",
+      "passed": true
+    },
+    {
+      "name": "749longmain-blog contained",
+      "passed": true
+    },
+    {
+      "name": "749longmain-article contained",
+      "passed": true
+    },
+    {
+      "name": "749longmain-article inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "749longmain-article touch targets",
+      "passed": true
+    },
+    {
+      "name": "749longmain-search contained",
+      "passed": true
+    },
+    {
+      "name": "749longmain-search inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "749longmain-search touch targets",
+      "passed": true
+    },
+    {
+      "name": "749longmain-contact contained",
+      "passed": true
+    },
+    {
+      "name": "749longmain-contact inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "749longmain-contact touch targets",
+      "passed": true
+    },
+    {
+      "name": "749longmain-password contained",
+      "passed": true
+    },
+    {
+      "name": "749longmain-password inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "749longmain-password touch targets",
+      "passed": true
+    },
+    {
+      "name": "749longmain-index contained",
+      "passed": true
+    },
+    {
+      "name": "749longrich-text contained",
+      "passed": true
+    },
+    {
+      "name": "749longnewsletter contained",
+      "passed": true
+    },
+    {
+      "name": "749longnewsletter inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "749longnewsletter touch targets",
+      "passed": true
+    },
+    {
+      "name": "749longfeatured-collection contained",
+      "passed": true
+    },
+    {
+      "name": "749longfeatured-collection inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "749longfeatured-collection touch targets",
+      "passed": true
+    },
+    {
+      "name": "749long search reuses product card",
+      "passed": true
+    },
+    {
+      "name": "749long password remains native",
+      "passed": true
+    },
+    {
+      "name": "749long 404 shopping action",
+      "passed": true
+    },
+    {
+      "name": "1440normal page no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "1440normalmain-404 contained",
+      "passed": true
+    },
+    {
+      "name": "1440normalmain-page contained",
+      "passed": true
+    },
+    {
+      "name": "1440normalmain-list-collections contained",
+      "passed": true
+    },
+    {
+      "name": "1440normalmain-blog contained",
+      "passed": true
+    },
+    {
+      "name": "1440normalmain-article contained",
+      "passed": true
+    },
+    {
+      "name": "1440normalmain-article inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "1440normalmain-article touch targets",
+      "passed": true
+    },
+    {
+      "name": "1440normalmain-search contained",
+      "passed": true
+    },
+    {
+      "name": "1440normalmain-search inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "1440normalmain-search touch targets",
+      "passed": true
+    },
+    {
+      "name": "1440normalmain-contact contained",
+      "passed": true
+    },
+    {
+      "name": "1440normalmain-contact inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "1440normalmain-contact touch targets",
+      "passed": true
+    },
+    {
+      "name": "1440normalmain-password contained",
+      "passed": true
+    },
+    {
+      "name": "1440normalmain-password inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "1440normalmain-password touch targets",
+      "passed": true
+    },
+    {
+      "name": "1440normalmain-index contained",
+      "passed": true
+    },
+    {
+      "name": "1440normalrich-text contained",
+      "passed": true
+    },
+    {
+      "name": "1440normalnewsletter contained",
+      "passed": true
+    },
+    {
+      "name": "1440normalnewsletter inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "1440normalnewsletter touch targets",
+      "passed": true
+    },
+    {
+      "name": "1440normalfeatured-collection contained",
+      "passed": true
+    },
+    {
+      "name": "1440normalfeatured-collection inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "1440normalfeatured-collection touch targets",
+      "passed": true
+    },
+    {
+      "name": "1440normal search reuses product card",
+      "passed": true
+    },
+    {
+      "name": "1440normal password remains native",
+      "passed": true
+    },
+    {
+      "name": "1440normal 404 shopping action",
+      "passed": true
+    },
+    {
+      "name": "1440empty page no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "1440emptymain-404 contained",
+      "passed": true
+    },
+    {
+      "name": "1440emptymain-page contained",
+      "passed": true
+    },
+    {
+      "name": "1440emptymain-list-collections contained",
+      "passed": true
+    },
+    {
+      "name": "1440emptymain-blog contained",
+      "passed": true
+    },
+    {
+      "name": "1440emptymain-article contained",
+      "passed": true
+    },
+    {
+      "name": "1440emptymain-article inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "1440emptymain-article touch targets",
+      "passed": true
+    },
+    {
+      "name": "1440emptymain-search contained",
+      "passed": true
+    },
+    {
+      "name": "1440emptymain-search inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "1440emptymain-search touch targets",
+      "passed": true
+    },
+    {
+      "name": "1440emptymain-contact contained",
+      "passed": true
+    },
+    {
+      "name": "1440emptymain-contact inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "1440emptymain-contact touch targets",
+      "passed": true
+    },
+    {
+      "name": "1440emptymain-password contained",
+      "passed": true
+    },
+    {
+      "name": "1440emptymain-password inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "1440emptymain-password touch targets",
+      "passed": true
+    },
+    {
+      "name": "1440emptymain-index contained",
+      "passed": true
+    },
+    {
+      "name": "1440emptyrich-text contained",
+      "passed": true
+    },
+    {
+      "name": "1440emptynewsletter contained",
+      "passed": true
+    },
+    {
+      "name": "1440emptynewsletter inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "1440emptynewsletter touch targets",
+      "passed": true
+    },
+    {
+      "name": "1440emptyfeatured-collection contained",
+      "passed": true
+    },
+    {
+      "name": "1440 empty blog message",
+      "passed": true
+    },
+    {
+      "name": "1440 empty collections message",
+      "passed": true
+    },
+    {
+      "name": "1440empty password remains native",
+      "passed": true
+    },
+    {
+      "name": "1440empty 404 shopping action",
+      "passed": true
+    },
+    {
+      "name": "1440long page no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "1440longmain-404 contained",
+      "passed": true
+    },
+    {
+      "name": "1440longmain-page contained",
+      "passed": true
+    },
+    {
+      "name": "1440longmain-list-collections contained",
+      "passed": true
+    },
+    {
+      "name": "1440longmain-blog contained",
+      "passed": true
+    },
+    {
+      "name": "1440longmain-article contained",
+      "passed": true
+    },
+    {
+      "name": "1440longmain-article inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "1440longmain-article touch targets",
+      "passed": true
+    },
+    {
+      "name": "1440longmain-search contained",
+      "passed": true
+    },
+    {
+      "name": "1440longmain-search inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "1440longmain-search touch targets",
+      "passed": true
+    },
+    {
+      "name": "1440longmain-contact contained",
+      "passed": true
+    },
+    {
+      "name": "1440longmain-contact inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "1440longmain-contact touch targets",
+      "passed": true
+    },
+    {
+      "name": "1440longmain-password contained",
+      "passed": true
+    },
+    {
+      "name": "1440longmain-password inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "1440longmain-password touch targets",
+      "passed": true
+    },
+    {
+      "name": "1440longmain-index contained",
+      "passed": true
+    },
+    {
+      "name": "1440longrich-text contained",
+      "passed": true
+    },
+    {
+      "name": "1440longnewsletter contained",
+      "passed": true
+    },
+    {
+      "name": "1440longnewsletter inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "1440longnewsletter touch targets",
+      "passed": true
+    },
+    {
+      "name": "1440longfeatured-collection contained",
+      "passed": true
+    },
+    {
+      "name": "1440longfeatured-collection inputs labeled",
+      "passed": true
+    },
+    {
+      "name": "1440longfeatured-collection touch targets",
+      "passed": true
+    },
+    {
+      "name": "1440long search reuses product card",
+      "passed": true
+    },
+    {
+      "name": "1440long password remains native",
+      "passed": true
+    },
+    {
+      "name": "1440long 404 shopping action",
+      "passed": true
+    }
+  ],
+  "limits": "Twelve actual Liquid sections rendered locally; Shopify forms/pagination/image services modeled. No live Theme Editor, backend form submission, screen reader or Lighthouse test."
+}

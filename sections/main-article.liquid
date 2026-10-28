@@ -1,10 +1,11 @@
-{% comment %}Skeleton baseline migrated to JSON sections in T00. Full page features are a later milestone.{% endcomment %}
- <div class="page-shell">
+{{ 'section-foundation.css' | asset_url | stylesheet_tag }}
+<section class="support-section support-section--article section-shell color-{{ section.settings.color_scheme }}">
+  <div class="container section-content">
   {% if article.image %}
-    {{ article.image | image_url: width: 1000 | image_tag }}
+    {{ article.image | image_url: width: 1600 | image_tag: widths: '480, 800, 1200, 1600', sizes: '(min-width: 990px) 70vw, 90vw', alt: article.image.alt, class: 'support-article__image', loading: 'eager' }}
   {% endif %}
 
-  <h1>{{ article.title }}</h1>
+  <h1>{{ article.title | escape }}</h1>
 
   {% assign date = article.published_at | time_tag: format: 'date' %}
   <p>{{ 'blog.article_metadata_html' | t: date: date, author: article.author }}</p>
@@ -37,27 +38,35 @@
 
       <div>
         <label for="author-{{ section.id }}">{{ 'blog.comment_form_name' | t }}</label>
-        <input type="text" name="comment[author]" id="author-{{ section.id }}" value="{{ form.author }}" required>
+        <input type="text" name="comment[author]" id="author-{{ section.id }}" value="{{ form.author | escape }}" autocomplete="name" required>
       </div>
 
       <div>
         <label for="email-{{ section.id }}">{{ 'blog.comment_form_email' | t }}</label>
-        <input type="email" name="comment[email]" id="email-{{ section.id }}" value="{{ form.email }}" required>
+        <input type="email" name="comment[email]" id="email-{{ section.id }}" value="{{ form.email | escape }}" autocomplete="email" required>
       </div>
 
       <div>
         <label for="body-{{ section.id }}">{{ 'blog.comment_form_body' | t }}</label>
-        <textarea name="comment[body]" id="body-{{ section.id }}" required>{{ form.body }}</textarea>
+        <textarea name="comment[body]" id="body-{{ section.id }}" required>{{ form.body | escape }}</textarea>
       </div>
 
       <input type="submit" value="{{ 'blog.comment_form_submit' | t }}">
     {% endform %}
   {% endif %}
-</div>
+  </div>
+</section>
 
 {% schema %}
 {
   "name": "Main article",
-  "settings": []
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-light"
+    }
+  ]
 }
 {% endschema %}

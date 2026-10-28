@@ -1,4 +1,5 @@
-<section class="section-shell color-{{ section.settings.color_scheme }}"><div class="{% if section.settings.width == 'container' %}container{% else %}section-content--full{% endif %} section-content"><h2>{{ section.settings.heading | escape }}</h2><div class="rte">{{ section.settings.body }}</div>{% if section.settings.button_link != blank and section.settings.button_label != blank %}<a class="button" href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }}</a>{% endif %}</div></section>
+{{ 'section-foundation.css' | asset_url | stylesheet_tag }}
+<section class="support-section support-section--rich-text section-shell color-{{ section.settings.color_scheme }}"><div class="{% if section.settings.width == 'container' %}container{% else %}section-content--full{% endif %} section-content"><h2>{{ section.settings.heading | escape }}</h2><div class="rte">{{ section.settings.body }}</div>{% if section.settings.button_link != blank and section.settings.button_label != blank %}<a class="button" href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }}</a>{% endif %}</div></section>
 
 {% schema %}
 {

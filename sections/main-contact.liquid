@@ -1,4 +1,6 @@
-<div class="page-shell">
+{{ 'section-foundation.css' | asset_url | stylesheet_tag }}
+<section class="support-section support-section--contact section-shell color-{{ section.settings.color_scheme }}">
+  <div class="container section-content">
   <h1>{{ page.title | escape }}</h1>
   <div class="rte">{{ page.content }}</div>
   {% assign form_id = 'Contact-' | append: section.id %}
@@ -13,11 +15,19 @@
     <textarea id="ContactBody-{{ section.id }}" name="contact[body]" required>{{ form.body | escape }}</textarea>
     <button type="submit">{{ 'contact.send' | t }}</button>
   {% endform %}
-</div>
+  </div>
+</section>
 
 {% schema %}
 {
   "name": "Contact form",
-  "settings": []
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-light"
+    }
+  ]
 }
 {% endschema %}

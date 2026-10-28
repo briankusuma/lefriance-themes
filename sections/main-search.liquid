@@ -1,5 +1,6 @@
-{% comment %}Skeleton baseline migrated to JSON sections in T00. Full page features are a later milestone.{% endcomment %}
- <div class="page-shell">
+{{ 'section-foundation.css' | asset_url | stylesheet_tag }}
+<section class="support-section support-section--search section-shell color-{{ section.settings.color_scheme }}">
+  <div class="container section-content">
   <h1>{{ 'search.title' | t }}</h1>
 
   <form action="{{ routes.search_url }}" method="get" role="search">
@@ -15,29 +16,34 @@
     <button type="submit">{{ 'search.submit' | t }}</button>
   </form>
 
+  {% assign escaped_terms = search.terms | escape %}
   {% if search.performed %}
     {% if search.results_count == 0 %}
-      <p>{{ 'search.no_results_html' | t: terms: search.terms }}</p>
+      <p>{{ 'search.no_results_html' | t: terms: escaped_terms }}</p>
     {% else %}
-      <p>{{ 'search.results_for_html' | t: terms: search.terms, count: search.results_count }}</p>
+      <p>{{ 'search.results_for_html' | t: terms: escaped_terms, count: search.results_count }}</p>
 
       <div class="search-results">
         {% paginate search.results by 20 %}
           {% # Search result items may be an article, a page, or a product. %}
           {% for result in search.results %}
             <div class="search-result">
+              {% if result.object_type == 'product' %}
+                {% render 'product-card', card_product: result, instance_id: section.id %}
+              {% else %}
               {% assign featured_image = result.featured_image | default: result.image %}
               {% if featured_image %}
                 {% render 'image', class: 'search-result__image', image: featured_image, url: result.url, width: 400 %}
               {% endif %}
               <div class="search-result__content">
                 <p>
-                  {{ result.title | link_to: result.url }}
+                  <a href="{{ result.url }}">{{ result.title | escape }}</a>
                   {% if result.price %}
                     {{ result.price | money_with_currency }}
                   {% endif %}
                 </p>
               </div>
+              {% endif %}
             </div>
           {% endfor %}
 
@@ -46,11 +52,19 @@
       </div>
     {% endif %}
   {% endif %}
-</div>
+  </div>
+</section>
 
 {% schema %}
 {
   "name": "Main search",
-  "settings": []
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-light"
+    }
+  ]
 }
 {% endschema %}

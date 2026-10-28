@@ -1,19 +1,28 @@
-{% comment %}Skeleton baseline migrated to JSON sections in T00. Full page features are a later milestone.{% endcomment %}
- <div class="page-shell">
+{{ 'section-foundation.css' | asset_url | stylesheet_tag }}
+<section class="support-section support-section--404 section-shell color-{{ section.settings.color_scheme }}">
+  <div class="container section-content">
   <h1>{{ '404.title' | t }}</h1>
 
   <p>
     {{ '404.not_found' | t }}
   </p>
 
-  <a href="{{ routes.all_products_collection_url }}">
+  <a class="button" href="{{ routes.all_products_collection_url }}">
     {{ '404.back_to_shopping' | t }}
   </a>
-</div>
+  </div>
+</section>
 
 {% schema %}
 {
   "name": "Main 404",
-  "settings": []
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-light"
+    }
+  ]
 }
 {% endschema %}

@@ -1,0 +1,80 @@
+{
+  "scope": "Collection intro 3717:1596",
+  "passed": 18,
+  "total": 18,
+  "results": [
+    {
+      "name": "390 no overflow",
+      "passed": true
+    },
+    {
+      "name": "390 custom title",
+      "passed": true
+    },
+    {
+      "name": "390 collection title fallback",
+      "passed": true
+    },
+    {
+      "name": "390 collection description fallback",
+      "passed": true
+    },
+    {
+      "name": "390 no empty description",
+      "passed": true
+    },
+    {
+      "name": "390 long copy contained",
+      "passed": true
+    },
+    {
+      "name": "390 dark scheme",
+      "passed": true
+    },
+    {
+      "name": "390 description max width",
+      "passed": true
+    },
+    {
+      "name": "390 padding radius gap",
+      "passed": true
+    },
+    {
+      "name": "1440 no overflow",
+      "passed": true
+    },
+    {
+      "name": "1440 custom title",
+      "passed": true
+    },
+    {
+      "name": "1440 collection title fallback",
+      "passed": true
+    },
+    {
+      "name": "1440 collection description fallback",
+      "passed": true
+    },
+    {
+      "name": "1440 no empty description",
+      "passed": true
+    },
+    {
+      "name": "1440 long copy contained",
+      "passed": true
+    },
+    {
+      "name": "1440 dark scheme",
+      "passed": true
+    },
+    {
+      "name": "1440 description max width",
+      "passed": true
+    },
+    {
+      "name": "1440 padding radius gap",
+      "passed": true
+    }
+  ],
+  "limits": "Actual header Liquid local fixture; collection data modeled. No live Theme Editor or Lighthouse."
+}

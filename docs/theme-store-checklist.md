@@ -1,5 +1,9 @@
 # Theme Store submission checklist
 
+2026-10-28 S01: 25 section diaudit, 12 baseline mendapat styling scoped; 13 lainnya dilewati. Theme Check bersih; 307/307 pemeriksaan fixture lokal pada 320/749/1440px, schema dan asset references diverifikasi. Live Theme Editor, backend form, screen reader dan Lighthouse tetap terbuka. [Audit dan batas bukti](validation/support-sections.md).
+
+2026-10-28 collection intro: editable heading/richtext/color scheme dengan fallback data koleksi; Theme Check bersih, 18/18 fixture checks lokal (390/1440px). Live editor/Lighthouse tetap terbuka; [laporan](validation/catalog-card.md).
+
 2026-10-28 C01: kartu katalog mengikuti layout harga/swatch kiri dan aksi kanan. Theme Check bersih dan 85/85 browser fixture checks lokal; live cart/editor dan Lighthouse tetap terbuka. [Laporan](validation/catalog-card.md).
 
 2026-10-28 P01 controls: radio varian, quantity stepper dan blok editor terpisah diuji dengan 125/125 checks fixture lokal; Theme Check bersih. Native form association tetap benar setelah reorder/removal, no-JS fallback tersedia. Checkout bermerek tidak diwarnai ulang. Live Theme Editor, accelerated checkout asli dan Lighthouse tetap terbuka.

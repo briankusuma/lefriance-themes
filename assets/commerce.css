@@ -103,6 +103,34 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--grid-gap);
 }
+.collection-intro {
+  display: grid;
+  gap: 1.5rem;
+  margin-block-end: 3.75rem;
+  padding: 1.5rem;
+  border-radius: 10px;
+  overflow-wrap: anywhere;
+}
+.collection-intro h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4.5vw, 4rem);
+  line-height: 1.1;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+}
+.collection-intro__description {
+  max-width: 750px;
+  min-width: 0;
+  font-size: clamp(1rem, 1.7vw, 1.5rem);
+  line-height: 1.35;
+  letter-spacing: -0.03em;
+}
+.collection-intro__description > :first-child {
+  margin-block-start: 0;
+}
+.collection-intro__description > :last-child {
+  margin-block-end: 0;
+}
 .product-card {
   min-width: 0;
   text-align: var(--card-alignment);

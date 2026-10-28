@@ -11,3 +11,11 @@ Deviasi: teks typo ADD TO CHART diperbaiki menjadi Add to cart dari locale (dita
 Validasi: Theme Check CLI 4.9.4 `[]`; git diff check bersih. [85/85 browser fixture checks](catalog-card-browser.json) pada lebar kartu 342/150px: containment, penempatan aksi, harga, native quick add ID, choose-options/sold-out, setting off, long title, missing image, swatch, ukuran target dan variasi editorial. Kartu desktop ditinjau visual di Chrome. Form output Shopify dimodelkan; backend cart, Theme Editor, screen reader dan Lighthouse belum diuji. Tidak ada publish/push atau perubahan katalog.
 
 Sumber Shopify: [product](https://shopify.dev/docs/api/liquid/objects/product), [form](https://shopify.dev/docs/api/liquid/tags/form).
+
+## Heading koleksi — follow-up 3717:1596
+
+[Screenshot/design context](https://www.figma.com/design/C2rhn7BP2nXA0LyByRDn09/Speedtest?node-id=3717-1596) diperiksa: panel #171513, putih, padding/gap 24px, radius 10px, heading 64px, body 24px/max 750px dan jarak 60px ke grid. Main collection memakai schema Heading (text), Description (richtext), Heading color scheme (default existing scheme-footer). Teks kosong memakai collection.title/description; tidak menyalin deskripsi satu kursi menjadi default semua koleksi. H1 semantik tetap satu, konten title di-escape, richtext dirender native.
+
+CSS memakai clamp untuk mobile yang tidak ada pada Figma; font picker tema dipertahankan. Grid, pagination, image koleksi dan kartu sebelumnya tetap tersedia. Tidak ada aset atau JS baru. [18/18 pemeriksaan lokal](collection-intro-browser.json) pada 390/1440px memverifikasi override/fallback, description kosong, long text, overflow, scheme, spacing dan lebar teks. Desktop ditinjau visual; Theme Check `[]`, diff bersih. Live Theme Editor, screen reader dan Lighthouse belum diuji.
+
+Sumber: [collection](https://shopify.dev/docs/api/liquid/objects/collection), [input settings](https://shopify.dev/docs/storefronts/themes/architecture/settings/input-settings).

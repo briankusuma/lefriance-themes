@@ -1,9 +1,18 @@
-{% comment %}Skeleton baseline migrated to JSON sections in T00. Full page features are a later milestone.{% endcomment %}
-<div class="page-shell"><h1>{{ shop.name | escape }}</h1></div>
+{{ 'section-foundation.css' | asset_url | stylesheet_tag }}
+<section class="support-section support-section--index section-shell color-{{ section.settings.color_scheme }}">
+  <div class="container section-content"><h1>{{ shop.name | escape }}</h1>  </div>
+</section>
 
 {% schema %}
 {
   "name": "Home page",
-  "settings": []
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-light"
+    }
+  ]
 }
 {% endschema %}

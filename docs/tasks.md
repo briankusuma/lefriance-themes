@@ -1,12 +1,12 @@
-# Task aktif — kartu katalog LE FRIANCE
+# Task aktif — styling section dasar LE FRIANCE
 
 ## Brief
 
 - Tanggal: 2026-10-28
 - Zona waktu: Asia/Jakarta
 - Status: in_progress
-- Task aktif: C01
-- Judul: Kartu katalog dari Figma 3716:1529
+- Task aktif: S01
+- Judul: Styling section baseline mengikuti homepage
 
 ### Tujuan
 
@@ -311,13 +311,22 @@ Kriteria selesai:
 - [x] Theme Check bersih; 85/85 browser fixture checks.
 - [ ] Live Theme Editor/cart backend dan Lighthouse.
 
+### S01 — Styling section dasar
+
+- Scope: audit 25 Liquid sections; 12 baseline ditata mengikuti token dan komposisi homepage. 13 section yang sudah memiliki styling/berfungsi sebagai raw Liquid dilewati.
+- Referensi: homepage Figma `3374:242`, design-tokens.md dan komponen tema aktual. Halaman tambahan/mobile merupakan turunan, tidak ada frame khususnya pada referensi.
+- Mapping: font/color/container/radius homepage → token global; story cards → grid blog/koleksi/search; form editorial → contact/newsletter/password/comment; existing product-card → hasil pencarian produk.
+- [x] Styling scoped, tanpa mengganti stylesheet homepage atau stack.
+- [x] Color scheme pada 12 section, markup native/form/pagination dipertahankan.
+- [x] Theme Check bersih; 307/307 checks fixture lokal pada 320/749/1440px.
+- [ ] Live Theme Editor, backend form dan Lighthouse.
+
 ## Progres dan laporan — task aktif saja
 
-- ID laporan: C01, 2026-10-28 Asia/Jakarta.
-- Status: implementasi dan verifikasi lokal selesai; QA toko masih terbuka.
-- File: snippets/product-card.liquid dan assets/commerce.css.
-- [Laporan](validation/catalog-card.md), [85/85 pemeriksaan lokal](validation/catalog-card-browser.json).
-- [Arsip laporan P01](task-history/2026-10-28-02.md); pemeriksaan yang belum dilakukan tetap terbuka.
+- ID laporan: S01, 2026-10-28 Asia/Jakarta.
+- Status: implementasi dan validasi lokal selesai; QA toko masih terbuka.
+- [Audit lengkap 25 section dan hasil](validation/support-sections.md); [307/307 checks lokal](validation/support-sections-browser.json).
+- [Arsip laporan C01](task-history/2026-10-28-03.md); pemeriksaan yang terbuka tidak ditutup oleh task ini.
 
 ## Aturan pencatatan dan eksekusi
 

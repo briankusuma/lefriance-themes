@@ -1,4 +1,5 @@
-<section class="section-shell color-{{ section.settings.color_scheme }}"><div class="container section-content">
+{{ 'section-foundation.css' | asset_url | stylesheet_tag }}
+<section class="support-section support-section--newsletter section-shell color-{{ section.settings.color_scheme }}"><div class="container section-content">
   <h2>{{ section.settings.heading | escape }}</h2><div class="rte">{{ section.settings.body }}</div>
   {% assign newsletter_id = 'Newsletter-' | append: section.id %}
   {% form 'customer', id: newsletter_id %}

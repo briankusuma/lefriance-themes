@@ -8,6 +8,10 @@
  * ------------------------------------------------------------
  */
 {
+  "support_sections": {
+    "no_articles": "No stories have been published yet.",
+    "no_collections": "No collections are available yet."
+  },
   "product_gallery": {
     "decrease": "Decrease quantity",
     "increase": "Increase quantity",
