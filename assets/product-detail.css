@@ -28,6 +28,7 @@
   background: var(--color-card);
   color: var(--color-card-text);
   scroll-margin-block-start: 2rem;
+  border-radius: 10.66px;
 }
 
 .product-detail .product-detail__media > :is(img, video, iframe, model-viewer) {
