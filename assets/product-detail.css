@@ -31,6 +31,10 @@
   border-radius: 10.66px;
 }
 
+.product-detail__media .price{
+  font-size: 32px;
+}
+
 .product-detail .product-detail__media > :is(img, video, iframe, model-viewer) {
   display: block;
   width: 100%;
