@@ -1,39 +1,8 @@
 # Theme Store submission checklist
 
-2026-10-28 S01: 25 section diaudit, 12 baseline mendapat styling scoped; 13 lainnya dilewati. Theme Check bersih; 307/307 pemeriksaan fixture lokal pada 320/749/1440px, schema dan asset references diverifikasi. Live Theme Editor, backend form, screen reader dan Lighthouse tetap terbuka. [Audit dan batas bukti](validation/support-sections.md).
-
-2026-10-28 collection intro: editable heading/richtext/color scheme dengan fallback data koleksi; Theme Check bersih, 18/18 fixture checks lokal (390/1440px). Live editor/Lighthouse tetap terbuka; [laporan](validation/catalog-card.md).
-
-2026-10-28 C01: kartu katalog mengikuti layout harga/swatch kiri dan aksi kanan. Theme Check bersih dan 85/85 browser fixture checks lokal; live cart/editor dan Lighthouse tetap terbuka. [Laporan](validation/catalog-card.md).
-
-2026-10-28 P01 controls: radio varian, quantity stepper dan blok editor terpisah diuji dengan 125/125 checks fixture lokal; Theme Check bersih. Native form association tetap benar setelah reorder/removal, no-JS fallback tersedia. Checkout bermerek tidak diwarnai ulang. Live Theme Editor, accelerated checkout asli dan Lighthouse tetap terbuka.
-
-2026-10-28 P01 product gallery: main product memakai main media + thumbnail dua kolom dari katalog dan Swiper lokal; gambar varian/form dipertahankan. Theme Check `[]`, 131/131 checks browser fixture lokal dan tinjauan visual desktop/mobile. [Bukti dan batasan](validation/product-detail-gallery.md). Live Theme Editor, rich-media services dan Lighthouse belum diuji; tidak menutup checklist submission global.
-
-2026-10-28 Product Color connection: metafield kategori standar dipakai sebagai fallback palette kartu dan blok Colors di main product; native variant swatches/URL dipertahankan. Namespace/access diperiksa read-only di Admin, Theme Check bersih, 42/42 browser fixture checks lokal. Live preview/editor dan Lighthouse tetap terbuka; lihat `catalog-swatches/README.md`.
-
-2026-10-27 motion integration: empat slider memakai Swiper 14.3.0 subset lokal, Lenis 1.3.27 opsional. Theme Check bersih; 101/101 integrasi + 30/30 state checks lokal. Lisensi/integrity dan payload gzip dicatat di `vendor/motion-libraries.md`. Reduced-motion preference disimulasikan pada fixture; live editor, browser/perangkat lain dan Lighthouse masih terbuka. Tidak menutup persyaratan submission global.
-
 Source: https://shopify.dev/docs/storefronts/themes/store/requirements
-Last full verification recorded: **2026-10-01** (existing record, not re-certified).
-Scoped review: **2026-10-26** — see [review notes](shopify-review.md).
-Scoped follow-up **2026-10-27**: T03 inspected against current requirements; local behavior and limits are recorded in [material stories validation](validation/material-story-notes.md). Global submission checks remain open.
-T04 scoped check: Theme Check bersih, 210/210 browser checks lokal; schema/block editing dan Lighthouse belum diuji di development theme. Lihat [laporan task](tasks.md).
-T05 scoped check: Theme Check bersih dan 325/325 browser checks lokal, termasuk tab, keyboard, harga, badge dan swatch. Koleksi asli, Theme Editor dan Lighthouse masih perlu diverifikasi; global submission checks tetap terbuka.
-T05 follow-up 2026-10-27: koleksi Homepage diperiksa read-only (satu produk/empat gambar/satu Default Title sold out); thumbnail kartu lulus 39/39 checks lokal dan Theme Check bersih. Preview perubahan pada development theme, Theme Editor dan Lighthouse masih terbuka.
-T05 revisi berikutnya: thumbnail diganti empat kartu besar dan kartu varian asli; 16/16 galeri + 22/22 varian fixture checks lokal lulus, Theme Check bersih. Bukti dan batas uji pada tasks.md; checklist global tetap terbuka.
-T05 koreksi final: target empat produk berbeda dikonfirmasi pada katalog All products; implementasi varian/galeri diganti satu kartu per produk dan pilihan product_list berurutan. Theme Check bersih, 19/19 checks lokal; editor/live preview dan Lighthouse masih terbuka. Laporan sebelumnya adalah riwayat.
-T06 scoped check: Theme Check bersih, 132/132 browser checks lokal untuk Journal; editor asli, screen reader dan Lighthouse belum diuji. Bukti pada laporan task aktif.
-T06 slider follow-up 2026-10-27: enam blok, dua gambar AI ilustratif, slider centered; Theme Check bersih, 240/240 regresi + 10/10 resize/RTL/manual scroll lokal. Sumber/prompt gambar dan bukti di tasks.md. Live editor, screen reader dan Lighthouse tetap terbuka.
-T06 active-card/loop correction: teks cokelat mengikuti slide aktif dan tetangga berupa gambar; loop dua arah dengan salinan inert. Theme Check bersih; 167/167 pemeriksaan lokal di `validation/journal-active-loop-browser.json`. Live editor, screen reader dan Lighthouse tetap terbuka.
-T07/T08 scoped check: footer/editorial + newsletter native, Theme Check bersih dan 208/208 browser checks lokal. Submit backend, Theme Editor dan Lighthouse belum diuji; tidak menutup checklist submission global.
-Footer visual follow-up 2026-10-27: proporsi newsletter, placeholder dan crop khusus wordmark referensi; Theme Check bersih, 322/322 browser checks lokal. Bukti `validation/footer-refinement-browser.json`; signup backend, editor dan Lighthouse tetap terbuka.
-Footer copy follow-up: detail bawah dimatikan sesuai pilihan merchant, tetap tersedia lewat setting; placeholder independen dan GET CONTACT / Your Email / SEND. Theme Check bersih, 426/426 checks lokal (`validation/footer-copy-browser.json`); bukan sertifikasi submission.
-Re-verify at the start of every milestone and again right before submission. Update the date above when you do.
 
-Treat applicable requirements as submission gates. Mark an item only after verifying it using the appropriate method: repository inspection for file structure, source and license review for assets, a development store for storefront and Theme Editor behavior, and browser measurements for accessibility and performance. Record evidence in the active task report or a linked verification report. Code presence alone does not prove working behavior.
-
-This checklist is a local working reference. Documentation maintenance does not update the verification date above; change that date only after reviewing the current official requirements.
+Working checklist, not a release certificate. Read current official requirements at each milestone. Preserve unchecked items until verified; do not load the entire checklist for small edits. Historical checked entries retain their original scope and must be reverified before submission. Current QA limits are in [project brief](project-brief.md).
 
 ## 1. Exclusivity
 
@@ -318,12 +287,8 @@ This checklist is a local working reference. Documentation maintenance does not 
 
 ## Repository and tooling gates
 
-- [x] `shopify theme check` clean for relevant findings — adapted T00 foundation, Shopify CLI 4.9.4, zero findings (2026-10-26); evidence docs/validation/header-hero-cart-theme-check.json for latest T01/T02/G01 changes; rerun after changes.
+- [ ] Run `shopify theme check` for the current changes; historical local checks do not certify the current tree.
 - [ ] No disabled Theme Check rules without justification
 - [ ] Third-party assets and licenses recorded in `docs/third-party-licenses.md`
-- [ ] Figma deviations recorded in `docs/figma-deviations.md`
+- [ ] Intentional design deviations recorded in `docs/project-brief.md`
 - [ ] Final re-read of the official requirements page completed on: ____-__-__
-
-## Follow-up T01/T02/G01 evidence, 2026-10-26
-
-[Global settings report](global-settings.md) records the scoped changes and outstanding checks. Local fixture verifies responsive header/hero, cart controller and basic product variants; it does not check a live Shopify service. Cart/features/accessibility/performance submission items stay unchecked until their store/browser criteria are satisfied.

@@ -4,7 +4,7 @@ Original Shopify theme for furniture merchants, targeting the Shopify Theme Stor
 
 ## Start here — any AI assistant
 
-These instructions travel with the repository. They do not depend on previous chats, a specific AI product, plugins, or absolute machine paths. Read `docs/project-brief.md`, inspect the current repository, then read the relevant task and standards. Treat historical notes as dated observations, not live state.
+These instructions travel with the repository. They do not depend on previous chats, a specific AI product, plugins, or absolute machine paths. Read `docs/project-brief.md`, inspect the files relevant to the request, then read the active task and applicable standards. Do not read the whole docs folder or full reports for every change. Treat historical notes as dated observations, not live state.
 
 The user's current request determines the work. `docs/tasks.md` records scope and progress; its IDs, dates, and status fields are organizational aids, not a permission ritual. Do not rewrite these instructions, reinitialize an existing theme, change the stack, or regenerate documentation merely because a different AI is working on the project.
 
@@ -16,7 +16,7 @@ The user's current request determines the work. `docs/tasks.md` records scope an
 - Do not require the user to edit Markdown, select an ID, change `draft` to `ready`, or repeat a date when their current request already gives a clear scope. Update bookkeeping yourself. Ask only for missing material decisions, not routine implementation choices.
 - If a linked frame covers multiple tasks (for example header + hero or newsletter + footer), use the named section when supplied. Otherwise inspect the frame and explain the coherent scope before proceeding; clarify only if it would materially change the work. A homepage link is not automatic authorization to implement the whole backlog.
 - Reuse a matching task. For a new target, append a scoped task with the inspected Figma reference, Shopify mapping, and verifiable acceptance criteria. Report this mapping before coding; approval is unnecessary unless a material choice remains unresolved.
-- Preserve and archive a previous task's report before switching targets. Keep unfinished work open. A new explicit change to a completed section is a follow-up, not a reason to refuse because its old status is `done`.
+- Keep only the active task and a concise result in docs/tasks.md. Carry unfinished work forward; use Git for history. Do not persist task-history archives, validation dumps, screenshots or duplicate reports in the repository unless requested. A change to a completed section is a follow-up, not a reason to refuse.
 - Implement only the requested target and necessary prerequisites. Existing code comes first; initialize Skeleton only when no foundation exists and the requested implementation needs it. Do not complete unrelated prerequisites or redesign other sections silently.
 - A generic execution command runs one active task, then stops. Do not advance through the backlog automatically. An explicit multi-section request may cover those sections together.
 - Documentation-only work needs documentation checks. Apply code, editor, accessibility, and performance checks according to actual scope. Never report an unperformed check as passed.

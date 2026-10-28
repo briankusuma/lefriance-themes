@@ -1,6 +1,6 @@
 # Motion libraries
 
-User-requested migration on 2026-10-27: Swiper 14.3.0 for Journal, Featured collections, Material story and footer gallery; Lenis 1.3.27 for wheel scrolling. Both use the MIT license. No third-party request is made at storefront runtime: scripts and styles are theme assets, loaded once through `theme-motion.js`. Native product media grid and header menus are not carousels and remain native.
+User-requested migration on 2026-10-27: Swiper 14.3.0 for Journal, Featured collections, Material story and footer gallery; Lenis 1.3.27 for wheel scrolling. Both use the MIT license. No third-party request is made at storefront runtime: scripts and styles are theme assets, loaded once through `theme-motion.js`. Product detail gallery also uses the shared Swiper helper; header menus remain native.
 
 Swiper contains only Core, Navigation, A11y and EffectFade. The readable bundle is about 177KB before transfer compression; its CSS is about 6.5KB. Lenis JS is about 36KB. Total gzip estimate is approximately 46KB for both libraries and CSS, excluding component adapters. Swiper is loaded only when a nonempty carousel initializes. Lenis is not loaded when disabled, in Theme Editor, or when reduced motion is requested. This is a transfer estimate, not a Lighthouse score.
 

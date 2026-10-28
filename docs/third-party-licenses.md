@@ -1,10 +1,10 @@
 # Third-Party Assets and Licenses
 
-2026-10-28 catalog Color: five 96px PNG swatches under `docs/catalog-swatches/` rendered from Figma swatch SVG groups `3374:343`, `3374:346`, `3374:349` (same palette reused by `3374:353`) at the user's request and uploaded to Shopify Files. Exact source fills and product assignments are recorded in [catalog notes](catalog-swatches/README.md). Internal reference copies only; existing Figma distribution-rights status remains unchanged. No raster AI generation, storefront library, or runtime theme asset was added for this task.
+2026-10-28 catalog Color: five 96px PNG swatches rendered from Figma swatch SVG groups `3374:343`, `3374:346`, `3374:349` (same palette reused by `3374:353`) at the user's request and uploaded to Shopify Files. Palette sources are retained in [design tokens](design-tokens.md). Local upload duplicates were removed during documentation cleanup; Shopify Files supplies storefront data. existing Figma distribution-rights status remains unchanged. No raster AI generation, storefront library, or runtime theme asset was added for this task.
 
 2026-10-27 motion migration: Swiper 14.3.0 and Lenis 1.3.27 added at the user's explicit request, both MIT. Distributed locally in theme assets with full license notices in JS; license copies under `docs/licenses/`. Swiper is a readable Core/Navigation/A11y/EffectFade build; Lenis uses its readable official distribution. Version, npm integrity, asset hashes, build details and performance rationale: [motion libraries](vendor/motion-libraries.md), [manifest](vendor/motion-libraries.json). No runtime CDN or new paid service.
 
-2026-10-27 Journal follow-up: `assets/journal-finishing-generated.jpg` and `assets/journal-timber-generated.jpg` were created using the built-in imagegen tool at the user's request; illustrative AI-generated workshop scenes, not sourced third-party photography or merchant process documentation. Optimized JPEGs are 960 x 960px. Prompts and generation method: [journal image prompts](validation/journal-image-prompts.md). No external library or font introduced; original Figma images retain their separately recorded rights status.
+2026-10-27 Journal follow-up: `assets/journal-finishing-generated.jpg` and `assets/journal-timber-generated.jpg` were created using the built-in imagegen tool at the user's request; illustrative AI-generated workshop scenes, not sourced third-party photography or merchant process documentation. Optimized JPEGs are 960 x 960px. Prompts and generation method: the generation prompts below. No external library or font introduced; original Figma images retain their separately recorded rights status.
 
 Record every third-party asset (fonts, icons, external libraries, images) used in the theme, along with source and license details.
 
@@ -47,3 +47,16 @@ T03 pada 2026-10-27 menggunakan aset asli node `3374:270`: `assets/material-stor
 | Ikon dan indikator Figma | Kontrol di tiap section | Belum dikonfirmasi | Inventaris detail saat section dikerjakan |
 
 T00 hanya membaca desain; follow-up T01/T02 kemudian menggunakan aset yang dicatat pada tabel pertama. Keberadaan file di Figma bukan izin distribusi. Font custom tidak dibundel; font fondasi dipilih dari Shopify font picker. Ikon cart/account yang sudah ada tetap dari Skeleton dan tercakup lisensi sumber.
+
+## Generated image provenance
+
+
+Generated with the built-in imagegen tool at the user's request. Illustrative workshop scenes, not photographs of the merchant's actual workers or process. Originals retained outside the repository; project copies optimized to 960 x 960px JPEG, quality 82. Existing Figma photographs unchanged. Merchant image/article selections override bundled images.
+
+## assets/journal-finishing-generated.jpg
+
+Prompt: Use case: photorealistic-natural. Generate ONE square editorial photograph for a premium furniture studio journal. A craftsperson in understated dark olive workwear hand-finishing a sculptural walnut chair with a linen cloth on a timber workbench in a quiet beige plaster workshop. Warm natural side daylight, muted walnut brown, oatmeal, cream, olive palette, soft organic shadows, subtle film grain, restrained magazine photography, candid realistic textures, mid-distance composition, no logos, no typography, no watermark. Consistent with tasteful Scandinavian furniture craft photography. Save a usable image asset for the website.
+
+## assets/journal-timber-generated.jpg
+
+Prompt: Use case photorealistic-natural. ONE square premium furniture journal editorial photograph. Close mid-distance candid scene of a craftsperson in dark brown workwear examining oak and walnut timber grain samples on a wooden workbench in a quiet beige plaster furniture workshop. Shavings, a small plane and neatly arranged wood pieces, warm natural side daylight, soft shadows, muted walnut brown oatmeal cream and subdued olive palette, tactile realistic textures, subtle film grain, restrained Scandinavian furniture magazine art direction. No logos, words, lettering or watermark. Match the warm quiet workshop photography of the preceding generated chair finishing photograph, but a distinct composition about choosing timber.

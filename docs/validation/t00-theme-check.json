@@ -1,7 +1,0 @@
-{
-  "date": "2026-10-26",
-  "cli_version": "4.9.4",
-  "command": "shopify theme check --output json",
-  "exit_code": 0,
-  "results": []
-}

@@ -4,7 +4,7 @@ Read this before writing code. `AGENTS.md` has the precedence and workflow; this
 Tooling is provider-independent: no AI plugin is required. Preserve the existing Shopify architecture when changing assistants or moving this folder. Do not rewrite working code or these standards merely to fit a different agent.
 
 Official source for requirements: https://shopify.dev/docs/storefronts/themes/store/requirements
-Scoped documentation review: 2026-10-26. See [Shopify review](shopify-review.md) for scope and limits; this is not a submission approval.
+This is a working standard, not a submission approval. Verify the current official requirements at the start of a milestone.
 
 ## 1. Liquid
 

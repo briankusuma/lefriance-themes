@@ -1,6 +1,6 @@
 # Design tokens — T00
 
-Sumber: [homepage Figma](https://www.figma.com/design/C2rhn7BP2nXA0LyByRDn09/Speedtest?node-id=3374-242), dibaca pada 2026-10-26 melalui design context dan screenshot. `get_variable_defs` mengembalikan `{}`: tidak ada named variables yang dapat dikonfirmasi. Nilai berikut adalah properti node, bukan token resmi bernama dari desainer. Ringkasan mesin: [figma-foundation.json](figma-foundation.json).
+Sumber: [homepage Figma](https://www.figma.com/design/C2rhn7BP2nXA0LyByRDn09/Speedtest?node-id=3374-242), dibaca pada 2026-10-26 melalui design context dan screenshot. `get_variable_defs` mengembalikan `{}`: tidak ada named variables yang dapat dikonfirmasi. Nilai berikut adalah properti node, bukan token resmi bernama dari desainer.
 
 ## Warna yang diamati
 
@@ -58,3 +58,17 @@ Nilai rem mengasumsikan basis browser 16 px, tanpa mengunci preferensi ukuran fo
 ## Responsive dan state
 
 Tidak ada frame mobile atau breakpoint yang terverifikasi dari target ini. 375, 768, dan 1535 px adalah ukuran QA proyek, bukan breakpoint Figma. Komposisi mobile, focus, error, empty, dan state lain diturunkan ketika section dikerjakan dan dicatat sebagai **not in Figma**. Fondasi tidak menyalin posisi absolut atau tinggi frame menjadi layout produksi.
+
+## Product Color data
+
+Use the standard category metafield `shopify.color-pattern`; prefer its image over solid color. Native variant swatches take priority. Do not treat descriptive category colors as selectable variants. These names describe Figma colors, not verified commercial variant names.
+
+| Palette | Figma fills |
+| --- | --- |
+| Cream / Tan | #EAE4D3 / #BC8157 |
+| Charcoal / Walnut | #473F3D / #97765E |
+| Gray / Charcoal | #C2C2C2 / #393939 |
+| Olive / Tan | #526142 / #BC8157 |
+| Caramel / Brown | #D4A887 / #A36940 |
+
+Source groups: 3374:343, 3374:346, 3374:349, 3374:353; file C2rhn7BP2nXA0LyByRDn09. Five 96px transparent two-tone swatches were uploaded to Shopify Files in 2026-10-28. Runtime reads merchant data; local duplicate PNGs are unnecessary. Recheck actual catalog assignments in Admin when needed.

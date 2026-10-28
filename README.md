@@ -19,6 +19,6 @@ Mulai dari [AGENTS.md](AGENTS.md), [panduan docs](docs/README.md), dan [task akt
 npm exec --yes --package=@shopify/cli@4.9.4 -- shopify theme check --output json
 ```
 
-Lihat [setup development](docs/development.md), [token desain](docs/design-tokens.md), dan [mapping section](docs/section-mapping.md). CLI 3.78.1 lokal terlalu lama untuk sebagian sintaks upstream. CLI global tidak diubah.
+Lihat [setup development](docs/development.md), [token desain](docs/design-tokens.md), dan [peta section dalam brief](docs/project-brief.md). CLI 3.78.1 lokal terlalu lama untuk sebagian sintaks upstream. CLI global tidak diubah.
 
 Preview memerlukan akses development store dan mengunggah development theme. Belum ada preview, upload, publikasi, atau pengujian Theme Editor. Halaman product/cart/collection/search masih baseline, bukan implementasi lengkap atau bukti siap Theme Store.
