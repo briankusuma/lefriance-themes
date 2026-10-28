@@ -16,12 +16,12 @@
           "type": "title",
           "settings": {}
         },
-        "description": {
-          "type": "description",
-          "settings": {}
-        },
         "price": {
           "type": "price",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
           "settings": {}
         },
         "colors": {
@@ -49,8 +49,8 @@
       },
       "block_order": [
         "title",
-        "description",
         "price",
+        "description",
         "colors",
         "variants",
         "quantity",
