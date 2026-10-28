@@ -12,19 +12,30 @@
       <ul class="cart-lines" role="list">
         {% for item in cart.items %}
           <li class="cart-line">
-            {% if item.image %}<a href="{{ item.url }}">{{ item.image | image_url: width: 240 | image_tag: widths: '120, 240', sizes: '100px', loading: 'lazy', alt: item.image.alt }}</a>{% endif %}
+            {% if item.image %}
+              {% assign cart_image_alt = item.image.alt | default: item.product.title %}
+              <a class="cart-line__media" href="{{ item.url }}">{{ item.image | image_url: width: 240 | image_tag: widths: '120, 240', sizes: '120px', loading: 'lazy', alt: cart_image_alt }}</a>
+            {% else %}
+              <span class="cart-line__media" aria-hidden="true">{{ 'product-1' | placeholder_svg_tag }}</span>
+            {% endif %}
             <div class="cart-line__info">
               {% if settings.cart_show_vendor %}<small>{{ item.product.vendor | escape }}</small>{% endif %}
-              <a href="{{ item.url }}">{{ item.product.title | escape }}</a>
+              <a class="cart-line__title" href="{{ item.url }}">{{ item.product.title | escape }}</a>
               {% unless item.product.has_only_default_variant %}{% for option in item.options_with_values %}<small>{{ option.name | escape }}: {{ option.value | escape }}</small>{% endfor %}{% endunless %}
               {% for property in item.properties %}{% assign first_character = property.first | slice: 0 %}{% if property.last != blank and first_character != '_' %}<small>{{ property.first | escape }}: {% assign property_prefix = property.last | slice: 0, 8 %}{% if property.last contains '/uploads/' and property_prefix == 'https://' %}<a href="{{ property.last | escape }}">{{ property.last | split: '/' | last | escape }}</a>{% else %}{{ property.last | escape }}{% endif %}</small>{% endif %}{% endfor %}
               {% if item.selling_plan_allocation %}<small>{{ item.selling_plan_allocation.selling_plan.name | escape }}</small>{% endif %}
-              <span>{% if item.original_line_price != item.final_line_price %}<s>{{ item.original_line_price | money }}</s>{% endif %} {{ item.final_line_price | money }}</span>
+              <span class="cart-line__price">{% if item.original_line_price != item.final_line_price %}<s>{{ item.original_line_price | money }}</s>{% endif %} {{ item.final_line_price | money }}</span>
               {% if item.unit_price_measurement %}<small>{{ item.unit_price | unit_price_with_measurement: item.unit_price_measurement }}</small>{% endif %}
               {% for allocation in item.line_level_discount_allocations %}<small>{{ allocation.discount_application.title | escape }} (−{{ allocation.amount | money }})</small>{% endfor %}
-              <label for="Quantity-{{ instance_id }}-{{ forloop.index }}">{{ 'commerce.quantity' | t }}</label>
-              <input id="Quantity-{{ instance_id }}-{{ forloop.index }}" name="updates[]" type="number" min="0" step="1" value="{{ item.quantity }}" data-cart-quantity data-key="{{ item.key | escape }}">
-              <a href="{{ item.url_to_remove }}" data-cart-remove data-key="{{ item.key | escape }}" aria-label="{{ 'commerce.remove_item' | t: title: item.product.title | escape }}">{{ 'cart.remove' | t }}</a>
+              <div class="cart-line__controls">
+                <label class="visually-hidden" for="Quantity-{{ instance_id }}-{{ forloop.index }}">{{ 'commerce.quantity' | t }}: {{ item.product.title | escape }}</label>
+                <div class="cart-quantity">
+                  <button type="button" data-cart-quantity-step="-1" data-key="{{ item.key | escape }}" aria-label="{{ 'product_gallery.decrease' | t | escape }}: {{ item.product.title | escape }}" hidden>−</button>
+                  <input id="Quantity-{{ instance_id }}-{{ forloop.index }}" name="updates[]" type="number" inputmode="numeric" min="0" step="{{ item.variant.quantity_rule.increment | default: 1 }}"{% if item.variant.quantity_rule.max %} max="{{ item.variant.quantity_rule.max }}"{% endif %} data-minimum="{{ item.variant.quantity_rule.min | default: 1 }}" value="{{ item.quantity }}" data-cart-quantity data-key="{{ item.key | escape }}">
+                  <button type="button" data-cart-quantity-step="1" data-key="{{ item.key | escape }}" aria-label="{{ 'product_gallery.increase' | t | escape }}: {{ item.product.title | escape }}" hidden>+</button>
+                </div>
+                <a class="cart-line__remove" href="{{ item.url_to_remove }}" data-cart-remove data-key="{{ item.key | escape }}" aria-label="{{ 'commerce.remove_item' | t: title: item.product.title | escape }}">{{ 'cart.remove' | t }}</a>
+              </div>
             </div>
           </li>
         {% endfor %}

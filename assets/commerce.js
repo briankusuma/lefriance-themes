@@ -6,6 +6,19 @@
   let refreshVersion = 0;
   let opener;
   const panel = () => document.getElementById('CartPanel');
+  function enhanceQuantities() {
+    document.querySelectorAll('.cart-quantity').forEach(control => {
+      const input = control.querySelector('[data-cart-quantity]');
+      if (!input) return;
+      control.classList.add('is-enhanced');
+      control.querySelectorAll('[data-cart-quantity-step]').forEach(button => {
+        button.hidden = false;
+        button.disabled = busy || (button.dataset.cartQuantityStep === '-1'
+          ? Number(input.value) <= 0
+          : !!input.max && Number(input.value) >= Number(input.max));
+      });
+    });
+  }
   const endpoint = (key) => `${document.body.dataset[key]}.js`;
   const sectionIds = () => [...new Set([...document.querySelectorAll('[data-cart-section]')].map(el => el.dataset.cartSection))].slice(0, 5);
   const showError = (message, form) => {
@@ -29,6 +42,7 @@
       current.dataset.itemCount = next.dataset.itemCount;
       refreshed++;
     }
+    enhanceQuantities();
     return refreshed;
   }
   async function refresh(sections) {
@@ -79,6 +93,7 @@
     const enabled = controls.filter(el => !el.disabled);
     enabled.forEach(el => { el.disabled = true; });
     form?.setAttribute('aria-busy', 'true');
+    let restoreFocus;
     try {
       const ids = sectionIds();
       let options;
@@ -94,11 +109,24 @@
       if (route === 'cartAddUrl') openPanel(trigger);
       else if (trigger && !trigger.isConnected) {
         const scope = panel()?.open ? panel() : document;
-        const replacement = [...scope.querySelectorAll('[data-cart-quantity]')].find(input => input.dataset.key === trigger.dataset.key);
-        (replacement || scope.querySelector('[data-cart-content] a, [data-cart-content] input'))?.focus();
+        const selector = trigger.matches('[data-cart-quantity-step]') ? '[data-cart-quantity-step]' : '[data-cart-quantity]';
+        const replacement = [...scope.querySelectorAll(selector)].find(input => input.dataset.key === trigger.dataset.key && input.dataset.cartQuantityStep === trigger.dataset.cartQuantityStep);
+        restoreFocus = replacement || scope.querySelector('[data-cart-content] a, [data-cart-content] input');
       }
-    } catch (error) { showError(error.message || document.body.dataset.cartErrorMessage, form); }
-    finally { enabled.forEach(el => { if (el.isConnected) el.disabled = false; }); form?.removeAttribute('aria-busy'); busy = false; }
+    } catch (error) {
+      if (trigger?.isConnected) restoreFocus = trigger;
+      if (trigger?.matches('[data-cart-quantity-step]')) {
+        const input = trigger.closest('.cart-quantity')?.querySelector('input');
+        if (input) input.value = input.defaultValue;
+      }
+      showError(error.message || document.body.dataset.cartErrorMessage, form);
+    }
+    finally {
+      enabled.forEach(el => { if (el.isConnected) el.disabled = false; });
+      form?.removeAttribute('aria-busy'); busy = false; enhanceQuantities();
+      const focusTarget = restoreFocus?.disabled ? restoreFocus.closest('.cart-quantity')?.querySelector('input') : restoreFocus;
+      focusTarget?.focus();
+    }
   }
   function changeLine(key, quantity, form, trigger) {
     const note = form?.elements.note;
@@ -107,6 +135,21 @@
     } else mutate('cartChangeUrl', { id: key, quantity }, form, trigger);
   }
   document.addEventListener('click', event => {
+    const stepper = event.target.closest('[data-cart-quantity-step]');
+    if (stepper) {
+      if (busy) return;
+      const input = stepper.closest('.cart-quantity')?.querySelector('[data-cart-quantity]');
+      if (!input) return;
+      const minimum = Number(input.dataset.minimum) || 1;
+      const step = Number(input.step) || 1;
+      const current = Number.isFinite(input.valueAsNumber) ? input.valueAsNumber : Number(input.defaultValue);
+      let next = current + Number(stepper.dataset.cartQuantityStep) * step;
+      if (next > 0 && next < minimum) next = stepper.dataset.cartQuantityStep === '-1' ? 0 : minimum;
+      if (input.max) next = Math.min(next, Number(input.max));
+      input.value = Math.max(0, next);
+      if (input.checkValidity()) changeLine(input.dataset.key, Number(input.value), input.form, stepper);
+      return;
+    }
     const open = event.target.closest('[data-cart-open]');
     if (open && document.body.dataset.cartType !== 'page' && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey && event.button === 0 && openPanel(open)) {
       event.preventDefault(); if (!busy) refresh().catch(error => showError(error.message));
@@ -135,4 +178,6 @@
     document.querySelectorAll('[data-cart-open]').forEach(link => link.setAttribute('aria-expanded', 'false'));
     if (opener?.isConnected) opener.focus();
   });
+  document.addEventListener('shopify:section:load', enhanceQuantities);
+  enhanceQuantities();
 })();

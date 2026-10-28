@@ -9,7 +9,7 @@
 >
   <div class="cart-panel__heading">
     <h2 id="CartPanelTitle">{{ 'cart.title' | t }}</h2>
-    <button type="button" data-cart-close aria-label="{{ 'commerce.close_cart' | t }}">{{ 'commerce.close' | t }}</button>
+    <button type="button" data-cart-close aria-label="{{ 'commerce.close_cart' | t }}"><span aria-hidden="true">×</span></button>
   </div>
   <p class="commerce-error" data-cart-error role="alert" hidden></p>
   {% render 'cart-content', instance_id: section.id %}
