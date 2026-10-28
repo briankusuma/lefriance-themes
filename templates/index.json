@@ -14,7 +14,7 @@
       "settings": {
         "use_reference_images": true,
         "enable_intro": true,
-        "intro_once": true,
+        "intro_once": false,
         "image_zoom": 106,
         "heading": "LE FRIANCE",
         "use_reference_wordmark": true,
@@ -29,7 +29,7 @@
         "mobile_height": 680,
         "allow_header_overlay": true,
         "overlay_color": "#000000",
-        "overlay_opacity": 60
+        "overlay_opacity": 0
       }
     },
     "materials": {

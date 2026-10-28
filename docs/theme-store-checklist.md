@@ -287,7 +287,7 @@ Working checklist, not a release certificate. Read current official requirements
 
 ## Repository and tooling gates
 
-- [x] Theme Check CLI 4.9.4: zero findings after hero intro Liquid/schema/locale changes, 2026-10-28. Rerun after code changes.
+- [x] Theme Check CLI 4.9.4: zero findings after hero final-frame layout, timing and repeat-default changes, 2026-10-28. Rerun after code changes.
 - [ ] No disabled Theme Check rules without justification
 - [ ] Third-party assets and licenses recorded in `docs/third-party-licenses.md`
 - [ ] Intentional design deviations recorded in `docs/project-brief.md`

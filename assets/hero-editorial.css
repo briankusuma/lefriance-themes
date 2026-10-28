@@ -158,7 +158,7 @@
   display: block;
 }
 .editorial-hero[data-intro-enabled="true"] {
-  min-height: min(var(--hero-height), 100svh);
+  min-height: max(40rem, var(--hero-fluid-height));
 }
 .editorial-hero__title-frame {
   position: relative;
@@ -266,7 +266,7 @@ html:has(hero-intro.is-intro-running) {
   inset: 0;
   color: var(--hero-intro-text);
   clip-path: inset(0 100% 0 0);
-  animation: hero-copy-fill 750ms linear forwards;
+  animation: hero-copy-fill 1800ms linear forwards;
 }
 @keyframes hero-copy-fill {
   to {
@@ -284,5 +284,53 @@ html:has(hero-intro.is-intro-running) {
 @media (prefers-reduced-motion: reduce) {
   .editorial-hero__intro-copy {
     animation: none;
+  }
+}
+
+/* Final frame 3722:1658 keeps the room and wordmark in the same proportions. */
+@media (min-width: 750px) {
+  .editorial-hero[data-intro-enabled="true"] .editorial-hero__content {
+    width: 93.334%;
+    padding-top: 4.3055vw;
+  }
+  .editorial-hero[data-intro-enabled="true"] .editorial-hero__wordmark {
+    max-height: none;
+  }
+  .editorial-hero[data-intro-enabled="true"] .editorial-hero__detail {
+    width: 12.5vw;
+    margin-left: 0.315vw;
+    padding-block: 3.127vw;
+  }
+  .editorial-hero[data-intro-enabled="true"] .editorial-hero__card {
+    width: 9.5833vw;
+    height: 9.5833vw;
+    padding: 0.417vw;
+  }
+  .editorial-hero[data-intro-enabled="true"] .editorial-hero__card img,
+  .editorial-hero[data-intro-enabled="true"] .editorial-hero__card svg {
+    height: 6.5972vw;
+  }
+  .editorial-hero[data-intro-enabled="true"] .editorial-hero__card-blur {
+    top: 2.5vw;
+    right: 0.417vw;
+    bottom: 0.417vw;
+    left: 0.417vw;
+    -webkit-backdrop-filter: blur(17.589px);
+    backdrop-filter: blur(17.589px);
+  }
+  .editorial-hero[data-intro-enabled="true"] .editorial-hero__body {
+    margin-top: 1.1075vw;
+    font-size: max(12px, 0.97225vw);
+    letter-spacing: -0.02917vw;
+  }
+}
+@media (min-width: 750px) {
+  body:has(
+      main > .shopify-section:first-child hero-intro[data-intro-enabled="true"]
+    )
+    .site-header[data-home="true"][data-overlay-enabled="true"]
+    .site-header__inner {
+    width: 93.334%;
+    max-width: none;
   }
 }

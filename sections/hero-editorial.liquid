@@ -18,6 +18,7 @@
 {% if intro_enabled %}<script src="{{ 'hero-intro.js' | asset_url }}" defer></script>{% endif %}
 {% style %}
   #shopify-section-{{ section.id }} {
+    --hero-fluid-height: {{ section.settings.desktop_height | times: 100.0 | divided_by: 1535 }}vw;
     --hero-height: {{ section.settings.desktop_height }}px;
     --hero-mobile-height: {{ section.settings.mobile_height }}px;
     --hero-image-zoom: {{ section.settings.image_zoom | divided_by: 100.0 }};
@@ -123,7 +124,8 @@
       "type": "checkbox",
       "id": "intro_once",
       "label": "Play once per session",
-      "default": true
+      "default": false,
+      "info": "Leave off to replay the intro on every page load."
     },
     {
       "type": "image_picker",

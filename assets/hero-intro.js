@@ -17,7 +17,6 @@ if (!customElements.get("hero-intro")) {
           this.dataset.designMode === "true" ||
           window.Shopify?.designMode ||
           this.motion.matches ||
-          window.scrollY > 20 ||
           (this.dataset.introOnce === "true" && seen) ||
           document.querySelector("dialog[open], details[scroll-lock][open]")
         )
@@ -58,9 +57,10 @@ if (!customElements.get("hero-intro")) {
         const skip = this.querySelector("[data-intro-skip]");
         const header = document.querySelector('.site-header[data-home="true"]');
         if (!detail || !surface || !skip) return this.finish();
+        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
         this.classList.add("is-intro-running");
         skip.hidden = false;
-        this.safety = setTimeout(() => this.finish(), 6500);
+        this.safety = setTimeout(() => this.finish(), 14000);
         skip.addEventListener("click", () => this.finish(), { signal });
         document.addEventListener(
           "keydown",
@@ -134,19 +134,19 @@ if (!customElements.get("hero-intro")) {
           this.animate(
             detail,
             [{ opacity: 0 }, { opacity: 1 }],
-            450,
+            900,
             "ease-out",
           ),
           this.animate(
             progress,
             [{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }],
-            750,
+            1800,
             "linear",
           ),
           Promise.race([
             loaded,
             new Promise((resolve) => {
-              this.loadTimer = setTimeout(resolve, 1800);
+              this.loadTimer = setTimeout(resolve, 2600);
             }),
           ]),
         ]);
@@ -173,7 +173,7 @@ if (!customElements.get("hero-intro")) {
           this.animate(
             detail,
             [{ transform: offset }, { transform: "translate(0, 0)" }],
-            850,
+            1800,
           ),
           this.animate(
             surface,
@@ -183,12 +183,12 @@ if (!customElements.get("hero-intro")) {
                 transform: `translate(${hero.left + x}px, ${hero.top + y}px) rotate(1.44deg) scale(${targetWidth / innerWidth}, ${targetHeight / innerHeight})`,
               },
             ],
-            850,
+            1800,
           ),
           this.animate(
             progress.parentElement,
             [{ opacity: 1 }, { opacity: 0 }],
-            250,
+            500,
           ),
         ]);
         if (!this.active) return;
@@ -196,13 +196,13 @@ if (!customElements.get("hero-intro")) {
           this.animate(
             pre,
             [{ opacity: 1 }, { opacity: 0 }],
-            700,
+            1800,
             "ease-in-out",
           ),
           this.animate(
             surface,
             [{ opacity: 1 }, { opacity: 0 }],
-            700,
+            1800,
             "ease-in-out",
           ),
           this.animate(
@@ -216,7 +216,7 @@ if (!customElements.get("hero-intro")) {
                     .trim() || ".6",
               },
             ],
-            700,
+            1800,
           ),
         ]);
         if (!this.active) return;
@@ -226,7 +226,7 @@ if (!customElements.get("hero-intro")) {
             { transform: "scaleX(0)", opacity: 1 },
             { transform: "scaleX(1)", opacity: 1 },
           ],
-          350,
+          1000,
           "ease-in-out",
         );
         if (!this.active) return;
@@ -234,16 +234,16 @@ if (!customElements.get("hero-intro")) {
           this.animate(
             title,
             [{ clipPath: "inset(100% 0 0)" }, { clipPath: "inset(0% 0 0)" }],
-            600,
+            1500,
           ),
-          this.animate(line, [{ opacity: 1 }, { opacity: 0 }], 300),
+          this.animate(line, [{ opacity: 1 }, { opacity: 0 }], 650),
           this.animate(
             header,
             [
               { opacity: 0, transform: "translateY(-110%)" },
               { opacity: 1, transform: "translateY(0)" },
             ],
-            550,
+            1200,
           ),
         ]);
         this.finish();
