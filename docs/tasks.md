@@ -1,6 +1,6 @@
 # Task aktif
 
-Task terakhir: perbaikan tinggi panel koleksi (2026-10-28), selesai lokal. `collection-intro` memakai `height: auto` untuk mengatasi rule global `header { height: 5rem; }`. Empat pemeriksaan browser pada 320/1440px dengan teks normal/panjang lulus. Live Theme Editor belum diuji. Belum ada target implementasi berikutnya.
+Task terakhir: layout kontak (2026-10-28), selesai lokal. Judul/deskripsi berada di atas form, satu kolom dengan lebar maksimal 800px. Pemeriksaan browser pada 390/1440px lulus; Live Theme Editor belum diuji. Belum ada target implementasi berikutnya.
 
 ## Isi untuk pekerjaan berikutnya
 

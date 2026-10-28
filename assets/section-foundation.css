@@ -168,8 +168,16 @@
   text-transform: uppercase;
 }
 
+.support-section--contact .section-content {
+  max-width: 800px;
+}
+
+.support-section--contact form {
+  width: 100%;
+  max-width: 800px;
+}
+
 .support-section--contact .rte {
-  max-width: 36rem;
   margin-block-end: 2rem;
 }
 
@@ -284,23 +292,6 @@
 }
 
 @media (min-width: 990px) {
-  .support-section--contact .section-content {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 1.5rem 5vw;
-    align-content: start;
-  }
-
-  .support-section--contact form {
-    grid-column: 2;
-    grid-row: 1 / span 2;
-  }
-
-  .support-section--contact h1 {
-    align-self: end;
-    margin: 0;
-  }
-
   .support-section--rich-text .section-content,
   .support-section--newsletter .section-content {
     display: grid;

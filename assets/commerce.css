@@ -122,7 +122,7 @@
 .collection-intro__description {
   max-width: 750px;
   min-width: 0;
-  font-size: clamp(1rem, 1.7vw, 1.5rem);
+  font-size: 18px;
   line-height: 1.35;
   letter-spacing: -0.03em;
 }
