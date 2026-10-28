@@ -152,6 +152,7 @@
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
+  font-size: 40px;
 }
 .price small {
   flex-basis: 100%;
