@@ -50,6 +50,7 @@
   aspect-ratio: 10 / 11;
   background: var(--color-card);
   color: var(--color-card-text);
+  border-radius: 10.66px;
 }
 
 .product-detail .product-detail__thumbnail img {
@@ -57,6 +58,7 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
+  border-radius: inherit;
 }
 
 .product-detail__thumbnail[aria-current="true"] {
@@ -76,6 +78,122 @@
   padding: 0.25rem 0.5rem;
   background: var(--color-card);
   font-size: 0.75rem;
+}
+
+.product-detail .product-details {
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+}
+
+.product-detail__block > :is(h1, p),
+.product-detail .product-details form {
+  margin: 0;
+}
+
+.product-detail__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  min-width: 0;
+  margin: 0 0 0.75rem;
+  padding: 0;
+  border: 0;
+}
+
+.product-detail__options legend {
+  margin-block-end: 0.5rem;
+  padding: 0;
+}
+
+.product-detail__option {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 32px;
+  cursor: pointer;
+}
+
+.product-detail .product-detail__option input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  padding: 0;
+  accent-color: var(--color-button);
+}
+
+.product-detail__quantity {
+  display: flex;
+  align-items: center;
+  width: 140px;
+  max-width: 100%;
+  margin-block-start: 0.5rem;
+}
+
+.product-detail .product-detail__quantity input {
+  width: 52px;
+  min-width: 0;
+  min-height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  text-align: center;
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.product-detail__quantity input::-webkit-inner-spin-button,
+.product-detail__quantity input::-webkit-outer-spin-button {
+  margin: 0;
+  appearance: none;
+}
+
+.product-detail__quantity button {
+  flex: 0 0 40px;
+  min-height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 1.25rem;
+}
+
+.product-detail .product-details [data-add-button],
+.product-detail .shopify-payment-button__button--unbranded {
+  min-height: 44px;
+  border: 0;
+  border-radius: var(--radius-button);
+  background: var(--color-button);
+  color: var(--color-button-label);
+  box-shadow: none;
+  font: inherit;
+}
+
+.product-detail .shopify-payment-button__button--unbranded:hover {
+  background: var(--color-button);
+  color: var(--color-button-label);
+}
+
+.product-detail .shopify-payment-button__button--unbranded {
+  width: 100%;
+}
+
+.product-detail .product-details .shopify-payment-button {
+  margin: 0;
+}
+
+/* Shopify owns wallet colors; only its documented size/radius hooks apply. */
+.product-detail shopify-accelerated-checkout {
+  --shopify-accelerated-checkout-button-block-size: 44px;
+  --shopify-accelerated-checkout-button-border-radius: var(--radius-button);
+  --shopify-accelerated-checkout-button-box-shadow: none;
+}
+
+.product-detail :is(input, button):focus-visible {
+  outline: 2px solid var(--color-foreground);
+  outline-offset: 3px;
 }
 
 @media (min-width: 990px) {

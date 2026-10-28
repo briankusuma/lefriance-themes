@@ -1,0 +1,508 @@
+{
+  "scope": "Product controls follow-up 2026-10-28",
+  "passed": 125,
+  "total": 125,
+  "results": [
+    {
+      "name": "normal 1200 no runtime error",
+      "passed": true
+    },
+    {
+      "name": "normal 1200 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "normal 1200 thumbnail radius",
+      "passed": true
+    },
+    {
+      "name": "normal 1200 form receives variant and quantity",
+      "passed": true
+    },
+    {
+      "name": "normal 1200 both purchase buttons brown borderless",
+      "passed": true
+    },
+    {
+      "name": "normal 1200 radio options visible without fieldset border",
+      "passed": true
+    },
+    {
+      "name": "normal 1200 radio changes native variant ID",
+      "passed": true
+    },
+    {
+      "name": "normal 1200 submitted variant follows radio",
+      "passed": true
+    },
+    {
+      "name": "normal 1200 price follows selected variant",
+      "passed": true
+    },
+    {
+      "name": "normal 1200 sold out disabled",
+      "passed": true
+    },
+    {
+      "name": "normal 1200 available variant restores button",
+      "passed": true
+    },
+    {
+      "name": "normal 1200 compact quantity",
+      "passed": true
+    },
+    {
+      "name": "normal 1200 minus disabled at min",
+      "passed": true
+    },
+    {
+      "name": "normal 1200 plus follows increment",
+      "passed": true
+    },
+    {
+      "name": "normal 1200 minus follows minimum",
+      "passed": true
+    },
+    {
+      "name": "normal 390 no runtime error",
+      "passed": true
+    },
+    {
+      "name": "normal 390 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "normal 390 thumbnail radius",
+      "passed": true
+    },
+    {
+      "name": "normal 390 form receives variant and quantity",
+      "passed": true
+    },
+    {
+      "name": "normal 390 both purchase buttons brown borderless",
+      "passed": true
+    },
+    {
+      "name": "normal 390 radio options visible without fieldset border",
+      "passed": true
+    },
+    {
+      "name": "normal 390 radio changes native variant ID",
+      "passed": true
+    },
+    {
+      "name": "normal 390 submitted variant follows radio",
+      "passed": true
+    },
+    {
+      "name": "normal 390 price follows selected variant",
+      "passed": true
+    },
+    {
+      "name": "normal 390 sold out disabled",
+      "passed": true
+    },
+    {
+      "name": "normal 390 available variant restores button",
+      "passed": true
+    },
+    {
+      "name": "normal 390 compact quantity",
+      "passed": true
+    },
+    {
+      "name": "normal 390 minus disabled at min",
+      "passed": true
+    },
+    {
+      "name": "normal 390 plus follows increment",
+      "passed": true
+    },
+    {
+      "name": "normal 390 minus follows minimum",
+      "passed": true
+    },
+    {
+      "name": "rules 390 no runtime error",
+      "passed": true
+    },
+    {
+      "name": "rules 390 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "rules 390 thumbnail radius",
+      "passed": true
+    },
+    {
+      "name": "rules 390 form receives variant and quantity",
+      "passed": true
+    },
+    {
+      "name": "rules 390 both purchase buttons brown borderless",
+      "passed": true
+    },
+    {
+      "name": "rules 390 radio options visible without fieldset border",
+      "passed": true
+    },
+    {
+      "name": "rules 390 radio changes native variant ID",
+      "passed": true
+    },
+    {
+      "name": "rules 390 submitted variant follows radio",
+      "passed": true
+    },
+    {
+      "name": "rules 390 price follows selected variant",
+      "passed": true
+    },
+    {
+      "name": "rules 390 sold out disabled",
+      "passed": true
+    },
+    {
+      "name": "rules 390 available variant restores button",
+      "passed": true
+    },
+    {
+      "name": "rules 390 compact quantity",
+      "passed": true
+    },
+    {
+      "name": "rules 390 minus disabled at min",
+      "passed": true
+    },
+    {
+      "name": "rules 390 plus follows increment",
+      "passed": true
+    },
+    {
+      "name": "rules 390 minus follows minimum",
+      "passed": true
+    },
+    {
+      "name": "rules 390 plus stops at max",
+      "passed": true
+    },
+    {
+      "name": "default 390 no runtime error",
+      "passed": true
+    },
+    {
+      "name": "default 390 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "default 390 thumbnail radius",
+      "passed": true
+    },
+    {
+      "name": "default 390 form receives variant and quantity",
+      "passed": true
+    },
+    {
+      "name": "default 390 both purchase buttons brown borderless",
+      "passed": true
+    },
+    {
+      "name": "default 390 compact quantity",
+      "passed": true
+    },
+    {
+      "name": "default 390 minus disabled at min",
+      "passed": true
+    },
+    {
+      "name": "default 390 plus follows increment",
+      "passed": true
+    },
+    {
+      "name": "default 390 minus follows minimum",
+      "passed": true
+    },
+    {
+      "name": "default 390 Default Title picker hidden",
+      "passed": true
+    },
+    {
+      "name": "no-picker 390 no runtime error",
+      "passed": true
+    },
+    {
+      "name": "no-picker 390 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "no-picker 390 thumbnail radius",
+      "passed": true
+    },
+    {
+      "name": "no-picker 390 form receives variant and quantity",
+      "passed": true
+    },
+    {
+      "name": "no-picker 390 both purchase buttons brown borderless",
+      "passed": true
+    },
+    {
+      "name": "no-picker 390 compact quantity",
+      "passed": true
+    },
+    {
+      "name": "no-picker 390 minus disabled at min",
+      "passed": true
+    },
+    {
+      "name": "no-picker 390 plus follows increment",
+      "passed": true
+    },
+    {
+      "name": "no-picker 390 minus follows minimum",
+      "passed": true
+    },
+    {
+      "name": "no-picker 390 removed picker has hidden variant ID",
+      "passed": true
+    },
+    {
+      "name": "no-quantity 390 no runtime error",
+      "passed": true
+    },
+    {
+      "name": "no-quantity 390 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "no-quantity 390 thumbnail radius",
+      "passed": true
+    },
+    {
+      "name": "no-quantity 390 form receives variant and quantity",
+      "passed": true
+    },
+    {
+      "name": "no-quantity 390 both purchase buttons brown borderless",
+      "passed": true
+    },
+    {
+      "name": "no-quantity 390 radio options visible without fieldset border",
+      "passed": true
+    },
+    {
+      "name": "no-quantity 390 radio changes native variant ID",
+      "passed": true
+    },
+    {
+      "name": "no-quantity 390 submitted variant follows radio",
+      "passed": true
+    },
+    {
+      "name": "no-quantity 390 price follows selected variant",
+      "passed": true
+    },
+    {
+      "name": "no-quantity 390 sold out disabled",
+      "passed": true
+    },
+    {
+      "name": "no-quantity 390 available variant restores button",
+      "passed": true
+    },
+    {
+      "name": "no-quantity 390 removed quantity uses min",
+      "passed": true
+    },
+    {
+      "name": "no-buy 390 no runtime error",
+      "passed": true
+    },
+    {
+      "name": "no-buy 390 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "no-buy 390 thumbnail radius",
+      "passed": true
+    },
+    {
+      "name": "no-buy 390 radio options visible without fieldset border",
+      "passed": true
+    },
+    {
+      "name": "no-buy 390 radio changes native variant ID",
+      "passed": true
+    },
+    {
+      "name": "no-buy 390 price follows selected variant",
+      "passed": true
+    },
+    {
+      "name": "no-buy 390 compact quantity",
+      "passed": true
+    },
+    {
+      "name": "no-buy 390 minus disabled at min",
+      "passed": true
+    },
+    {
+      "name": "no-buy 390 plus follows increment",
+      "passed": true
+    },
+    {
+      "name": "no-buy 390 minus follows minimum",
+      "passed": true
+    },
+    {
+      "name": "no-buy 390 removed buy block has no purchase form",
+      "passed": true
+    },
+    {
+      "name": "no-price 390 no runtime error",
+      "passed": true
+    },
+    {
+      "name": "no-price 390 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "no-price 390 thumbnail radius",
+      "passed": true
+    },
+    {
+      "name": "no-price 390 form receives variant and quantity",
+      "passed": true
+    },
+    {
+      "name": "no-price 390 both purchase buttons brown borderless",
+      "passed": true
+    },
+    {
+      "name": "no-price 390 radio options visible without fieldset border",
+      "passed": true
+    },
+    {
+      "name": "no-price 390 radio changes native variant ID",
+      "passed": true
+    },
+    {
+      "name": "no-price 390 submitted variant follows radio",
+      "passed": true
+    },
+    {
+      "name": "no-price 390 sold out disabled",
+      "passed": true
+    },
+    {
+      "name": "no-price 390 available variant restores button",
+      "passed": true
+    },
+    {
+      "name": "no-price 390 compact quantity",
+      "passed": true
+    },
+    {
+      "name": "no-price 390 minus disabled at min",
+      "passed": true
+    },
+    {
+      "name": "no-price 390 plus follows increment",
+      "passed": true
+    },
+    {
+      "name": "no-price 390 minus follows minimum",
+      "passed": true
+    },
+    {
+      "name": "reordered 390 no runtime error",
+      "passed": true
+    },
+    {
+      "name": "reordered 390 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "reordered 390 thumbnail radius",
+      "passed": true
+    },
+    {
+      "name": "reordered 390 form receives variant and quantity",
+      "passed": true
+    },
+    {
+      "name": "reordered 390 both purchase buttons brown borderless",
+      "passed": true
+    },
+    {
+      "name": "reordered 390 radio options visible without fieldset border",
+      "passed": true
+    },
+    {
+      "name": "reordered 390 radio changes native variant ID",
+      "passed": true
+    },
+    {
+      "name": "reordered 390 submitted variant follows radio",
+      "passed": true
+    },
+    {
+      "name": "reordered 390 price follows selected variant",
+      "passed": true
+    },
+    {
+      "name": "reordered 390 sold out disabled",
+      "passed": true
+    },
+    {
+      "name": "reordered 390 available variant restores button",
+      "passed": true
+    },
+    {
+      "name": "reordered 390 compact quantity",
+      "passed": true
+    },
+    {
+      "name": "reordered 390 minus disabled at min",
+      "passed": true
+    },
+    {
+      "name": "reordered 390 plus follows increment",
+      "passed": true
+    },
+    {
+      "name": "reordered 390 minus follows minimum",
+      "passed": true
+    },
+    {
+      "name": "reordered 390 quantity remains associated after reorder",
+      "passed": true
+    },
+    {
+      "name": "nojs 390 no runtime error",
+      "passed": true
+    },
+    {
+      "name": "nojs 390 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "nojs 390 thumbnail radius",
+      "passed": true
+    },
+    {
+      "name": "nojs 390 form receives variant and quantity",
+      "passed": true
+    },
+    {
+      "name": "nojs 390 no-JS variant fallback available",
+      "passed": true
+    },
+    {
+      "name": "nojs 390 no-JS quantity is editable",
+      "passed": true
+    }
+  ],
+  "limits": "Actual Liquid locally rendered; payment button/form service output mocked. No live accelerated checkout, Theme Editor, Lighthouse or screen reader test."
+}

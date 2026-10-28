@@ -21,12 +21,32 @@
         "description": {
           "type": "description",
           "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variants": {
+          "type": "variant_picker",
+          "settings": {}
+        },
+        "quantity": {
+          "type": "quantity",
+          "settings": {}
+        },
+        "tax": {
+          "type": "tax_note",
+          "settings": {}
         }
       },
       "block_order": [
         "title",
         "colors",
+        "price",
+        "variants",
+        "quantity",
         "buy",
+        "tax",
         "description"
       ]
     }

@@ -35,16 +35,81 @@
       {% endif %}
     </product-detail-gallery>
   {% endif %}
-  <div class="product-details">
-    {% for block in section.blocks %}<div {{ block.shopify_attributes }}>{% case block.type %}
-      {% when 'title' %}<h1>{{ product.title | escape }}</h1>
-      {% when 'colors' %}{% render 'product-color-metafield', color_product: product, show_labels: true %}
-      {% when 'buy_buttons' %}{% render 'product-form', product: product, instance_id: section.id, accelerated: block.settings.accelerated %}
-      {% when 'description' %}<div class="rte">{{ product.description }}</div>
-      {% when '@app' %}{% render block %}
-      {% when 'custom_liquid' %}{{ block.settings.code }}
-    {% endcase %}</div>{% endfor %}
-  </div>
+  {% liquid
+    assign current_variant = product.selected_or_first_available_variant
+    assign product_form_id = 'ProductForm-' | append: section.id
+    assign picker_blocks = section.blocks | where: 'type', 'variant_picker'
+    assign quantity_blocks = section.blocks | where: 'type', 'quantity'
+  %}
+  <lefriance-product class="product-details" data-unavailable-label="{{ 'commerce.unavailable' | t | escape }}">
+    {% if picker_blocks.size == 0 %}
+      <input type="hidden" name="id" value="{{ current_variant.id }}" form="{{ product_form_id }}" data-variant-select>
+    {% endif %}
+    {% if quantity_blocks.size == 0 %}
+      <input type="hidden" name="quantity" value="{{ current_variant.quantity_rule.min | default: 1 }}" form="{{ product_form_id }}">
+    {% endif %}
+    {% for block in section.blocks %}
+      {% capture block_content %}
+        {% case block.type %}
+          {% when 'title' %}<h1>{{ product.title | escape }}</h1>
+          {% when 'colors' %}{% render 'product-color-metafield', color_product: product, show_labels: true %}
+          {% when 'price' %}<div data-product-price aria-live="polite">{% render 'price', item: current_variant %}</div>
+          {% when 'variant_picker' %}
+            <div data-variant-fallback{% if product.has_only_default_variant %} hidden{% endif %}>
+              <label data-variant-label for="Variant-{{ section.id }}">{{ 'commerce.variant' | t }}</label>
+              <select id="Variant-{{ section.id }}" name="id" form="{{ product_form_id }}" data-variant-select>
+                {% for variant in product.variants %}
+                  <option value="{{ variant.id }}"{% if variant.id == current_variant.id %} selected{% endif %}>{{ variant.title | escape }} — {{ variant.price | money }}{% unless variant.available %} — {{ 'commerce.sold_out' | t }}{% endunless %}</option>
+                {% endfor %}
+              </select>
+              <noscript>
+                <form action="{{ product.url }}" method="get">
+                  <label for="ReviewVariant-{{ section.id }}">{{ 'commerce.variant' | t }}</label>
+                  <select id="ReviewVariant-{{ section.id }}" name="variant">
+                    {% for variant in product.variants %}<option value="{{ variant.id }}"{% if variant.id == current_variant.id %} selected{% endif %}>{{ variant.title | escape }}</option>{% endfor %}
+                  </select>
+                  <button type="submit">{{ 'commerce.review_variant' | t }}</button>
+                </form>
+              </noscript>
+            </div>
+            {% unless product.has_only_default_variant %}
+              <div data-product-options hidden>
+                {% for option in product.options_with_values %}
+                  {% assign option_index = forloop.index0 %}
+                  <fieldset class="product-detail__options" data-option-group>
+                    <legend>{{ option.name | escape }}</legend>
+                    {% for value in option.values %}
+                      {% assign option_name = value.name | default: value %}
+                      <label class="product-detail__option">
+                        <input type="radio" name="Option-{{ section.id }}-{{ option_index }}" value="{{ option_name | escape }}" data-option-radio{% if current_variant.options[option_index] == option_name %} checked{% endif %}>
+                        <span>{{ option_name | escape }}</span>
+                      </label>
+                    {% endfor %}
+                  </fieldset>
+                {% endfor %}
+              </div>
+            {% endunless %}
+          {% when 'quantity' %}
+            <label for="ProductQuantity-{{ section.id }}">{{ 'commerce.quantity' | t }}</label>
+            <div class="product-detail__quantity">
+              <button type="button" data-quantity-step="-1" aria-label="{{ 'product_gallery.decrease' | t | escape }}" hidden>−</button>
+              <input id="ProductQuantity-{{ section.id }}" name="quantity" form="{{ product_form_id }}" type="number" inputmode="numeric" value="{{ current_variant.quantity_rule.min | default: 1 }}" min="{{ current_variant.quantity_rule.min | default: 1 }}" step="{{ current_variant.quantity_rule.increment | default: 1 }}"{% if current_variant.quantity_rule.max %} max="{{ current_variant.quantity_rule.max }}"{% endif %}>
+              <button type="button" data-quantity-step="1" aria-label="{{ 'product_gallery.increase' | t | escape }}" hidden>+</button>
+            </div>
+          {% when 'buy_buttons' %}{% render 'product-form', product: product, instance_id: section.id, accelerated: block.settings.accelerated %}
+          {% when 'tax_note' %}<p>{% if cart.taxes_included %}{{ 'commerce.tax_included' | t }}{% else %}{{ 'commerce.tax_at_checkout' | t }}{% endif %}</p>
+          {% when 'description' %}<div class="rte">{{ product.description }}</div>
+          {% when '@app' %}{% render block %}
+          {% when 'custom_liquid' %}{{ block.settings.code }}
+        {% endcase %}
+      {% endcapture %}
+      {% assign block_content = block_content | strip %}
+      {% if block_content != blank %}
+        <div class="product-detail__block"{% if block.type == 'variant_picker' and product.has_only_default_variant %} hidden{% endif %} {{ block.shopify_attributes }}>{{ block_content }}</div>
+      {% endif %}
+    {% endfor %}
+    {% render 'product-variant-data', product: product %}
+  </lefriance-product>
 </div></section>
 <script type="application/ld+json">{{ product | structured_data }}</script>
 
@@ -71,8 +136,28 @@
       "limit": 1
     },
     {
+      "type": "price",
+      "name": "Price",
+      "limit": 1
+    },
+    {
+      "type": "variant_picker",
+      "name": "Variant picker",
+      "limit": 1
+    },
+    {
+      "type": "quantity",
+      "name": "Quantity",
+      "limit": 1
+    },
+    {
+      "type": "tax_note",
+      "name": "Tax note",
+      "limit": 1
+    },
+    {
       "type": "buy_buttons",
-      "name": "Product form",
+      "name": "Buy buttons",
       "limit": 1,
       "settings": [
         {

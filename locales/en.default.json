@@ -9,6 +9,8 @@
  */
 {
   "product_gallery": {
+    "decrease": "Decrease quantity",
+    "increase": "Increase quantity",
     "media": "Product media",
     "choose": "Choose product media",
     "show": "Show product media {{ number }}"
