@@ -1,8 +1,22 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "main-collection",
-      "settings": {}
+      "settings": {
+        "heading": "Collection",
+        "description": "<p>A compact device with a minimalist white finish and a vertically ribbed body. Rounded corners and a combination of textured and smooth surfaces create a clean, understated look for a desk or modern interior.</p>",
+        "heading_color_scheme": "",
+        "color_scheme": ""
+      }
     }
   },
   "order": [
