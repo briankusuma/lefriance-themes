@@ -83,7 +83,7 @@
 .product-detail .product-details {
   display: grid;
   align-content: start;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .product-detail__block > :is(h1, p),
