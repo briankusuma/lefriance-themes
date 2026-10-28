@@ -17,11 +17,14 @@
     {% render 'price', item: card_product %}
     {% if settings.card_show_swatches %}
       <div class="product-card__swatches">
+        {% assign has_option_swatches = false %}
         {% for option in card_product.options_with_values %}
           {% for value in option.values %}
             {% assign swatch_url = value.variant.url | default: value.product_url %}
             {% assign swatch_name = value.name | default: value %}
             {% if value.swatch and swatch_url != blank %}
+              {% if value.swatch.image != blank or value.swatch.color != blank %}
+              {% assign has_option_swatches = true %}
               <a class="product-swatch" href="{{ swatch_url }}" aria-label="{{ option.name | escape }}: {{ swatch_name | escape }}" title="{{ swatch_name | escape }}"{% if value.variant.id == card_product.selected_or_first_available_variant.id %} aria-current="true"{% endif %}>
                 {% if value.swatch.image %}
                   {{ value.swatch.image | image_url: width: 60 | image_tag: alt: swatch_name, loading: 'lazy' }}
@@ -29,9 +32,13 @@
                   <span style="background: {{ value.swatch.color }}"></span>
                 {% endif %}
               </a>
+              {% endif %}
             {% endif %}
           {% endfor %}
         {% endfor %}
+        {% unless has_option_swatches %}
+          {% render 'product-color-metafield', color_product: card_product %}
+        {% endunless %}
       </div>
     {% endif %}
   </div>

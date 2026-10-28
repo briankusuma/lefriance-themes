@@ -6,6 +6,7 @@
   <div class="product-details">
     {% for block in section.blocks %}<div {{ block.shopify_attributes }}>{% case block.type %}
       {% when 'title' %}<h1>{{ product.title | escape }}</h1>
+      {% when 'colors' %}{% render 'product-color-metafield', color_product: product, show_labels: true %}
       {% when 'buy_buttons' %}{% render 'product-form', product: product, instance_id: section.id, accelerated: block.settings.accelerated %}
       {% when 'description' %}<div class="rte">{{ product.description }}</div>
       {% when '@app' %}{% render block %}
@@ -27,6 +28,11 @@
     }
   ],
   "blocks": [
+    {
+      "type": "colors",
+      "name": "Colors",
+      "limit": 1
+    },
     {
       "type": "title",
       "name": "Title",

@@ -129,6 +129,7 @@
     "detail_alt": "Furniture material detail"
   },
   "commerce": {
+    "color": "Color",
     "empty_cart": "Your cart is empty.",
     "continue_shopping": "Continue shopping",
     "quantity": "Quantity",

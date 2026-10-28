@@ -1,0 +1,36 @@
+{% doc %}
+  Render the product's standard Shopify Color category metafield as a palette.
+  These are descriptive attributes, not variant selectors or stock promises.
+  @param {product} color_product - Product whose Color entries are displayed.
+  @param {boolean} [show_labels] - Show a heading and visible color names.
+{% enddoc %}
+{% capture color_items %}
+  {% for entry in color_product.metafields.shopify['color-pattern'].value %}
+    {% liquid
+      assign color_name = entry.label.value
+      assign color_image = entry.image.value
+      assign color_value = entry.color.value
+    %}
+    {% if color_name != blank %}
+      {% if color_image != blank or color_value != blank %}
+        <li class="product-color-palette__item">
+          <span class="product-swatch product-swatch--attribute" title="{{ color_name | escape }}">
+            {% if color_image != blank %}
+              {{ color_image | image_url: width: 96 | image_tag: widths: '48, 96', sizes: '24px', alt: '', loading: 'lazy' }}
+            {% else %}
+              <span style="background: {{ color_value | escape }}"></span>
+            {% endif %}
+          </span>
+          <span{% unless show_labels %} class="visually-hidden"{% endunless %}>{{ color_name | escape }}</span>
+        </li>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+{% endcapture %}
+{% assign color_items = color_items | strip %}
+{% if color_items != blank %}
+  {% if show_labels %}<p class="product-color-palette__label">{{ 'commerce.color' | t }}</p>{% endif %}
+  <ul class="product-color-palette{% if show_labels %} product-color-palette--labelled{% endif %}" aria-label="{{ 'commerce.color' | t | escape }}">
+    {{ color_items }}
+  </ul>
+{% endif %}
