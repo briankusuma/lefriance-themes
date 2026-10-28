@@ -1,6 +1,6 @@
 # Task aktif
 
-Belum ada task implementasi baru. Pembersihan dokumentasi selesai pada 2026-10-28. Styling S01 sebelumnya selesai secara lokal; QA toko masih terbuka, lihat [brief](project-brief.md) dan [checklist Shopify](theme-store-checklist.md).
+Task terakhir: perbaikan tinggi panel koleksi (2026-10-28), selesai lokal. `collection-intro` memakai `height: auto` untuk mengatasi rule global `header { height: 5rem; }`. Empat pemeriksaan browser pada 320/1440px dengan teks normal/panjang lulus. Live Theme Editor belum diuji. Belum ada target implementasi berikutnya.
 
 ## Isi untuk pekerjaan berikutnya
 
