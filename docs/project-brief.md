@@ -7,6 +7,7 @@ Tema Shopify orisinal untuk merchant furnitur, berbasis Skeleton resmi yang suda
 - Homepage, header/footer, galeri produk, kartu katalog, heading koleksi dan styling section dasar sudah diimplementasikan lokal. Periksa kode aktual sebelum mengubahnya.
 - Shopify Liquid/JSON, native CSS/JS; library Swiper dan Lenis di-host dalam assets. Font memakai Shopify font picker (Work Sans), bukan font custom Open Sauce One.
 - Settings global ada di config/settings_schema.json; markup settings/CSS tokens ada di snippets/css-variables.liquid. Baca file ini saat mengubah setting, jangan menduplikasi schema dalam dokumentasi.
+- Mobile navbar: brand/cart/hamburger; search/account dan localization ada dalam menu fullscreen dengan scroll-lock/focus handling. Layout mobile ini mengikuti permintaan pengguna, bukan frame mobile Figma.
 - Header/footer memakai section groups. Cart drawer/page/popover memakai logic dan snippets commerce yang sama. Lenis nonaktif pada editor/reduced motion.
 - Gallery produk memakai Swiper, thumbnail dua kolom, sinkron dengan gambar varian. Blok title/colors/price/variant picker/quantity/buy/tax/description dapat diurutkan/dihapus.
 - Swatch kategori membaca `product.metafields.shopify['color-pattern'].value`: gambar didahulukan, lalu warna solid. Native variant swatches mendapat prioritas pada kartu. Metadata warna bersifat deskriptif, bukan varian/stok.

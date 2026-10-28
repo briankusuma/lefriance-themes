@@ -1,6 +1,6 @@
 # Task aktif
 
-Task terakhir: empty cart centered (2026-10-28), selesai lokal. Pesan dan tombol berjarak 24px; View cart tersembunyi saat kosong dan muncul kembali saat terisi. Sepuluh pemeriksaan lokal pada drawer/popover/page, 390/1440px lulus. Perubahan CSS saja; live Theme Editor belum diuji.
+Task terakhir: navbar mobile fullscreen (2026-10-28), selesai lokal. Search/account dan localization berada dalam panel; navbar menampilkan brand, cart dan hamburger. Panel memenuhi viewport, scroll-lock, Escape/focus loop, no-JS close dan native account fallback. Theme Check bersih; 120/120 checks lokal pada 320–1440px, empty/long/no-JS/reconnect/resize lulus. Tab/Escape dicoba langsung. Layanan akun Shopify asli, Theme Editor dan Lighthouse belum diuji. Sumber: [account component](https://shopify.dev/docs/storefronts/themes/customer-engagement/account-component), [routes](https://shopify.dev/docs/api/liquid/objects/routes).
 
 ## Isi untuk pekerjaan berikutnya
 

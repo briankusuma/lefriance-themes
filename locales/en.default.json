@@ -128,6 +128,7 @@
     "success": "Thank you. Your message has been sent."
   },
   "header": {
+    "close_menu": "Close menu",
     "menu": "Menu",
     "country": "Country and currency",
     "language": "Language",
