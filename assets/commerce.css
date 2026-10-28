@@ -201,7 +201,22 @@
   margin-block: 0 2rem;
 }
 [data-cart-content][data-item-count="0"] {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 24px;
+  min-height: 14rem;
   padding-block: 2rem;
+  text-align: center;
+}
+[data-cart-content][data-item-count="0"] > p {
+  margin: 0;
+}
+.cart-panel--drawer [data-cart-content][data-item-count="0"] {
+  min-height: calc(100dvh - 10rem);
+}
+.cart-panel [data-cart-content][data-item-count="0"] ~ .cart-panel__page-link {
+  display: none;
 }
 @media (min-width: 990px) {
   .cart-page [data-cart-form] {

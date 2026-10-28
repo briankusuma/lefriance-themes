@@ -1,6 +1,6 @@
 # Task aktif
 
-Task terakhir: perapian cart drawer/popover/page (2026-10-28), selesai lokal. Foto radius 10px, kontrol quantity −/+ dengan native fallback, metadata/total lebih rapi. Theme Check CLI 4.9.4 bersih; 77/77 browser fixture checks pada 390/1440px lulus (quantity, max, removal/empty, note, refresh harga, error/focus, no-JS). Respons Shopify dimodelkan; live checkout, Theme Editor dan Lighthouse belum diuji. Sumber: [Cart API](https://shopify.dev/docs/api/ajax/reference/cart), [line item](https://shopify.dev/docs/api/liquid/objects/line_item).
+Task terakhir: empty cart centered (2026-10-28), selesai lokal. Pesan dan tombol berjarak 24px; View cart tersembunyi saat kosong dan muncul kembali saat terisi. Sepuluh pemeriksaan lokal pada drawer/popover/page, 390/1440px lulus. Perubahan CSS saja; live Theme Editor belum diuji.
 
 ## Isi untuk pekerjaan berikutnya
 
