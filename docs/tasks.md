@@ -1,6 +1,12 @@
 # Task aktif
 
-Task terakhir: navbar mobile fullscreen (2026-10-28), selesai lokal. Search/account dan localization berada dalam panel; navbar menampilkan brand, cart dan hamburger. Panel memenuhi viewport, scroll-lock, Escape/focus loop, no-JS close dan native account fallback. Theme Check bersih; 120/120 checks lokal pada 320–1440px, empty/long/no-JS/reconnect/resize lulus. Tab/Escape dicoba langsung. Layanan akun Shopify asli, Theme Editor dan Lighthouse belum diuji. Sumber: [account component](https://shopify.dev/docs/storefronts/themes/customer-engagement/account-component), [routes](https://shopify.dev/docs/api/liquid/objects/routes).
+Task aktif: intro homepage dari Figma [3722:1757](https://www.figma.com/design/C2rhn7BP2nXA0LyByRDn09/Speedtest?node-id=3722-1757), 2026-10-28. Selesai implementasi dan validasi lokal.
+
+Mapping: sequence → `hero-editorial.liquid`, `hero-editorial.css`, `hero-intro.js`; motion-pre → aset lokal `hero-motion-pre.jpg`; pilihan enable/once/image/colors → schema section. Memakai kartu/wordmark/navbar existing, tanpa library baru.
+
+Hasil: text/progress reveal, kartu bergerak ke kiri bawah, bidang hijau menyusut ke kanan, empty room crossfade ke hero furnished, garis kemudian wordmark dan navbar turun. Default homepage aktif sekali per session; skip/Escape, cleanup, no-JS, editor dan reduced motion menampilkan hero akhir. Theme Check tanpa temuan. Browser lokal 390/1440px: 14 skenario normal/editor/disabled/no-JS/skip/reduced-motion/repeat lulus; tanpa error/overflow, scroll/inert/animasi dibersihkan. Urutan normal juga diamati pada desktop dan mobile. Timing dan mobile diturunkan dari langkah statis Figma; lihat [brief](project-brief.md). Live Theme Editor, perangkat nyata dan Lighthouse belum diuji.
+
+Dokumentasi Shopify: [asset_img_url](https://shopify.dev/docs/api/liquid/filters/asset_img_url), [input settings](https://shopify.dev/docs/storefronts/themes/architecture/settings/input-settings), [requirements](https://shopify.dev/docs/storefronts/themes/store/requirements).
 
 ## Isi untuk pekerjaan berikutnya
 

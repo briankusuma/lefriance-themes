@@ -1,5 +1,13 @@
 {{ 'hero-editorial.css' | asset_url | stylesheet_tag }}
 {% liquid
+  assign intro_enabled = false
+  if section.settings.enable_intro and request.page_type == 'index' and section.index == 1 and section.settings.show_detail_card and section.settings.allow_header_overlay
+    if section.settings.intro_pre_image != blank
+      assign intro_enabled = true
+    elsif section.settings.image == blank and section.settings.use_reference_images
+      assign intro_enabled = true
+    endif
+  endif
   assign hero_loading = 'lazy'
   assign hero_priority = 'auto'
   if section.index == 1
@@ -7,6 +15,7 @@
     assign hero_priority = 'high'
   endif
 %}
+{% if intro_enabled %}<script src="{{ 'hero-intro.js' | asset_url }}" defer></script>{% endif %}
 {% style %}
   #shopify-section-{{ section.id }} {
     --hero-height: {{ section.settings.desktop_height }}px;
@@ -16,9 +25,11 @@
     --hero-copy-color: {{ section.settings.text_color }};
     --hero-background-color: {{ section.settings.background_color }};
     --hero-overlay-color: {{ section.settings.overlay_color }};
+    --hero-intro-background: {{ section.settings.intro_background | default: '#6C7C69' }};
+    --hero-intro-text: {{ section.settings.intro_text_color | default: '#FFFFFF' }};
   }
 {% endstyle %}
-<section class="editorial-hero section-shell"{% if section.settings.allow_header_overlay %} data-header-overlay{% endif %}>
+<hero-intro class="editorial-hero section-shell" data-intro-enabled="{{ intro_enabled }}" data-intro-once="{{ section.settings.intro_once }}" data-design-mode="{{ request.design_mode }}"{% if section.settings.allow_header_overlay %} data-header-overlay{% endif %}>
   <div class="editorial-hero__media">
     {% if section.settings.image != blank %}
       <picture>
@@ -31,8 +42,22 @@
       {{ 'lifestyle-1' | placeholder_svg_tag: 'editorial-hero__placeholder' }}
     {% endif %}
   </div>
+  {% if intro_enabled %}
+    <div class="editorial-hero__pre" aria-hidden="true">
+      {% if section.settings.intro_pre_image != blank %}
+        {{ section.settings.intro_pre_image | image_url: width: 2400 | image_tag: widths: '750, 1100, 1535, 2000, 2400', sizes: '100vw', loading: 'lazy', alt: '', class: 'editorial-hero__pre-photo' }}
+      {% else %}
+        <img class="editorial-hero__pre-photo" src="{{ 'hero-motion-pre.jpg' | asset_img_url: '1535x' }}" srcset="{{ 'hero-motion-pre.jpg' | asset_img_url: '750x' }} 750w, {{ 'hero-motion-pre.jpg' | asset_img_url: '1100x' }} 1100w, {{ 'hero-motion-pre.jpg' | asset_img_url: '1535x' }} 1535w" sizes="100vw" width="1280" height="960" loading="lazy" alt="">
+      {% endif %}
+    </div>
+    <div class="editorial-hero__intro-surface" aria-hidden="true"></div>
+    <div class="editorial-hero__intro-progress" aria-hidden="true"><span></span></div>
+    <button class="editorial-hero__intro-skip" type="button" data-intro-skip hidden>{{ 'hero.skip_intro' | t }}</button>
+  {% endif %}
   <div class="editorial-hero__shade" aria-hidden="true"></div>
   <div class="editorial-hero__content container">
+    <div class="editorial-hero__title-frame">
+    <div class="editorial-hero__title">
     {% if section.settings.wordmark != blank %}
       {{ section.settings.wordmark | image_url: width: 2400 | image_tag: widths: '750, 1100, 1600, 2400', sizes: '93vw', alt: section.settings.heading, class: 'editorial-hero__wordmark' }}
       <h1 class="visually-hidden">{{ section.settings.heading | default: shop.name | escape }}</h1>
@@ -42,14 +67,18 @@
     {% else %}
       <h1 class="editorial-hero__heading">{{ section.settings.heading | default: shop.name | escape }}</h1>
     {% endif %}
+    </div>
+    <span class="editorial-hero__reveal-line" aria-hidden="true"></span>
+    </div>
     {% if section.settings.show_detail_card %}
       <div class="editorial-hero__detail">
+        <div class="editorial-hero__detail-content">
         {% if section.settings.detail_link != blank %}<a href="{{ section.settings.detail_link }}" aria-label="{{ section.settings.detail_link_label | default: section.settings.heading | default: shop.name | escape }}">{% endif %}
         <div class="editorial-hero__card">
           {% if section.settings.detail_image != blank %}
-            {{ section.settings.detail_image | image_url: width: 400 | image_tag: widths: '160, 240, 400', sizes: '150px', loading: 'lazy', alt: section.settings.detail_image.alt }}
+            {{ section.settings.detail_image | image_url: width: 400 | image_tag: widths: '160, 240, 400', sizes: '150px', loading: hero_loading, alt: section.settings.detail_image.alt }}
           {% elsif section.settings.use_reference_images %}
-            <img src="{{ 'hero-detail.png' | asset_img_url: '300x' }}" srcset="{{ 'hero-detail.png' | asset_img_url: '160x' }} 160w, {{ 'hero-detail.png' | asset_img_url: '300x' }} 300w" sizes="150px" width="960" height="1200" loading="lazy" alt="{{ 'hero.detail_alt' | t }}">
+            <img src="{{ 'hero-detail.png' | asset_img_url: '300x' }}" srcset="{{ 'hero-detail.png' | asset_img_url: '160x' }} 160w, {{ 'hero-detail.png' | asset_img_url: '300x' }} 300w" sizes="150px" width="960" height="1200" loading="{{ hero_loading }}" alt="{{ 'hero.detail_alt' | t }}">
           {% else %}{{ 'product-1' | placeholder_svg_tag }}
           {% endif %}
           <span class="editorial-hero__card-blur" aria-hidden="true"></span>
@@ -59,12 +88,14 @@
           <div class="editorial-hero__body rte">
             {% if section.settings.body != blank %}<span class="editorial-hero__body-primary">{{ section.settings.body }}</span>{% endif %}
             {% if section.settings.body_muted != blank %}<span class="editorial-hero__body-muted">{{ section.settings.body_muted | escape }}</span>{% endif %}
+            {% if intro_enabled %}<span class="editorial-hero__intro-copy" aria-hidden="true">{{ section.settings.body | strip_html }} {{ section.settings.body_muted | escape }}</span>{% endif %}
           </div>
         {% endif %}
+        </div>
       </div>
     {% elsif section.settings.body != blank %}<div class="editorial-hero__body editorial-hero__body--alone rte">{{ section.settings.body }}</div>{% endif %}
   </div>
-</section>
+</hero-intro>
 
 {% schema %}
 {
@@ -77,6 +108,41 @@
     ]
   },
   "settings": [
+    {
+      "type": "header",
+      "content": "Intro animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_intro",
+      "label": "Enable intro animation",
+      "default": false,
+      "info": "Runs on the first home page hero with a detail card and header overlay. Reduced motion and the theme editor show the final hero."
+    },
+    {
+      "type": "checkbox",
+      "id": "intro_once",
+      "label": "Play once per session",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "intro_pre_image",
+      "label": "Empty room image",
+      "info": "Match the composition of the furnished hero image. Required when using custom hero photography."
+    },
+    {
+      "type": "color",
+      "id": "intro_background",
+      "label": "Intro background",
+      "default": "#6C7C69"
+    },
+    {
+      "type": "color",
+      "id": "intro_text_color",
+      "label": "Intro text",
+      "default": "#FFFFFF"
+    },
     {
       "type": "header",
       "content": "Images"

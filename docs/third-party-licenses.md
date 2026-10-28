@@ -1,5 +1,7 @@
 # Third-Party Assets and Licenses
 
+2026-10-28 hero intro: `assets/hero-motion-pre.jpg` exported from user-provided Figma `C2rhn7BP2nXA0LyByRDn09`, empty-room layer `3722:1741` in motion-pre `3722:1739` (sequence `3722:1757`). Original 1280 x 960 PNG converted to JPEG quality 88, approximately 184 KB. Existing Figma commercial distribution rights remain unverified before release. Native Web Animations API; no additional library.
+
 2026-10-28 catalog Color: five 96px PNG swatches rendered from Figma swatch SVG groups `3374:343`, `3374:346`, `3374:349` (same palette reused by `3374:353`) at the user's request and uploaded to Shopify Files. Palette sources are retained in [design tokens](design-tokens.md). Local upload duplicates were removed during documentation cleanup; Shopify Files supplies storefront data. existing Figma distribution-rights status remains unchanged. No raster AI generation, storefront library, or runtime theme asset was added for this task.
 
 2026-10-27 motion migration: Swiper 14.3.0 and Lenis 1.3.27 added at the user's explicit request, both MIT. Distributed locally in theme assets with full license notices in JS; license copies under `docs/licenses/`. Swiper is a readable Core/Navigation/A11y/EffectFade build; Lenis uses its readable official distribution. Version, npm integrity, asset hashes, build details and performance rationale: [motion libraries](vendor/motion-libraries.md), [manifest](vendor/motion-libraries.json). No runtime CDN or new paid service.

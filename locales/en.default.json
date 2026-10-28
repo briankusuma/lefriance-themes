@@ -137,6 +137,7 @@
     "cart_count": "Cart, {{ count }} items"
   },
   "hero": {
+    "skip_intro": "Skip intro",
     "reference_alt": "Furniture in a warm, sunlit living room",
     "detail_alt": "Furniture material detail"
   },
