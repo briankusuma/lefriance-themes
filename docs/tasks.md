@@ -1,12 +1,10 @@
 # Task aktif
 
-Task aktif: perbaiki caption awal dan hilangkan solid hijau saat sofa di tengah, 2026-10-29. Selesai lokal.
+Task aktif: sinkronisasi sofa, garis, wordmark dan background final, 2026-10-29. Selesai lokal.
 
-Penyebab caption terlambat: setup sebelumnya menunggu GSAP/SplitText sebelum mengamati readiness aset. Sekarang salinan caption aria-hidden dipersiapkan langsung dengan DOM/grapheme segmentation native; SplitText mengambil alih setelah library siap tanpa reset progress. Gambar load/decode, font readiness dan engine readiness menggerakkan opacity 0.25–1 serta garis existing. Tidak ada timed reveal/minimum duration/fake progress; cache tetap boleh selesai langsung sesuai konfirmasi pengguna.
+`hero-intro.js` memakai fase bersama: center-sofa 1.8s memulai garis (0.5s), perjalanan ke kanan bawah (2s) dan crossfade background final (2s). Wordmark kanan-ke-kiri mulai 2.3s, navbar 2.4s. Sofa-settled/room-ready, seluruh huruf, navbar dan crossfade selesai bersama pada 3.8s. Garis memudar menjelang akhir. Semua waktu dihitung setelah real asset readiness; caption loading tetap tanpa timed reveal. Green surface tetap transparan ketika sofa terbentuk di tengah.
 
-Warna surface hijau memudar menjadi transparan bersamaan dengan opacity `green-sofa-front` naik (1.35–1.8 detik setelah readiness), sehingga ketika mencapai tengah hanya sofa terlihat. Tetap transparan saat bergerak ke kanan bawah. Urutan, foto baru dan wordmark kanan-ke-kiri tetap.
-
-Validasi: Theme Check/syntax/diff bersih; assertions progress/load/error/abort lulus. Browser 390/1535px 30/30 checks: caption sebelum engine, progress tetap saat pending, no reset saat handoff, full fill hanya setelah readiness, background transparan di center/corner, wrapping, cleanup dan scroll/header recovery. Live Theme Editor/perangkat nyata/Lighthouse belum diuji.
+Validasi: browser 390/1535px 28/28 checks sinkronisasi center/line, crossfade selama movement, arah huruf, state lengkap saat arrival dan cleanup/scroll unlock lulus. Assertions loading/load/error/abort, syntax/diff dan Theme Check bersih. Live Theme Editor/perangkat nyata/Lighthouse belum diuji.
 
 ## Isi untuk pekerjaan berikutnya
 

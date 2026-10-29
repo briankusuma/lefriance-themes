@@ -224,15 +224,15 @@ if (!customElements.get("hero-intro")) {
             .addLabel("center-sofa", 1.8)
             .to(
               surface,
-              { x: cornerX, y: cornerY, rotation: 2.05, duration: 1.4 },
+              { x: cornerX, y: cornerY, rotation: 2.05, duration: 2 },
               "center-sofa",
             )
-            .addLabel("sofa-settled", 3.2)
+            .addLabel("sofa-settled", 3.8)
             .to(progress, { opacity: 0, duration: 0.5 }, 0)
             .to(
               [pre, surface],
-              { opacity: 0, duration: 1.8, ease: "power1.inOut" },
-              "sofa-settled",
+              { opacity: 0, duration: 2, ease: "power1.inOut" },
+              "center-sofa",
             )
             .to(
               find("shade"),
@@ -243,11 +243,12 @@ if (!customElements.get("hero-intro")) {
                       "--hero-overlay-opacity",
                     ),
                   ) || 0,
-                duration: 1.8,
+                duration: 2,
               },
-              "sofa-settled",
+              "center-sofa",
             )
-            .addLabel("room-ready", 5)
+            .addLabel("room-ready", 3.8)
+            .addLabel("wordmark-reveal", 2.3)
             .call(
               () => this.classList.remove("is-intro-loading"),
               null,
@@ -255,10 +256,10 @@ if (!customElements.get("hero-intro")) {
             )
             .to(
               line,
-              { scaleX: 1, opacity: 1, duration: 1, ease: "power1.inOut" },
-              "room-ready",
+              { scaleX: 1, opacity: 1, duration: 0.5, ease: "power1.inOut" },
+              "center-sofa",
             )
-            .to(line, { opacity: 0, duration: 0.35 }, 7.15);
+            .to(line, { opacity: 0, duration: 0.35 }, 3.45);
           if (letters.length) {
             // Use the original Figma paths; rightmost letter rises from the line first.
             timeline.to(
@@ -270,18 +271,22 @@ if (!customElements.get("hero-intro")) {
                 stagger: { amount: 0.7 },
                 ease: "power3.out",
               },
-              6,
+              "wordmark-reveal",
             );
           } else {
             // A merchant-uploaded wordmark is one image, so retain it and reveal right to left.
             timeline.to(
               title,
               { clipPath: "inset(0 0 0 0%)", duration: 1.5 },
-              6,
+              "wordmark-reveal",
             );
           }
           if (header)
-            timeline.to(header, { yPercent: 0, opacity: 1, duration: 1.2 }, 6);
+            timeline.to(
+              header,
+              { yPercent: 0, opacity: 1, duration: 1.4 },
+              2.4,
+            );
         }, this);
         await loaded;
         if (!signal.aborted) this.timeline.play();
