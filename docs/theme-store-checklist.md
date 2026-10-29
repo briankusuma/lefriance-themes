@@ -287,7 +287,7 @@ Working checklist, not a release certificate. Read current official requirements
 
 ## Repository and tooling gates
 
-- [x] Theme Check CLI 4.9.4: zero findings after material-story activation-gate and editor lifecycle fixes, 2026-10-29. Rerun after code changes.
+- [x] Theme Check CLI 4.9.4: zero findings after native-sticky scene and core-only hero loader changes, 2026-10-29. Rerun after code changes.
 - [ ] No disabled Theme Check rules without justification
 - [ ] Third-party assets and licenses recorded in `docs/third-party-licenses.md`
 - [ ] Intentional design deviations recorded in `docs/project-brief.md`

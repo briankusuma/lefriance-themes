@@ -27,7 +27,7 @@ if (!customElements.get("hero-intro")) {
       }
 
       async start(signal) {
-        const engineReady = window.ThemeMotion?.animation();
+        const engineReady = window.ThemeMotion?.animation({ splitText: false });
         if (!engineReady || !this.isConnected) return this.finish();
         const find = (suffix) =>
           this.querySelector(`.editorial-hero__${suffix}`);
@@ -140,18 +140,10 @@ if (!customElements.get("hero-intro")) {
         const engine = await engineReady;
         if (signal.aborted) return;
         if (!engine) return this.finish();
-        const { gsap, SplitText } = engine;
+        const { gsap } = engine;
         const currentProgress = this.loadingValue;
-        this.split?.revert();
-        if (copy)
-          this.split = SplitText.create(copy, {
-            type: "words,chars",
-            tag: "span",
-            charsClass: "editorial-hero__intro-char",
-            reduceWhiteSpace: false,
-            aria: "none",
-            wordsClass: "editorial-hero__intro-word",
-          });
+        // Reuse the native grapheme spans prepared before the engine loaded.
+        // Reverting and splitting again here forces unnecessary DOM/layout work.
         this.paintLoadingProgress(currentProgress);
         this.paintCaptionReveal(0);
         const revealed = new Promise((resolve) => {

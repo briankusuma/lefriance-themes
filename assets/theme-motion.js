@@ -7,6 +7,7 @@
   let swiperReady;
   let lenisReady;
   let gsapReady;
+  let splitTextReady;
   let scrollTriggerReady;
   const scrollLocks = new Set();
   let lenis;
@@ -31,12 +32,15 @@
           }),
     ]);
   window.ThemeMotion = {
-    async animation() {
-      await (gsapReady ||= Promise.all([
-        load(config.gsapSrc),
-        load(config.splitTextSrc),
-      ]));
-      window.gsap.registerPlugin(window.SplitText);
+    async animation({ splitText = true } = {}) {
+      const core = (gsapReady ||= load(config.gsapSrc));
+      if (splitText) {
+        await Promise.all([
+          core,
+          (splitTextReady ||= load(config.splitTextSrc)),
+        ]);
+        window.gsap.registerPlugin(window.SplitText);
+      } else await core;
       return { gsap: window.gsap, SplitText: window.SplitText };
     },
     async scrollAnimation() {

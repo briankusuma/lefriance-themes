@@ -387,10 +387,16 @@
 .material-story__motion-lines {
   display: none;
 }
+.material-story.is-scroll-scene {
+  height: 550svh;
+  overflow: visible;
+}
 .material-story.is-scroll-scene .material-story__layout {
   --material-grid-color: #5b5148;
   --story-card-size: min(43.54vw, 61svh);
   --story-frame-opacity: 0;
+  position: sticky;
+  top: 0;
   height: 100svh;
   min-height: 0;
   grid-template-columns: minmax(0, 1fr) var(--story-card-size) minmax(0, 1fr);

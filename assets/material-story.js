@@ -3,7 +3,11 @@ if (!customElements.get("material-story")) {
     "material-story",
     class extends HTMLElement {
       connectedCallback() {
-        if (!window.ThemeMotion) return;
+        if (
+          !window.ThemeMotion ||
+          (this.controller && !this.controller.signal.aborted)
+        )
+          return;
         this.motionMedia?.revert();
         this.motionMedia = null;
         this.editorSelected = false;
@@ -99,7 +103,7 @@ if (!customElements.get("material-story")) {
           if (!event.target.contains(this) && !this.contains(event.target))
             return;
           this.editorSelected = false;
-          this.setupMotion();
+          this.queueMotion();
         };
         document.addEventListener("shopify:section:select", selectInEditor, {
           signal,
@@ -120,7 +124,59 @@ if (!customElements.get("material-story")) {
         this.querySelectorAll("[data-story-controls]").forEach((control) => {
           control.hidden = this.items.length === 0;
         });
-        this.update(false).then(() => this.setupMotion());
+        signal.addEventListener(
+          "abort",
+          () => {
+            this.visibilityObserver?.disconnect();
+            this.introObserver?.disconnect();
+          },
+          { once: true },
+        );
+        this.update(false).then(() => this.queueMotion());
+      }
+
+      queueMotion() {
+        this.visibilityObserver?.disconnect();
+        this.introObserver?.disconnect();
+        this.introObserver = null;
+        if (
+          this.controller.signal.aborted ||
+          this.editorSelected ||
+          this.motionMedia ||
+          this.dataset.scrollReveal !== "true" ||
+          matchMedia("(prefers-reduced-motion: reduce)").matches
+        )
+          return;
+        let near = !("IntersectionObserver" in window);
+        const start = () => {
+          if (!near || this.controller.signal.aborted || this.editorSelected)
+            return;
+          const intro = document.querySelector("hero-intro.is-intro-running");
+          if (intro) {
+            if (!this.introObserver) {
+              this.introObserver = new MutationObserver(start);
+              this.introObserver.observe(intro, {
+                attributes: true,
+                attributeFilter: ["class"],
+              });
+            }
+            return;
+          }
+          this.visibilityObserver?.disconnect();
+          this.introObserver?.disconnect();
+          this.introObserver = null;
+          this.setupMotion();
+        };
+        if ("IntersectionObserver" in window) {
+          this.visibilityObserver = new IntersectionObserver(
+            (entries) => {
+              near = entries.some((entry) => entry.isIntersecting);
+              start();
+            },
+            { rootMargin: "0px 0px 25% 0px" },
+          );
+          this.visibilityObserver.observe(this);
+        } else start();
       }
 
       async setupMotion() {
@@ -207,17 +263,17 @@ if (!customElements.get("material-story")) {
                   scrollTrigger: {
                     trigger: this,
                     start: "top top",
-                    end: () => `+=${innerHeight * 4.5}`,
-                    pin: true,
+                    // CSS sticky reserves the scene in normal flow: no pin wrapper,
+                    // reparenting, custom-element callbacks or pin refresh feedback.
+                    end: "bottom bottom",
                     scrub: 1.2,
-                    anticipatePin: 1,
                     invalidateOnRefresh: true,
-                    onRefresh: () => ThemeMotion.pageScroll?.resize(),
                   },
                 });
                 timeline
                   .to(title, { progress: 1, duration: 2.2, ease: "none" }, 0)
-                  .to(line("horizontal"), { scaleX: 1, duration: 1.2 }, 1.8)
+                  .to(line("horizontal"), { scaleX: 0.896, duration: 1.2 }, 1.8)
+                  .to(line("horizontal"), { scaleX: 1, duration: 0.8 }, 2.7)
                   .to(line("vertical"), { scaleY: 1, duration: 1 }, 2.7)
                   .to(
                     [line("horizontal"), line("vertical")],
@@ -300,20 +356,12 @@ if (!customElements.get("material-story")) {
                 else trigger.scroll(trigger.end);
               };
               document.addEventListener("keydown", finishForKeyboard);
-              // Refresh after lazy media dimensions settle; no extra RAF or scroll owner.
-              const refresh = () => ScrollTrigger.refresh();
-              const images = [...this.querySelectorAll("img")].filter(
-                (img) => !img.complete,
-              );
-              images.forEach((img) =>
-                img.addEventListener("load", refresh, { once: true }),
-              );
+              // Card/media geometry is reserved by CSS and image dimensions.
+              // One initial refresh; ScrollTrigger handles viewport resizes itself.
               ScrollTrigger.refresh();
+              ThemeMotion.pageScroll?.resize();
               return () => {
                 document.removeEventListener("keydown", finishForKeyboard);
-                images.forEach((img) =>
-                  img.removeEventListener("load", refresh),
-                );
                 timeline.scrollTrigger?.kill();
                 timeline.kill();
                 title.kill();
