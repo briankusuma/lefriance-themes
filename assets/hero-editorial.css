@@ -81,7 +81,7 @@
 .editorial-hero__card svg {
   display: block;
   width: 100%;
-  height: 6.329rem;
+  height: var(--hero-card-image-height, 6.329rem);
   object-fit: cover;
   object-position: center;
   border-radius: 0.2665rem;
@@ -316,7 +316,7 @@ html:has(hero-intro.is-intro-running) {
   }
   .editorial-hero[data-intro-enabled="true"] .editorial-hero__card img,
   .editorial-hero[data-intro-enabled="true"] .editorial-hero__card svg {
-    height: 6.5972vw;
+    height: var(--hero-card-image-height, 6.5972vw);
   }
   .editorial-hero[data-intro-enabled="true"] .editorial-hero__card-blur {
     top: 2.5vw;
@@ -367,4 +367,11 @@ html:has(hero-intro.is-intro-running) {
    opacity takes over when the navbar enters at the end of the intro. */
 body:has(hero-intro.is-intro-running) .site-header[data-home="true"] {
   opacity: 0;
+}
+
+/* This Figma export already includes the white frame and the original blur. */
+.editorial-hero__card-reference {
+  --hero-card-image-height: 100%;
+  position: absolute;
+  inset: 0;
 }

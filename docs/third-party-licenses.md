@@ -1,5 +1,7 @@
 # Third-Party Assets and Licenses
 
+2026-10-29 loading thumbnail: `assets/hero-detail-blurred.png`, unchanged 3× PNG export (442 × 442) of Figma `C2rhn7BP2nXA0LyByRDn09`, node `3722:1633`. Includes the original white frame, blur and fade; replaces the raw photo plus CSS blur for the reference card. Existing Figma commercial distribution-rights status remains pending before release. No new library.
+
 2026-10-29 full-chair replacement: user-supplied `assets/sofa-full.png`, 515 x 573 with transparency, replaces green-sofa-front in the intro. Original file retained unchanged; native aspect ratio/contain preserve the entire chair. Same user-provided Figma asset distribution-rights status applies; no new library or generated image.
 
 2026-10-29 hero center-sofa follow-up: user-supplied `assets/bg-header-center.png` (2303 x 1638) and `assets/green-sofa-front.png` (413 x 107), matching the updated Figma sequence `3722:1757` and center/corner frames `3725:1786`/`3725:1775`. Used unchanged; the default pre-room now references bg-header-center instead of hero-motion-pre.jpg. Same Figma commercial distribution-rights status applies. No generated images or new libraries.

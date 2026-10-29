@@ -86,10 +86,12 @@
           {% if section.settings.detail_image != blank %}
             {{ section.settings.detail_image | image_url: width: 400 | image_tag: widths: '160, 240, 400', sizes: '150px', loading: hero_loading, alt: section.settings.detail_image.alt }}
           {% elsif section.settings.use_reference_images %}
-            <img src="{{ 'hero-detail.png' | asset_img_url: '300x' }}" srcset="{{ 'hero-detail.png' | asset_img_url: '160x' }} 160w, {{ 'hero-detail.png' | asset_img_url: '300x' }} 300w" sizes="150px" width="960" height="1200" loading="{{ hero_loading }}" alt="{{ 'hero.detail_alt' | t }}">
+            <img class="editorial-hero__card-reference" src="{{ 'hero-detail-blurred.png' | asset_img_url: '442x' }}" srcset="{{ 'hero-detail-blurred.png' | asset_img_url: '148x' }} 148w, {{ 'hero-detail-blurred.png' | asset_img_url: '296x' }} 296w, {{ 'hero-detail-blurred.png' | asset_img_url: '442x' }} 442w" sizes="(min-width: 750px) 9.5833vw, 147px" width="442" height="442" loading="{{ hero_loading }}" alt="{{ 'hero.detail_alt' | t }}">
           {% else %}{{ 'product-1' | placeholder_svg_tag }}
           {% endif %}
-          <span class="editorial-hero__card-blur" aria-hidden="true"></span>
+          {% if section.settings.detail_image != blank or section.settings.use_reference_images != true %}
+            <span class="editorial-hero__card-blur" aria-hidden="true"></span>
+          {% endif %}
         </div>
         {% if section.settings.detail_link != blank %}</a>{% endif %}
         {% if section.settings.body != blank or section.settings.body_muted != blank %}

@@ -1,10 +1,10 @@
 # Task aktif
 
-Task aktif: replay setiap reload dan perlambat isi caption, 2026-10-29. Implementasi dan pemeriksaan logika selesai; visual browser belum diverifikasi.
+Task aktif: samakan blur thumbnail loading, 2026-10-29. Implementasi dan pemeriksaan lokal selesai; visual browser belum diverifikasi.
 
-`hero-intro.js` menghapus sessionStorage/introOnce gate. `hero-editorial.liquid`/schema dan home JSON menghapus intro_once, sehingga setting lama tidak bisa melewatkan replay. Caption native mulai pada opacity 0.25; setelah engine siap, GSAP menunggu 0.35s lalu mengisi karakter selama 2.4s setiap load. Ini durasi visual yang kini diminta pengguna, mengganti batasan timed-reveal sebelumnya. Garis existing tetap mengikuti readiness aset sebenarnya. Header menunggu Promise.all(asset readiness, text completion), lalu hold 0.8s; cached assets tidak membuat caption langsung penuh. Skip/abort membunuh caption timeline, menyelesaikan pending gate dan membersihkan context/split/scroll lock.
+Figma `3722:1633` → kartu detail di `sections/hero-editorial.liquid`. Export PNG asli 3× (442 × 442) disimpan sebagai `assets/hero-detail-blurred.png`, termasuk frame putih, blur bertekstur dan fade putih. CSS menempatkan export memenuhi kartu; overlay blur hanya dipertahankan untuk upload custom/placeholder. Tidak mengubah timing reveal atau urutan intro sebelumnya.
 
-Validasi: syntax/diff dan Theme Check bersih. GSAP asli/VM checks: inisialisasi berulang tetap berjalan meski dataset introOnce lama true; readiness cache tidak mengubah opacity karakter; fill 2.4s, asset+caption gate, hold 0.8s, urutan skala dan readiness/error/abort lulus. Ini bukan uji rendering/browser. Visual/Theme Editor/perangkat/Lighthouse belum diverifikasi karena sesi Computer Use sebelumnya dibatasi URL. [Shopify input settings](https://shopify.dev/docs/storefronts/themes/architecture/settings/input-settings).
+Validasi: export diperiksa terhadap screenshot sumber; render Liquid default/tanpa JS/custom dan dimensi aset lulus. Theme Check tanpa temuan; CSS formatting dan diff bersih. Browser/Theme Editor belum diperiksa karena pembatasan sesi Computer Use sebelumnya. API: [asset_img_url](https://shopify.dev/docs/api/liquid/filters/asset_img_url). Replay intro/timing sebelumnya tetap memerlukan QA visual.
 
 ## Isi untuk pekerjaan berikutnya
 
