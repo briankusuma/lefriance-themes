@@ -5,6 +5,8 @@ if (!customElements.get("material-story")) {
       connectedCallback() {
         if (!window.ThemeMotion) return;
         this.motionMedia?.revert();
+        this.motionMedia = null;
+        this.editorSelected = false;
         this.controller?.abort();
         this.swiper?.destroy(true, true);
         this.swiperCategory = null;
@@ -85,6 +87,35 @@ if (!customElements.get("material-story")) {
           { signal },
         );
 
+        // Editor selection must expose all content, without disabling preview globally.
+        const selectInEditor = (event) => {
+          if (!event.target.contains(this) && !this.contains(event.target))
+            return;
+          this.editorSelected = true;
+          this.motionMedia?.revert();
+          this.motionMedia = null;
+        };
+        const deselectInEditor = (event) => {
+          if (!event.target.contains(this) && !this.contains(event.target))
+            return;
+          this.editorSelected = false;
+          this.setupMotion();
+        };
+        document.addEventListener("shopify:section:select", selectInEditor, {
+          signal,
+        });
+        document.addEventListener("shopify:block:select", selectInEditor, {
+          signal,
+        });
+        document.addEventListener(
+          "shopify:section:deselect",
+          deselectInEditor,
+          { signal },
+        );
+        document.addEventListener("shopify:block:deselect", deselectInEditor, {
+          signal,
+        });
+
         this.classList.add("is-enhanced");
         this.querySelectorAll("[data-story-controls]").forEach((control) => {
           control.hidden = this.items.length === 0;
@@ -98,16 +129,23 @@ if (!customElements.get("material-story")) {
           this.dataset.scrollReveal !== "true" ||
           !this.items.length ||
           !this.swiper ||
-          window.Shopify?.designMode ||
+          this.editorSelected ||
+          this.motionMedia ||
           matchMedia("(prefers-reduced-motion: reduce)").matches
         )
           return;
         try {
           const { gsap, SplitText, ScrollTrigger } =
             await ThemeMotion.scrollAnimation();
-          if (signal.aborted || !this.isConnected) return;
+          if (
+            signal.aborted ||
+            !this.isConnected ||
+            this.editorSelected ||
+            this.motionMedia
+          )
+            return;
           await document.fonts.ready;
-          if (signal.aborted) return;
+          if (signal.aborted || this.editorSelected || this.motionMedia) return;
           const layout = this.querySelector(".material-story__layout");
           const heading = this.querySelector(".material-story__heading");
           const footer = this.querySelector(".material-story__footer");
@@ -120,28 +158,13 @@ if (!customElements.get("material-story")) {
           this.motionMedia = gsap.matchMedia();
           this.motionMedia.add(
             {
-              desktop: "(min-width: 990px) and (min-height: 700px)",
-              mobile: "(max-width: 989px), (max-height: 699px)",
+              desktop: "(min-width: 750px)",
+              mobile: "(max-width: 749px)",
               reduced: "(prefers-reduced-motion: reduce)",
             },
             ({ conditions }) => {
               if (conditions.reduced) return;
-              let pinScene = conditions.desktop;
-              if (pinScene) {
-                this.classList.add("is-scroll-scene");
-                const rowSpace =
-                  (layout.clientHeight - stories.clientHeight) / 2;
-                if (
-                  this.items.some(
-                    (item) => item.scrollHeight > item.clientHeight + 2,
-                  ) ||
-                  heading.scrollHeight > rowSpace ||
-                  footer.scrollHeight > rowSpace
-                ) {
-                  this.classList.remove("is-scroll-scene");
-                  pinScene = false;
-                }
-              }
+              const pinScene = conditions.desktop;
               const split = SplitText.create(heading, {
                 type: "words,chars",
                 aria: "auto",
@@ -304,9 +327,14 @@ if (!customElements.get("material-story")) {
               };
             },
           );
-        } catch {
+        } catch (error) {
           this.motionMedia?.revert();
+          this.motionMedia = null;
           this.classList.remove("is-scroll-scene");
+          console.warn(
+            "Material story scroll animation could not initialize.",
+            error,
+          );
         }
       }
 
@@ -402,6 +430,7 @@ if (!customElements.get("material-story")) {
 
       disconnectedCallback() {
         this.motionMedia?.revert();
+        this.motionMedia = null;
         this.controller?.abort();
         this.swiper?.destroy(true, true);
       }
