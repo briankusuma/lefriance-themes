@@ -1,6 +1,8 @@
 # Task aktif
 
-Task aktif: sinkronisasi scale kartu/garis dan final slide reveal, 2026-10-29. Implementasi dan pemeriksaan lokal selesai; visual browser belum diperiksa.
+Task aktif: gambar tidak muncul setelah perubahan scale, 2026-10-29. Bug diperbaiki lokal; browser toko belum diverifikasi.
+
+Root cause terverifikasi pada GSAP 3.15.0 CSSPlugin: quickSetter dengan compound alias scale diteruskan sebagai scaleX,scaleY sehingga tidak memperbarui transform cache DOM. Diganti setter scaleX dan scaleY eksplisit. Tes CSSPlugin asli mereproduksi nilai sumbu tetap 0 pada setter lama, lalu membuktikan kedua sumbu berubah dan renderTransform dipanggil pada setter baru (maju/mundur). Tes objek biasa terdahulu tidak menguji alias CSS ini. Sinkronisasi garis, zero start, dan final reveal dipertahankan. Syntax/format/diff, tes timeline dan Theme Check bersih.
 
 Follow-up: kartu scale 0→0.25→1 dan keempat batas kotak memakai satu nilai opening dan easing yang sama. Offset garis berasal dari separuh lebar/tinggi rail, dihitung saat setup/refresh; tidak membaca layout per frame. Swiper di-update sekali sebelum pengukuran, padding rail dihapus agar kartu tidak melewati batas. Final items memakai slide dari bawah (yPercent 105→0), clip mask dan stagger, mengikuti scrub. Tes GSAP sampling progres dan perubahan lebar saat refresh membuktikan batas kartu/garis tetap sinkron; reverse juga lulus. Tidak menambah library atau pin DOM. Batas verifikasi freeze/browser sebelumnya tetap berlaku.
 

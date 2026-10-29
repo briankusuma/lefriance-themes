@@ -247,14 +247,17 @@ if (!customElements.get("material-story")) {
                 let halfWidth = stories.offsetWidth / 2;
                 let halfHeight = stories.offsetHeight / 2;
                 const opening = { value: 0 };
-                const setScale = gsap.quickSetter(stories, "scale");
+                // quickSetter does not expand the compound scale alias for CSS targets.
+                const setScaleX = gsap.quickSetter(stories, "scaleX");
+                const setScaleY = gsap.quickSetter(stories, "scaleY");
                 const setTop = gsap.quickSetter(line("top"), "y", "px");
                 const setBottom = gsap.quickSetter(line("bottom"), "y", "px");
                 const setLeft = gsap.quickSetter(line("left"), "x", "px");
                 const setRight = gsap.quickSetter(line("right"), "x", "px");
                 const paintOpening = () => {
                   const value = opening.value;
-                  setScale(value);
+                  setScaleX(value);
+                  setScaleY(value);
                   setTop(-halfHeight * value);
                   setBottom(halfHeight * value);
                   setLeft(-halfWidth * value);
