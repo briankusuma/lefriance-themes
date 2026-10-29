@@ -1,6 +1,8 @@
 # Task aktif
 
-Task aktif: cek ulang scroll Figma dan tangani loading/Page Unresponsive, 2026-10-29. Perbaikan lokal selesai; verifikasi browser toko tetap terbuka.
+Task aktif: sinkronisasi scale kartu/garis dan final slide reveal, 2026-10-29. Implementasi dan pemeriksaan lokal selesai; visual browser belum diperiksa.
+
+Follow-up: kartu scale 0→0.25→1 dan keempat batas kotak memakai satu nilai opening dan easing yang sama. Offset garis berasal dari separuh lebar/tinggi rail, dihitung saat setup/refresh; tidak membaca layout per frame. Swiper di-update sekali sebelum pengukuran, padding rail dihapus agar kartu tidak melewati batas. Final items memakai slide dari bawah (yPercent 105→0), clip mask dan stagger, mengikuti scrub. Tes GSAP sampling progres dan perubahan lebar saat refresh membuktikan batas kartu/garis tetap sinkron; reverse juga lulus. Tidak menambah library atau pin DOM. Batas verifikasi freeze/browser sebelumnya tetap berlaku.
 
 Figma `C2rhn7BP2nXA0LyByRDn09` / `3734:390` dibaca ulang. Mapping: Material stories existing; tujuh tahap pada satu sticky stage: title character fill → horizontal → cross → kartu kecil → kartu penuh → outer grid → side controls. CSS host 550svh/stage 100svh; ScrollTrigger start top/top, end bottom/bottom, scrub 1.2s; mundur saat scroll naik. Tidak ada GSAP pin/wrapper/pemindahan DOM atau callback refresh→Lenis.resize. Kategori, slider dan konten editable dipertahankan. Scene baru dimuat dekat viewport setelah intro selesai.
 

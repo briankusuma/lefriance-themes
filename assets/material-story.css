@@ -434,7 +434,7 @@
 }
 .material-story.is-scroll-scene .material-story__stories {
   height: var(--story-card-size);
-  padding: 0.333rem;
+  padding: 0;
   transform-origin: center;
 }
 .material-story.is-scroll-scene .material-story__card {

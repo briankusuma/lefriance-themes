@@ -243,13 +243,43 @@ if (!customElements.get("material-story")) {
                 this.classList.add("is-scroll-scene");
                 const line = (name) =>
                   this.querySelector(`[data-story-line="${name}"]`);
-                const half = () => stories.offsetHeight / 2;
+                this.swiper?.update?.();
+                let halfWidth = stories.offsetWidth / 2;
+                let halfHeight = stories.offsetHeight / 2;
+                const opening = { value: 0 };
+                const setScale = gsap.quickSetter(stories, "scale");
+                const setTop = gsap.quickSetter(line("top"), "y", "px");
+                const setBottom = gsap.quickSetter(line("bottom"), "y", "px");
+                const setLeft = gsap.quickSetter(line("left"), "x", "px");
+                const setRight = gsap.quickSetter(line("right"), "x", "px");
+                const paintOpening = () => {
+                  const value = opening.value;
+                  setScale(value);
+                  setTop(-halfHeight * value);
+                  setBottom(halfHeight * value);
+                  setLeft(-halfWidth * value);
+                  setRight(halfWidth * value);
+                };
+                const finalItems = [
+                  ...this.querySelectorAll(
+                    ".material-story__filters button, .material-story__intro > *, .material-story__thumbnail, .material-story__aside-copy > *, .material-story__indicator",
+                  ),
+                ];
                 const centerY = (element) =>
                   layout.offsetHeight / 2 -
                   element.offsetTop -
                   element.offsetHeight / 2;
                 gsap.set(sides, { autoAlpha: 0 });
-                gsap.set(stories, { scale: 0.25, autoAlpha: 0 });
+                gsap.set(finalItems, {
+                  yPercent: 105,
+                  autoAlpha: 0,
+                  clipPath: "inset(100% 0 0 0)",
+                });
+                gsap.set(stories, { scale: 0, autoAlpha: 1 });
+                gsap.set(
+                  [line("top"), line("bottom"), line("left"), line("right")],
+                  { x: 0, y: 0 },
+                );
                 gsap.set(heading, { y: () => centerY(heading) - 90 });
                 gsap.set(footer, { y: () => centerY(footer) + 65 });
                 gsap.set([line("horizontal"), line("top"), line("bottom")], {
@@ -268,6 +298,11 @@ if (!customElements.get("material-story")) {
                     end: "bottom bottom",
                     scrub: 1.2,
                     invalidateOnRefresh: true,
+                    onRefresh: () => {
+                      halfWidth = stories.offsetWidth / 2;
+                      halfHeight = stories.offsetHeight / 2;
+                      paintOpening();
+                    },
                   },
                 });
                 timeline
@@ -290,40 +325,48 @@ if (!customElements.get("material-story")) {
                     { scaleY: 1, duration: 0.3 },
                     3.5,
                   )
-                  .to(
-                    line("top"),
-                    { y: () => -half() * 0.25, duration: 1 },
+                  .fromTo(
+                    opening,
+                    { value: 0 },
+                    {
+                      value: 0.25,
+                      duration: 1,
+                      immediateRender: false,
+                      onUpdate: paintOpening,
+                    },
                     3.5,
                   )
-                  .to(
-                    line("bottom"),
-                    { y: () => half() * 0.25, duration: 1 },
-                    3.5,
-                  )
-                  .to(
-                    line("left"),
-                    { x: () => -half() * 0.25, duration: 1 },
-                    3.5,
-                  )
-                  .to(
-                    line("right"),
-                    { x: () => half() * 0.25, duration: 1 },
-                    3.5,
-                  )
-                  .to(stories, { autoAlpha: 1, duration: 0.8 }, 3.8)
                   .to(heading, { y: 0, duration: 3 }, 3.5)
                   .to(footer, { y: 0, duration: 3 }, 3.5)
-                  .to(stories, { scale: 1, duration: 2.6 }, 4.5)
-                  .to(line("top"), { y: () => -half(), duration: 2.6 }, 4.5)
-                  .to(line("bottom"), { y: () => half(), duration: 2.6 }, 4.5)
-                  .to(line("left"), { x: () => -half(), duration: 2.6 }, 4.5)
-                  .to(line("right"), { x: () => half(), duration: 2.6 }, 4.5)
+                  .fromTo(
+                    opening,
+                    { value: 0.25 },
+                    {
+                      value: 1,
+                      duration: 2.6,
+                      immediateRender: false,
+                      onUpdate: paintOpening,
+                    },
+                    4.5,
+                  )
                   .to(
                     layout,
                     { "--story-frame-opacity": 1, duration: 0.9 },
                     6.8,
                   )
-                  .to(sides, { autoAlpha: 1, duration: 1.2, stagger: 0.2 }, 7.4)
+                  .set(sides, { autoAlpha: 1 }, 7.4)
+                  .to(
+                    finalItems,
+                    {
+                      yPercent: 0,
+                      autoAlpha: 1,
+                      clipPath: "inset(0% 0 0 0)",
+                      duration: 1.2,
+                      stagger: { amount: 0.65 },
+                      ease: "power3.out",
+                    },
+                    7.4,
+                  )
                   .to({}, { duration: 0.7 });
                 const updateAccess = () => {
                   sides.forEach((side) => {
