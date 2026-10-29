@@ -3,8 +3,11 @@
   const config = document.currentScript.dataset;
   const reduced = matchMedia("(prefers-reduced-motion: reduce)");
   const instances = new Set();
+  const pendingCreates = new WeakMap();
   let swiperReady;
   let lenisReady;
+  let gsapReady;
+  const scrollLocks = new Set();
   let lenis;
   const load = (src, style) =>
     Promise.all([
@@ -15,16 +18,34 @@
         script.onerror = reject;
         document.head.append(script);
       }),
-      new Promise((resolve, reject) => {
-        const link = document.createElement("link");
-        link.rel = "stylesheet";
-        link.href = style;
-        link.onload = resolve;
-        link.onerror = reject;
-        document.head.append(link);
-      }),
+      !style
+        ? Promise.resolve()
+        : new Promise((resolve, reject) => {
+            const link = document.createElement("link");
+            link.rel = "stylesheet";
+            link.href = style;
+            link.onload = resolve;
+            link.onerror = reject;
+            document.head.append(link);
+          }),
     ]);
   window.ThemeMotion = {
+    async animation() {
+      await (gsapReady ||= Promise.all([
+        load(config.gsapSrc),
+        load(config.splitTextSrc),
+      ]));
+      window.gsap.registerPlugin(window.SplitText);
+      return { gsap: window.gsap, SplitText: window.SplitText };
+    },
+    lockScroll(owner) {
+      scrollLocks.add(owner);
+      syncLock();
+      return () => {
+        scrollLocks.delete(owner);
+        syncLock();
+      };
+    },
     get pageScroll() {
       return lenis;
     },
@@ -32,13 +53,16 @@
       return reduced.matches ? 0 : 520;
     },
     async create(container, slides, options = {}) {
+      const request = {};
+      pendingCreates.set(container, request);
       if (!slides.length) return null;
       try {
         await (swiperReady ||= load(config.swiperSrc, config.swiperCss));
       } catch {
         return null;
       }
-      if (!container.isConnected) return null;
+      if (!container.isConnected || pendingCreates.get(container) !== request)
+        return null;
       const wrapper = document.createElement("div");
       wrapper.className = "swiper-wrapper";
       container.prepend(wrapper);
@@ -94,6 +118,7 @@
   const syncLock = () => {
     if (!lenis) return;
     const locked =
+      scrollLocks.size > 0 ||
       Boolean(
         document.querySelector("dialog[open], details[scroll-lock][open]"),
       ) ||

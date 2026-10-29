@@ -201,8 +201,11 @@ html:has(hero-intro.is-intro-running) {
 .is-intro-running .editorial-hero__content {
   z-index: 3;
 }
+.is-intro-running .editorial-hero__title-frame {
+  overflow: hidden;
+}
 .is-intro-running .editorial-hero__title {
-  clip-path: inset(100% 0 0);
+  transform: translateY(100%);
 }
 .is-intro-running .editorial-hero__shade {
   opacity: 0;
@@ -228,7 +231,7 @@ html:has(hero-intro.is-intro-running) {
   display: block;
   position: absolute;
   right: 0;
-  bottom: -1rem;
+  bottom: 0;
   left: 0;
   height: 1px;
   background: var(--hero-intro-text);
@@ -255,7 +258,7 @@ html:has(hero-intro.is-intro-running) {
   .editorial-hero__body
   > span:not(.editorial-hero__intro-copy) {
   color: inherit;
-  opacity: 0.35;
+  color: transparent;
 }
 .editorial-hero__intro-copy {
   display: none;
@@ -265,13 +268,7 @@ html:has(hero-intro.is-intro-running) {
   position: absolute;
   inset: 0;
   color: var(--hero-intro-text);
-  clip-path: inset(0 100% 0 0);
-  animation: hero-copy-fill 1800ms linear forwards;
-}
-@keyframes hero-copy-fill {
-  to {
-    clip-path: inset(0 0 0 0);
-  }
+  pointer-events: none;
 }
 @media (max-width: 749px) {
   .editorial-hero[data-intro-enabled="true"] {
@@ -279,11 +276,6 @@ html:has(hero-intro.is-intro-running) {
   }
   .editorial-hero__pre-photo {
     object-position: 55% top;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .editorial-hero__intro-copy {
-    animation: none;
   }
 }
 

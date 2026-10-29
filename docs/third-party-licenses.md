@@ -1,5 +1,7 @@
 # Third-Party Assets and Licenses
 
+2026-10-29: GSAP core and SplitText 3.15.0 from the official npm `gsap` package, distributed unminified in `assets/vendor-gsap-3.15.0.js` and `assets/vendor-gsap-split-text-3.15.0.js`. GSAP Standard No Charge License, not MIT: https://gsap.com/standard-license/. Original copyright/license notices retained. Used for the user-requested preset hero intro; no visual animation builder. Source/integrity/hashes in [motion manifest](vendor/motion-libraries.json). Loaded on demand for eligible intro only; no runtime third-party host.
+
 2026-10-28 hero intro: `assets/hero-motion-pre.jpg` exported from user-provided Figma `C2rhn7BP2nXA0LyByRDn09`, empty-room layer `3722:1741` in motion-pre `3722:1739` (sequence `3722:1757`). Original 1280 x 960 PNG converted to JPEG quality 88, approximately 184 KB. Existing Figma commercial distribution rights remain unverified before release. Native Web Animations API; no additional library.
 
 2026-10-28 catalog Color: five 96px PNG swatches rendered from Figma swatch SVG groups `3374:343`, `3374:346`, `3374:349` (same palette reused by `3374:353`) at the user's request and uploaded to Shopify Files. Palette sources are retained in [design tokens](design-tokens.md). Local upload duplicates were removed during documentation cleanup; Shopify Files supplies storefront data. existing Figma distribution-rights status remains unchanged. No raster AI generation, storefront library, or runtime theme asset was added for this task.

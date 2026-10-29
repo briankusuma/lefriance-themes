@@ -34,5 +34,24 @@
         "sha256": "2f668ae84a668327f246faf8a770383a2bf69196d214290fbc4d5548910606c5"
       }
     }
+  },
+  "gsap": {
+    "version": "3.15.0",
+    "license": "GSAP Standard No Charge License (not MIT)",
+    "license_url": "https://gsap.com/standard-license/",
+    "source": "https://registry.npmjs.org/gsap/-/gsap-3.15.0.tgz",
+    "integrity": "sha512-dMW4CWBTUK1AEEDeZc1g4xpPGIrSf9fJF960qbTZmN/QwZIWY5wgliS6JWl9/25fpTGJrMRtSjGtOmPnfjZB+A==",
+    "assets": {
+      "assets/vendor-gsap-3.15.0.js": {
+        "bytes": 179557,
+        "gzip_bytes": 42707,
+        "sha256": "01effe0e121c22ba0f885a3f091f3dc6d1f0d445c4fba37dcb298e314eca5cfb"
+      },
+      "assets/vendor-gsap-split-text-3.15.0.js": {
+        "bytes": 18034,
+        "gzip_bytes": 4999,
+        "sha256": "e25cde4005072ad2be67924d721709b881f7e122d4756ee4d1c2cbaae43e3f41"
+      }
+    }
   }
 }

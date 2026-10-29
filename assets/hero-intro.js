@@ -1,17 +1,17 @@
-/* A progressive, session-aware introduction. The unenhanced hero is always visible. */
+/* Scoped GSAP intro; the unenhanced hero remains available when assets fail. */
 if (!customElements.get("hero-intro")) {
   customElements.define(
     "hero-intro",
     class extends HTMLElement {
       connectedCallback() {
+        this.finish();
         this.motion = matchMedia("(prefers-reduced-motion: reduce)");
-        const seen = (() => {
-          try {
-            return sessionStorage.getItem("lefriance:hero-intro:v1");
-          } catch {
-            return false;
-          }
-        })();
+        let seen;
+        try {
+          seen = sessionStorage.getItem("lefriance:hero-intro:v1");
+        } catch {
+          /* Optional storage. */
+        }
         if (
           this.dataset.introEnabled !== "true" ||
           this.dataset.designMode === "true" ||
@@ -22,45 +22,43 @@ if (!customElements.get("hero-intro")) {
         )
           return;
         this.controller = new AbortController();
-        this.animations = new Set();
         this.restores = [];
         this.active = true;
-        this.run().catch(() => this.finish());
-      }
-
-      animate(
-        element,
-        frames,
-        duration,
-        easing = "cubic-bezier(.76, 0, .24, 1)",
-      ) {
-        if (!this.active || !element) return Promise.resolve();
-        const animation = element.animate(frames, {
-          duration,
-          easing,
-          fill: "forwards",
+        const { signal } = this.controller;
+        this.safety = setTimeout(() => this.finish(), 16000);
+        window.addEventListener("pagehide", () => this.finish(), { signal });
+        window.addEventListener("resize", () => this.finish(), { signal });
+        this.motion.addEventListener("change", () => this.finish(), { signal });
+        this.start(signal).catch(() => {
+          if (!signal.aborted) this.finish();
         });
-        this.animations.add(animation);
-        return animation.finished;
       }
 
-      async run() {
-        const signal = this.controller.signal;
-        const detail = this.querySelector(".editorial-hero__detail-content");
-        const surface = this.querySelector(".editorial-hero__intro-surface");
-        const pre = this.querySelector(".editorial-hero__pre");
-        const title = this.querySelector(".editorial-hero__title");
-        const line = this.querySelector(".editorial-hero__reveal-line");
-        const progress = this.querySelector(
-          ".editorial-hero__intro-progress span",
-        );
-        const skip = this.querySelector("[data-intro-skip]");
+      async start(signal) {
+        const engine = await window.ThemeMotion?.animation();
+        if (signal.aborted) return;
+        if (!engine || !this.isConnected) return this.finish();
+        const { gsap, SplitText } = engine;
+        const find = (suffix) =>
+          this.querySelector(`.editorial-hero__${suffix}`);
+        const detail = find("detail-content"),
+          surface = find("intro-surface"),
+          pre = find("pre");
+        const title = find("title"),
+          line = find("reveal-line"),
+          progress = find("intro-progress");
+        const copy = find("intro-copy"),
+          skip = this.querySelector("[data-intro-skip]");
         const header = document.querySelector('.site-header[data-home="true"]');
         if (!detail || !surface || !skip) return this.finish();
+        this.releaseScroll = window.ThemeMotion.lockScroll(this);
+        window.ThemeMotion.pageScroll?.scrollTo(0, {
+          immediate: true,
+          force: true,
+        });
         window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-        this.classList.add("is-intro-running");
+        this.classList.add("is-intro-running", "is-intro-loading");
         skip.hidden = false;
-        this.safety = setTimeout(() => this.finish(), 14000);
         skip.addEventListener("click", () => this.finish(), { signal });
         document.addEventListener(
           "keydown",
@@ -69,10 +67,7 @@ if (!customElements.get("hero-intro")) {
           },
           { signal },
         );
-        window.addEventListener("pagehide", () => this.finish(), { signal });
-        window.addEventListener("resize", () => this.finish(), { signal });
-        this.motion.addEventListener("change", () => this.finish(), { signal });
-        // Keep the skip control available while the rest of the page is covered.
+        // Keep only the intro and its Skip control interactive while covered.
         let branch = this;
         while (
           branch.parentElement &&
@@ -105,60 +100,8 @@ if (!customElements.get("hero-intro")) {
               : headerGroup.style.removeProperty("z-index"),
           );
         }
-        if (header)
-          this.animate(
-            header,
-            [
-              { opacity: 0, transform: "translateY(-110%)" },
-              { opacity: 0, transform: "translateY(-110%)" },
-            ],
-            1,
-          );
-        const box = detail.getBoundingClientRect();
-        const hero = this.getBoundingClientRect();
-        const offset = `translate(${innerWidth / 2 - box.left - box.width / 2}px, ${innerHeight / 2 - box.top - box.height / 2}px)`;
-        const positioned = detail.animate([{ transform: offset }], {
-          duration: 1,
-          fill: "forwards",
-        });
-        this.animations.add(positioned);
-        this.classList.add("is-intro-loading");
-        const images = [...this.querySelectorAll("img")];
-        const loaded = Promise.all(
-          images.map((img) => {
-            img.loading = "eager";
-            return img.decode().catch(() => {});
-          }),
-        );
-        await Promise.all([
-          this.animate(
-            detail,
-            [{ opacity: 0 }, { opacity: 1 }],
-            900,
-            "ease-out",
-          ),
-          this.animate(
-            progress,
-            [{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }],
-            1800,
-            "linear",
-          ),
-          Promise.race([
-            loaded,
-            new Promise((resolve) => {
-              this.loadTimer = setTimeout(resolve, 2600);
-            }),
-          ]),
-        ]);
-        if (!this.active) return;
-        try {
-          sessionStorage.setItem("lefriance:hero-intro:v1", "1");
-        } catch {
-          /* Storage is optional. */
-        }
-        this.classList.remove("is-intro-loading");
-        this.classList.add("is-intro-moving");
-        positioned.cancel();
+        const box = detail.getBoundingClientRect(),
+          hero = this.getBoundingClientRect();
         const targetWidth = Math.min(
           (261 * hero.width) / 1535,
           hero.width * 0.24,
@@ -169,84 +112,115 @@ if (!customElements.get("hero-intro")) {
           (hero.width * 1138) / 1535,
         );
         const y = (hero.height * 691) / 1092;
-        await Promise.all([
-          this.animate(
-            detail,
-            [{ transform: offset }, { transform: "translate(0, 0)" }],
-            1800,
-          ),
-          this.animate(
-            surface,
-            [
-              { transform: "translate(0, 0) rotate(0deg) scale(1, 1)" },
-              {
-                transform: `translate(${hero.left + x}px, ${hero.top + y}px) rotate(1.44deg) scale(${targetWidth / innerWidth}, ${targetHeight / innerHeight})`,
-              },
-            ],
-            1800,
-          ),
-          this.animate(
-            progress.parentElement,
-            [{ opacity: 1 }, { opacity: 0 }],
-            500,
-          ),
+        const images = [...this.querySelectorAll("img")].map((img) => {
+          img.loading = "eager";
+          return img.decode().catch(() => {});
+        });
+        const loaded = Promise.race([
+          Promise.all(images),
+          new Promise((resolve) => {
+            this.loadTimer = setTimeout(resolve, 2600);
+          }),
         ]);
-        if (!this.active) return;
-        await Promise.all([
-          this.animate(
-            pre,
-            [{ opacity: 1 }, { opacity: 0 }],
-            1800,
-            "ease-in-out",
-          ),
-          this.animate(
-            surface,
-            [{ opacity: 1 }, { opacity: 0 }],
-            1800,
-            "ease-in-out",
-          ),
-          this.animate(
-            this.querySelector(".editorial-hero__shade"),
-            [
-              { opacity: 0 },
+        try {
+          sessionStorage.setItem("lefriance:hero-intro:v1", "1");
+        } catch {
+          /* Optional storage. */
+        }
+        // The accessible rich text stays intact; only its aria-hidden visual copy splits.
+        if (copy)
+          this.split = SplitText.create(copy, {
+            type: "words",
+            aria: "none",
+            wordsClass: "editorial-hero__intro-word",
+          });
+        this.context = gsap.context(() => {
+          gsap.set(detail, {
+            x: innerWidth / 2 - box.left - box.width / 2,
+            y: innerHeight / 2 - box.top - box.height / 2,
+            opacity: 0,
+          });
+          gsap.set(title, { y: 0, yPercent: 100 });
+          if (header) gsap.set(header, { yPercent: -110, opacity: 0 });
+          const timeline = (this.timeline = gsap.timeline({
+            defaults: { ease: "power3.inOut" },
+            onComplete: () => this.finish(),
+          }));
+          timeline
+            .to(detail, { opacity: 1, duration: 0.9 }, 0)
+            .to(
+              progress.firstElementChild,
+              { scaleX: 1, duration: 1.8, ease: "none" },
+              0,
+            );
+          if (this.split?.words.length)
+            timeline.fromTo(
+              this.split.words,
+              { opacity: 0.12, yPercent: 20, clipPath: "inset(0 100% 0 0)" },
+              {
+                opacity: 1,
+                yPercent: 0,
+                clipPath: "inset(0 0% 0 0)",
+                duration: 1.1,
+                stagger: { amount: 0.7 },
+                ease: "power2.out",
+              },
+              0,
+            );
+          timeline
+            .addPause(1.8, () => {
+              loaded.then(() => {
+                if (!signal.aborted) timeline.resume();
+              });
+            })
+            .call(() => this.classList.add("is-intro-moving"), null, 1.8)
+            .to(detail, { x: 0, y: 0, duration: 1.8 }, 1.8)
+            .to(
+              surface,
+              {
+                x: hero.left + x,
+                y: hero.top + y,
+                rotation: 1.44,
+                scaleX: targetWidth / innerWidth,
+                scaleY: targetHeight / innerHeight,
+                duration: 1.8,
+              },
+              1.8,
+            )
+            .to(progress, { opacity: 0, duration: 0.5 }, 1.8)
+            .to(
+              [pre, surface],
+              { opacity: 0, duration: 1.8, ease: "power1.inOut" },
+              3.6,
+            )
+            .to(
+              find("shade"),
               {
                 opacity:
-                  getComputedStyle(this)
-                    .getPropertyValue("--hero-overlay-opacity")
-                    .trim() || ".6",
+                  Number(
+                    getComputedStyle(this).getPropertyValue(
+                      "--hero-overlay-opacity",
+                    ),
+                  ) || 0,
+                duration: 1.8,
               },
-            ],
-            1800,
-          ),
-        ]);
-        if (!this.active) return;
-        await this.animate(
-          line,
-          [
-            { transform: "scaleX(0)", opacity: 1 },
-            { transform: "scaleX(1)", opacity: 1 },
-          ],
-          1000,
-          "ease-in-out",
-        );
-        if (!this.active) return;
-        await Promise.all([
-          this.animate(
-            title,
-            [{ clipPath: "inset(100% 0 0)" }, { clipPath: "inset(0% 0 0)" }],
-            1500,
-          ),
-          this.animate(line, [{ opacity: 1 }, { opacity: 0 }], 650),
-          this.animate(
-            header,
-            [
-              { opacity: 0, transform: "translateY(-110%)" },
-              { opacity: 1, transform: "translateY(0)" },
-            ],
-            1200,
-          ),
-        ]);
-        this.finish();
+              3.6,
+            )
+            .call(() => this.classList.remove("is-intro-loading"), null, 5.4)
+            .to(
+              line,
+              { scaleX: 1, opacity: 1, duration: 1, ease: "power1.inOut" },
+              5.4,
+            )
+            .to(title, { yPercent: 0, duration: 1.5 }, 6.4)
+            .to(line, { opacity: 0, duration: 0.35 }, 7.55);
+          if (header)
+            timeline.to(
+              header,
+              { yPercent: 0, opacity: 1, duration: 1.2 },
+              6.4,
+            );
+        }, this);
       }
 
       finish() {
@@ -254,16 +228,21 @@ if (!customElements.get("hero-intro")) {
         this.active = false;
         clearTimeout(this.safety);
         clearTimeout(this.loadTimer);
-        this.controller.abort();
+        this.controller?.abort();
         const skip = this.querySelector("[data-intro-skip]");
         const restoreFocus = document.activeElement === skip;
+        this.timeline?.kill();
+        this.context?.revert();
+        this.split?.revert();
+        this.context = this.split = this.timeline = null;
         this.classList.remove(
           "is-intro-running",
           "is-intro-loading",
           "is-intro-moving",
         );
-        for (const animation of this.animations) animation.cancel();
         for (const restore of this.restores.reverse()) restore();
+        this.releaseScroll?.();
+        this.releaseScroll = null;
         if (skip) skip.hidden = true;
         if (restoreFocus)
           document

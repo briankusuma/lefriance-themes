@@ -99,6 +99,8 @@ if (!customElements.get("material-story")) {
       }
 
       async update(announce) {
+        const signal = this.controller.signal;
+        const category = this.category;
         const visible = this.items.filter((item) => this.matchesCategory(item));
         if (this.swiperCategory !== this.category) {
           this.swiper?.destroy(true, true);
@@ -125,7 +127,7 @@ if (!customElements.get("material-story")) {
               },
             },
           );
-          if (this.controller.signal.aborted) {
+          if (signal.aborted || this.category !== category) {
             swiper?.destroy(true, true);
             return;
           }

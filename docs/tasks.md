@@ -1,12 +1,14 @@
 # Task aktif
 
-Task aktif: intro homepage dari Figma [3722:1757](https://www.figma.com/design/C2rhn7BP2nXA0LyByRDn09/Speedtest?node-id=3722-1757), 2026-10-28. Selesai implementasi dan validasi lokal.
+Task aktif: GSAP intro dan audit kompatibilitas motion, 2026-10-29. Selesai lokal.
 
-Mapping: sequence → `hero-editorial.liquid`, `hero-editorial.css`, `hero-intro.js`; motion-pre → aset lokal `hero-motion-pre.jpg`; pilihan enable/once/image/colors → schema section. Memakai kartu/wordmark/navbar existing, tanpa library baru.
+Mapping: loading copy → GSAP SplitText pada salinan aria-hidden; sequence/wordmark → timeline GSAP di `hero-intro.js`; baseline/mask → `hero-editorial.css`; library loader dan scroll locks → `theme-motion.js`/`layout/theme.liquid`. Tetap memakai aset frame Figma [3722:1658](https://www.figma.com/design/C2rhn7BP2nXA0LyByRDn09/Speedtest?node-id=3722-1658), dengan urutan [3722:1757](https://www.figma.com/design/C2rhn7BP2nXA0LyByRDn09/Speedtest?node-id=3722-1757). Timing ~7.9 detik mengikuti permintaan perlambatan, bukan keyframes Figma. Intro aktif tiap reload; editor/reduced motion/no-JS tetap hero akhir.
 
-Hasil: text/progress reveal, kartu bergerak ke kiri bawah, bidang hijau menyusut ke kanan, empty room crossfade ke hero furnished, garis kemudian wordmark dan navbar turun. Follow-up 3722:1658: final desktop mengikuti proporsi Figma, wordmark/card/navbar aligned, overlay homepage 0%; durasi diperpanjang menjadi ~7.9 detik dan intro diputar setiap reload. Aset foto/wordmark dikonfirmasi identik dengan frame final (hash sama), tanpa aset baru. Default homepage aktif setiap reload; skip/Escape, cleanup, no-JS, editor dan reduced motion menampilkan hero akhir. Theme Check tanpa temuan. Browser lokal 390/1440px: 14 skenario normal/editor/disabled/no-JS/skip/reduced-motion/repeat lulus; tanpa error/overflow, scroll/inert/animasi dibersihkan. Komposisi final dibandingkan pada 1535 x 1092 dan reload dicoba langsung di Chrome. Timing dan mobile diturunkan dari langkah statis Figma; lihat [brief](project-brief.md). Live Theme Editor, perangkat nyata dan Lighthouse belum diuji.
+GSAP core + SplitText 3.15.0 readable/local, on demand (~47 KB gzip), dengan notices dan manifest lisensi. Wordmark naik dari garis tanpa gap. Lenis satu-satunya page scroll engine; lock bersama intro/modal/menu mencegah resume prematur. Loader Swiper menolak request async yang sudah digantikan; Material Story mengabaikan hasil filter lama. Audit semua script section tidak menemukan kebutuhan mengubah slider lain.
 
-Dokumentasi Shopify: [asset_img_url](https://shopify.dev/docs/api/liquid/filters/asset_img_url), [input settings](https://shopify.dev/docs/storefronts/themes/architecture/settings/input-settings), [requirements](https://shopify.dev/docs/storefronts/themes/store/requirements).
+Validasi lokal: Theme Check tanpa temuan; browser 101/101 checks Material Story/Featured Collections/Journal/footer, 14/14 galeri produk, 30/30 integrasi GSAP–Lenis/baseline/reconnect/cleanup. Fallback intro diperiksa ulang pada 390/1440px. Tidak mengklaim kelulusan Theme Editor asli, screen reader, perangkat nyata atau Lighthouse toko.
+
+Sumber: [GSAP context](https://gsap.com/docs/v3/GSAP/gsap.context()/), [SplitText](https://gsap.com/docs/v3/Plugins/SplitText/), [Lenis](https://github.com/darkroomengineering/lenis), [Shopify performance](https://shopify.dev/docs/storefronts/themes/best-practices/performance). Lisensi/aset: [motion libraries](vendor/motion-libraries.md).
 
 ## Isi untuk pekerjaan berikutnya
 
