@@ -1,10 +1,10 @@
 # Task aktif
 
-Task aktif: samakan blur thumbnail loading, 2026-10-29. Implementasi dan pemeriksaan lokal selesai; visual browser belum diverifikasi.
+Task aktif: perbaiki error refresh cart drawer, 2026-10-29. Perbaikan dan pemeriksaan lokal selesai; transaksi toko/browser belum diverifikasi.
 
-Figma `3722:1633` → kartu detail di `sections/hero-editorial.liquid`. Export PNG asli 3× (442 × 442) disimpan sebagai `assets/hero-detail-blurred.png`, termasuk frame putih, blur bertekstur dan fade putih. CSS menempatkan export memenuhi kartu; overlay blur hanya dipertahankan untuk upload custom/placeholder. Tidak mengubah timing reveal atau urutan intro sebelumnya.
+`assets/commerce.js`: refresh section memakai URL halaman aktif (beserta locale/query preview), bukan `/cart` yang tidak merender drawer menurut `layout/theme.liquid`. Bundled rendering memakai konteks yang sama. Refresh sukses membersihkan error lama; kegagalan nyata tetap ditampilkan. Mutation sukses tidak diulang ketika section gagal dirender. Tidak mengubah tampilan atau schema.
 
-Validasi: export diperiksa terhadap screenshot sumber; render Liquid default/tanpa JS/custom dan dimensi aset lulus. Theme Check tanpa temuan; CSS formatting dan diff bersih. Browser/Theme Editor belum diperiksa karena pembatasan sesi Computer Use sebelumnya. API: [asset_img_url](https://shopify.dev/docs/api/liquid/filters/asset_img_url). Replay intro/timing sebelumnya tetap memerlukan QA visual.
+Validasi: Node VM regression checks untuk drawer dan cart page, locale/preview, null-section fallback, satu mutation dan pembersihan error lulus. Syntax/diff bersih; Theme Check tanpa temuan. Pemeriksaan jaringan toko dan browser/Theme Editor belum dilakukan. Sumber: [Cart API](https://shopify.dev/docs/api/ajax/reference/cart), [Section Rendering API](https://shopify.dev/docs/api/ajax/section-rendering).
 
 ## Isi untuk pekerjaan berikutnya
 

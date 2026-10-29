@@ -20,6 +20,13 @@
     });
   }
   const endpoint = (key) => `${document.body.dataset[key]}.js`;
+  // The cart page omits the drawer. Render sections in their current page context.
+  const sectionContext = () => {
+    const url = new URL(location.href);
+    url.searchParams.delete('sections');
+    url.searchParams.delete('section_id');
+    return url;
+  };
   const sectionIds = () => [...new Set([...document.querySelectorAll('[data-cart-section]')].map(el => el.dataset.cartSection))].slice(0, 5);
   const showError = (message, form) => {
     const targets = form?.querySelector('[data-product-error]') ? [form.querySelector('[data-product-error]')] : document.querySelectorAll('[data-cart-error]');
@@ -49,7 +56,7 @@
     const version = ++refreshVersion;
     const ids = sectionIds();
     if (paint(sections) < ids.length) {
-      const url = new URL(document.body.dataset.cartUrl, location.origin);
+      const url = sectionContext();
       url.searchParams.set('sections', ids.join(','));
       const rendered = await fetch(url, { headers: { Accept: 'application/json' } }).then(readJSON);
       if (version !== refreshVersion) return;
@@ -57,6 +64,7 @@
     }
     const cart = await fetch(endpoint('cartUrl'), { headers: { Accept: 'application/json' } }).then(readJSON);
     if (version !== refreshVersion) return;
+    document.querySelectorAll('[data-cart-error]').forEach(el => { el.hidden = true; el.textContent = ''; });
     document.querySelectorAll('[data-cart-count]').forEach(el => { el.textContent = cart.item_count; el.hidden = cart.item_count === 0; });
     document.querySelectorAll('[data-cart-open]').forEach(el => el.setAttribute('aria-label', `${el.dataset.cartLabel} (${cart.item_count})`));
     const status = document.querySelector('[data-cart-status]');
@@ -98,10 +106,12 @@
       const ids = sectionIds();
       let options;
       if (payload instanceof FormData) {
-        payload.set('sections', ids.join(',')); payload.set('sections_url', location.pathname);
+        const context = sectionContext();
+        payload.set('sections', ids.join(',')); payload.set('sections_url', context.pathname + context.search);
         options = { method: 'POST', body: payload, headers: { Accept: 'application/json' } };
       } else {
-        options = { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({ ...payload, sections: ids, sections_url: location.pathname }) };
+        const context = sectionContext();
+        options = { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({ ...payload, sections: ids, sections_url: context.pathname + context.search }) };
       }
       const result = await fetch(endpoint(route), options).then(readJSON);
       // Never repeat a successful mutation if rendering fails: that could add an item twice.
