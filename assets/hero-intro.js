@@ -232,7 +232,7 @@ if (!customElements.get("hero-intro")) {
             .to(
               [pre, surface],
               { opacity: 0, duration: 2, ease: "power1.inOut" },
-              "center-sofa",
+              "sofa-settled",
             )
             .to(
               find("shade"),
@@ -245,9 +245,9 @@ if (!customElements.get("hero-intro")) {
                   ) || 0,
                 duration: 2,
               },
-              "center-sofa",
+              "sofa-settled",
             )
-            .addLabel("room-ready", 3.8)
+            .addLabel("room-ready", 5.8)
             .addLabel("wordmark-reveal", 2.3)
             .call(
               () => this.classList.remove("is-intro-loading"),

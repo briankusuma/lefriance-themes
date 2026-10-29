@@ -1,10 +1,10 @@
 # Task aktif
 
-Task aktif: sinkronisasi sofa, garis, wordmark dan background final, 2026-10-29. Selesai lokal.
+Task aktif: sofa tiba dahulu, background final menyusul, 2026-10-29. Selesai lokal.
 
-`hero-intro.js` memakai fase bersama: center-sofa 1.8s memulai garis (0.5s), perjalanan ke kanan bawah (2s) dan crossfade background final (2s). Wordmark kanan-ke-kiri mulai 2.3s, navbar 2.4s. Sofa-settled/room-ready, seluruh huruf, navbar dan crossfade selesai bersama pada 3.8s. Garis memudar menjelang akhir. Semua waktu dihitung setelah real asset readiness; caption loading tetap tanpa timed reveal. Green surface tetap transparan ketika sofa terbentuk di tengah.
+`hero-intro.js`: display-text tetap reveal kanan-ke-kiri selama perjalanan sofa dan lengkap pada arrival 3.8s. Crossfade background/header final sekarang baru mulai pada label sofa-settled (3.8s), selesai pada room-ready (5.8s). Navbar/garis, tahap tengah, background hijau transparan dan caption real loading tidak diubah.
 
-Validasi: browser 390/1535px 28/28 checks sinkronisasi center/line, crossfade selama movement, arah huruf, state lengkap saat arrival dan cleanup/scroll unlock lulus. Assertions loading/load/error/abort, syntax/diff dan Theme Check bersih. Live Theme Editor/perangkat nyata/Lighthouse belum diuji.
+Validasi lokal: syntax/diff dan Theme Check bersih; browser 390/1535px memeriksa background belum berubah selama perjalanan/arrival, display-text lengkap lebih dulu, lalu crossfade setelah arrival dan cleanup/scroll unlock. Live Theme Editor/perangkat nyata/Lighthouse belum diuji.
 
 ## Isi untuk pekerjaan berikutnya
 
