@@ -41,7 +41,8 @@ if (!customElements.get("hero-intro")) {
         const detail = find("detail-content"),
           surface = find("intro-surface"),
           pre = find("pre");
-        const sofa = find("intro-sofa");
+        const sofa = find("intro-sofa"),
+          green = find("intro-green");
         const title = find("title"),
           line = find("reveal-line"),
           progress = find("intro-progress");
@@ -56,7 +57,8 @@ if (!customElements.get("hero-intro")) {
             )
           : [];
         const header = document.querySelector('.site-header[data-home="true"]');
-        if (!detail || !surface || !skip || !sofa) return this.finish();
+        if (!detail || !surface || !skip || !sofa || !green)
+          return this.finish();
         this.releaseScroll = window.ThemeMotion.lockScroll(this);
         window.ThemeMotion.pageScroll?.scrollTo(0, {
           immediate: true,
@@ -164,6 +166,13 @@ if (!customElements.get("hero-intro")) {
           });
         this.paintLoadingProgress(currentProgress);
         this.context = gsap.context(() => {
+          // The chair has a stable, uncropped box. Only the plane behind it shrinks.
+          gsap.set(surface, {
+            x: centerX,
+            y: centerY,
+            width: sofaWidth,
+            height: sofaHeight,
+          });
           gsap.set(detail, {
             x: innerWidth / 2 - box.left - box.width / 2,
             y: innerHeight / 2 - box.top - box.height / 2,
@@ -189,34 +198,21 @@ if (!customElements.get("hero-intro")) {
             .call(() => this.classList.add("is-intro-moving"), null, 0)
             .to(detail, { x: 0, y: 0, duration: 1.8 }, 0)
             .to(
-              surface,
+              green,
               {
-                x: centerX,
-                y: centerY,
-                width: sofaWidth,
-                height: sofaHeight,
-                borderRadius: 0,
-                rotation: 0,
+                x: centerX + sofaWidth * 0.2,
+                y: centerY + sofaHeight * 0.2,
+                scaleX: (sofaWidth * 0.6) / innerWidth,
+                scaleY: (sofaHeight * 0.6) / innerHeight,
+                borderRadius: "12%",
                 duration: 1.8,
+                ease: "power2.inOut",
               },
               0,
             )
-            .to(
-              sofa,
-              { opacity: 1, duration: 0.45, ease: "power1.inOut" },
-              1.35,
-            )
-            .to(
-              surface,
-              {
-                backgroundColor: "rgba(0, 0, 0, 0)",
-                duration: 0.45,
-                ease: "power1.inOut",
-              },
-              1.35,
-            )
+            .to(green, { opacity: 0, duration: 1.2, ease: "power1.inOut" }, 0.6)
+            .to(sofa, { opacity: 1, duration: 0.9, ease: "power1.inOut" }, 0.9)
             .addLabel("center-sofa", 1.8)
-            .set(surface, { zIndex: 4 }, "center-sofa")
             .to(
               surface,
               {

@@ -166,6 +166,7 @@
 }
 .editorial-hero__pre,
 .editorial-hero__intro-surface,
+.editorial-hero__intro-green,
 .editorial-hero__intro-progress,
 .editorial-hero__reveal-line {
   display: none;
@@ -188,16 +189,24 @@ html:has(hero-intro.is-intro-running) {
   object-fit: cover;
   object-position: center top;
 }
-.is-intro-running .editorial-hero__intro-surface {
+.is-intro-running .editorial-hero__intro-surface,
+.is-intro-running .editorial-hero__intro-green {
   display: block;
   position: fixed;
   inset: 0;
   width: 100vw;
   height: 100dvh;
-  background: var(--hero-intro-background);
   transform-origin: center;
-  overflow: hidden;
+}
+.is-intro-running .editorial-hero__intro-green {
+  transform-origin: top left;
+  background: var(--hero-intro-background);
   z-index: 2;
+}
+.is-intro-running .editorial-hero__intro-surface {
+  background: transparent;
+  overflow: visible;
+  z-index: 4;
 }
 .is-intro-running .editorial-hero__content {
   z-index: 3;
