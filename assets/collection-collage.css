@@ -168,8 +168,6 @@ collection-collage {
   overflow: visible;
 }
 .collection-collage.is-scroll-scene .collection-collage__stage {
-  --collage-lines: 0;
-  --collage-line-opacity: 0.35;
   --collage-cell: min(
     calc((100vw - var(--page-margin) * 2 - var(--grid-gap) * 3) / 4),
     31.3svh
@@ -243,41 +241,7 @@ collection-collage {
   width: clamp(1.5rem, 4.58vw, 6.44svh);
   height: clamp(1.5rem, 4.58vw, 6.44svh);
 }
-.collection-collage.is-scroll-scene .collection-collage__image::after,
-.collection-collage.is-scroll-scene .collection-collage__promotion::before {
-  content: "";
-  position: absolute;
-  pointer-events: none;
-  opacity: var(--collage-line-opacity);
-}
-.collection-collage.is-scroll-scene .collection-collage__image::after {
-  inset: auto 0 0;
-  height: 1px;
-  background: var(--collage-line-horizontal) center / 100% 100% no-repeat;
-  transform: scaleX(var(--collage-lines));
-  transform-origin: left;
-}
-.collection-collage.is-scroll-scene
-  .collection-collage__image:nth-child(even)::after {
-  background-image: var(--collage-line-alternate);
-  transform-origin: right;
-}
-.collection-collage.is-scroll-scene .collection-collage__promotion::before {
-  inset: 0 auto 0 -0.333rem;
-  width: 1px;
-  background: var(--collage-line-vertical) center / 100% 100% no-repeat;
-  transform: scaleY(var(--collage-lines));
-  transform-origin: bottom;
-}
-.collection-collage.is-scroll-scene
-  .collection-collage__promotion--bottom::before {
-  transform-origin: top;
-}
 .collection-collage.is-scroll-scene .collection-collage__plus span {
   width: min(1.86545rem, 50%);
   height: min(1.86545rem, 50%);
-}
-.collection-collage.is-scroll-scene
-  .collection-collage__image:nth-child(n + 5)::after {
-  inset-block: 0 auto;
 }

@@ -1,6 +1,6 @@
 # Third-Party Assets and Licenses
 
-2026-10-29 Collection collage scroll follow-up: unchanged SVG_STRING exports from Figma `C2rhn7BP2nXA0LyByRDn09`: `collage-line-vertical.svg` (3734:612, 1 × 342), `collage-line-left.svg` (3734:635, 342 × 1), `collage-line-right.svg` (3734:636, 342 × 1). Used as decorative background guides; six existing collage photos and two plus icons reused unchanged. No new runtime library. Same pending Figma commercial distribution-rights status applies before release.
+2026-10-29 Collection collage: the three guide SVG exports from `3734:612`, `3734:635`, `3734:636` were removed after the user clarified they are motion references only. Existing six collage photos and two plus icons remain unchanged; no new library or image.
 
 2026-10-29 material-story motion: official readable `dist/ScrollTrigger.js` from the already pinned GSAP 3.15.0 npm archive, copied unchanged as `assets/vendor-gsap-scroll-trigger-3.15.0.js`. Same GSAP Standard No Charge License; original notices retained. Local lazy loading; hash/size in the motion manifest. No new image or runtime host.
 

@@ -31,4 +31,4 @@ Hero caption replays a decorative 2.4s fill after a 0.35s delay (latest user dir
 
 Sources: [ScrollTrigger](https://gsap.com/docs/v3/Plugins/ScrollTrigger/), [SplitText](https://gsap.com/docs/v3/Plugins/SplitText/), [license](https://gsap.com/standard-license/).
 
-2026-10-29 Collection collage reuses the shared ScrollTrigger loader with `{ splitText: false }`. Native sticky, five staged transforms/masks, no GSAP pin, no added ticker/Lenis RAF or new vendor files. Fonts/asset loading precede setup; no per-frame geometry reads or per-image refresh. Existing Material stories keeps its default SplitText-enabled loader. Browser performance remains unmeasured.
+2026-10-29 Collection collage reuses the shared ScrollTrigger loader with `{ splitText: false }`. Native sticky, staged transforms and directional photo masks (guide lines are not rendered), no GSAP pin, no added ticker/Lenis RAF or new vendor files. Fonts/asset loading precede setup; no per-frame geometry reads or per-image refresh. Existing Material stories keeps its default SplitText-enabled loader. Browser performance remains unmeasured.

@@ -1,6 +1,6 @@
 {{ 'collection-collage.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'collection-collage.js' | asset_url }}" defer></script>
-<collection-collage data-scroll-reveal="{{ section.settings.enable_scroll_reveal }}" style="--collage-line-horizontal: url('{{ 'collage-line-left.svg' | asset_url }}'); --collage-line-alternate: url('{{ 'collage-line-right.svg' | asset_url }}'); --collage-line-vertical: url('{{ 'collage-line-vertical.svg' | asset_url }}');" class="collection-collage section-shell color-{{ section.settings.color_scheme }}">
+<collection-collage data-scroll-reveal="{{ section.settings.enable_scroll_reveal }}" class="collection-collage section-shell color-{{ section.settings.color_scheme }}">
   <div class="collection-collage__stage container">
     <div class="collection-collage__intro">
       {% if section.settings.heading != blank %}<h2>{{ section.settings.heading | escape }}</h2>{% endif %}

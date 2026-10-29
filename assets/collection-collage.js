@@ -169,10 +169,35 @@ if (!customElements.get("collection-collage")) {
                 x: () => centerX(description),
                 y: () => atY(description, 0.56),
               });
-              gsap.set(photos, {
-                autoAlpha: 0,
-                yPercent: 8,
-                clipPath: "inset(100% 0 0 0)",
+              const gridItems = [
+                ...stage.querySelectorAll(".collection-collage__grid > *"),
+              ];
+              const reveals = photos.map((photo) => {
+                const slot = gridItems.indexOf(photo.parentElement);
+                // Figma guides are reveal origins, not visible decoration.
+                const from =
+                  slot === 0 || slot === 6
+                    ? {
+                        xPercent: 100,
+                        yPercent: 0,
+                        clipPath: "inset(0 0 0 100%)",
+                        autoAlpha: 1,
+                      }
+                    : slot < 4
+                      ? {
+                          xPercent: 0,
+                          yPercent: 100,
+                          clipPath: "inset(100% 0 0 0)",
+                          autoAlpha: 1,
+                        }
+                      : {
+                          xPercent: 0,
+                          yPercent: -100,
+                          clipPath: "inset(0 0 100% 0)",
+                          autoAlpha: 1,
+                        };
+                gsap.set(photo, from);
+                return { photo, from };
               });
               promotions.forEach((item, index) =>
                 gsap.set(item, {
@@ -225,22 +250,24 @@ if (!customElements.get("collection-collage")) {
                   promotions,
                   { x: 0, y: 0, duration: 1.5, stagger: 0.12 },
                   2.8,
-                )
-                .to(stage, { "--collage-lines": 1, duration: 1.1 }, 4.3)
-                .to(
-                  photos,
+                );
+              reveals.forEach(({ photo, from }, index) => {
+                timeline.fromTo(
+                  photo,
+                  from,
                   {
-                    autoAlpha: 1,
+                    xPercent: 0,
                     yPercent: 0,
                     clipPath: "inset(0% 0 0 0)",
-                    duration: 1.5,
-                    stagger: { amount: 0.6 },
+                    autoAlpha: 1,
+                    duration: 1.8,
+                    immediateRender: false,
                     ease: "power3.out",
                   },
-                  5.6,
-                )
-                .to(stage, { "--collage-line-opacity": 0, duration: 0.6 }, 7.4)
-                .to({}, { duration: 0.7 });
+                  4.3 + index * 0.12,
+                );
+              });
+              timeline.to({}, { duration: 0.7 });
               const access = () =>
                 promotions.forEach((item) => {
                   item.inert = timeline.time() < 4.3;
