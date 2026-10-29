@@ -108,8 +108,7 @@ if (!customElements.get("hero-intro")) {
         }
         const box = detail.getBoundingClientRect(),
           hero = this.getBoundingClientRect();
-        // Preserve the center/corner anchors; the full chair uses its own image ratio.
-        // Corner center (1266.675, 722.18), rotated 2.05 degrees in a 1535 x 1092 room.
+        // Keep the centered size; match the final cutout to the rendered photo (3726:1797).
         const sofaWidth = Math.min(
           Math.max(96, (274.995 * hero.width) / 1535),
           hero.width - 48,
@@ -127,14 +126,7 @@ if (!customElements.get("hero-intro")) {
           hero.height / 2 +
           (0.29 * hero.height) / 1092 -
           sofaHeight / 2;
-        const cornerX =
-          hero.left +
-          Math.min(
-            hero.width - sofaWidth - 24,
-            (hero.width * 1266.675) / 1535 - sofaWidth / 2,
-          );
-        const cornerY =
-          hero.top + (hero.height * 722.18) / 1092 - sofaHeight / 2;
+        const corner = this.photoChairRect(find("photo"), hero);
         try {
           sessionStorage.setItem("lefriance:hero-intro:v1", "1");
         } catch {
@@ -224,9 +216,17 @@ if (!customElements.get("hero-intro")) {
               1.35,
             )
             .addLabel("center-sofa", 1.8)
+            .set(surface, { zIndex: 4 }, "center-sofa")
             .to(
               surface,
-              { x: cornerX, y: cornerY, rotation: 2.05, duration: 2 },
+              {
+                x: corner.left,
+                y: corner.top,
+                width: corner.width,
+                height: corner.height,
+                rotation: 0,
+                duration: 2,
+              },
               "center-sofa",
             )
             .addLabel("sofa-settled", 3.8)
@@ -292,6 +292,45 @@ if (!customElements.get("hero-intro")) {
         }, this);
         await loaded;
         if (!signal.aborted) this.timeline.play();
+      }
+
+      photoChairRect(photo, hero) {
+        // Reference: chair left 1092, top 507.89, 343 x 382 in frame 1535 x 1092.
+        // Map its source-image region through the actual object-fit/crop and CSS zoom.
+        const width =
+          photo?.naturalWidth || Number(photo?.getAttribute("width"));
+        const height =
+          photo?.naturalHeight || Number(photo?.getAttribute("height"));
+        if (!photo || !width || !height)
+          return {
+            left: hero.left + (hero.width * 1092) / 1535,
+            top: hero.top + (hero.height * 507.89) / 1092,
+            width: (hero.width * 343) / 1535,
+            height: (hero.height * 382) / 1092,
+          };
+        const bounds = photo.getBoundingClientRect();
+        const scale = Math.max(bounds.width / width, bounds.height / height);
+        const drawnWidth = width * scale,
+          drawnHeight = height * scale;
+        const position = getComputedStyle(photo).objectPosition.split(" ");
+        const fraction = (value, fallback) => {
+          if (value === "left" || value === "top") return 0;
+          if (value === "right" || value === "bottom") return 1;
+          return value?.endsWith("%") ? parseFloat(value) / 100 : fallback;
+        };
+        const left =
+          bounds.left +
+          (bounds.width - drawnWidth) * fraction(position[0], 0.5);
+        const top =
+          bounds.top + (bounds.height - drawnHeight) * fraction(position[1], 0);
+        const referenceWidth = 1535 * 1.0639;
+        const referenceHeight = 1094 * 1.1292;
+        return {
+          left: left + ((1092 + 1535 * 0.0319) / referenceWidth) * drawnWidth,
+          top: top + ((507.89 + 2) / referenceHeight) * drawnHeight,
+          width: (343 / referenceWidth) * drawnWidth,
+          height: (382 / referenceHeight) * drawnHeight,
+        };
       }
 
       prepareLoadingCopy(copy) {

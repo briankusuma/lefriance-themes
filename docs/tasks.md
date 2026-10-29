@@ -1,10 +1,10 @@
 # Task aktif
 
-Task aktif: ganti green-sofa-front dengan sofa-full, 2026-10-29. Selesai lokal.
+Task aktif: sofa di depan text dan cocok dengan kursi background, 2026-10-29. Selesai lokal.
 
-`hero-editorial.liquid` memakai aset user `sofa-full.png` (515 x 573, alpha). `hero-intro.js` mempertahankan anchor/timing tetapi menghitung tinggi dari metadata rasio gambar; radius akhir 0. CSS contain menjaga seluruh kaki/sandaran tidak terpotong. Display-text tetap lebih dahulu, final background hanya berganti setelah sofa tiba di kanan. Ini follow-up aset dari pengguna; proporsi baru bukan strip lama Figma.
+Referensi [3726:1797](https://www.figma.com/design/C2rhn7BP2nXA0LyByRDn09/Speedtest?node-id=3726-1797): kursi utuh left 1092/top 507.89, 343 x 382 dalam frame 1535 x 1092; tanpa rotasi strip sebelumnya. `hero-intro.js` menaikkan surface ke z-index 4 di center-sofa, di depan content/wordmark (3); loading hijau awal tetap di belakang caption. Kursi membesar selama movement dan endpoint diproyeksikan dari region kursi pada source photo melalui ukuran, crop/object-position dan zoom yang sebenarnya. Mobile mengikuti crop foto, bukan dipaksa tetap utuh di viewport. Tidak ada aset baru/diubah.
 
-Validasi: syntax/diff dan Theme Check bersih; 28/28 browser checks mobile/desktop lulus, mencakup sumber/aspect/contain/no clipping, posisi dalam frame, timing wordmark sebelum background dan cleanup. Live Theme Editor/perangkat nyata/Lighthouse belum diuji. [Shopify asset_img_url](https://shopify.dev/docs/api/liquid/filters/asset_img_url).
+Display-text tetap muncul dahulu dan background final baru crossfade setelah arrival. Readiness caption dan cleanup/scroll locks tetap. Validasi lokal: syntax/diff, assertions readiness/load/error/abort dan Theme Check bersih. 27/27 browser checks mobile/desktop lulus, mencakup z-order, endpoint frame Figma, pertumbuhan ukuran, crop/zoom, foto belum muncul sebelum alignment dan cleanup. Live Theme Editor/perangkat nyata/Lighthouse belum diuji.
 
 ## Isi untuk pekerjaan berikutnya
 
