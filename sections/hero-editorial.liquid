@@ -63,7 +63,11 @@
       {{ section.settings.wordmark | image_url: width: 2400 | image_tag: widths: '750, 1100, 1600, 2400', sizes: '93vw', alt: section.settings.heading, class: 'editorial-hero__wordmark' }}
       <h1 class="visually-hidden">{{ section.settings.heading | default: shop.name | escape }}</h1>
     {% elsif section.settings.use_reference_wordmark %}
-      <img class="editorial-hero__wordmark" src="{{ 'le-friance-wordmark.svg' | asset_url }}" width="1433" height="404" alt="{{ section.settings.heading | default: shop.name | escape }}">
+      {% if intro_enabled %}
+        <span class="editorial-hero__wordmark editorial-hero__wordmark-vector" aria-hidden="true">{{ 'le-friance-wordmark.svg' | inline_asset_content }}</span>
+      {% else %}
+        <img class="editorial-hero__wordmark" src="{{ 'le-friance-wordmark.svg' | asset_url }}" width="1433" height="404" alt="{{ section.settings.heading | default: shop.name | escape }}">
+      {% endif %}
       <h1 class="visually-hidden">{{ section.settings.heading | default: shop.name | escape }}</h1>
     {% else %}
       <h1 class="editorial-hero__heading">{{ section.settings.heading | default: shop.name | escape }}</h1>

@@ -1,12 +1,12 @@
 # Task aktif
 
-Task aktif: character reveal mengikuti loading nyata, 2026-10-29. Selesai lokal.
+Task aktif: caption reveal dan wordmark kanan ke kiri, 2026-10-29. Selesai lokal.
 
-`assets/hero-intro.js`: mengganti word/timed reveal dengan SplitText chars (dependency existing). Opacity 0.25–1 dihitung langsung dari jumlah hero image decodes dan font-readiness checks yang selesai. Tiga karakter berdekatan overlap dalam ruang progress; tanpa timer/tween/delay/scroll trigger untuk reveal. Loader lama hanya memiliki readiness lifecycle, tidak memiliki byte-level percentage. Timeout yang dapat melewati readiness dihapus. Cached assets dapat langsung selesai; decode gagal/skip/abort kembali ke hero statis. Garis loading existing mengikuti readiness yang sama; tidak ada UI baru. Motion setelah loading mempertahankan durasi transisinya.
+Caption target adalah teks di bawah thumbnail. Pengguna menegaskan tetap progres nyata: opacity 0.25–1 mengikuti image load/decode + font readiness; cache boleh langsung 100%, tanpa jeda/reveal buatan. `waitForImage()` menunggu load nyata sebelum decode; error/abort tidak dihitung sebagai siap.
 
-Typography/wrapping dan accessible rich text dipertahankan; SplitText hanya menyentuh salinan aria-hidden. Reduced motion/editor/no-JS tetap statis. Validasi: syntax + Theme Check bersih; assertions opacity endpoints/order/overlap/monotonicity, readiness/failure/abort lulus. Browser 390/1535px: 32/32 checks character reveal, no elapsed-time advancement, wrapping/overflow dan cleanup lulus. Live Theme Editor, screen reader, perangkat nyata dan Lighthouse belum diuji.
+Display-text frame [3722:1658](https://www.figma.com/design/C2rhn7BP2nXA0LyByRDn09/Speedtest?node-id=3722-1658) memakai SVG asli 2.2 KB melalui `inline_asset_content`, tanpa mengubah paths. Sembilan huruf diurutkan berdasarkan posisi X, kanan lebih dulu; naik dari garis dengan stagger pada fase sesudah loading. Wordmark gambar kustom tetap dipertahankan dengan mask kanan ke kiri. Struktur/schema/font lainnya tetap.
 
-Sumber: [SplitText](https://gsap.com/docs/v3/Plugins/SplitText/), [image decode](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/decode), [font readiness](https://developer.mozilla.org/en-US/docs/Web/API/FontFaceSet/ready).
+Validasi: Theme Check tanpa temuan; syntax/diff checks dan assertions resource readiness/load/error/abort lulus. Browser 390/1535px 32/32 checks: target caption, no timed reveal, arah huruf, baseline, final geometry, wrapping/overflow dan cleanup. Live Theme Editor/perangkat nyata/Lighthouse belum diuji. [Shopify inline_asset_content](https://shopify.dev/docs/api/liquid/filters/inline_asset_content), [SplitText](https://gsap.com/docs/v3/Plugins/SplitText/).
 
 ## Isi untuk pekerjaan berikutnya
 

@@ -48,6 +48,14 @@ if (!customElements.get("hero-intro")) {
           progress = find("intro-progress");
         const copy = find("intro-copy"),
           skip = this.querySelector("[data-intro-skip]");
+        const wordmarkSvg = title.querySelector(
+          ".editorial-hero__wordmark-vector svg",
+        );
+        const letters = wordmarkSvg
+          ? [...wordmarkSvg.querySelectorAll("path")].sort(
+              (a, b) => b.getBBox().x - a.getBBox().x,
+            )
+          : [];
         const header = document.querySelector('.site-header[data-home="true"]');
         if (!detail || !surface || !skip) return this.finish();
         this.releaseScroll = window.ThemeMotion.lockScroll(this);
@@ -132,7 +140,16 @@ if (!customElements.get("hero-intro")) {
             y: innerHeight / 2 - box.top - box.height / 2,
             opacity: 1,
           });
-          gsap.set(title, { y: 0, yPercent: 100 });
+          gsap.set(title, {
+            y: 0,
+            yPercent: 0,
+            clipPath: letters.length ? "none" : "inset(0 0 0 100%)",
+          });
+          if (letters.length)
+            gsap.set(letters, {
+              y: wordmarkSvg.viewBox.baseVal.height,
+              opacity: 0,
+            });
           if (header) gsap.set(header, { yPercent: -110, opacity: 0 });
           const timeline = (this.timeline = gsap.timeline({
             paused: true,
@@ -179,8 +196,28 @@ if (!customElements.get("hero-intro")) {
               { scaleX: 1, opacity: 1, duration: 1, ease: "power1.inOut" },
               3.6,
             )
-            .to(title, { yPercent: 0, duration: 1.5 }, 4.6)
             .to(line, { opacity: 0, duration: 0.35 }, 5.75);
+          if (letters.length) {
+            // Use the original Figma paths; rightmost letter rises from the line first.
+            timeline.to(
+              letters,
+              {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                stagger: { amount: 0.7 },
+                ease: "power3.out",
+              },
+              4.6,
+            );
+          } else {
+            // A merchant-uploaded wordmark is one image, so retain it and reveal right to left.
+            timeline.to(
+              title,
+              { clipPath: "inset(0 0 0 0%)", duration: 1.5 },
+              4.6,
+            );
+          }
           if (header)
             timeline.to(
               header,
@@ -202,7 +239,7 @@ if (!customElements.get("hero-intro")) {
         // requests do not expose byte progress; reuse their actual decode lifecycle.
         const tasks = [...this.querySelectorAll("img")].map((image) => {
           image.loading = "eager";
-          return () => image.decode();
+          return () => this.waitForImage(image, signal);
         });
         if (document.fonts) tasks.push(() => document.fonts.ready);
         let completed = 0;
@@ -215,6 +252,37 @@ if (!customElements.get("hero-intro")) {
           }),
         );
         if (!tasks.length && !signal.aborted) this.paintLoadingProgress(1);
+      }
+
+      async waitForImage(image, signal) {
+        if (signal.aborted) return;
+        if (!image.complete) {
+          // Eager/srcset selection can still be pending. Wait for the actual load
+          // event before decoding; a failed request must not count as ready.
+          await new Promise((resolve, reject) => {
+            const clean = () => {
+              image.removeEventListener("load", onLoad);
+              image.removeEventListener("error", onError);
+              signal.removeEventListener("abort", onAbort);
+            };
+            const onLoad = () => {
+              clean();
+              resolve();
+            };
+            const onError = () => {
+              clean();
+              reject(new Error("Hero image failed to load"));
+            };
+            const onAbort = () => {
+              clean();
+              resolve();
+            };
+            image.addEventListener("load", onLoad, { once: true });
+            image.addEventListener("error", onError, { once: true });
+            signal.addEventListener("abort", onAbort, { once: true });
+          });
+        }
+        if (!signal.aborted) await image.decode();
       }
 
       paintLoadingProgress(progress) {
