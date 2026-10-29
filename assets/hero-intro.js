@@ -166,13 +166,16 @@ if (!customElements.get("hero-intro")) {
           });
         this.paintLoadingProgress(currentProgress);
         this.context = gsap.context(() => {
-          // The chair has a stable, uncropped box. Only the plane behind it shrinks.
+          // Opposite scales share a center: green 1 → 0, chair 0 → 1.
           gsap.set(surface, {
             x: centerX,
             y: centerY,
             width: sofaWidth,
             height: sofaHeight,
+            scale: 0,
+            transformOrigin: "50% 50%",
           });
+          gsap.set(sofa, { opacity: 1 });
           gsap.set(detail, {
             x: innerWidth / 2 - box.left - box.width / 2,
             y: innerHeight / 2 - box.top - box.height / 2,
@@ -200,18 +203,15 @@ if (!customElements.get("hero-intro")) {
             .to(
               green,
               {
-                x: centerX + sofaWidth * 0.2,
-                y: centerY + sofaHeight * 0.2,
-                scaleX: (sofaWidth * 0.6) / innerWidth,
-                scaleY: (sofaHeight * 0.6) / innerHeight,
-                borderRadius: "12%",
+                x: centerX + sofaWidth / 2 - innerWidth / 2,
+                y: centerY + sofaHeight / 2 - innerHeight / 2,
+                scale: 0,
                 duration: 1.8,
                 ease: "power2.inOut",
               },
               0,
             )
-            .to(green, { opacity: 0, duration: 1.2, ease: "power1.inOut" }, 0.6)
-            .to(sofa, { opacity: 1, duration: 0.9, ease: "power1.inOut" }, 0.9)
+            .to(surface, { scale: 1, duration: 1.8, ease: "power2.inOut" }, 0)
             .addLabel("center-sofa", 1.8)
             .to(
               surface,

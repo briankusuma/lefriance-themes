@@ -1,10 +1,10 @@
 # Task aktif
 
-Task aktif: sofa di depan text dan cocok dengan kursi background, 2026-10-29. Selesai lokal.
+Task aktif: scale hijau 1→0 dan sofa 0→1, 2026-10-29. Implementasi lokal; visual browser belum diverifikasi.
 
-Referensi [3726:1797](https://www.figma.com/design/C2rhn7BP2nXA0LyByRDn09/Speedtest?node-id=3726-1797): kursi utuh left 1092/top 507.89, 343 x 382 dalam frame 1535 x 1092; tanpa rotasi strip sebelumnya. `hero-intro.js` menaikkan surface ke z-index 4 di center-sofa, di depan content/wordmark (3); loading hijau awal tetap di belakang caption. Kursi membesar selama movement dan endpoint diproyeksikan dari region kursi pada source photo melalui ukuran, crop/object-position dan zoom yang sebenarnya. Mobile mengikuti crop foto, bukan dipaksa tetap utuh di viewport. Tidak ada aset baru/diubah.
+`hero-intro.js`/CSS memakai dua lapisan terpisah. Green plane ber-origin center dan mengecil uniform sampai scale 0; sofa mulai scale 0 dan membesar sampai 1 dengan easing/durasi sama (power2.inOut, 1.8s), bertemu di pusat yang sama. Ini mengganti blend opacity serta sisa kotak 60% sebelumnya. Tidak ada opacity fade pada swap ini. Perjalanan ke kanan baru dimulai pada center-sofa 1.8s, setelah kedua skala selesai. Alignment foto, foreground z-index, wordmark lebih dahulu, background setelah arrival dan loading caption nyata dipertahankan.
 
-Display-text tetap muncul dahulu dan background final baru crossfade setelah arrival. Readiness caption dan cleanup/scroll locks tetap. Validasi lokal: syntax/diff, assertions readiness/load/error/abort dan Theme Check bersih. 27/27 browser checks mobile/desktop lulus, mencakup z-order, endpoint frame Figma, pertumbuhan ukuran, crop/zoom, foto belum muncul sebelum alignment dan cleanup. Live Theme Editor/perangkat nyata/Lighthouse belum diuji.
+Validasi: syntax/diff dan Theme Check bersih. Konfigurasi produksi diuji dengan GSAP asli pada objek numerik: endpoint 1→0/0→1, monotonic/complementary scale, pusat yang sama, posisi tetap sebelum 1.8s lalu bergerak ke kanan lulus. Assertions resource readiness/load/error/abort tetap lulus. Ini bukan uji rendering DOM. Computer Use pada sesi sebelumnya dihentikan oleh batas akses URL; tidak ada klaim verifikasi visual/browser baru, live Theme Editor, perangkat nyata atau Lighthouse.
 
 ## Isi untuk pekerjaan berikutnya
 
