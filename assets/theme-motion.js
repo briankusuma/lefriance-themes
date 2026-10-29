@@ -43,8 +43,8 @@
       } else await core;
       return { gsap: window.gsap, SplitText: window.SplitText };
     },
-    async scrollAnimation() {
-      const engine = await this.animation();
+    async scrollAnimation(options) {
+      const engine = await this.animation(options);
       await (scrollTriggerReady ||= load(config.scrollTriggerSrc));
       engine.gsap.registerPlugin(window.ScrollTrigger);
       return { ...engine, ScrollTrigger: window.ScrollTrigger };

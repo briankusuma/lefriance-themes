@@ -1,5 +1,7 @@
 # Third-Party Assets and Licenses
 
+2026-10-29 Collection collage scroll follow-up: unchanged SVG_STRING exports from Figma `C2rhn7BP2nXA0LyByRDn09`: `collage-line-vertical.svg` (3734:612, 1 × 342), `collage-line-left.svg` (3734:635, 342 × 1), `collage-line-right.svg` (3734:636, 342 × 1). Used as decorative background guides; six existing collage photos and two plus icons reused unchanged. No new runtime library. Same pending Figma commercial distribution-rights status applies before release.
+
 2026-10-29 material-story motion: official readable `dist/ScrollTrigger.js` from the already pinned GSAP 3.15.0 npm archive, copied unchanged as `assets/vendor-gsap-scroll-trigger-3.15.0.js`. Same GSAP Standard No Charge License; original notices retained. Local lazy loading; hash/size in the motion manifest. No new image or runtime host.
 
 2026-10-29 loading thumbnail: `assets/hero-detail-blurred.png`, unchanged 3× PNG export (442 × 442) of Figma `C2rhn7BP2nXA0LyByRDn09`, node `3722:1633`. Includes the original white frame, blur and fade; replaces the raw photo plus CSS blur for the reference card. Existing Figma commercial distribution-rights status remains pending before release. No new library.

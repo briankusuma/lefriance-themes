@@ -163,6 +163,7 @@
       ],
       "settings": {
         "color_scheme": "scheme-light",
+        "enable_scroll_reveal": true,
         "heading": "We design furniture to stand the test of time.",
         "description": "<p>Our furniture is crafted for simple disassembly. Each piece uses robust materials, ensuring easy repairs and a lifetime of use.</p>",
         "use_reference_images": true

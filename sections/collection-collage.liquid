@@ -1,6 +1,7 @@
 {{ 'collection-collage.css' | asset_url | stylesheet_tag }}
-<section class="collection-collage section-shell color-{{ section.settings.color_scheme }}">
-  <div class="container">
+<script src="{{ 'collection-collage.js' | asset_url }}" defer></script>
+<collection-collage data-scroll-reveal="{{ section.settings.enable_scroll_reveal }}" style="--collage-line-horizontal: url('{{ 'collage-line-left.svg' | asset_url }}'); --collage-line-alternate: url('{{ 'collage-line-right.svg' | asset_url }}'); --collage-line-vertical: url('{{ 'collage-line-vertical.svg' | asset_url }}');" class="collection-collage section-shell color-{{ section.settings.color_scheme }}">
+  <div class="collection-collage__stage container">
     <div class="collection-collage__intro">
       {% if section.settings.heading != blank %}<h2>{{ section.settings.heading | escape }}</h2>{% endif %}
       {% if section.settings.description != blank %}<div class="collection-collage__description rte">{{ section.settings.description }}</div>{% endif %}
@@ -20,6 +21,7 @@
               endif
             %}
             <div class="collection-collage__image{% if reference_crop %} collection-collage__image--sofa{% endif %}" {{ block.shopify_attributes }}>
+              <div class="collection-collage__photo">
               {% if block.settings.image != blank %}
                 {{ block.settings.image | image_url: width: 1000 | image_tag: widths: '240, 360, 540, 720, 1000', sizes: '(min-width: 990px) 23vw, (min-width: 600px) 46vw, 90vw', loading: 'lazy', alt: block.settings.image.alt }}
               {% elsif reference_asset != blank %}
@@ -27,6 +29,7 @@
               {% else %}
                 {{ 'image' | placeholder_svg_tag: 'collection-collage__placeholder' }}
               {% endif %}
+              </div>
             </div>
           {% when 'promotion' %}
             {% liquid
@@ -50,7 +53,7 @@
       {% endfor %}
     </div>
   </div>
-</section>
+</collection-collage>
 
 {% schema %}
 {
@@ -59,6 +62,7 @@
   "disabled_on": { "groups": ["header", "footer"] },
   "max_blocks": 16,
   "settings": [
+    { "type": "checkbox", "id": "enable_scroll_reveal", "label": "Animate on scroll", "default": true, "info": "Builds the collage as visitors scroll. Selected editor sections and reduced motion show the full layout." },
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-light" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Introduce your collection" },
     { "type": "richtext", "id": "description", "label": "Description", "default": "<p>Share the ideas and details behind your furniture.</p>" },

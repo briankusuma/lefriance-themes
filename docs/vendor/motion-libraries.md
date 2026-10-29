@@ -30,3 +30,5 @@ Material stories: seven desktop steps from Figma 3734:390; native sticky stage w
 Hero caption replays a decorative 2.4s fill after a 0.35s delay (latest user direction); actual resource readiness remains separate. Shared owner-based intro/modal/menu locks control Lenis. See project brief for the current hero sequence.
 
 Sources: [ScrollTrigger](https://gsap.com/docs/v3/Plugins/ScrollTrigger/), [SplitText](https://gsap.com/docs/v3/Plugins/SplitText/), [license](https://gsap.com/standard-license/).
+
+2026-10-29 Collection collage reuses the shared ScrollTrigger loader with `{ splitText: false }`. Native sticky, five staged transforms/masks, no GSAP pin, no added ticker/Lenis RAF or new vendor files. Fonts/asset loading precede setup; no per-frame geometry reads or per-image refresh. Existing Material stories keeps its default SplitText-enabled loader. Browser performance remains unmeasured.
