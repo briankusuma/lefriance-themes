@@ -6,18 +6,11 @@ if (!customElements.get("hero-intro")) {
       connectedCallback() {
         this.finish();
         this.motion = matchMedia("(prefers-reduced-motion: reduce)");
-        let seen;
-        try {
-          seen = sessionStorage.getItem("lefriance:hero-intro:v1");
-        } catch {
-          /* Optional storage. */
-        }
         if (
           this.dataset.introEnabled !== "true" ||
           this.dataset.designMode === "true" ||
           window.Shopify?.designMode ||
           this.motion.matches ||
-          (this.dataset.introOnce === "true" && seen) ||
           document.querySelector("dialog[open], details[scroll-lock][open]")
         )
           return;
@@ -129,11 +122,6 @@ if (!customElements.get("hero-intro")) {
           (0.29 * hero.height) / 1092 -
           sofaHeight / 2;
         const corner = this.photoChairRect(find("photo"), hero);
-        try {
-          sessionStorage.setItem("lefriance:hero-intro:v1", "1");
-        } catch {
-          /* Optional storage. */
-        }
         // Show real progress immediately, including while the animation library loads.
         this.prepareLoadingCopy(copy);
         this.progressFill = progress.firstElementChild;
@@ -165,6 +153,10 @@ if (!customElements.get("hero-intro")) {
             wordsClass: "editorial-hero__intro-word",
           });
         this.paintLoadingProgress(currentProgress);
+        this.paintCaptionReveal(0);
+        const revealed = new Promise((resolve) => {
+          this.completeCaption = resolve;
+        });
         this.context = gsap.context(() => {
           // Opposite scales share a center: green 1 → 0, chair 0 → 1.
           gsap.set(surface, {
@@ -285,12 +277,28 @@ if (!customElements.get("hero-intro")) {
               { yPercent: 0, opacity: 1, duration: 1.4 },
               2.4,
             );
+          // Presentation timing is independent of the real asset-readiness line.
+          const fill = { value: 0 };
+          this.captionTimeline = gsap
+            .timeline({
+              delay: 0.35,
+              onComplete: () => {
+                this.completeCaption?.();
+                this.completeCaption = null;
+              },
+            })
+            .to(fill, {
+              value: 1,
+              duration: 2.4,
+              ease: "none",
+              onUpdate: () => this.paintCaptionReveal(fill.value),
+            });
         }, this);
-        await loaded;
+        await Promise.all([loaded, revealed]);
         if (!signal.aborted) {
-          this.paintLoadingProgress(1);
-          // Hold the completed caption briefly; loading progress itself stays real.
-          this.timeline.delay(0.6).restart(true);
+          this.paintCaptionReveal(1);
+          // Assets and text are both ready before the completed-caption hold.
+          this.timeline.delay(0.8).restart(true);
         }
       }
 
@@ -423,8 +431,14 @@ if (!customElements.get("hero-intro")) {
       paintLoadingProgress(progress) {
         const value = Math.max(0, Math.min(1, progress || 0));
         this.loadingValue = value;
+        // The existing line represents actual asset readiness, never visual fill time.
+        this.progressFill.style.transform = `scaleX(${value})`;
+      }
+
+      paintCaptionReveal(progress) {
+        const value = Math.max(0, Math.min(1, progress || 0));
         const chars = this.split?.chars || [];
-        // Three adjacent characters overlap in progress space; no time-based tween.
+        // Three adjacent characters overlap across the visual fill.
         const overlap = Math.min(3, chars.length);
         const cursor = value * (Math.max(0, chars.length - 1) + overlap);
         chars.forEach((char, index) => {
@@ -432,8 +446,6 @@ if (!customElements.get("hero-intro")) {
           const eased = fill * fill * (3 - 2 * fill);
           char.style.opacity = String(0.25 + 0.75 * eased);
         });
-        // Keep the existing line honest; do not introduce another indicator.
-        this.progressFill.style.transform = `scaleX(${value})`;
       }
 
       finish() {
@@ -443,9 +455,12 @@ if (!customElements.get("hero-intro")) {
         const skip = this.querySelector("[data-intro-skip]");
         const restoreFocus = document.activeElement === skip;
         this.timeline?.kill();
+        this.captionTimeline?.kill();
+        this.completeCaption?.();
+        this.completeCaption = null;
         this.context?.revert();
         this.split?.revert();
-        this.context = this.split = this.timeline = null;
+        this.context = this.split = this.timeline = this.captionTimeline = null;
         this.classList.remove(
           "is-intro-running",
           "is-intro-loading",

@@ -14,7 +14,6 @@
       "settings": {
         "use_reference_images": true,
         "enable_intro": true,
-        "intro_once": false,
         "image_zoom": 106,
         "heading": "LE FRIANCE",
         "use_reference_wordmark": true,

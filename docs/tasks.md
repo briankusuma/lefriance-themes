@@ -1,10 +1,10 @@
 # Task aktif
 
-Task aktif: jeda setelah caption selesai sebelum header, 2026-10-29. Selesai lokal; visual browser belum diverifikasi.
+Task aktif: replay setiap reload dan perlambat isi caption, 2026-10-29. Implementasi dan pemeriksaan logika selesai; visual browser belum diverifikasi.
 
-Setelah seluruh readiness selesai, `hero-intro.js` memastikan caption/garis 100%, lalu memberi jeda GSAP 0.6s melalui delay/restart(includeDelay). Baru setelah itu seluruh transisi sofa/header berjalan. Progress caption tetap dari readiness nyata; jeda ini merupakan hold setelah selesai yang diminta pengguna, bukan persentase/jeda loading palsu. Skip/abort tetap membersihkan timeline melalui mekanisme existing.
+`hero-intro.js` menghapus sessionStorage/introOnce gate. `hero-editorial.liquid`/schema dan home JSON menghapus intro_once, sehingga setting lama tidak bisa melewatkan replay. Caption native mulai pada opacity 0.25; setelah engine siap, GSAP menunggu 0.35s lalu mengisi karakter selama 2.4s setiap load. Ini durasi visual yang kini diminta pengguna, mengganti batasan timed-reveal sebelumnya. Garis existing tetap mengikuti readiness aset sebenarnya. Header menunggu Promise.all(asset readiness, text completion), lalu hold 0.8s; cached assets tidak membuat caption langsung penuh. Skip/abort membunuh caption timeline, menyelesaikan pending gate dan membersihkan context/split/scroll lock.
 
-Validasi: syntax/diff dan Theme Check bersih; test GSAP asli memastikan motion belum berjalan pada +0.3s dan berjalan setelah +0.6s. Assertions readiness dan opposite-scale tetap lulus. Visual browser belum diuji karena pembatasan akses Computer Use pada sesi sebelumnya; tidak ada klaim uji browser/Theme Editor/Lighthouse baru. [GSAP restart includeDelay](https://gsap.com/docs/v3/GSAP/Timeline/restart()/).
+Validasi: syntax/diff dan Theme Check bersih. GSAP asli/VM checks: inisialisasi berulang tetap berjalan meski dataset introOnce lama true; readiness cache tidak mengubah opacity karakter; fill 2.4s, asset+caption gate, hold 0.8s, urutan skala dan readiness/error/abort lulus. Ini bukan uji rendering/browser. Visual/Theme Editor/perangkat/Lighthouse belum diverifikasi karena sesi Computer Use sebelumnya dibatasi URL. [Shopify input settings](https://shopify.dev/docs/storefronts/themes/architecture/settings/input-settings).
 
 ## Isi untuk pekerjaan berikutnya
 

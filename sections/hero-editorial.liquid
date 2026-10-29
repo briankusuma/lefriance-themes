@@ -30,7 +30,7 @@
     --hero-intro-text: {{ section.settings.intro_text_color | default: '#FFFFFF' }};
   }
 {% endstyle %}
-<hero-intro class="editorial-hero section-shell" data-intro-enabled="{{ intro_enabled }}" data-intro-once="{{ section.settings.intro_once }}" data-design-mode="{{ request.design_mode }}"{% if section.settings.allow_header_overlay %} data-header-overlay{% endif %}>
+<hero-intro class="editorial-hero section-shell" data-intro-enabled="{{ intro_enabled }}" data-design-mode="{{ request.design_mode }}"{% if section.settings.allow_header_overlay %} data-header-overlay{% endif %}>
   <div class="editorial-hero__media">
     {% if section.settings.image != blank %}
       <picture>
@@ -126,13 +126,6 @@
       "label": "Enable intro animation",
       "default": false,
       "info": "Runs on the first home page hero with a detail card and header overlay. Reduced motion and the theme editor show the final hero."
-    },
-    {
-      "type": "checkbox",
-      "id": "intro_once",
-      "label": "Play once per session",
-      "default": false,
-      "info": "Leave off to replay the intro on every page load."
     },
     {
       "type": "image_picker",
