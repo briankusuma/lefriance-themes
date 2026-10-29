@@ -48,10 +48,12 @@
       {% if section.settings.intro_pre_image != blank %}
         {{ section.settings.intro_pre_image | image_url: width: 2400 | image_tag: widths: '750, 1100, 1535, 2000, 2400', sizes: '100vw', loading: 'lazy', alt: '', class: 'editorial-hero__pre-photo' }}
       {% else %}
-        <img class="editorial-hero__pre-photo" src="{{ 'hero-motion-pre.jpg' | asset_img_url: '1535x' }}" srcset="{{ 'hero-motion-pre.jpg' | asset_img_url: '750x' }} 750w, {{ 'hero-motion-pre.jpg' | asset_img_url: '1100x' }} 1100w, {{ 'hero-motion-pre.jpg' | asset_img_url: '1535x' }} 1535w" sizes="100vw" width="1280" height="960" loading="lazy" alt="">
+        <img class="editorial-hero__pre-photo" src="{{ 'bg-header-center.png' | asset_img_url: '1535x' }}" srcset="{{ 'bg-header-center.png' | asset_img_url: '750x' }} 750w, {{ 'bg-header-center.png' | asset_img_url: '1100x' }} 1100w, {{ 'bg-header-center.png' | asset_img_url: '1535x' }} 1535w, {{ 'bg-header-center.png' | asset_img_url: '2303x' }} 2303w" sizes="100vw" width="2303" height="1638" loading="lazy" alt="">
       {% endif %}
     </div>
-    <div class="editorial-hero__intro-surface" aria-hidden="true"></div>
+    <div class="editorial-hero__intro-surface" aria-hidden="true">
+      <img class="editorial-hero__intro-sofa" src="{{ 'green-sofa-front.png' | asset_img_url: '413x' }}" width="413" height="107" loading="lazy" alt="">
+    </div>
     <div class="editorial-hero__intro-progress" aria-hidden="true"><span></span></div>
     <button class="editorial-hero__intro-skip" type="button" data-intro-skip hidden>{{ 'hero.skip_intro' | t }}</button>
   {% endif %}

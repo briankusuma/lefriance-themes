@@ -1,5 +1,7 @@
 # Third-Party Assets and Licenses
 
+2026-10-29 hero center-sofa follow-up: user-supplied `assets/bg-header-center.png` (2303 x 1638) and `assets/green-sofa-front.png` (413 x 107), matching the updated Figma sequence `3722:1757` and center/corner frames `3725:1786`/`3725:1775`. Used unchanged; the default pre-room now references bg-header-center instead of hero-motion-pre.jpg. Same Figma commercial distribution-rights status applies. No generated images or new libraries.
+
 2026-10-29: GSAP core and SplitText 3.15.0 from the official npm `gsap` package, distributed unminified in `assets/vendor-gsap-3.15.0.js` and `assets/vendor-gsap-split-text-3.15.0.js`. GSAP Standard No Charge License, not MIT: https://gsap.com/standard-license/. Original copyright/license notices retained. Used for the user-requested preset hero intro; no visual animation builder. Source/integrity/hashes in [motion manifest](vendor/motion-libraries.json). Loaded on demand for eligible intro only; no runtime third-party host.
 
 2026-10-28 hero intro: `assets/hero-motion-pre.jpg` exported from user-provided Figma `C2rhn7BP2nXA0LyByRDn09`, empty-room layer `3722:1741` in motion-pre `3722:1739` (sequence `3722:1757`). Original 1280 x 960 PNG converted to JPEG quality 88, approximately 184 KB. Existing Figma commercial distribution rights remain unverified before release. Native Web Animations API; no additional library.

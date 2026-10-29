@@ -43,6 +43,7 @@ if (!customElements.get("hero-intro")) {
         const detail = find("detail-content"),
           surface = find("intro-surface"),
           pre = find("pre");
+        const sofa = find("intro-sofa");
         const title = find("title"),
           line = find("reveal-line"),
           progress = find("intro-progress");
@@ -57,7 +58,7 @@ if (!customElements.get("hero-intro")) {
             )
           : [];
         const header = document.querySelector('.site-header[data-home="true"]');
-        if (!detail || !surface || !skip) return this.finish();
+        if (!detail || !surface || !skip || !sofa) return this.finish();
         this.releaseScroll = window.ThemeMotion.lockScroll(this);
         window.ThemeMotion.pageScroll?.scrollTo(0, {
           immediate: true,
@@ -109,16 +110,31 @@ if (!customElements.get("hero-intro")) {
         }
         const box = detail.getBoundingClientRect(),
           hero = this.getBoundingClientRect();
-        const targetWidth = Math.min(
-          (261 * hero.width) / 1535,
-          hero.width * 0.24,
+        // Frame 3725:1786: 274.995 x 70.797 at the center. Frame 3725:1775:
+        // center (1266.675, 722.18), rotated 2.05 degrees in a 1535 x 1092 room.
+        const sofaWidth = Math.min(
+          Math.max(96, (274.995 * hero.width) / 1535),
+          hero.width - 48,
         );
-        const targetHeight = (57 * hero.height) / 1092;
-        const x = Math.min(
-          hero.width - targetWidth - 24,
-          (hero.width * 1138) / 1535,
-        );
-        const y = (hero.height * 691) / 1092;
+        const sofaHeight = (sofaWidth * 70.797) / 274.995;
+        const centerX =
+          hero.left +
+          hero.width / 2 +
+          (0.64 * hero.width) / 1535 -
+          sofaWidth / 2;
+        const centerY =
+          hero.top +
+          hero.height / 2 +
+          (0.29 * hero.height) / 1092 -
+          sofaHeight / 2;
+        const cornerX =
+          hero.left +
+          Math.min(
+            hero.width - sofaWidth - 24,
+            (hero.width * 1266.675) / 1535 - sofaWidth / 2,
+          );
+        const cornerY =
+          hero.top + (hero.height * 722.18) / 1092 - sofaHeight / 2;
         try {
           sessionStorage.setItem("lefriance:hero-intro:v1", "1");
         } catch {
@@ -162,20 +178,33 @@ if (!customElements.get("hero-intro")) {
             .to(
               surface,
               {
-                x: hero.left + x,
-                y: hero.top + y,
-                rotation: 1.44,
-                scaleX: targetWidth / innerWidth,
-                scaleY: targetHeight / innerHeight,
+                x: centerX,
+                y: centerY,
+                width: sofaWidth,
+                height: sofaHeight,
+                borderRadius: (10 * hero.width) / 1535,
+                rotation: 0,
                 duration: 1.8,
               },
               0,
             )
+            .to(
+              sofa,
+              { opacity: 1, duration: 0.45, ease: "power1.inOut" },
+              1.35,
+            )
+            .addLabel("center-sofa", 1.8)
+            .to(
+              surface,
+              { x: cornerX, y: cornerY, rotation: 2.05, duration: 1.4 },
+              "center-sofa",
+            )
+            .addLabel("sofa-settled", 3.2)
             .to(progress, { opacity: 0, duration: 0.5 }, 0)
             .to(
               [pre, surface],
               { opacity: 0, duration: 1.8, ease: "power1.inOut" },
-              1.8,
+              "sofa-settled",
             )
             .to(
               find("shade"),
@@ -188,15 +217,20 @@ if (!customElements.get("hero-intro")) {
                   ) || 0,
                 duration: 1.8,
               },
-              1.8,
+              "sofa-settled",
             )
-            .call(() => this.classList.remove("is-intro-loading"), null, 3.6)
+            .addLabel("room-ready", 5)
+            .call(
+              () => this.classList.remove("is-intro-loading"),
+              null,
+              "room-ready",
+            )
             .to(
               line,
               { scaleX: 1, opacity: 1, duration: 1, ease: "power1.inOut" },
-              3.6,
+              "room-ready",
             )
-            .to(line, { opacity: 0, duration: 0.35 }, 5.75);
+            .to(line, { opacity: 0, duration: 0.35 }, 7.15);
           if (letters.length) {
             // Use the original Figma paths; rightmost letter rises from the line first.
             timeline.to(
@@ -208,22 +242,18 @@ if (!customElements.get("hero-intro")) {
                 stagger: { amount: 0.7 },
                 ease: "power3.out",
               },
-              4.6,
+              6,
             );
           } else {
             // A merchant-uploaded wordmark is one image, so retain it and reveal right to left.
             timeline.to(
               title,
               { clipPath: "inset(0 0 0 0%)", duration: 1.5 },
-              4.6,
+              6,
             );
           }
           if (header)
-            timeline.to(
-              header,
-              { yPercent: 0, opacity: 1, duration: 1.2 },
-              4.6,
-            );
+            timeline.to(header, { yPercent: 0, opacity: 1, duration: 1.2 }, 6);
         }, this);
         this.progressFill = progress.firstElementChild;
         const oldTransform = this.progressFill.style.transform;

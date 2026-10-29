@@ -1,12 +1,12 @@
 # Task aktif
 
-Task aktif: caption reveal dan wordmark kanan ke kiri, 2026-10-29. Selesai lokal.
+Task aktif: green sofa-center sequence, 2026-10-29. Selesai implementasi dan validasi lokal.
 
-Caption target adalah teks di bawah thumbnail. Pengguna menegaskan tetap progres nyata: opacity 0.25–1 mengikuti image load/decode + font readiness; cache boleh langsung 100%, tanpa jeda/reveal buatan. `waitForImage()` menunggu load nyata sebelum decode; error/abort tidak dihitung sebagai siap.
+Sumber: Figma [center 3725:1786](https://www.figma.com/design/C2rhn7BP2nXA0LyByRDn09/Speedtest?node-id=3725-1786), [urutan 3722:1757](https://www.figma.com/design/C2rhn7BP2nXA0LyByRDn09/Speedtest?node-id=3722-1757), corner 3725:1775.
 
-Display-text frame [3722:1658](https://www.figma.com/design/C2rhn7BP2nXA0LyByRDn09/Speedtest?node-id=3722-1658) memakai SVG asli 2.2 KB melalui `inline_asset_content`, tanpa mengubah paths. Sembilan huruf diurutkan berdasarkan posisi X, kanan lebih dulu; naik dari garis dengan stagger pada fase sesudah loading. Wordmark gambar kustom tetap dipertahankan dengan mask kanan ke kiri. Struktur/schema/font lainnya tetap.
+Mapping: `hero-editorial.liquid` memakai file user `bg-header-center.png` sebagai default pre-room dan `green-sofa-front.png` pada surface. `hero-intro.js`/CSS: full green → mengecil di tengah menjadi sofa (274.995 x 70.797 pada 1535px) → bergerak kanan bawah dan berotasi 2.05° → crossfade ke hero furnished → garis dan huruf kanan-ke-kiri/navbar. Stage setelah readiness ~7.5 detik; timing diturunkan dari frame statis. Caption tetap real image load/decode + font readiness, kini termasuk aset baru, tanpa fake progress. Picker pre-room existing, no-JS/editor/reduced motion, skip/abort/cleanup tetap tersedia. Mobile aspect/minimum 96px dan posisi dijaga di dalam frame; tidak ada frame mobile Figma.
 
-Validasi: Theme Check tanpa temuan; syntax/diff checks dan assertions resource readiness/load/error/abort lulus. Browser 390/1535px 32/32 checks: target caption, no timed reveal, arah huruf, baseline, final geometry, wrapping/overflow dan cleanup. Live Theme Editor/perangkat nyata/Lighthouse belum diuji. [Shopify inline_asset_content](https://shopify.dev/docs/api/liquid/filters/inline_asset_content), [SplitText](https://gsap.com/docs/v3/Plugins/SplitText/).
+Validasi lokal: Theme Check bersih; syntax/diff dan tests resource readiness/load/error/abort lulus. Browser 390/1535px: 40/40 checks lulus; memeriksa center sebelum corner, ukuran/koordinat/rotasi Figma, crossfade setelah arrival, caption, wordmark dan cleanup. Visual center dibandingkan dengan screenshot Figma. Live Theme Editor/perangkat nyata/Lighthouse belum diuji. [Shopify asset_img_url](https://shopify.dev/docs/api/liquid/filters/asset_img_url). Provenance di [lisensi](third-party-licenses.md).
 
 ## Isi untuk pekerjaan berikutnya
 

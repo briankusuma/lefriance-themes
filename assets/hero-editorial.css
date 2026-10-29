@@ -195,7 +195,8 @@ html:has(hero-intro.is-intro-running) {
   width: 100vw;
   height: 100dvh;
   background: var(--hero-intro-background);
-  transform-origin: top left;
+  transform-origin: center;
+  overflow: hidden;
   z-index: 2;
 }
 .is-intro-running .editorial-hero__content {
@@ -341,4 +342,14 @@ html:has(hero-intro.is-intro-running) {
   display: block;
   width: 100%;
   height: 100%;
+}
+
+.editorial-hero__intro-sofa {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
 }
