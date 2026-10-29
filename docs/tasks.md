@@ -1,6 +1,8 @@
 # Task aktif
 
-Task aktif: Collection collage — gambar slide dari acuan tanpa garis, 2026-10-29. Implementasi dan pemeriksaan lokal selesai; QA visual toko masih terbuka.
+Task aktif: Collection collage — perbaiki slide saat scroll turun, 2026-10-29. Implementasi dan pemeriksaan lokal selesai; QA visual toko masih terbuka.
+
+Follow-up: moving clip-path pada photo dihapus (clipPath none); cukup outer image cell overflow:hidden sebagai batas reveal. Translation 100%→0 tetap memakai arah Figma, dengan power2.inOut yang simetris. Ini menghilangkan overlap dua batas bergerak yang menyembunyikan awal gerak. Tes GSAP memulai masing-masing dari enam reveal dari progres 0, memeriksa gerak awal dan posisi yang sama saat kembali dari akhir; lulus. Browser toko belum diamati langsung.
 
 Target: Figma `C2rhn7BP2nXA0LyByRDn09` / `3734:526`, follow-up section Collection collage (T04). Mapping: section dan blok image/promotion existing; checkbox Animate on scroll aktif di home. Follow-up frame `3734:594`: garis hanya acuan gerak dan tidak dirender. Setelah intro/promosi berpindah, desk dan detail meja slide ke kiri dari batas kanan; sofa/console naik dari bawah; shelf/kursi turun dari atas. Reveal memakai mask dan clipping tiap cell, dengan stagger mengikuti scroll. Tidak ada jeda untuk menampilkan guide lines. Native sticky 500svh/100svh + ScrollTrigger scrub 1.2s, reversible, tanpa pin/reparenting. SVG guide, variabel inline, pseudo-elements dan tween garis dihapus; foto/ikon lama digunakan ulang. Loader menerima opsi core-only sehingga collage tidak memerlukan SplitText. Tidak ada library baru.
 

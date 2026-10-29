@@ -174,26 +174,28 @@ if (!customElements.get("collection-collage")) {
               ];
               const reveals = photos.map((photo) => {
                 const slot = gridItems.indexOf(photo.parentElement);
+                // The outer image cell clips a single translating photo. A second
+                // moving clip-path hides early forward motion and makes it pop in.
                 // Figma guides are reveal origins, not visible decoration.
                 const from =
                   slot === 0 || slot === 6
                     ? {
                         xPercent: 100,
                         yPercent: 0,
-                        clipPath: "inset(0 0 0 100%)",
+                        clipPath: "none",
                         autoAlpha: 1,
                       }
                     : slot < 4
                       ? {
                           xPercent: 0,
                           yPercent: 100,
-                          clipPath: "inset(100% 0 0 0)",
+                          clipPath: "none",
                           autoAlpha: 1,
                         }
                       : {
                           xPercent: 0,
                           yPercent: -100,
-                          clipPath: "inset(0 0 100% 0)",
+                          clipPath: "none",
                           autoAlpha: 1,
                         };
                 gsap.set(photo, from);
@@ -258,11 +260,11 @@ if (!customElements.get("collection-collage")) {
                   {
                     xPercent: 0,
                     yPercent: 0,
-                    clipPath: "inset(0% 0 0 0)",
+                    clipPath: "none",
                     autoAlpha: 1,
                     duration: 1.8,
                     immediateRender: false,
-                    ease: "power3.out",
+                    ease: "power2.inOut",
                   },
                   4.3 + index * 0.12,
                 );
