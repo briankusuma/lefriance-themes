@@ -263,6 +263,12 @@ html:has(hero-intro.is-intro-running) {
 .editorial-hero__intro-copy {
   display: none;
 }
+.editorial-hero__intro-word {
+  max-width: 100%;
+}
+.editorial-hero__intro-char {
+  opacity: 0.25;
+}
 .is-intro-loading .editorial-hero__intro-copy {
   display: block;
   position: absolute;

@@ -1,14 +1,12 @@
 # Task aktif
 
-Task aktif: GSAP intro dan audit kompatibilitas motion, 2026-10-29. Selesai lokal.
+Task aktif: character reveal mengikuti loading nyata, 2026-10-29. Selesai lokal.
 
-Mapping: loading copy → GSAP SplitText pada salinan aria-hidden; sequence/wordmark → timeline GSAP di `hero-intro.js`; baseline/mask → `hero-editorial.css`; library loader dan scroll locks → `theme-motion.js`/`layout/theme.liquid`. Tetap memakai aset frame Figma [3722:1658](https://www.figma.com/design/C2rhn7BP2nXA0LyByRDn09/Speedtest?node-id=3722-1658), dengan urutan [3722:1757](https://www.figma.com/design/C2rhn7BP2nXA0LyByRDn09/Speedtest?node-id=3722-1757). Timing ~7.9 detik mengikuti permintaan perlambatan, bukan keyframes Figma. Intro aktif tiap reload; editor/reduced motion/no-JS tetap hero akhir.
+`assets/hero-intro.js`: mengganti word/timed reveal dengan SplitText chars (dependency existing). Opacity 0.25–1 dihitung langsung dari jumlah hero image decodes dan font-readiness checks yang selesai. Tiga karakter berdekatan overlap dalam ruang progress; tanpa timer/tween/delay/scroll trigger untuk reveal. Loader lama hanya memiliki readiness lifecycle, tidak memiliki byte-level percentage. Timeout yang dapat melewati readiness dihapus. Cached assets dapat langsung selesai; decode gagal/skip/abort kembali ke hero statis. Garis loading existing mengikuti readiness yang sama; tidak ada UI baru. Motion setelah loading mempertahankan durasi transisinya.
 
-GSAP core + SplitText 3.15.0 readable/local, on demand (~47 KB gzip), dengan notices dan manifest lisensi. Wordmark naik dari garis tanpa gap. Lenis satu-satunya page scroll engine; lock bersama intro/modal/menu mencegah resume prematur. Loader Swiper menolak request async yang sudah digantikan; Material Story mengabaikan hasil filter lama. Audit semua script section tidak menemukan kebutuhan mengubah slider lain.
+Typography/wrapping dan accessible rich text dipertahankan; SplitText hanya menyentuh salinan aria-hidden. Reduced motion/editor/no-JS tetap statis. Validasi: syntax + Theme Check bersih; assertions opacity endpoints/order/overlap/monotonicity, readiness/failure/abort lulus. Browser 390/1535px: 32/32 checks character reveal, no elapsed-time advancement, wrapping/overflow dan cleanup lulus. Live Theme Editor, screen reader, perangkat nyata dan Lighthouse belum diuji.
 
-Validasi lokal: Theme Check tanpa temuan; browser 101/101 checks Material Story/Featured Collections/Journal/footer, 14/14 galeri produk, 30/30 integrasi GSAP–Lenis/baseline/reconnect/cleanup. Fallback intro diperiksa ulang pada 390/1440px. Tidak mengklaim kelulusan Theme Editor asli, screen reader, perangkat nyata atau Lighthouse toko.
-
-Sumber: [GSAP context](https://gsap.com/docs/v3/GSAP/gsap.context()/), [SplitText](https://gsap.com/docs/v3/Plugins/SplitText/), [Lenis](https://github.com/darkroomengineering/lenis), [Shopify performance](https://shopify.dev/docs/storefronts/themes/best-practices/performance). Lisensi/aset: [motion libraries](vendor/motion-libraries.md).
+Sumber: [SplitText](https://gsap.com/docs/v3/Plugins/SplitText/), [image decode](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/decode), [font readiness](https://developer.mozilla.org/en-US/docs/Web/API/FontFaceSet/ready).
 
 ## Isi untuk pekerjaan berikutnya
 

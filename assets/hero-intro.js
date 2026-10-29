@@ -25,7 +25,6 @@ if (!customElements.get("hero-intro")) {
         this.restores = [];
         this.active = true;
         const { signal } = this.controller;
-        this.safety = setTimeout(() => this.finish(), 16000);
         window.addEventListener("pagehide", () => this.finish(), { signal });
         window.addEventListener("resize", () => this.finish(), { signal });
         this.motion.addEventListener("change", () => this.finish(), { signal });
@@ -112,16 +111,6 @@ if (!customElements.get("hero-intro")) {
           (hero.width * 1138) / 1535,
         );
         const y = (hero.height * 691) / 1092;
-        const images = [...this.querySelectorAll("img")].map((img) => {
-          img.loading = "eager";
-          return img.decode().catch(() => {});
-        });
-        const loaded = Promise.race([
-          Promise.all(images),
-          new Promise((resolve) => {
-            this.loadTimer = setTimeout(resolve, 2600);
-          }),
-        ]);
         try {
           sessionStorage.setItem("lefriance:hero-intro:v1", "1");
         } catch {
@@ -130,7 +119,10 @@ if (!customElements.get("hero-intro")) {
         // The accessible rich text stays intact; only its aria-hidden visual copy splits.
         if (copy)
           this.split = SplitText.create(copy, {
-            type: "words",
+            type: "words,chars",
+            tag: "span",
+            charsClass: "editorial-hero__intro-char",
+            reduceWhiteSpace: false,
             aria: "none",
             wordsClass: "editorial-hero__intro-word",
           });
@@ -138,43 +130,18 @@ if (!customElements.get("hero-intro")) {
           gsap.set(detail, {
             x: innerWidth / 2 - box.left - box.width / 2,
             y: innerHeight / 2 - box.top - box.height / 2,
-            opacity: 0,
+            opacity: 1,
           });
           gsap.set(title, { y: 0, yPercent: 100 });
           if (header) gsap.set(header, { yPercent: -110, opacity: 0 });
           const timeline = (this.timeline = gsap.timeline({
+            paused: true,
             defaults: { ease: "power3.inOut" },
             onComplete: () => this.finish(),
           }));
           timeline
-            .to(detail, { opacity: 1, duration: 0.9 }, 0)
-            .to(
-              progress.firstElementChild,
-              { scaleX: 1, duration: 1.8, ease: "none" },
-              0,
-            );
-          if (this.split?.words.length)
-            timeline.fromTo(
-              this.split.words,
-              { opacity: 0.12, yPercent: 20, clipPath: "inset(0 100% 0 0)" },
-              {
-                opacity: 1,
-                yPercent: 0,
-                clipPath: "inset(0 0% 0 0)",
-                duration: 1.1,
-                stagger: { amount: 0.7 },
-                ease: "power2.out",
-              },
-              0,
-            );
-          timeline
-            .addPause(1.8, () => {
-              loaded.then(() => {
-                if (!signal.aborted) timeline.resume();
-              });
-            })
-            .call(() => this.classList.add("is-intro-moving"), null, 1.8)
-            .to(detail, { x: 0, y: 0, duration: 1.8 }, 1.8)
+            .call(() => this.classList.add("is-intro-moving"), null, 0)
+            .to(detail, { x: 0, y: 0, duration: 1.8 }, 0)
             .to(
               surface,
               {
@@ -185,13 +152,13 @@ if (!customElements.get("hero-intro")) {
                 scaleY: targetHeight / innerHeight,
                 duration: 1.8,
               },
-              1.8,
+              0,
             )
-            .to(progress, { opacity: 0, duration: 0.5 }, 1.8)
+            .to(progress, { opacity: 0, duration: 0.5 }, 0)
             .to(
               [pre, surface],
               { opacity: 0, duration: 1.8, ease: "power1.inOut" },
-              3.6,
+              1.8,
             )
             .to(
               find("shade"),
@@ -204,30 +171,70 @@ if (!customElements.get("hero-intro")) {
                   ) || 0,
                 duration: 1.8,
               },
-              3.6,
+              1.8,
             )
-            .call(() => this.classList.remove("is-intro-loading"), null, 5.4)
+            .call(() => this.classList.remove("is-intro-loading"), null, 3.6)
             .to(
               line,
               { scaleX: 1, opacity: 1, duration: 1, ease: "power1.inOut" },
-              5.4,
+              3.6,
             )
-            .to(title, { yPercent: 0, duration: 1.5 }, 6.4)
-            .to(line, { opacity: 0, duration: 0.35 }, 7.55);
+            .to(title, { yPercent: 0, duration: 1.5 }, 4.6)
+            .to(line, { opacity: 0, duration: 0.35 }, 5.75);
           if (header)
             timeline.to(
               header,
               { yPercent: 0, opacity: 1, duration: 1.2 },
-              6.4,
+              4.6,
             );
         }, this);
+        this.progressFill = progress.firstElementChild;
+        const oldTransform = this.progressFill.style.transform;
+        this.restores.push(() => {
+          this.progressFill.style.transform = oldTransform;
+        });
+        await this.waitForLoading(signal);
+        if (!signal.aborted) this.timeline.play();
+      }
+
+      async waitForLoading(signal) {
+        // Readiness milestones, not a percentage of network bytes. Native image
+        // requests do not expose byte progress; reuse their actual decode lifecycle.
+        const tasks = [...this.querySelectorAll("img")].map((image) => {
+          image.loading = "eager";
+          return () => image.decode();
+        });
+        if (document.fonts) tasks.push(() => document.fonts.ready);
+        let completed = 0;
+        this.paintLoadingProgress(0);
+        await Promise.all(
+          tasks.map(async (ready) => {
+            await ready();
+            if (signal.aborted) return;
+            this.paintLoadingProgress(++completed / tasks.length);
+          }),
+        );
+        if (!tasks.length && !signal.aborted) this.paintLoadingProgress(1);
+      }
+
+      paintLoadingProgress(progress) {
+        const value = Math.max(0, Math.min(1, progress));
+        const chars = this.split?.chars || [];
+        // Three adjacent characters overlap in progress space; no time-based tween.
+        const overlap = Math.min(3, chars.length);
+        const cursor = value * (Math.max(0, chars.length - 1) + overlap);
+        chars.forEach((char, index) => {
+          const fill = Math.max(0, Math.min(1, (cursor - index) / overlap));
+          const eased = fill * fill * (3 - 2 * fill);
+          char.style.opacity = String(0.25 + 0.75 * eased);
+        });
+        // Keep the existing line honest; do not introduce another indicator.
+        this.progressFill.style.transform = `scaleX(${value})`;
       }
 
       finish() {
         if (!this.active) return;
         this.active = false;
-        clearTimeout(this.safety);
-        clearTimeout(this.loadTimer);
         this.controller?.abort();
         const skip = this.querySelector("[data-intro-skip]");
         const restoreFocus = document.activeElement === skip;
