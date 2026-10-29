@@ -353,3 +353,9 @@ html:has(hero-intro.is-intro-running) {
   object-fit: cover;
   opacity: 0;
 }
+
+/* Keep the header hidden before the lazy animation engine is ready. Inline GSAP
+   opacity takes over when the navbar enters at the end of the intro. */
+body:has(hero-intro.is-intro-running) .site-header[data-home="true"] {
+  opacity: 0;
+}

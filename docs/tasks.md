@@ -1,12 +1,12 @@
 # Task aktif
 
-Task aktif: green sofa-center sequence, 2026-10-29. Selesai implementasi dan validasi lokal.
+Task aktif: perbaiki caption awal dan hilangkan solid hijau saat sofa di tengah, 2026-10-29. Selesai lokal.
 
-Sumber: Figma [center 3725:1786](https://www.figma.com/design/C2rhn7BP2nXA0LyByRDn09/Speedtest?node-id=3725-1786), [urutan 3722:1757](https://www.figma.com/design/C2rhn7BP2nXA0LyByRDn09/Speedtest?node-id=3722-1757), corner 3725:1775.
+Penyebab caption terlambat: setup sebelumnya menunggu GSAP/SplitText sebelum mengamati readiness aset. Sekarang salinan caption aria-hidden dipersiapkan langsung dengan DOM/grapheme segmentation native; SplitText mengambil alih setelah library siap tanpa reset progress. Gambar load/decode, font readiness dan engine readiness menggerakkan opacity 0.25–1 serta garis existing. Tidak ada timed reveal/minimum duration/fake progress; cache tetap boleh selesai langsung sesuai konfirmasi pengguna.
 
-Mapping: `hero-editorial.liquid` memakai file user `bg-header-center.png` sebagai default pre-room dan `green-sofa-front.png` pada surface. `hero-intro.js`/CSS: full green → mengecil di tengah menjadi sofa (274.995 x 70.797 pada 1535px) → bergerak kanan bawah dan berotasi 2.05° → crossfade ke hero furnished → garis dan huruf kanan-ke-kiri/navbar. Stage setelah readiness ~7.5 detik; timing diturunkan dari frame statis. Caption tetap real image load/decode + font readiness, kini termasuk aset baru, tanpa fake progress. Picker pre-room existing, no-JS/editor/reduced motion, skip/abort/cleanup tetap tersedia. Mobile aspect/minimum 96px dan posisi dijaga di dalam frame; tidak ada frame mobile Figma.
+Warna surface hijau memudar menjadi transparan bersamaan dengan opacity `green-sofa-front` naik (1.35–1.8 detik setelah readiness), sehingga ketika mencapai tengah hanya sofa terlihat. Tetap transparan saat bergerak ke kanan bawah. Urutan, foto baru dan wordmark kanan-ke-kiri tetap.
 
-Validasi lokal: Theme Check bersih; syntax/diff dan tests resource readiness/load/error/abort lulus. Browser 390/1535px: 40/40 checks lulus; memeriksa center sebelum corner, ukuran/koordinat/rotasi Figma, crossfade setelah arrival, caption, wordmark dan cleanup. Visual center dibandingkan dengan screenshot Figma. Live Theme Editor/perangkat nyata/Lighthouse belum diuji. [Shopify asset_img_url](https://shopify.dev/docs/api/liquid/filters/asset_img_url). Provenance di [lisensi](third-party-licenses.md).
+Validasi: Theme Check/syntax/diff bersih; assertions progress/load/error/abort lulus. Browser 390/1535px 30/30 checks: caption sebelum engine, progress tetap saat pending, no reset saat handoff, full fill hanya setelah readiness, background transparan di center/corner, wrapping, cleanup dan scroll/header recovery. Live Theme Editor/perangkat nyata/Lighthouse belum diuji.
 
 ## Isi untuk pekerjaan berikutnya
 

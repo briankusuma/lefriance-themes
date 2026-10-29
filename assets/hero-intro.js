@@ -34,10 +34,8 @@ if (!customElements.get("hero-intro")) {
       }
 
       async start(signal) {
-        const engine = await window.ThemeMotion?.animation();
-        if (signal.aborted) return;
-        if (!engine || !this.isConnected) return this.finish();
-        const { gsap, SplitText } = engine;
+        const engineReady = window.ThemeMotion?.animation();
+        if (!engineReady || !this.isConnected) return this.finish();
         const find = (suffix) =>
           this.querySelector(`.editorial-hero__${suffix}`);
         const detail = find("detail-content"),
@@ -140,7 +138,27 @@ if (!customElements.get("hero-intro")) {
         } catch {
           /* Optional storage. */
         }
-        // The accessible rich text stays intact; only its aria-hidden visual copy splits.
+        // Show real progress immediately, including while the animation library loads.
+        this.prepareLoadingCopy(copy);
+        this.progressFill = progress.firstElementChild;
+        const oldTransform = this.progressFill.style.transform;
+        this.restores.push(() => {
+          this.progressFill.style.transform = oldTransform;
+        });
+        const oldDetailTransform = detail.style.transform;
+        detail.style.transform = `translate(${innerWidth / 2 - box.left - box.width / 2}px, ${innerHeight / 2 - box.top - box.height / 2}px)`;
+        this.restores.push(() => {
+          detail.style.transform = oldDetailTransform;
+        });
+        const loaded = this.waitForLoading(signal, engineReady).catch(() => {
+          if (!signal.aborted) this.finish();
+        });
+        const engine = await engineReady;
+        if (signal.aborted) return;
+        if (!engine) return this.finish();
+        const { gsap, SplitText } = engine;
+        const currentProgress = this.loadingValue;
+        this.split?.revert();
         if (copy)
           this.split = SplitText.create(copy, {
             type: "words,chars",
@@ -150,6 +168,7 @@ if (!customElements.get("hero-intro")) {
             aria: "none",
             wordsClass: "editorial-hero__intro-word",
           });
+        this.paintLoadingProgress(currentProgress);
         this.context = gsap.context(() => {
           gsap.set(detail, {
             x: innerWidth / 2 - box.left - box.width / 2,
@@ -191,6 +210,15 @@ if (!customElements.get("hero-intro")) {
             .to(
               sofa,
               { opacity: 1, duration: 0.45, ease: "power1.inOut" },
+              1.35,
+            )
+            .to(
+              surface,
+              {
+                backgroundColor: "rgba(0, 0, 0, 0)",
+                duration: 0.45,
+                ease: "power1.inOut",
+              },
               1.35,
             )
             .addLabel("center-sofa", 1.8)
@@ -255,16 +283,46 @@ if (!customElements.get("hero-intro")) {
           if (header)
             timeline.to(header, { yPercent: 0, opacity: 1, duration: 1.2 }, 6);
         }, this);
-        this.progressFill = progress.firstElementChild;
-        const oldTransform = this.progressFill.style.transform;
-        this.restores.push(() => {
-          this.progressFill.style.transform = oldTransform;
-        });
-        await this.waitForLoading(signal);
+        await loaded;
         if (!signal.aborted) this.timeline.play();
       }
 
-      async waitForLoading(signal) {
+      prepareLoadingCopy(copy) {
+        if (!copy) return;
+        const original = [...copy.childNodes];
+        const chars = [],
+          fragment = document.createDocumentFragment();
+        const segmenter =
+          typeof Intl.Segmenter === "function"
+            ? new Intl.Segmenter(undefined, { granularity: "grapheme" })
+            : null;
+        for (const token of copy.textContent.split(/(\s+)/)) {
+          if (!token) continue;
+          if (/^\s+$/.test(token)) {
+            fragment.append(document.createTextNode(token));
+            continue;
+          }
+          const word = document.createElement("span");
+          word.className = "editorial-hero__intro-word";
+          word.style.display = "inline-block";
+          const letters = segmenter
+            ? [...segmenter.segment(token)].map((item) => item.segment)
+            : Array.from(token);
+          for (const letter of letters) {
+            const char = document.createElement("span");
+            char.className = "editorial-hero__intro-char";
+            char.style.display = "inline-block";
+            char.textContent = letter;
+            word.append(char);
+            chars.push(char);
+          }
+          fragment.append(word);
+        }
+        copy.replaceChildren(fragment);
+        this.split = { chars, revert: () => copy.replaceChildren(...original) };
+      }
+
+      async waitForLoading(signal, engineReady) {
         // Readiness milestones, not a percentage of network bytes. Native image
         // requests do not expose byte progress; reuse their actual decode lifecycle.
         const tasks = [...this.querySelectorAll("img")].map((image) => {
@@ -272,6 +330,7 @@ if (!customElements.get("hero-intro")) {
           return () => this.waitForImage(image, signal);
         });
         if (document.fonts) tasks.push(() => document.fonts.ready);
+        if (engineReady) tasks.push(() => engineReady);
         let completed = 0;
         this.paintLoadingProgress(0);
         await Promise.all(
@@ -316,7 +375,8 @@ if (!customElements.get("hero-intro")) {
       }
 
       paintLoadingProgress(progress) {
-        const value = Math.max(0, Math.min(1, progress));
+        const value = Math.max(0, Math.min(1, progress || 0));
+        this.loadingValue = value;
         const chars = this.split?.chars || [];
         // Three adjacent characters overlap in progress space; no time-based tween.
         const overlap = Math.min(3, chars.length);
