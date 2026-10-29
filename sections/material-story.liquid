@@ -4,8 +4,13 @@
   assign categories = section.blocks | map: 'settings' | map: 'category' | uniq
   assign initial_index = section.settings.initial_item | minus: 1
 %}
-<material-story class="material-story section-shell color-{{ section.settings.color_scheme }}" data-initial-index="{{ initial_index }}" aria-labelledby="MaterialHeading-{{ section.id }}">
+<material-story class="material-story section-shell color-{{ section.settings.color_scheme }}" data-scroll-reveal="{{ section.settings.enable_scroll_reveal }}" data-initial-index="{{ initial_index }}" aria-labelledby="MaterialHeading-{{ section.id }}">
   <div class="material-story__layout container">
+    <div class="material-story__motion-lines" aria-hidden="true">
+      <i data-story-line="horizontal"></i><i data-story-line="vertical"></i>
+      <i data-story-line="top"></i><i data-story-line="bottom"></i>
+      <i data-story-line="left"></i><i data-story-line="right"></i>
+    </div>
     <h2 class="material-story__heading" id="MaterialHeading-{{ section.id }}">
       {{ section.settings.heading | escape }}
       {% if section.settings.heading_secondary != blank %}<span>{{ section.settings.heading_secondary | escape }}</span>{% endif %}
@@ -70,6 +75,7 @@
   "disabled_on": { "groups": ["header", "footer"] },
   "max_blocks": 12,
   "settings": [
+    { "type": "checkbox", "id": "enable_scroll_reveal", "label": "Animate on scroll", "default": true, "info": "Opens the story card as visitors scroll. Disabled in the theme editor and for reduced motion." },
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-dark" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Tell your material story" },
     { "type": "text", "id": "heading_secondary", "label": "Secondary heading", "default": "from the inside out" },

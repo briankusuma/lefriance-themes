@@ -51,6 +51,11 @@
         "bytes": 18034,
         "gzip_bytes": 4999,
         "sha256": "e25cde4005072ad2be67924d721709b881f7e122d4756ee4d1c2cbaae43e3f41"
+      },
+      "assets/vendor-gsap-scroll-trigger-3.15.0.js": {
+        "bytes": 115504,
+        "gzip_bytes": 26810,
+        "sha256": "98e0ab6d6876a62ba3fb8504609cb5647176bb8a1bcb3140bd95793d4ee2548b"
       }
     }
   }

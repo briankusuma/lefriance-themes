@@ -4,6 +4,7 @@ if (!customElements.get("material-story")) {
     class extends HTMLElement {
       connectedCallback() {
         if (!window.ThemeMotion) return;
+        this.motionMedia?.revert();
         this.controller?.abort();
         this.swiper?.destroy(true, true);
         this.swiperCategory = null;
@@ -88,7 +89,225 @@ if (!customElements.get("material-story")) {
         this.querySelectorAll("[data-story-controls]").forEach((control) => {
           control.hidden = this.items.length === 0;
         });
-        this.update(false);
+        this.update(false).then(() => this.setupMotion());
+      }
+
+      async setupMotion() {
+        const signal = this.controller.signal;
+        if (
+          this.dataset.scrollReveal !== "true" ||
+          !this.items.length ||
+          !this.swiper ||
+          window.Shopify?.designMode ||
+          matchMedia("(prefers-reduced-motion: reduce)").matches
+        )
+          return;
+        try {
+          const { gsap, SplitText, ScrollTrigger } =
+            await ThemeMotion.scrollAnimation();
+          if (signal.aborted || !this.isConnected) return;
+          await document.fonts.ready;
+          if (signal.aborted) return;
+          const layout = this.querySelector(".material-story__layout");
+          const heading = this.querySelector(".material-story__heading");
+          const footer = this.querySelector(".material-story__footer");
+          const stories = this.querySelector(".material-story__stories");
+          const sides = [
+            ...this.querySelectorAll(
+              ".material-story__left, .material-story__right",
+            ),
+          ];
+          this.motionMedia = gsap.matchMedia();
+          this.motionMedia.add(
+            {
+              desktop: "(min-width: 990px) and (min-height: 700px)",
+              mobile: "(max-width: 989px), (max-height: 699px)",
+              reduced: "(prefers-reduced-motion: reduce)",
+            },
+            ({ conditions }) => {
+              if (conditions.reduced) return;
+              let pinScene = conditions.desktop;
+              if (pinScene) {
+                this.classList.add("is-scroll-scene");
+                const rowSpace =
+                  (layout.clientHeight - stories.clientHeight) / 2;
+                if (
+                  this.items.some(
+                    (item) => item.scrollHeight > item.clientHeight + 2,
+                  ) ||
+                  heading.scrollHeight > rowSpace ||
+                  footer.scrollHeight > rowSpace
+                ) {
+                  this.classList.remove("is-scroll-scene");
+                  pinScene = false;
+                }
+              }
+              const split = SplitText.create(heading, {
+                type: "words,chars",
+                aria: "auto",
+                wordsClass: "story-reveal-word",
+              });
+              // Inline words preserve natural wrapping; opacity never changes layout.
+              const title = gsap.fromTo(
+                split.chars,
+                { opacity: 0.25 },
+                {
+                  opacity: 1,
+                  duration: 1,
+                  stagger: { amount: 2.5 },
+                  ease: "none",
+                  paused: true,
+                },
+              );
+              let timeline;
+              if (pinScene) {
+                this.classList.add("is-scroll-scene");
+                const line = (name) =>
+                  this.querySelector(`[data-story-line="${name}"]`);
+                const half = () => stories.offsetHeight / 2;
+                const centerY = (element) =>
+                  layout.offsetHeight / 2 -
+                  element.offsetTop -
+                  element.offsetHeight / 2;
+                gsap.set(sides, { autoAlpha: 0 });
+                gsap.set(stories, { scale: 0.25, autoAlpha: 0 });
+                gsap.set(heading, { y: () => centerY(heading) - 90 });
+                gsap.set(footer, { y: () => centerY(footer) + 65 });
+                gsap.set([line("horizontal"), line("top"), line("bottom")], {
+                  scaleX: 0,
+                });
+                gsap.set([line("vertical"), line("left"), line("right")], {
+                  scaleY: 0,
+                });
+                timeline = gsap.timeline({
+                  defaults: { ease: "power2.inOut" },
+                  scrollTrigger: {
+                    trigger: this,
+                    start: "top top",
+                    end: () => `+=${innerHeight * 4.5}`,
+                    pin: true,
+                    scrub: 1.2,
+                    anticipatePin: 1,
+                    invalidateOnRefresh: true,
+                    onRefresh: () => ThemeMotion.pageScroll?.resize(),
+                  },
+                });
+                timeline
+                  .to(title, { progress: 1, duration: 2.2, ease: "none" }, 0)
+                  .to(line("horizontal"), { scaleX: 1, duration: 1.2 }, 1.8)
+                  .to(line("vertical"), { scaleY: 1, duration: 1 }, 2.7)
+                  .to(
+                    [line("horizontal"), line("vertical")],
+                    { opacity: 0, duration: 0.3 },
+                    3.5,
+                  )
+                  .to(
+                    [line("top"), line("bottom")],
+                    { scaleX: 1, duration: 0.3 },
+                    3.5,
+                  )
+                  .to(
+                    [line("left"), line("right")],
+                    { scaleY: 1, duration: 0.3 },
+                    3.5,
+                  )
+                  .to(
+                    line("top"),
+                    { y: () => -half() * 0.25, duration: 1 },
+                    3.5,
+                  )
+                  .to(
+                    line("bottom"),
+                    { y: () => half() * 0.25, duration: 1 },
+                    3.5,
+                  )
+                  .to(
+                    line("left"),
+                    { x: () => -half() * 0.25, duration: 1 },
+                    3.5,
+                  )
+                  .to(
+                    line("right"),
+                    { x: () => half() * 0.25, duration: 1 },
+                    3.5,
+                  )
+                  .to(stories, { autoAlpha: 1, duration: 0.8 }, 3.8)
+                  .to(heading, { y: 0, duration: 3 }, 3.5)
+                  .to(footer, { y: 0, duration: 3 }, 3.5)
+                  .to(stories, { scale: 1, duration: 2.6 }, 4.5)
+                  .to(line("top"), { y: () => -half(), duration: 2.6 }, 4.5)
+                  .to(line("bottom"), { y: () => half(), duration: 2.6 }, 4.5)
+                  .to(line("left"), { x: () => -half(), duration: 2.6 }, 4.5)
+                  .to(line("right"), { x: () => half(), duration: 2.6 }, 4.5)
+                  .to(
+                    layout,
+                    { "--story-frame-opacity": 1, duration: 0.9 },
+                    6.8,
+                  )
+                  .to(sides, { autoAlpha: 1, duration: 1.2, stagger: 0.2 }, 7.4)
+                  .to({}, { duration: 0.7 });
+                const updateAccess = () => {
+                  sides.forEach((side) => {
+                    side.inert = timeline.time() < 7.4;
+                  });
+                  stories.inert = timeline.time() < 6.5;
+                };
+                timeline.eventCallback("onUpdate", updateAccess);
+                updateAccess();
+              } else {
+                timeline = gsap.timeline({
+                  scrollTrigger: {
+                    trigger: heading,
+                    start: "top 85%",
+                    end: "top 30%",
+                    scrub: 0.8,
+                  },
+                });
+                timeline.to(title, { progress: 1, duration: 1, ease: "none" });
+              }
+              const finishForKeyboard = (event) => {
+                const trigger = timeline.scrollTrigger;
+                if (event.key !== "Tab" || !pinScene || !trigger?.isActive)
+                  return;
+                timeline.progress(1);
+                if (ThemeMotion.pageScroll)
+                  ThemeMotion.pageScroll.scrollTo(trigger.end, {
+                    immediate: true,
+                  });
+                else trigger.scroll(trigger.end);
+              };
+              document.addEventListener("keydown", finishForKeyboard);
+              // Refresh after lazy media dimensions settle; no extra RAF or scroll owner.
+              const refresh = () => ScrollTrigger.refresh();
+              const images = [...this.querySelectorAll("img")].filter(
+                (img) => !img.complete,
+              );
+              images.forEach((img) =>
+                img.addEventListener("load", refresh, { once: true }),
+              );
+              ScrollTrigger.refresh();
+              return () => {
+                document.removeEventListener("keydown", finishForKeyboard);
+                images.forEach((img) =>
+                  img.removeEventListener("load", refresh),
+                );
+                timeline.scrollTrigger?.kill();
+                timeline.kill();
+                title.kill();
+                split.revert();
+                this.classList.remove("is-scroll-scene");
+                sides.forEach((side) => {
+                  side.inert = false;
+                });
+                stories.inert = false;
+                ThemeMotion.pageScroll?.resize();
+              };
+            },
+          );
+        } catch {
+          this.motionMedia?.revert();
+          this.classList.remove("is-scroll-scene");
+        }
       }
 
       matchesCategory(item) {
@@ -182,6 +401,7 @@ if (!customElements.get("material-story")) {
       }
 
       disconnectedCallback() {
+        this.motionMedia?.revert();
         this.controller?.abort();
         this.swiper?.destroy(true, true);
       }

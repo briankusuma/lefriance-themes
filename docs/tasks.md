@@ -1,10 +1,14 @@
 # Task aktif
 
-Task aktif: perbaiki error refresh cart drawer, 2026-10-29. Perbaikan dan pemeriksaan lokal selesai; transaksi toko/browser belum diverifikasi.
+Task aktif: Material stories scroll sequence, 2026-10-29. Implementasi dan pemeriksaan lokal selesai; QA visual toko masih terbuka.
 
-`assets/commerce.js`: refresh section memakai URL halaman aktif (beserta locale/query preview), bukan `/cart` yang tidak merender drawer menurut `layout/theme.liquid`. Bundled rendering memakai konteks yang sama. Refresh sukses membersihkan error lama; kegagalan nyata tetap ditampilkan. Mutation sukses tidak diulang ketika section gagal dirender. Tidak mengubah tampilan atau schema.
+Figma `C2rhn7BP2nXA0LyByRDn09` node `3734:390` → section `material-story`, blok dan slider existing. Checkbox Animate on scroll; homepage aktif. SplitText heading opacity 0.25→1 mengikuti progres scroll, garis silang membuka kotak, kartu scale 0.25→1, ornament dan kontrol samping masuk terakhir. Desktop pin 4.5 viewport, scrub 1.2s. ScrollTrigger lokal dari paket GSAP 3.15.0 yang sudah digunakan; Lenis tetap pemilik RAF. Tidak mengganti data merchant/aset lama.
 
-Validasi: Node VM regression checks untuk drawer dan cart page, locale/preview, null-section fallback, satu mutation dan pembersihan error lulus. Syntax/diff bersih; Theme Check tanpa temuan. Pemeriksaan jaringan toko dan browser/Theme Editor belum dilakukan. Sumber: [Cart API](https://shopify.dev/docs/api/ajax/reference/cart), [Section Rendering API](https://shopify.dev/docs/api/ajax/section-rendering).
+Figma hanya memiliki tujuh frame statis (motion inventory kosong): timing/easing diturunkan dari urutan yang disetujui. Mobile/viewport pendek dan konten panjang memakai reveal judul tanpa pin; editor/reduced motion tetap statis. Tab menyelesaikan scene untuk menjangkau kontrol. Cleanup mendukung disconnect, breakpoint dan perubahan preferensi.
+
+Validasi: real-GSAP/VM regression checks lulus untuk fill karakter, ordering garis/kartu/sides, reverse, pin range, mobile, cleanup serta reduced-motion/editor guards. Tujuh fixture Liquid dirender dari section asli; syntax/format/diff bersih, Theme Check tanpa temuan. Ini bukan pengujian browser. Perbandingan Figma desktop/mobile, keyboard nyata, Theme Editor dan Lighthouse belum diverifikasi karena pembatasan sesi Computer Use sebelumnya. QA cart toko dari task sebelumnya juga tetap terbuka.
+
+Sumber: [ScrollTrigger](https://gsap.com/docs/v3/Plugins/ScrollTrigger/), [Shopify input settings](https://shopify.dev/docs/storefronts/themes/architecture/settings/input-settings), [Theme Store requirements](https://shopify.dev/docs/storefronts/themes/store/requirements).
 
 ## Isi untuk pekerjaan berikutnya
 

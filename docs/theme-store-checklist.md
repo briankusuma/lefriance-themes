@@ -287,7 +287,7 @@ Working checklist, not a release certificate. Read current official requirements
 
 ## Repository and tooling gates
 
-- [x] Theme Check CLI 4.9.4: zero findings after cart section-context refresh fix, 2026-10-29. Rerun after code changes.
+- [x] Theme Check CLI 4.9.4: zero findings after material-story ScrollTrigger integration, 2026-10-29. Rerun after code changes.
 - [ ] No disabled Theme Check rules without justification
 - [ ] Third-party assets and licenses recorded in `docs/third-party-licenses.md`
 - [ ] Intentional design deviations recorded in `docs/project-brief.md`

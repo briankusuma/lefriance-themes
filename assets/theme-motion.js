@@ -7,6 +7,7 @@
   let swiperReady;
   let lenisReady;
   let gsapReady;
+  let scrollTriggerReady;
   const scrollLocks = new Set();
   let lenis;
   const load = (src, style) =>
@@ -37,6 +38,12 @@
       ]));
       window.gsap.registerPlugin(window.SplitText);
       return { gsap: window.gsap, SplitText: window.SplitText };
+    },
+    async scrollAnimation() {
+      const engine = await this.animation();
+      await (scrollTriggerReady ||= load(config.scrollTriggerSrc));
+      engine.gsap.registerPlugin(window.ScrollTrigger);
+      return { ...engine, ScrollTrigger: window.ScrollTrigger };
     },
     lockScroll(owner) {
       scrollLocks.add(owner);
@@ -175,6 +182,7 @@
         ) &&
         !["hidden", "clip"].includes(getComputedStyle(document.body).overflowY),
     });
+    lenis.on("scroll", () => window.ScrollTrigger?.update());
     syncLock();
   };
   reduced.addEventListener("change", () => {

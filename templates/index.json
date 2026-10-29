@@ -75,6 +75,7 @@
       ],
       "settings": {
         "color_scheme": "scheme-dark",
+        "enable_scroll_reveal": true,
         "heading": "Design freely with",
         "heading_secondary": "a fully modular system",
         "intro": "<p>Fewer parts, fast swaps, and repairable modules cut TCO from day one.</p>",

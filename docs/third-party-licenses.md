@@ -1,5 +1,7 @@
 # Third-Party Assets and Licenses
 
+2026-10-29 material-story motion: official readable `dist/ScrollTrigger.js` from the already pinned GSAP 3.15.0 npm archive, copied unchanged as `assets/vendor-gsap-scroll-trigger-3.15.0.js`. Same GSAP Standard No Charge License; original notices retained. Local lazy loading; hash/size in the motion manifest. No new image or runtime host.
+
 2026-10-29 loading thumbnail: `assets/hero-detail-blurred.png`, unchanged 3× PNG export (442 × 442) of Figma `C2rhn7BP2nXA0LyByRDn09`, node `3722:1633`. Includes the original white frame, blur and fade; replaces the raw photo plus CSS blur for the reference card. Existing Figma commercial distribution-rights status remains pending before release. No new library.
 
 2026-10-29 full-chair replacement: user-supplied `assets/sofa-full.png`, 515 x 573 with transparency, replaces green-sofa-front in the intro. Original file retained unchanged; native aspect ratio/contain preserve the entire chair. Same user-provided Figma asset distribution-rights status applies; no new library or generated image.
