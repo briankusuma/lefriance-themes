@@ -287,7 +287,11 @@ if (!customElements.get("hero-intro")) {
             );
         }, this);
         await loaded;
-        if (!signal.aborted) this.timeline.play();
+        if (!signal.aborted) {
+          this.paintLoadingProgress(1);
+          // Hold the completed caption briefly; loading progress itself stays real.
+          this.timeline.delay(0.6).restart(true);
+        }
       }
 
       photoChairRect(photo, hero) {

@@ -1,10 +1,10 @@
 # Task aktif
 
-Task aktif: scale hijau 1→0 dan sofa 0→1, 2026-10-29. Implementasi lokal; visual browser belum diverifikasi.
+Task aktif: jeda setelah caption selesai sebelum header, 2026-10-29. Selesai lokal; visual browser belum diverifikasi.
 
-`hero-intro.js`/CSS memakai dua lapisan terpisah. Green plane ber-origin center dan mengecil uniform sampai scale 0; sofa mulai scale 0 dan membesar sampai 1 dengan easing/durasi sama (power2.inOut, 1.8s), bertemu di pusat yang sama. Ini mengganti blend opacity serta sisa kotak 60% sebelumnya. Tidak ada opacity fade pada swap ini. Perjalanan ke kanan baru dimulai pada center-sofa 1.8s, setelah kedua skala selesai. Alignment foto, foreground z-index, wordmark lebih dahulu, background setelah arrival dan loading caption nyata dipertahankan.
+Setelah seluruh readiness selesai, `hero-intro.js` memastikan caption/garis 100%, lalu memberi jeda GSAP 0.6s melalui delay/restart(includeDelay). Baru setelah itu seluruh transisi sofa/header berjalan. Progress caption tetap dari readiness nyata; jeda ini merupakan hold setelah selesai yang diminta pengguna, bukan persentase/jeda loading palsu. Skip/abort tetap membersihkan timeline melalui mekanisme existing.
 
-Validasi: syntax/diff dan Theme Check bersih. Konfigurasi produksi diuji dengan GSAP asli pada objek numerik: endpoint 1→0/0→1, monotonic/complementary scale, pusat yang sama, posisi tetap sebelum 1.8s lalu bergerak ke kanan lulus. Assertions resource readiness/load/error/abort tetap lulus. Ini bukan uji rendering DOM. Computer Use pada sesi sebelumnya dihentikan oleh batas akses URL; tidak ada klaim verifikasi visual/browser baru, live Theme Editor, perangkat nyata atau Lighthouse.
+Validasi: syntax/diff dan Theme Check bersih; test GSAP asli memastikan motion belum berjalan pada +0.3s dan berjalan setelah +0.6s. Assertions readiness dan opposite-scale tetap lulus. Visual browser belum diuji karena pembatasan akses Computer Use pada sesi sebelumnya; tidak ada klaim uji browser/Theme Editor/Lighthouse baru. [GSAP restart includeDelay](https://gsap.com/docs/v3/GSAP/Timeline/restart()/).
 
 ## Isi untuk pekerjaan berikutnya
 
