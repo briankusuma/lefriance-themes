@@ -1,10 +1,10 @@
 # Task aktif
 
-Task aktif: sofa tiba dahulu, background final menyusul, 2026-10-29. Selesai lokal.
+Task aktif: ganti green-sofa-front dengan sofa-full, 2026-10-29. Selesai lokal.
 
-`hero-intro.js`: display-text tetap reveal kanan-ke-kiri selama perjalanan sofa dan lengkap pada arrival 3.8s. Crossfade background/header final sekarang baru mulai pada label sofa-settled (3.8s), selesai pada room-ready (5.8s). Navbar/garis, tahap tengah, background hijau transparan dan caption real loading tidak diubah.
+`hero-editorial.liquid` memakai aset user `sofa-full.png` (515 x 573, alpha). `hero-intro.js` mempertahankan anchor/timing tetapi menghitung tinggi dari metadata rasio gambar; radius akhir 0. CSS contain menjaga seluruh kaki/sandaran tidak terpotong. Display-text tetap lebih dahulu, final background hanya berganti setelah sofa tiba di kanan. Ini follow-up aset dari pengguna; proporsi baru bukan strip lama Figma.
 
-Validasi lokal: syntax/diff dan Theme Check bersih; browser 390/1535px memeriksa background belum berubah selama perjalanan/arrival, display-text lengkap lebih dulu, lalu crossfade setelah arrival dan cleanup/scroll unlock. Live Theme Editor/perangkat nyata/Lighthouse belum diuji.
+Validasi: syntax/diff dan Theme Check bersih; 28/28 browser checks mobile/desktop lulus, mencakup sumber/aspect/contain/no clipping, posisi dalam frame, timing wordmark sebelum background dan cleanup. Live Theme Editor/perangkat nyata/Lighthouse belum diuji. [Shopify asset_img_url](https://shopify.dev/docs/api/liquid/filters/asset_img_url).
 
 ## Isi untuk pekerjaan berikutnya
 

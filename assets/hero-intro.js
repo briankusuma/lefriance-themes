@@ -108,13 +108,15 @@ if (!customElements.get("hero-intro")) {
         }
         const box = detail.getBoundingClientRect(),
           hero = this.getBoundingClientRect();
-        // Frame 3725:1786: 274.995 x 70.797 at the center. Frame 3725:1775:
-        // center (1266.675, 722.18), rotated 2.05 degrees in a 1535 x 1092 room.
+        // Preserve the center/corner anchors; the full chair uses its own image ratio.
+        // Corner center (1266.675, 722.18), rotated 2.05 degrees in a 1535 x 1092 room.
         const sofaWidth = Math.min(
           Math.max(96, (274.995 * hero.width) / 1535),
           hero.width - 48,
         );
-        const sofaHeight = (sofaWidth * 70.797) / 274.995;
+        const sofaHeight =
+          (sofaWidth * Number(sofa.getAttribute("height"))) /
+          Number(sofa.getAttribute("width"));
         const centerX =
           hero.left +
           hero.width / 2 +
@@ -201,7 +203,7 @@ if (!customElements.get("hero-intro")) {
                 y: centerY,
                 width: sofaWidth,
                 height: sofaHeight,
-                borderRadius: (10 * hero.width) / 1535,
+                borderRadius: 0,
                 rotation: 0,
                 duration: 1.8,
               },
