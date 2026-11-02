@@ -288,7 +288,6 @@ if (!customElements.get("journal-stories")) {
                   bodyTop:
                     bodyBox.top -
                     (Number(gsap.getProperty(this.cards[0], "y")) || 0),
-                  cards: this.cards.map(rect),
                   width: stage.offsetWidth,
                   height: stage.offsetHeight,
                 };
@@ -344,12 +343,8 @@ if (!customElements.get("journal-stories")) {
                 height: 0,
                 transformOrigin: "center",
               });
-              gsap.set(this.cards, {
-                x: (i) => {
-                  const delta = geometry.cards[i].left - geometry.card.left;
-                  return (-delta / (geometry.card.width + 21)) * 21;
-                },
-              });
+              // Swiper owns card positions and its 21px gaps throughout the
+              // reveal. Translating loop slides pulls offscreen cards into view.
               const timeline = gsap.timeline({
                 defaults: { ease: "power2.inOut" },
                 scrollTrigger: {
@@ -498,7 +493,6 @@ if (!customElements.get("journal-stories")) {
                   filled + 9.4,
                 )
                 .to(band, { autoAlpha: 0, duration: 0.6 }, filled + 11.7)
-                .to(this.cards, { x: 0, duration: 1.8 }, filled + 11.8)
                 .to(
                   captions,
                   { opacity: 1, duration: 1.2, stagger: { amount: 0.25 } },
