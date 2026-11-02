@@ -152,8 +152,7 @@ if (!customElements.get("footer-reveal")) {
                 scrollTrigger: {
                   trigger: this,
                   start: "top 90%",
-                  toggleActions: "play none none none",
-                  once: true,
+                  toggleActions: "restart none none reset",
                   invalidateOnRefresh: true,
                 },
               });
