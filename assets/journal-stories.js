@@ -293,6 +293,9 @@ if (!customElements.get("journal-stories")) {
                 };
               };
               measure();
+              const surroundingCards = this.cards.filter(
+                (card) => !card.classList.contains("is-active"),
+              );
               const brown = getComputedStyle(plane).backgroundColor;
               const white = getComputedStyle(plane).color;
               const muted = getComputedStyle(this.numbers[0]).color;
@@ -480,6 +483,13 @@ if (!customElements.get("journal-stories")) {
                   filled + 7.4,
                 )
                 .to(this.rail, { autoAlpha: 1, duration: 0.8 }, filled + 8.4)
+                // Clear every non-center loop slide before the brown panel
+                // contracts. Keep Swiper's positions and 21px gaps untouched.
+                .to(
+                  surroundingCards,
+                  { opacity: 0, duration: 0.5 },
+                  filled + 8.9,
+                )
                 .to(
                   band,
                   {
@@ -493,6 +503,11 @@ if (!customElements.get("journal-stories")) {
                   filled + 9.4,
                 )
                 .to(band, { autoAlpha: 0, duration: 0.6 }, filled + 11.7)
+                .to(
+                  surroundingCards,
+                  { opacity: 1, duration: 1 },
+                  filled + 11.8,
+                )
                 .to(
                   captions,
                   { opacity: 1, duration: 1.2, stagger: { amount: 0.25 } },
