@@ -106,7 +106,7 @@ if (!customElements.get("footer-reveal")) {
           const footer = this.closest(".editorial-footer");
           this.media = gsap.matchMedia();
           this.media.add(
-            { reduced: "(prefers-reduced-motion: reduce)" },
+            { all: "all", reduced: "(prefers-reduced-motion: reduce)" },
             ({ conditions }) => {
               if (conditions.reduced) return;
               const items = [
