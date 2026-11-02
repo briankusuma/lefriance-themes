@@ -68,6 +68,7 @@ if (!customElements.get("journal-stories")) {
               String(index === this.activeIndex),
             ),
           );
+          this.syncMotionSelection?.();
         };
         const swiper = await ThemeMotion.create(this.rail, this.cards, {
           initialSlide: initial,
@@ -298,15 +299,15 @@ if (!customElements.get("journal-stories")) {
                 });
               };
               measure();
-              const railLeft = this.rail.getBoundingClientRect().left;
-              const railRight = railLeft + this.rail.clientWidth;
-              const offscreenCards = this.cards.filter((card) => {
-                const box = card.getBoundingClientRect();
-                return (
-                  box.left + box.width <= railLeft + 0.5 ||
-                  box.left >= railRight - 0.5
-                );
-              });
+              // Logical indices stay stable while Swiper reorders loop slides.
+              const visibleOpacity = (index) => {
+                const distance =
+                  (index - this.activeIndex + this.cards.length) %
+                  this.cards.length;
+                return distance <= 1 || distance === this.cards.length - 1
+                  ? 1
+                  : 0;
+              };
               const brown = getComputedStyle(plane).backgroundColor;
               const white = getComputedStyle(plane).color;
               const muted = getComputedStyle(this.numbers[0]).color;
@@ -348,7 +349,7 @@ if (!customElements.get("journal-stories")) {
               gsap.set([this.rail, band, ...arrows], { autoAlpha: 0 });
               // Keep both visible neighbors stable; only mask loop slides
               // completely outside the rail until the opening is finished.
-              gsap.set(offscreenCards, { opacity: 0 });
+              gsap.set(this.cards, { opacity: visibleOpacity });
               gsap.set(captions, { opacity: 0 });
               gsap.set(band, {
                 x: () => studio.offsetLeft,
@@ -435,17 +436,21 @@ if (!customElements.get("journal-stories")) {
                   { x: 0, y: 0, duration: 1.8, stagger: { amount: 0.2 } },
                   filled + 2.8,
                 )
-                .to(
+                .fromTo(
                   this.numbers,
+                  { "--journal-fill": 1, "--journal-ink": white },
                   {
                     "--journal-fill": (index) =>
                       index === this.activeIndex ? 1 : 0,
                     "--journal-ink": (index) =>
                       index === this.activeIndex ? white : muted,
                     duration: 0.8,
+                    immediateRender: false,
                   },
                   filled + 2.8,
-                )
+                );
+              const selectionTween = timeline.recent();
+              timeline
                 .to(
                   tags,
                   {
@@ -510,7 +515,14 @@ if (!customElements.get("journal-stories")) {
                   filled + 9.4,
                 )
                 .to(band, { autoAlpha: 0, duration: 0.6 }, filled + 11.7)
-                .to(offscreenCards, { opacity: 1, duration: 1 }, filled + 11.8)
+                .fromTo(
+                  this.cards,
+                  { opacity: visibleOpacity },
+                  { opacity: 1, duration: 1, immediateRender: false },
+                  filled + 11.8,
+                );
+              const visibilityTween = timeline.recent();
+              timeline
                 .to(
                   captions,
                   { opacity: 1, duration: 1.2, stagger: { amount: 0.25 } },
@@ -519,6 +531,16 @@ if (!customElements.get("journal-stories")) {
                 .to(arrows, { autoAlpha: 1, duration: 1.2 }, filled + 12.4)
                 .to({}, { duration: 0.8 });
               let wasLocked;
+              const syncSelection = () => {
+                if (wasLocked !== false) return;
+                gsap.set(this.cards, { opacity: visibleOpacity });
+                // Rebind selection values without restarting scroll or Swiper.
+                for (const tween of [selectionTween, visibilityTween]) {
+                  const progress = tween.progress();
+                  tween.invalidate().progress(progress, true);
+                }
+              };
+              this.syncMotionSelection = syncSelection;
               const access = () => {
                 const locked = timeline.time() < filled + 13.9;
                 if (locked === wasLocked) return;
@@ -544,6 +566,8 @@ if (!customElements.get("journal-stories")) {
               ScrollTrigger.refresh();
               ThemeMotion.pageScroll?.resize();
               return () => {
+                if (this.syncMotionSelection === syncSelection)
+                  this.syncMotionSelection = null;
                 document.removeEventListener("keydown", keyboard);
                 ScrollTrigger.removeEventListener("refreshInit", measure);
                 timeline.scrollTrigger?.kill();
