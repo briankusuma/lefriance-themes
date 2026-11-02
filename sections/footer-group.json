@@ -19,7 +19,8 @@
           "settings": {
             "heading": "Get updates on new collections, materials, and stories from our workshop.",
             "email_label": "GET CONTACT",
-            "button_label": "SEND"
+            "button_label": "SEND",
+            "email_placeholder": "Your Email"
           }
         }
       },
@@ -32,8 +33,10 @@
         "social_text": "<p>Stay in touch with our studio.</p>",
         "studio_text": "<p>Thoughtful furniture, considered materials, and the people behind every piece.</p>",
         "brand_text": "<p>We design and craft furniture that brings warmth, simplicity, and lasting quality into everyday spaces.</p>",
-        "image_caption": "<p>Design volume instead of square meters — better yield without bigger plans.</p>",
-        "use_reference_wordmark": true
+        "image_caption": "<p>Design volume instead of square meters \u2014 better yield without bigger plans.</p>",
+        "use_reference_wordmark": true,
+        "enable_scroll_reveal": true,
+        "show_footer_details": false
       }
     }
   },

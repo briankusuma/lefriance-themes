@@ -1,8 +1,10 @@
 {{ 'footer-editorial.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'footer-gallery.js' | asset_url }}" defer></script>
+<script src="{{ 'footer-reveal.js' | asset_url }}" defer></script>
 {% assign media_blocks = section.blocks | where: 'type', 'media' %}
 <footer class="editorial-footer section-shell color-{{ section.settings.color_scheme }}" style="--footer-ornament-color: {{ section.settings.ornament_color | default: '#5B5148' }};">
   <div class="container">
+    <footer-reveal data-scroll-reveal="{{ section.settings.enable_scroll_reveal }}">
     <div class="editorial-footer__top">
       <div class="editorial-footer__identity">
         <div class="editorial-footer__thumbnails">
@@ -95,7 +97,7 @@
       {% if section.settings.wordmark != blank %}
         {{ section.settings.wordmark | image_url: width: 2400 | image_tag: widths: '480, 960, 1440, 2400', sizes: '93vw', loading: 'lazy', alt: shop.name }}
       {% elsif section.settings.use_reference_wordmark %}
-        <img src="{{ 'le-friance-wordmark.svg' | asset_url }}" width="1433" height="404" alt="{{ shop.name | escape }}" loading="lazy">
+        <span class="editorial-footer__wordmark-vector" role="img" aria-label="{{ shop.name | escape }}">{{ 'le-friance-wordmark.svg' | inline_asset_content }}</span>
       {% else %}<p>{{ shop.name | escape }}</p>{% endif %}
     </div>
     {% if section.settings.show_footer_details %}
@@ -105,6 +107,7 @@
       {% if section.settings.show_payment_icons %}<div class="editorial-footer__payments">{% for type in shop.enabled_payment_types %}{{ type | payment_type_svg_tag }}{% endfor %}</div>{% endif %}
     </div>
     {% endif %}
+    </footer-reveal>
   </div>
 </footer>
 {% schema %}
@@ -114,6 +117,7 @@
   "enabled_on": { "groups": ["footer"] },
   "max_blocks": 7,
   "settings": [
+    { "type": "checkbox", "id": "enable_scroll_reveal", "label": "Animate on scroll", "default": true, "info": "Reveals footer content as visitors scroll. Reduced motion and selected editor sections show the full layout." },
     { "type": "checkbox", "id": "show_follow_on_shop", "label": "Show Follow on Shop", "default": true },
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-footer" },
     { "type": "color", "id": "ornament_color", "label": "Ornament color", "default": "#5B5148" },

@@ -4,6 +4,7 @@ if (!customElements.get("footer-gallery")) {
     class extends HTMLElement {
       async connectedCallback() {
         if (!window.ThemeMotion) return;
+        if (this.controller && !this.controller.signal.aborted) return;
         this.controller?.abort();
         this.swiper?.destroy(true, true);
         this.controller = new AbortController();
@@ -60,6 +61,8 @@ if (!customElements.get("footer-gallery")) {
           effect: "fade",
           fadeEffect: { crossFade: true },
           rewind: true,
+          observer: false,
+          observeParents: false,
           on: { slideChange: (swiper) => this.paint(swiper.realIndex) },
         });
         if (signal.aborted) {
@@ -89,6 +92,7 @@ if (!customElements.get("footer-gallery")) {
       disconnectedCallback() {
         this.controller?.abort();
         this.swiper?.destroy(true, true);
+        this.swiper = null;
       }
     },
   );

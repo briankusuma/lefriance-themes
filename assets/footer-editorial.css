@@ -7,6 +7,23 @@
 .editorial-footer > .container {
   position: relative;
 }
+footer-reveal {
+  display: block;
+}
+.editorial-footer__wordmark-vector {
+  display: block;
+}
+.editorial-footer__wordmark-vector svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.editorial-footer.is-motion-ready .editorial-footer__wordmark {
+  overflow: hidden;
+}
+.footer-reveal-word {
+  white-space: nowrap;
+}
 .editorial-footer__top {
   display: grid;
   gap: 2rem;
@@ -241,7 +258,7 @@
   position: absolute;
   top: 0;
   left: 50%;
-  width: 100vw;
+  width: calc(100vw * var(--footer-line-progress, 1));
   height: 1.066px;
   transform: translateX(-50%);
   background: var(--footer-ornament-color);
@@ -323,6 +340,8 @@
       linear-gradient(var(--footer-ornament-color), transparent) right / 1.066px
         100% no-repeat;
     pointer-events: none;
+    transform: scaleY(var(--footer-line-progress, 1));
+    transform-origin: top;
   }
   .editorial-footer__top {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 1.5fr);
