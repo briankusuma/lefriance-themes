@@ -3,10 +3,42 @@ if (!customElements.get("journal-stories")) {
     "journal-stories",
     class extends HTMLElement {
       async connectedCallback() {
+        if (this.controller && !this.controller.signal.aborted) return;
+        this.motionMedia?.revert();
+        this.motionMedia = null;
+        this.selected = false;
         this.controller?.abort();
         this.swiper?.destroy(true, true);
         this.controller = new AbortController();
         const { signal } = this.controller;
+        const owns = (event) =>
+          event.target.contains(this) || this.contains(event.target);
+        const selected = (event) => {
+          if (!owns(event)) return;
+          this.selected = true;
+          this.motionMedia?.revert();
+          this.motionMedia = null;
+        };
+        const deselected = (event) => {
+          if (!owns(event)) return;
+          this.selected = false;
+          this.queueMotion();
+        };
+        for (const type of ["shopify:section:select", "shopify:block:select"])
+          document.addEventListener(type, selected, { signal });
+        for (const type of [
+          "shopify:section:deselect",
+          "shopify:block:deselect",
+        ])
+          document.addEventListener(type, deselected, { signal });
+        signal.addEventListener(
+          "abort",
+          () => {
+            this.observer?.disconnect();
+            this.introObserver?.disconnect();
+          },
+          { once: true },
+        );
         this.cards = [...this.querySelectorAll("[data-journal-card]")];
         this.numbers = [...this.querySelectorAll("[data-journal-select]")];
         this.rail = this.querySelector("[data-journal-rail]");
@@ -45,6 +77,8 @@ if (!customElements.get("journal-stories")) {
           loopAddBlankSlides: false,
           slidesPerView: this.cards.length >= 4 ? 1.15 : 1,
           spaceBetween: 21,
+          observer: false,
+          observeParents: false,
           breakpoints: {
             600: { slidesPerView: this.cards.length >= 4 ? 1.7 : 1 },
             990: { slidesPerView: this.cards.length >= 5 ? 3 : 1 },
@@ -111,7 +145,378 @@ if (!customElements.get("journal-stories")) {
           },
           { signal },
         );
+        this.queueMotion();
       }
+      queueMotion() {
+        this.observer?.disconnect();
+        this.introObserver?.disconnect();
+        this.introObserver = null;
+        if (
+          this.dataset.scrollReveal !== "true" ||
+          this.selected ||
+          this.motionMedia ||
+          this.controller.signal.aborted ||
+          !this.swiper
+        )
+          return;
+        let near = !("IntersectionObserver" in window);
+        const start = () => {
+          if (!near || this.selected || this.controller.signal.aborted) return;
+          const intro = document.querySelector("hero-intro.is-intro-running");
+          if (intro) {
+            if (!this.introObserver) {
+              this.introObserver = new MutationObserver(start);
+              this.introObserver.observe(intro, {
+                attributes: true,
+                attributeFilter: ["class"],
+              });
+            }
+            return;
+          }
+          this.observer?.disconnect();
+          this.introObserver?.disconnect();
+          this.introObserver = null;
+          this.setupMotion();
+        };
+        if ("IntersectionObserver" in window) {
+          this.observer = new IntersectionObserver(
+            (entries) => {
+              near = entries.some((entry) => entry.isIntersecting);
+              start();
+            },
+            { rootMargin: "0px 0px 25% 0px" },
+          );
+          this.observer.observe(this);
+        } else start();
+      }
+
+      async setupMotion() {
+        const signal = this.controller.signal;
+        if (
+          this.motionPending ||
+          this.motionMedia ||
+          this.selected ||
+          signal.aborted
+        )
+          return;
+        const request = {};
+        this.motionPending = request;
+        try {
+          const { gsap, ScrollTrigger } = await ThemeMotion.scrollAnimation({
+            splitText: false,
+          });
+          await document.fonts.ready;
+          if (
+            signal.aborted ||
+            this.selected ||
+            !this.isConnected ||
+            this.cards.length < 5
+          )
+            return;
+          const stage = this.querySelector(".journal-stories__stage");
+          const plane = this.querySelector(".journal-stories__motion-plane");
+          const band = this.querySelector(".journal-stories__motion-band");
+          const grid = this.querySelector(".journal-stories__motion-grid");
+          const studio = this.querySelector(".journal-stories__studio");
+          const heading = this.querySelector(".journal-stories__heading");
+          const copy = [...heading.children];
+          const tags = [...studio.children].filter(
+            (node) => !node.classList.contains("journal-stories__numbers"),
+          );
+          const captions = this.cards.map((card) =>
+            card.querySelector(".journal-stories__caption"),
+          );
+          const arrows = [...this.querySelectorAll(".journal-stories__arrow")];
+          const numbers = this.querySelector(".journal-stories__numbers");
+          this.motionMedia = gsap.matchMedia();
+          this.motionMedia.add(
+            {
+              desktop: "(min-width: 990px) and (min-height: 700px)",
+              reduced: "(prefers-reduced-motion: reduce)",
+            },
+            ({ conditions }) => {
+              if (!conditions.desktop || conditions.reduced) return;
+              this.classList.add("is-scroll-scene");
+              this.swiper.update();
+              const carousel = this.querySelector(".journal-stories__carousel");
+              if (
+                [studio, heading, carousel].some(
+                  (node) => node.scrollHeight > node.clientHeight + 4,
+                )
+              ) {
+                this.classList.remove("is-scroll-scene");
+                this.swiper.update();
+                return;
+              }
+              // Read final geometry once per refresh, never inside a scroll update.
+              let geometry;
+              const measure = () => {
+                const rect = (node) => {
+                  const box = node.getBoundingClientRect();
+                  return {
+                    left: box.left - (Number(gsap.getProperty(node, "x")) || 0),
+                    top: box.top - (Number(gsap.getProperty(node, "y")) || 0),
+                    width: node.offsetWidth,
+                    height: node.offsetHeight,
+                  };
+                };
+                const base = stage.getBoundingClientRect();
+                const buttons = this.numbers.map(rect);
+                const size = buttons[0].width;
+                const total =
+                  this.numbers.length * size + (this.numbers.length - 1) * 10;
+                const card = rect(
+                  this.cards.find((item) =>
+                    item.classList.contains("is-active"),
+                  ) || this.cards[0],
+                );
+                const body = this.cards[0].querySelector(
+                  ".journal-stories__body",
+                );
+                const bodyBox = body.getBoundingClientRect();
+                geometry = {
+                  base,
+                  buttons,
+                  size,
+                  total,
+                  card,
+                  bodyTop:
+                    bodyBox.top -
+                    (Number(gsap.getProperty(this.cards[0], "y")) || 0),
+                  cards: this.cards.map(rect),
+                  width: stage.offsetWidth,
+                  height: stage.offsetHeight,
+                };
+              };
+              measure();
+              const brown = getComputedStyle(plane).backgroundColor;
+              const white = getComputedStyle(plane).color;
+              const muted = getComputedStyle(this.numbers[0]).color;
+              gsap.set(stage, { "--journal-motion-background": brown });
+              this.classList.add("is-journal-opening");
+              gsap.set(plane, {
+                autoAlpha: 1,
+                x: 0,
+                y: 0,
+                scaleX: 1,
+                scaleY: 1,
+                borderRadius: 0,
+                transformOrigin: "0 0",
+              });
+              gsap.set(this.numbers, {
+                x: (i) =>
+                  geometry.base.left +
+                  (geometry.width - geometry.total) / 2 +
+                  i * (geometry.size + 10) -
+                  geometry.buttons[i].left,
+                y: (i) =>
+                  geometry.base.top +
+                  (geometry.height - geometry.size) / 2 -
+                  geometry.buttons[i].top,
+                "--journal-fill": 0,
+              });
+              gsap.set(this.numbers[0], {
+                "--journal-fill": 1,
+                "--journal-ink": white,
+              });
+              gsap.set(tags, { autoAlpha: 0, y: 24 });
+              gsap.set(copy, {
+                autoAlpha: 0,
+                y: 60,
+                clipPath: "inset(100% 0 0 0)",
+              });
+              gsap.set(grid, {
+                autoAlpha: 0,
+                scaleX: 0,
+                transformOrigin: "center",
+              });
+              gsap.set([this.rail, band, ...arrows], { autoAlpha: 0 });
+              gsap.set(captions, { opacity: 0 });
+              gsap.set(band, {
+                x: () => studio.offsetLeft,
+                y: () => geometry.bodyTop - geometry.base.top,
+                width: () => studio.clientWidth,
+                height: geometry.card.width,
+                scaleX: 1,
+                transformOrigin: "center",
+              });
+              gsap.set(this.cards, {
+                x: (i) => {
+                  const delta = geometry.cards[i].left - geometry.card.left;
+                  return (-delta / (geometry.card.width + 21)) * 21;
+                },
+              });
+              const timeline = gsap.timeline({
+                defaults: { ease: "power2.inOut" },
+                scrollTrigger: {
+                  trigger: this,
+                  start: "top top",
+                  end: "bottom bottom",
+                  scrub: 1.2,
+                  invalidateOnRefresh: true,
+                },
+              });
+              timeline
+                .to(
+                  plane,
+                  {
+                    scaleX: 0.975,
+                    scaleY: 0.927,
+                    x: () => geometry.width * 0.0125,
+                    y: () => geometry.height * 0.0365,
+                    borderRadius: "10px",
+                    duration: 1.2,
+                  },
+                  0.2,
+                )
+                .to(
+                  plane,
+                  {
+                    scaleX: () => geometry.size / geometry.width,
+                    scaleY: () => geometry.size / geometry.height,
+                    x: () => (geometry.width - geometry.total) / 2,
+                    y: () => (geometry.height - geometry.size) / 2,
+                    borderRadius: "10.66px",
+                    duration: 2,
+                  },
+                  1.4,
+                )
+                .set(
+                  this.numbers[0],
+                  { "--journal-fill": 1, "--journal-ink": white },
+                  3.4,
+                )
+                .set(plane, { autoAlpha: 0 }, 3.4);
+              this.numbers.slice(1).forEach((button, index) => {
+                timeline.to(
+                  button,
+                  {
+                    "--journal-fill": 1,
+                    "--journal-ink": white,
+                    duration: 0.65,
+                  },
+                  3.6 + index * 0.55,
+                );
+              });
+              const filled = 3.6 + (this.numbers.length - 1) * 0.55 + 0.65;
+              timeline
+                .to(
+                  this.numbers,
+                  {
+                    y: (i) =>
+                      geometry.base.top +
+                      geometry.height * 0.18 -
+                      geometry.buttons[i].top,
+                    duration: 1.5,
+                  },
+                  filled,
+                )
+                .to(grid, { autoAlpha: 1, scaleX: 1, duration: 1.5 }, filled)
+                .to(
+                  this.numbers,
+                  { x: 0, y: 0, duration: 1.8, stagger: { amount: 0.2 } },
+                  filled + 1.4,
+                )
+                .to(
+                  this.numbers,
+                  {
+                    "--journal-fill": (index) =>
+                      index === this.activeIndex ? 1 : 0,
+                    "--journal-ink": (index) =>
+                      index === this.activeIndex ? white : muted,
+                    duration: 0.8,
+                  },
+                  filled + 1.4,
+                )
+                .to(
+                  tags,
+                  {
+                    autoAlpha: 1,
+                    y: 0,
+                    duration: 1.4,
+                    stagger: { amount: 0.25 },
+                  },
+                  filled + 2.3,
+                )
+                .to(
+                  copy,
+                  {
+                    autoAlpha: 1,
+                    y: 0,
+                    clipPath: "inset(0% 0 0 0)",
+                    duration: 1.6,
+                    stagger: 0.25,
+                  },
+                  filled + 3.8,
+                )
+                .set(band, { autoAlpha: 1 }, filled + 4)
+                .to(
+                  band,
+                  {
+                    scaleX: () => geometry.card.width / studio.clientWidth,
+                    duration: 1.8,
+                  },
+                  filled + 5.5,
+                )
+                .to(this.rail, { autoAlpha: 1, duration: 0.8 }, filled + 6.6)
+                .to(band, { autoAlpha: 0, duration: 0.8 }, filled + 6.6)
+                .to(this.cards, { x: 0, duration: 1.8 }, filled + 7.3)
+                .to(
+                  captions,
+                  { opacity: 1, duration: 1.2, stagger: { amount: 0.25 } },
+                  filled + 7.8,
+                )
+                .to(arrows, { autoAlpha: 1, duration: 1.2 }, filled + 7.8)
+                .to({}, { duration: 0.8 });
+              let wasLocked;
+              const access = () => {
+                const locked = timeline.time() < filled + 9.2;
+                if (locked === wasLocked) return;
+                wasLocked = locked;
+                this.classList.toggle("is-journal-opening", locked);
+                numbers.inert = locked;
+                carousel.inert = locked;
+                this.swiper.allowTouchMove = !locked;
+              };
+              timeline.eventCallback("onUpdate", access);
+              access();
+              const keyboard = (event) => {
+                if (event.key !== "Tab" || !timeline.scrollTrigger.isActive)
+                  return;
+                timeline.progress(1);
+                const end = timeline.scrollTrigger.end;
+                if (ThemeMotion.pageScroll)
+                  ThemeMotion.pageScroll.scrollTo(end, { immediate: true });
+                else timeline.scrollTrigger.scroll(end);
+              };
+              document.addEventListener("keydown", keyboard);
+              ScrollTrigger.addEventListener("refreshInit", measure);
+              ScrollTrigger.refresh();
+              ThemeMotion.pageScroll?.resize();
+              return () => {
+                document.removeEventListener("keydown", keyboard);
+                ScrollTrigger.removeEventListener("refreshInit", measure);
+                timeline.scrollTrigger?.kill();
+                timeline.kill();
+                this.classList.remove("is-scroll-scene", "is-journal-opening");
+                numbers.inert = false;
+                carousel.inert = false;
+                this.swiper.allowTouchMove = true;
+                this.swiper.update();
+                ThemeMotion.pageScroll?.resize();
+              };
+            },
+          );
+        } catch (error) {
+          this.motionMedia?.revert();
+          this.motionMedia = null;
+          this.classList.remove("is-scroll-scene", "is-journal-opening");
+          console.warn("Journal animation could not initialize.", error);
+        } finally {
+          if (this.motionPending === request) this.motionPending = null;
+        }
+      }
+
       select(index, announce) {
         if (!this.swiper || !this.cards[index]) return;
         const speed = announce ? ThemeMotion.speed : 0;
@@ -123,7 +528,11 @@ if (!customElements.get("journal-stories")) {
       }
       disconnectedCallback() {
         this.controller?.abort();
+        this.motionMedia?.revert();
+        this.motionMedia = null;
+        this.motionPending = null;
         this.swiper?.destroy(true, true);
+        this.swiper = null;
         this.classList.remove("is-enhanced");
       }
     },

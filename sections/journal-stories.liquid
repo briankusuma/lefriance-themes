@@ -1,7 +1,10 @@
 {{ 'journal-stories.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'journal-stories.js' | asset_url }}" defer></script>
-<journal-stories class="journal-stories section-shell color-{{ section.settings.color_scheme }}" data-initial-index="{{ section.settings.initial_story | minus: 1 }}" style="--journal-ornament-color: {{ section.settings.ornament_color | default: '#E5E3D3' }};">
-  <div class="container">
+<journal-stories class="journal-stories section-shell color-{{ section.settings.color_scheme }}" data-scroll-reveal="{{ section.settings.enable_scroll_reveal }}" data-initial-index="{{ section.settings.initial_story | minus: 1 }}" style="--journal-ornament-color: {{ section.settings.ornament_color | default: '#E5E3D3' }};">
+  <div class="journal-stories__stage container">
+    <div class="journal-stories__motion-plane color-{{ section.settings.card_color_scheme }}" aria-hidden="true"></div>
+    <div class="journal-stories__motion-band color-{{ section.settings.card_color_scheme }}" aria-hidden="true"></div>
+    <div class="journal-stories__motion-grid" aria-hidden="true"></div>
     <div class="journal-stories__studio">
       <img src="{{ 'journal-icon.svg' | asset_url }}" width="34.1111" height="34.3776" alt="" loading="lazy">
       <div class="journal-stories__intro rte">{{ section.settings.intro }}</div>
@@ -80,6 +83,7 @@
   "disabled_on": { "groups": ["header", "footer"] },
   "max_blocks": 12,
   "settings": [
+    { "type": "checkbox", "id": "enable_scroll_reveal", "label": "Animate on scroll", "default": true, "info": "Reveals the studio stories as visitors scroll. Reduced motion and selected editor sections show the full layout." },
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-light" },
     { "type": "color", "id": "ornament_color", "label": "Ornament color", "default": "#E5E3D3" },
     { "type": "color_scheme", "id": "card_color_scheme", "label": "Text card color scheme", "default": "scheme-dark" },

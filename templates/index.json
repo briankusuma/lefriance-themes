@@ -352,6 +352,7 @@
         "timber"
       ],
       "settings": {
+        "enable_scroll_reveal": true,
         "color_scheme": "scheme-light",
         "ornament_color": "#e5e3d3",
         "card_color_scheme": "scheme-dark",
