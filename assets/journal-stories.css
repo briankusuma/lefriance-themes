@@ -31,18 +31,20 @@
   position: sticky;
   top: 0;
   width: 100%;
-  height: 100svh;
+  min-height: 100svh;
+  height: auto;
   padding-inline: var(--journal-inset);
-  padding-bottom: 4.67svh;
+  padding-bottom: 4.687svh;
   display: grid;
-  grid-template-rows: 24.5svh minmax(0, 1fr) auto;
+  /* Figma 3776:1651: dividers at 268px and 610.8px on a 1091.556px frame. */
+  grid-template-rows: 24.552svh 31.405svh auto;
   overflow: hidden;
 }
 .journal-stories.is-scroll-scene .journal-stories__studio {
   z-index: 3;
   grid-template-rows: minmax(0, 1fr) auto;
   min-height: 0;
-  padding-block: 3.9svh 1.95svh;
+  padding-block: 3.906svh 1.993svh;
   gap: 0 var(--grid-gap);
 }
 .journal-stories.is-scroll-scene .journal-stories__studio > img {
@@ -75,9 +77,16 @@
 .journal-stories.is-scroll-scene .journal-stories__carousel {
   position: relative;
   z-index: 3;
-  width: min(100%, 73.79rem);
+  /* Three 342.177px cards, 21px gaps, 42.64px arrows and 17.056px gutters. */
+  width: min(100%, 74.245rem);
+  gap: 1.066rem;
   margin-block: 0;
+  padding-top: 3.125svh;
   min-height: 0;
+}
+.journal-stories.is-scroll-scene .journal-stories__arrow {
+  /* Center on the square image, excluding the 53.3px caption above it. */
+  transform: translateY(1.665rem);
 }
 .journal-stories.is-scroll-scene .journal-stories__rail.theme-swiper {
   margin-block: 0;
@@ -109,19 +118,32 @@
   display: block;
   position: absolute;
   inset: 0 max(0px, calc(var(--journal-inset) - 1.066rem));
-  border-inline: 1px solid var(--journal-ornament-color);
+  pointer-events: none;
+}
+.journal-stories__motion-grid::before,
+.journal-stories__motion-grid::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform-origin: center;
+}
+.journal-stories__motion-grid::before {
+  transform: scaleX(var(--journal-line-progress, 0));
   background:
     linear-gradient(
         var(--journal-ornament-color),
         var(--journal-ornament-color)
       )
-      center 24.5svh / 100% 1px no-repeat,
+      center 24.552svh / 100% 1px no-repeat,
     linear-gradient(
         var(--journal-ornament-color),
         var(--journal-ornament-color)
       )
-      center 55.9svh / 100% 1px no-repeat;
-  pointer-events: none;
+      center 55.957svh / 100% 1px no-repeat;
+}
+.journal-stories__motion-grid::after {
+  border-inline: 1px solid var(--journal-ornament-color);
+  transform: scaleY(var(--journal-line-progress, 0));
 }
 .journal-stories::before {
   content: "";

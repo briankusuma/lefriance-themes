@@ -326,9 +326,7 @@ if (!customElements.get("journal-stories")) {
                 clipPath: "inset(100% 0 0 0)",
               });
               gsap.set(grid, {
-                autoAlpha: 0,
-                scaleX: 0,
-                transformOrigin: "center",
+                "--journal-line-progress": 0,
               });
               gsap.set([this.rail, band, ...arrows], { autoAlpha: 0 });
               gsap.set(captions, { opacity: 0 });
@@ -338,6 +336,7 @@ if (!customElements.get("journal-stories")) {
                 width: () => studio.clientWidth,
                 height: geometry.card.width,
                 scaleX: 1,
+                scaleY: 0,
                 transformOrigin: "center",
               });
               gsap.set(this.cards, {
@@ -411,7 +410,11 @@ if (!customElements.get("journal-stories")) {
                   },
                   filled,
                 )
-                .to(grid, { autoAlpha: 1, scaleX: 1, duration: 1.5 }, filled)
+                .to(
+                  grid,
+                  { "--journal-line-progress": 1, duration: 1.5 },
+                  filled,
+                )
                 .to(
                   this.numbers,
                   { x: 0, y: 0, duration: 1.8, stagger: { amount: 0.2 } },
@@ -449,7 +452,16 @@ if (!customElements.get("journal-stories")) {
                   },
                   filled + 3.8,
                 )
-                .set(band, { autoAlpha: 1 }, filled + 4)
+                .to(
+                  band,
+                  {
+                    autoAlpha: 1,
+                    scaleY: 1,
+                    duration: 1.6,
+                    ease: "power3.out",
+                  },
+                  filled + 3.8,
+                )
                 .to(
                   band,
                   {
