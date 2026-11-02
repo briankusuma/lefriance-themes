@@ -144,8 +144,7 @@ if (!customElements.get("footer-reveal")) {
               if (gallery)
                 gsap.set(gallery, {
                   autoAlpha: 0,
-                  y: 32,
-                  clipPath: "inset(100% 0 0 0 round 8.528px)",
+                  y: 48,
                 });
               const timeline = gsap.timeline({
                 defaults: { ease: "power3.out" },
@@ -182,7 +181,6 @@ if (!customElements.get("footer-reveal")) {
                   {
                     autoAlpha: 1,
                     y: 0,
-                    clipPath: "inset(0% 0 0 0 round 8.528px)",
                     duration: 1.8,
                   },
                   1.5,

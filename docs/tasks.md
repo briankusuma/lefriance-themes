@@ -1,10 +1,10 @@
 # Task aktif
 
-Task aktif: Footer scroll reveal, 2026-11-02. Implementasi/validasi lokal selesai; visual browser dan live editor belum diverifikasi.
+Task aktif: Catalog filter styling, 2026-11-02. Implementasi/validasi lokal selesai; visual browser dan live editor belum diverifikasi.
 
-Target: existing footer `3660:1365`, simplified per latest instruction. When footer top reaches90% of viewport, play automatically on entry; reset when scrolling up past the start and replay on re-entry: ornament lines0→100% over1.4s, then content/gallery/newsletter rise from below. Wordmark now moves as one HTML wrapper instead of SVG paths, retaining original geometry and bottom crop. No scrub, pin, extra scroll height, new assets or dependencies; existing core-only GSAP/ScrollTrigger loader, no SplitText. Focus completes playback; editor selection/reduced motion/failure/no-JS stay static. Gallery state and newsletter settings unchanged.
+Target: rapikan bar filter/sort koleksi dan search sesuai screenshot masalah dan token katalog existing. CSS scoped di assets/theme-features.css: kontrol44px, font0.875rem, grup filter kompak, sorting rata kanan dengan label inline, divider#E5E3D3, input radius10.66px dan tombol brown existing. Native details/GET/filter/sorting tidak diubah; focus-visible global tetap. Mobile membungkus dua kolom filter dan sorting/tombol full width. Bar active filters kosong tidak menyisakan baris gap.
 
-Validation: actual GSAP timeline test verifies lines finish before content starts, whole wordmark reaches visible final state, untouched SVG paths, reset/restart state, no scrub/pin, focus completion and reduced/custom fallback. Actual matchMedia regression and rendered DOM lifecycle tests pass. Theme Check result recorded in checklist. Browser rendering, mobile/editor/native newsletter and Lighthouse remain unverified. Timing follows the current user instruction; Figma frame has no motion keyframes.
+Validation: CSS formatting/diff checked; no Liquid/JSON or Shopify behavior changes. Browser visual/keyboard/mobile verification pending. Layout responsive diturunkan dari style existing sesuai permintaan pengguna, tanpa frame Figma baru.
 
 Carry forward: metadata author/doc/support untuk tema lafrience masih menunggu data pengguna; native commerce additions sudah diuji lokal tetapi live APIs/checkout/editor/a11y/performance belum lulus. Hak distribusi aset Figma dan QA animasi/freeze/cart sebelumnya tetap terbuka. Tidak ada push/publish/deploy.
 
