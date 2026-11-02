@@ -2,7 +2,7 @@
 
 Task aktif: Featured collections scroll animation, 2026-11-02. Implementasi dan validasi lokal selesai; QA browser toko masih terbuka.
 
-Follow-up `3768:927`: jarak tab kategori ke kartu produk desktop menjadi 26px, termasuk scene scroll; baris tab scene mengikuti tinggi kontennya. Perubahan CSS saja, Prettier/diff bersih; visual browser belum diverifikasi. Gap antarkartu tetap.
+Follow-up `3768:927`/`3768:1192`: gap tab ke kartu desktop 26px dipertahankan. Regresi sizing diperbaiki: track tab memakai tinggi definitif dari tipografi + gap, bukan auto; tinggi foto mengurangi ruang tab aktual agar tidak memicu fallback overflow. Margin kompensasi focus padding dihapus pada rail Swiper desktop karena Swiper menghapus padding tersebut. Perubahan CSS saja; Prettier/diff serta tes GSAP dan DOM lokal lulus. Tes itu tidak memverifikasi CSS rendering; visual browser tetap terbuka. Gap antarkartu tetap.
 
 Target: Figma `C2rhn7BP2nXA0LyByRDn09` / `3768:1192`, follow-up Featured collections. Mapping: existing section/collection blocks/product-card/Swiper, checkbox Animate on scroll aktif pada home. Urutan: kosong → horizontal/vertical 0–100% membentuk silang → dua garis dari center membuka ke posisi sepertiga lalu tepi → horizontal naik lalu kembali ke pembatas header → header/details/tab reveal → dua kartu kiri masuk ke kanan dan dua kanan masuk ke kiri hingga empat berjajar. Native sticky 600svh/100svh, ScrollTrigger scrub 1.2s, reversible; tanpa pin/reparenting atau library/aset baru. Data produk, tab awal dan link tetap dari merchant.
 

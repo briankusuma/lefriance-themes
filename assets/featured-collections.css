@@ -310,6 +310,11 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
+  .featured-collections__products.theme-swiper {
+    /* Swiper removes the focus padding; remove its compensating margins too. */
+    margin-block: 0;
+  }
+
   .featured-collections.is-enhanced .featured-collections__products {
     grid-auto-columns: calc((100% - var(--grid-gap) * 3) / 4);
   }
@@ -319,6 +324,8 @@
   display: none;
 }
 .featured-collections.is-scroll-scene {
+  --featured-tabs-height: calc(var(--text-navigation) * 1.08 + 1.332rem + 2px);
+  --featured-tabs-row: calc(var(--featured-tabs-height) + 26px);
   height: 600svh;
   padding-block: 0;
   overflow: visible;
@@ -332,7 +339,8 @@
   top: 0;
   height: 100svh;
   padding-block: 4.67svh;
-  grid-template-rows: 14.8svh 27.6svh auto minmax(0, 1fr);
+  /* A definite tab track keeps Swiper's 100% wrapper out of intrinsic sizing. */
+  grid-template-rows: 14.8svh 27.6svh var(--featured-tabs-row) minmax(0, 1fr);
 }
 .featured-collections.is-scroll-scene .featured-collections__intro {
   min-height: 0;
@@ -377,7 +385,11 @@
   padding-bottom: 0;
 }
 .featured-collections.is-scroll-scene .product-card__media {
-  height: max(6rem, min(34.4svh, calc(42.36svh - 6rem), 24.53vw));
+  /* Reserve the actual tab row, including its 26px gap, before sizing photos. */
+  height: max(
+    6rem,
+    min(34.4svh, calc(48.26svh - var(--featured-tabs-row) - 6rem), 24.53vw)
+  );
 }
 .featured-collections.is-scroll-scene .product-card__media > img,
 .featured-collections.is-scroll-scene .product-card__media > svg {
