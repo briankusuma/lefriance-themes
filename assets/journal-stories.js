@@ -416,8 +416,8 @@ if (!customElements.get("journal-stories")) {
                   filled,
                 )
                 .to(topLine, { scaleX: 1, duration: 1.5 }, filled + 1)
-                .to(bottomLine, { scaleX: 1, duration: 1.5 }, filled + 2.5)
-                .to(sideLines, { scaleY: 1, duration: 1.5 }, filled + 4)
+                .to(bottomLine, { scaleX: 1, duration: 1.6 }, filled + 5.5)
+                .to(sideLines, { scaleY: 1, duration: 1.5 }, filled + 7.1)
                 .to(
                   this.numbers,
                   { x: 0, y: 0, duration: 1.8, stagger: { amount: 0.2 } },
@@ -469,6 +469,25 @@ if (!customElements.get("journal-stories")) {
                 .to(
                   band,
                   {
+                    // Figma 3776:1588: 40px of brown around the three cards.
+                    width: () => this.rail.clientWidth + 80,
+                    height: () => geometry.card.width + 80,
+                    x: () =>
+                      geometry.card.left +
+                      geometry.card.width / 2 -
+                      this.rail.clientWidth / 2 -
+                      40 -
+                      geometry.base.left,
+                    y: () => geometry.bodyTop - geometry.base.top - 40,
+                    duration: 1,
+                    ease: "power3.inOut",
+                  },
+                  filled + 7.4,
+                )
+                .to(this.rail, { autoAlpha: 1, duration: 0.8 }, filled + 8.4)
+                .to(
+                  band,
+                  {
                     width: () => geometry.card.width,
                     x: () => geometry.card.left - geometry.base.left,
                     height: () => geometry.card.width,
@@ -476,21 +495,20 @@ if (!customElements.get("journal-stories")) {
                     duration: 2.2,
                     ease: "power3.inOut",
                   },
-                  filled + 7.4,
+                  filled + 9.4,
                 )
-                .to(this.rail, { autoAlpha: 1, duration: 0.9 }, filled + 9.5)
-                .to(band, { autoAlpha: 0, duration: 0.6 }, filled + 10)
-                .to(this.cards, { x: 0, duration: 1.8 }, filled + 10.4)
+                .to(band, { autoAlpha: 0, duration: 0.6 }, filled + 11.7)
+                .to(this.cards, { x: 0, duration: 1.8 }, filled + 11.8)
                 .to(
                   captions,
                   { opacity: 1, duration: 1.2, stagger: { amount: 0.25 } },
-                  filled + 11,
+                  filled + 12.4,
                 )
-                .to(arrows, { autoAlpha: 1, duration: 1.2 }, filled + 11)
+                .to(arrows, { autoAlpha: 1, duration: 1.2 }, filled + 12.4)
                 .to({}, { duration: 0.8 });
               let wasLocked;
               const access = () => {
-                const locked = timeline.time() < filled + 12.3;
+                const locked = timeline.time() < filled + 13.9;
                 if (locked === wasLocked) return;
                 wasLocked = locked;
                 this.classList.toggle("is-journal-opening", locked);
