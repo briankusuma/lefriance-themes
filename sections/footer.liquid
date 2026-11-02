@@ -33,6 +33,7 @@
             {% if section.settings.linkedin_url != blank %}<a href="{{ section.settings.linkedin_url }}" aria-label="LinkedIn"><img src="{{ 'footer-linkedin.svg' | asset_url }}" width="34.1111" height="34.1111" alt="" loading="lazy"></a>{% endif %}
           </div>
           <div class="editorial-footer__social-copy rte">{{ section.settings.social_text }}</div>
+          {% if section.settings.show_follow_on_shop %}<div class="editorial-footer__follow">{{ shop | login_button: action: 'follow' }}</div>{% endif %}
         </div>
       </div>
       <div class="editorial-footer__navigation">
@@ -113,6 +114,7 @@
   "enabled_on": { "groups": ["footer"] },
   "max_blocks": 7,
   "settings": [
+    { "type": "checkbox", "id": "show_follow_on_shop", "label": "Show Follow on Shop", "default": true },
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-footer" },
     { "type": "color", "id": "ornament_color", "label": "Ornament color", "default": "#5B5148" },
     { "type": "link_list", "id": "menu", "label": "Footer menu", "default": "footer" },

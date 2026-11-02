@@ -9,6 +9,7 @@
     {% if description != blank %}<div class="collection-intro__description rte">{{ description }}</div>{% endif %}
   </header>
   {% if collection.image %}{{ collection.image | image_url: width: 1600 | image_tag: widths: '600, 1000, 1600', sizes: '100vw', loading: 'lazy', alt: collection.image.alt }}{% endif %}
+  {% render 'catalog-filters', results: collection, action: collection.url, instance_id: section.id %}
   {% paginate collection.products by 20 %}
     <div class="product-grid">{% for product in collection.products %}{% render 'product-card', card_product: product, instance_id: section.id %}{% else %}<p>{{ 'commerce.empty_collection' | t }}</p>{% endfor %}</div>
     {{ paginate | default_pagination }}

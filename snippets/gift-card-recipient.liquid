@@ -1,0 +1,23 @@
+{% doc %}
+  Optional gift card delivery details inside a native product form.
+  @param {form} form - Product form.
+  @param {string} instance_id - Unique form instance.
+{% enddoc %}
+<gift-card-recipient>
+  <label class="gift-recipient-toggle" for="RecipientToggle-{{ instance_id }}">
+    <input id="RecipientToggle-{{ instance_id }}" type="checkbox" name="properties[__shopify_send_gift_card_to_recipient]" value="true" data-recipient-toggle{% if form.email != blank %} checked{% endif %}>
+    {{ 'theme_features.send_as_gift' | t }}
+  </label>
+  <fieldset data-recipient-fields>
+    <legend class="visually-hidden">{{ 'theme_features.recipient_details' | t }}</legend>
+    <label for="RecipientEmail-{{ instance_id }}">{{ 'theme_features.recipient_email' | t }}</label>
+    <input id="RecipientEmail-{{ instance_id }}" type="email" name="properties[Recipient email]" value="{{ form.email | escape }}" data-recipient-email autocomplete="email">
+    <label for="RecipientName-{{ instance_id }}">{{ 'theme_features.recipient_name' | t }}</label>
+    <input id="RecipientName-{{ instance_id }}" type="text" name="properties[Recipient name]" value="{{ form.name | escape }}" maxlength="255" autocomplete="name">
+    <label for="RecipientMessage-{{ instance_id }}">{{ 'theme_features.recipient_message' | t }}</label>
+    <textarea id="RecipientMessage-{{ instance_id }}" name="properties[Message]" maxlength="200">{{ form.message | escape }}</textarea>
+    <label for="RecipientDate-{{ instance_id }}">{{ 'theme_features.send_on' | t }}</label>
+    <input id="RecipientDate-{{ instance_id }}" type="date" name="properties[Send on]" value="{{ gift_card.send_on | escape }}" data-recipient-date>
+    <input type="hidden" name="properties[__shopify_offset]" data-recipient-offset>
+  </fieldset>
+</gift-card-recipient>

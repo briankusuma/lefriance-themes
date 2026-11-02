@@ -15,6 +15,8 @@
     {% render 'meta-tags' %}
 
     {{ content_for_header }}
+    <script src="{{ 'vendor/qrcode.js' | shopify_asset_url }}" defer></script>
+    <script src="{{ 'gift-card.js' | asset_url }}" defer></script>
   </head>
 
   <body class="template-gift-card">
@@ -49,6 +51,7 @@
         <h2>{{ shop.name }}</h2>
         <p>{{ 'gift_card.use_at_checkout' | t }}</p>
         <p>{{ gift_card.code | format_code }}</p>
+        <div data-gift-card-qr data-identifier="{{ gift_card.qr_identifier | escape }}" role="img" aria-label="{{ 'theme_features.gift_qr' | t | escape }}"></div>
 
         {% if gift_card.pass_url %}
           <a href="{{ gift_card.pass_url }}">

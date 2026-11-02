@@ -74,3 +74,7 @@ Prompt: Use case: photorealistic-natural. Generate ONE square editorial photogra
 ## assets/journal-timber-generated.jpg
 
 Prompt: Use case photorealistic-natural. ONE square premium furniture journal editorial photograph. Close mid-distance candid scene of a craftsperson in dark brown workwear examining oak and walnut timber grain samples on a wooden workbench in a quiet beige plaster furniture workshop. Shavings, a small plane and neatly arranged wood pieces, warm natural side daylight, soft shadows, muted walnut brown oatmeal cream and subdued olive palette, tactile realistic textures, subtle film grain, restrained Scandinavian furniture magazine art direction. No logos, words, lettering or watermark. Match the warm quiet workshop photography of the preceding generated chair finishing photograph, but a distinct composition about choosing timber.
+
+## Shopify platform QR resource — 2026-11-02
+
+Gift card QR uses the platform-provided `vendor/qrcode.js` through `shopify_asset_url`, as documented in [Shopify gift card templates](https://shopify.dev/docs/storefronts/themes/architecture/templates/gift-card-liquid). No third-party QR distribution was copied into theme assets; `assets/gift-card.js` is original glue code. No Dawn/Horizon implementation was used. Existing Figma asset distribution-rights gates remain open.

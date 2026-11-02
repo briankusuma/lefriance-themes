@@ -45,6 +45,10 @@
         "tax": {
           "type": "tax_note",
           "settings": {}
+        },
+        "pickup": {
+          "type": "pickup",
+          "settings": {}
         }
       },
       "block_order": [
@@ -55,14 +59,35 @@
         "variants",
         "quantity",
         "buy",
-        "tax"
+        "tax",
+        "pickup"
       ],
       "settings": {
-        "color_scheme": ""
+        "color_scheme": "scheme-light"
+      }
+    },
+    "related": {
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "You may also like",
+        "intent": "related",
+        "limit": 4,
+        "color_scheme": "scheme-light"
+      }
+    },
+    "complementary": {
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "Complete your space",
+        "intent": "complementary",
+        "limit": 4,
+        "color_scheme": "scheme-light"
       }
     }
   },
   "order": [
-    "main"
+    "main",
+    "related",
+    "complementary"
   ]
 }

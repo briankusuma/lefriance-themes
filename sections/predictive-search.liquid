@@ -1,0 +1,18 @@
+{% if predictive_search.performed %}
+  <ul role="listbox" data-predictive-list aria-label="{{ 'theme_features.suggestions' | t | escape }}">
+    {% assign suggestion_index = 0 %}
+    {% assign resource_types = 'products,collections,articles,pages,queries' | split: ',' %}
+    {% for type in resource_types %}
+      {% for result in predictive_search.resources[type] %}
+        {% assign suggestion_index = suggestion_index | plus: 1 %}
+        <li id="PredictiveResult-{{ suggestion_index }}" role="option" aria-selected="false" data-predictive-option>
+          <a href="{{ result.url }}" tabindex="-1">{{ result.title | default: result.text | escape }}</a>
+        </li>
+      {% endfor %}
+    {% endfor %}
+    {% if suggestion_index == 0 %}<li role="presentation">{{ 'theme_features.no_suggestions' | t }}</li>{% endif %}
+  </ul>
+{% endif %}
+{% schema %}
+{ "name": "Predictive search", "settings": [] }
+{% endschema %}

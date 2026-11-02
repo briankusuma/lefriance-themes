@@ -1,0 +1,141 @@
+.catalog-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  gap: 1rem;
+  margin-block: 2rem;
+  padding-block: 1.5rem;
+  border-block: 1px solid #e5e3d3;
+}
+.catalog-filters__group {
+  flex: 1 1 12rem;
+  max-width: 22rem;
+}
+.catalog-filters summary {
+  cursor: pointer;
+  padding-block: 0.5rem;
+}
+.catalog-filters fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0.75rem 0;
+}
+.catalog-filters__value {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-block: 0.25rem;
+}
+.catalog-filters__value input {
+  width: 1.25rem;
+  height: 1.25rem;
+  min-height: 0;
+  flex: 0 0 auto;
+}
+.catalog-filters input[type="number"] {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+.catalog-filters__sort {
+  display: grid;
+  gap: 0.5rem;
+}
+.catalog-filters__active {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  flex-basis: 100%;
+}
+theme-predictive-search {
+  display: block;
+  position: relative;
+}
+.predictive-results {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: 1rem;
+  margin-block: 0.5rem 1.5rem;
+}
+.predictive-results ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.predictive-results a {
+  display: block;
+  padding: 0.75rem;
+  color: inherit;
+}
+.predictive-results [aria-selected="true"] {
+  background: var(--color-button);
+  color: var(--color-button-label);
+  border-radius: var(--radius-button);
+}
+.product-recommendations__heading {
+  margin-bottom: 2rem;
+}
+product-recommendations,
+pickup-availability,
+gift-card-recipient {
+  display: block;
+}
+.pickup-locations {
+  list-style: none;
+  padding: 0;
+}
+.pickup-locations li {
+  border-top: 1px solid #e5e3d3;
+  padding-block: 1rem;
+}
+.pickup-locations address {
+  font-style: normal;
+}
+gift-card-recipient fieldset {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem 0;
+  border: 0;
+}
+gift-card-recipient [hidden] {
+  display: none;
+}
+gift-card-recipient input:not([type="checkbox"]),
+gift-card-recipient textarea {
+  width: 100%;
+}
+.gift-recipient-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.gift-recipient-toggle input {
+  min-height: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+.product-detail__option-swatch {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+  vertical-align: middle;
+  background: var(--option-swatch-color, transparent);
+}
+.product-detail__option-swatch img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.product-detail__option:has(.product-detail__option-swatch) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.editorial-footer__follow {
+  margin-block: 1rem;
+}
+.theme-feature-error {
+  padding: 0.75rem;
+  border: 1px solid var(--color-border);
+}

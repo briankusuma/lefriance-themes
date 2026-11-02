@@ -5,5 +5,6 @@
 <span class="price">
   {% if item.compare_at_price > item.price %}<s>{% if settings.show_currency_code %}{{ item.compare_at_price | money_with_currency }}{% else %}{{ item.compare_at_price | money }}{% endif %}</s>{% endif %}
   <span>{% if settings.show_currency_code %}{{ item.price | money_with_currency }}{% else %}{{ item.price | money }}{% endif %}{% if item.price_varies %} – {% if settings.show_currency_code %}{{ item.price_max | money_with_currency }}{% else %}{{ item.price_max | money }}{% endif %}{% endif %}</span>
-  {% if item.unit_price_measurement %}<small>{{ item.unit_price | unit_price_with_measurement: item.unit_price_measurement }}</small>{% endif %}
+  {% assign unit_item = item.selected_or_first_available_variant | default: item %}
+  {% if unit_item.unit_price_measurement %}<small>{{ unit_item.unit_price | unit_price_with_measurement: unit_item.unit_price_measurement }}</small>{% endif %}
 </span>

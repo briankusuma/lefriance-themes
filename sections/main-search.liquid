@@ -1,8 +1,10 @@
 {{ 'section-foundation.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'predictive-search.js' | asset_url }}" defer></script>
 <section class="support-section support-section--search section-shell color-{{ section.settings.color_scheme }}">
   <div class="container section-content">
   <h1>{{ 'search.title' | t }}</h1>
 
+  <theme-predictive-search data-url="{{ routes.predictive_search_url }}">
   <form action="{{ routes.search_url }}" method="get" role="search">
     <label for="Search-{{ section.id }}">{{ 'search.title' | t }}</label>
     <input
@@ -12,9 +14,13 @@
       name="q"
       value="{{ search.terms | escape }}"
       placeholder="{{ 'search.placeholder' | t }}"
+      aria-controls="PredictiveResults-{{ section.id }}"
     >
     <button type="submit">{{ 'search.submit' | t }}</button>
   </form>
+  <div id="PredictiveResults-{{ section.id }}" class="predictive-results" data-predictive-results hidden></div>
+  </theme-predictive-search>
+  {% if search.performed %}{% render 'catalog-filters', results: search, action: routes.search_url, instance_id: section.id, is_search: true %}{% endif %}
 
   {% assign escaped_terms = search.terms | escape %}
   {% if search.performed %}

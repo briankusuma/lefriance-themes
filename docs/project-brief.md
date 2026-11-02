@@ -19,6 +19,15 @@ Tema Shopify orisinal untuk merchant furnitur, berbasis Skeleton resmi yang suda
 - Gallery produk memakai Swiper, thumbnail dua kolom, sinkron dengan gambar varian. Blok title/colors/price/variant picker/quantity/buy/tax/description dapat diurutkan/dihapus.
 - Swatch kategori membaca `product.metafields.shopify['color-pattern'].value`: gambar didahulukan, lalu warna solid. Native variant swatches mendapat prioritas pada kartu. Metadata warna bersifat deskriptif, bukan varian/stok.
 
+## Commerce audit remediation — 2026-11-02
+
+- Native filtering/sorting tersedia pada koleksi dan search; predictive search pada halaman search dengan keyboard dan fallback form biasa. Filter yang tampil mengikuti konfigurasi/data Shopify.
+- Produk: swatch native pada radio, unit price kartu dari selected variant, pickup block, related/complementary recommendation sections memakai API Shopify. Template produk mengaktifkan pickup serta dua jenis rekomendasi; merchant dapat mengubah/reorder/remove. Recommendations dan pickup tetap kosong jika tidak ada data native, bukan memakai data palsu.
+- >250 variants memakai option_values IDs/Section Rendering API dan selected-only JSON; no-JS memakai link server. <=250 memakai JSON lokal. Fetch gagal menonaktifkan pembelian variant lama dan menyediakan retry. Section replacement mempertahankan recipient fields dan mengembalikan fokus. Native checkout setelah replacement perlu QA toko.
+- Gift card recipient properties + tanggal/offset native, error form dan required email ketika opt-in. Accelerated checkout disembunyikan ketika recipient aktif sesuai batasan Shopify. QR template160px memakai `vendor/qrcode.js` melalui `shopify_asset_url`; bukan CDN pihak ketiga. Komentar artikel mempunyai success status.
+- Follow on Shop dapat diatur pada footer; native account kini terlihat pada header mobile juga (perubahan terhadap layout mobile lama, untuk persyaratan Shopify). Gaya fitur baru diturunkan dari commerce/homepage; tidak ada frame Figma khusus.
+- Theme name `lafrience` dikonfirmasi. Author dan URL dokumentasi/support masih menunggu data pengguna; jangan mengarang URL atau menyatakan metadata siap rilis. Validasi lokal Theme Check/Liquid/DOM mock lulus; QA Shopify/browser/Lighthouse/lisensi tetap terbuka.
+
 ## Peta desain ke kode
 
 | Referensi Figma | Target aktual |

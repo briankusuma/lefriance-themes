@@ -8,6 +8,7 @@
 {% assign product_form_id = 'ProductForm-' | append: instance_id %}
 {% form 'product', product, id: product_form_id, data-product-form: '' %}
   {{ form.errors | default_errors }}
+  {% if product.gift_card? %}{% render 'gift-card-recipient', form: form, instance_id: instance_id %}{% endif %}
   {% if product.selling_plan_groups.size > 0 %}
     <label for="Plan-{{ instance_id }}">{{ 'commerce.selling_plan' | t }}</label>
     <select id="Plan-{{ instance_id }}" name="selling_plan" data-selling-plan>
@@ -25,6 +26,6 @@
     {% if current_variant.available %}{{ 'commerce.add_to_cart' | t }}{% else %}{{ 'commerce.sold_out' | t }}{% endif %}
   </button>
   <p data-product-error role="alert" hidden></p>
-  {% if accelerated %}{{ form | payment_button }}{% endif %}
+  {% if accelerated %}<div data-accelerated-checkout>{{ form | payment_button }}</div>{% endif %}
   {{ form | payment_terms }}
 {% endform %}

@@ -1,0 +1,24 @@
+{% doc %}
+  Server navigation for high-variant products when JavaScript is unavailable.
+  @param {product} product - Current product.
+{% enddoc %}
+{% for option in product.options_with_values %}
+  <fieldset>
+    <legend>{{ option.name | escape }}</legend>
+    <ul>
+      {% for value in option.values %}
+        {% assign value_ids = '' %}
+        {% for other_option in product.options_with_values %}
+          {% assign selected_id = value.id %}
+          {% unless other_option.position == option.position %}
+            {% assign selected_id = '' %}
+            {% for other_value in other_option.values %}{% if other_value.selected %}{% assign selected_id = other_value.id %}{% endif %}{% endfor %}
+          {% endunless %}
+          {% assign value_ids = value_ids | append: selected_id %}
+          {% unless forloop.last %}{% assign value_ids = value_ids | append: ',' %}{% endunless %}
+        {% endfor %}
+        <li><a href="{{ value.product_url | default: product.url }}?option_values={{ value_ids | url_encode }}"{% if value.selected %} aria-current="true"{% endif %}>{{ value.name | default: value | escape }}</a></li>
+      {% endfor %}
+    </ul>
+  </fieldset>
+{% endfor %}

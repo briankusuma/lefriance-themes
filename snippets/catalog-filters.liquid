@@ -1,0 +1,46 @@
+{% doc %}
+  Native GET filters and sorting for collections or search.
+  @param {object} results - Collection or search object.
+  @param {string} action - Form destination.
+  @param {string} instance_id - Unique section ID.
+  @param {boolean} [is_search] - Preserve the search query.
+{% enddoc %}
+{% assign selected_sort = results.sort_by | default: results.default_sort_by %}
+<form class="catalog-filters" action="{{ action }}" method="get">
+  {% if is_search %}<input type="hidden" name="q" value="{{ results.terms | escape }}"><input type="hidden" name="options[prefix]" value="last">{% endif %}
+  {% for filter in results.filters %}
+    {% assign filter_index = forloop.index %}
+    <details class="catalog-filters__group"{% if filter.active_values.size > 0 or filter.min_value.value != nil or filter.max_value.value != nil %} open{% endif %}>
+      <summary>{{ filter.label | escape }}</summary>
+      <fieldset>
+        <legend class="visually-hidden">{{ filter.label | escape }}</legend>
+        {% if filter.type == 'price_range' %}
+          <label for="Filter-{{ instance_id }}-{{ filter_index }}-min">{{ 'theme_features.price_from' | t }} ({{ cart.currency.iso_code }})</label>
+          <input id="Filter-{{ instance_id }}-{{ filter_index }}-min" type="number" name="{{ filter.min_value.param_name }}" min="0" max="{{ filter.range_max | divided_by: 100.0 }}" step="any"{% if filter.min_value.value != nil %} value="{{ filter.min_value.value | divided_by: 100.0 }}"{% endif %}>
+          <label for="Filter-{{ instance_id }}-{{ filter_index }}-max">{{ 'theme_features.price_to' | t }} ({{ cart.currency.iso_code }})</label>
+          <input id="Filter-{{ instance_id }}-{{ filter_index }}-max" type="number" name="{{ filter.max_value.param_name }}" min="0" max="{{ filter.range_max | divided_by: 100.0 }}" step="any"{% if filter.max_value.value != nil %} value="{{ filter.max_value.value | divided_by: 100.0 }}"{% endif %}>
+        {% else %}
+          {% for value in filter.values %}
+            <label class="catalog-filters__value" for="Filter-{{ instance_id }}-{{ filter_index }}-{{ forloop.index }}">
+              <input id="Filter-{{ instance_id }}-{{ filter_index }}-{{ forloop.index }}" type="checkbox" name="{{ value.param_name }}" value="{{ value.value | escape }}"{% if value.active %} checked{% elsif value.count == 0 %} disabled{% endif %}>
+              <span>{{ value.label | escape }} ({{ value.count }})</span>
+            </label>
+          {% endfor %}
+        {% endif %}
+      </fieldset>
+    </details>
+  {% endfor %}
+  <div class="catalog-filters__sort">
+    <label for="Sort-{{ instance_id }}">{{ 'theme_features.sort_by' | t }}</label>
+    <select id="Sort-{{ instance_id }}" name="sort_by">
+      {% for option in results.sort_options %}<option value="{{ option.value | escape }}"{% if option.value == selected_sort %} selected{% endif %}>{{ option.name | escape }}</option>{% endfor %}
+    </select>
+  </div>
+  <button type="submit">{{ 'theme_features.apply' | t }}</button>
+  <div class="catalog-filters__active">
+    {% for filter in results.filters %}
+      {% for value in filter.active_values %}<a href="{{ value.url_to_remove }}">{{ 'theme_features.remove_filter' | t: label: value.label }}</a>{% endfor %}
+      {% if filter.type == 'price_range' %}{% if filter.min_value.value != nil or filter.max_value.value != nil %}<a href="{{ filter.url_to_remove }}">{{ 'theme_features.remove_filter' | t: label: filter.label }}</a>{% endif %}{% endif %}
+    {% endfor %}
+  </div>
+</form>

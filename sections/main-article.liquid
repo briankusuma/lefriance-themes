@@ -35,6 +35,7 @@
       <h2>{{ 'blog.comment_form_title' | t }}</h2>
 
       {{ form.errors | default_errors }}
+      {% if form.posted_successfully? %}<p role="status">{{ 'theme_features.comment_success' | t }}</p>{% endif %}
 
       <div>
         <label for="author-{{ section.id }}">{{ 'blog.comment_form_name' | t }}</label>

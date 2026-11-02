@@ -173,5 +173,28 @@
     "one_time": "One-time purchase",
     "cart_updated_label": "Cart updated",
     "review_variant": "Review variant"
+  },
+  "theme_features": {
+    "price_from": "From",
+    "price_to": "To",
+    "sort_by": "Sort by",
+    "apply": "Apply filters",
+    "remove_filter": "Remove {{ label }}",
+    "suggestions": "Search suggestions",
+    "no_suggestions": "No suggestions. Submit to search all content.",
+    "comment_success": "Thank you. Your comment has been submitted.",
+    "pickup_locations": "Check pickup availability",
+    "pickup_available": "Available for pickup",
+    "pickup_unavailable": "Currently unavailable for pickup",
+    "pickup_error": "Pickup availability could not be loaded. Please try again.",
+    "send_as_gift": "Send this gift card to someone else",
+    "recipient_details": "Gift card recipient",
+    "recipient_email": "Recipient email",
+    "recipient_name": "Recipient name (optional)",
+    "recipient_message": "Message (optional)",
+    "send_on": "Send on (optional)",
+    "gift_qr": "Scan this gift card at checkout",
+    "variant_error": "This option could not be loaded. Retry your selection.",
+    "retry_option": "Retry selection"
   }
 }

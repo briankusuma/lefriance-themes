@@ -69,11 +69,11 @@ Working checklist, not a release certificate. Read current official requirements
 - [x] `config/settings_data.json`, `config/settings_schema.json` — JSON parsed and Theme Check passed T00.
 - [x] All templates (except account, gift card, checkout) are JSON and reference existing sections — static structure verified T00; editor behavior pending.
 - [ ] Custom Liquid section with a `liquid` setting, available on all section-capable templates
-- [ ] Header and footer rendered through section groups
+- [x] Header and footer rendered through section groups — static theme.liquid calls and group JSON verified 2026-11-02; editor behavior pending.
 - [x] Main product section uses blocks for all or most elements — title/form/description/app/Custom Liquid; static structure verified in T01/T02/G01 follow-up (2026-10-26); editor behavior pending.
 - [ ] `@app` blocks supported in main product and featured product sections
 - [ ] Custom Liquid block (with `liquid` setting) where an app block would go
-- [ ] `config/markets.json` is **not** included
+- [x] `config/markets.json` is **not** included — filesystem verified 2026-11-02.
 
 ## 6. Lighthouse (home, collection, product; desktop and mobile; averages)
 
@@ -287,8 +287,15 @@ Working checklist, not a release certificate. Read current official requirements
 
 ## Repository and tooling gates
 
-- [x] Theme Check CLI 4.9.4: zero findings after Journal scroll sequence, 2026-11-02. Rerun after code changes.
+- [x] Theme Check CLI 4.9.4: zero findings after native commerce audit remediation, 2026-11-02. Rerun after code changes.
 - [ ] No disabled Theme Check rules without justification
 - [ ] Third-party assets and licenses recorded in `docs/third-party-licenses.md`
 - [ ] Intentional design deviations recorded in `docs/project-brief.md`
 - [ ] Final re-read of the official requirements page completed on: ____-__-__
+
+## Scoped implementation evidence — 2026-11-02
+
+- [x] Native filters/sort, predictive results, pickup, both recommendation intents, recipient fields, unit pricing, swatches, article success and QR markup rendered in local fixtures; no live-feature pass implied.
+- [x] Low/high-variant state, section replacement/error/retry, search keyboard/abort, recipient/wallet state, recommendation intent and160px QR exercised in DOM emulation with mocked Shopify APIs.
+- [ ] Live Theme Editor, native APIs/forms/checkout, account/Shop behavior, browser/a11y and Lighthouse verification for these additions.
+- [ ] Replace remaining Skeleton author/documentation/support metadata with confirmed merchant-facing identity and URLs (theme name is now lafrience).

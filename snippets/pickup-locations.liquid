@@ -1,0 +1,20 @@
+{% doc %}
+  Native pickup locations for the selected variant.
+  @param {variant} variant - Current variant.
+{% enddoc %}
+{% assign locations = variant.store_availabilities | where: 'pick_up_enabled', true %}
+{% if locations.size > 0 %}
+  <details>
+    <summary>{{ 'theme_features.pickup_locations' | t }}</summary>
+    <ul class="pickup-locations">
+      {% for availability in locations %}
+        <li>
+          <h3>{{ availability.location.name | escape }}</h3>
+          <p>{% if availability.available %}{{ 'theme_features.pickup_available' | t }} — {{ availability.pick_up_time | escape }}{% else %}{{ 'theme_features.pickup_unavailable' | t }}{% endif %}</p>
+          <address>{{ availability.location.address | format_address }}</address>
+          {% if availability.location.address.phone != blank %}<p>{{ availability.location.address.phone | escape }}</p>{% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </details>
+{% endif %}
