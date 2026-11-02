@@ -37,4 +37,4 @@ Sources: [ScrollTrigger](https://gsap.com/docs/v3/Plugins/ScrollTrigger/), [Spli
 
 2026-11-02 Journal: same core-only ScrollTrigger loader and existing Swiper. Native sticky, sequential number fills and band/card reveals; no new asset/vendor/ticker/pin. Geometry measured only at setup/refresh, parent mutation observers disabled, static accessibility/editor/content fallbacks. Local tests do not establish browser performance.
 
-2026-11-02 Footer reuses the existing SplitText-enabled ScrollTrigger loader: natural footer scroll, no pin/spacer/ticker/new dependency. Original2264-byte SVG is inlined through Shopify; gallery parent mutation observers disabled so reveal styles do not trigger Swiper updates. Live rendering and performance remain unmeasured.
+2026-11-02 Footer reuses the core-only ScrollTrigger loader. Viewport-enter playback once: lines then bottom-up content/whole wordmark; no SplitText/scrub/pin/spacer/ticker/new dependency. Original2264-byte inline SVG geometry unchanged; gallery parent mutation observers disabled. Browser rendering/performance unmeasured.

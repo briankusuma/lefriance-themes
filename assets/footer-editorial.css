@@ -21,9 +21,6 @@ footer-reveal {
 .editorial-footer.is-motion-ready .editorial-footer__wordmark {
   overflow: hidden;
 }
-.footer-reveal-word {
-  white-space: nowrap;
-}
 .editorial-footer__top {
   display: grid;
   gap: 2rem;

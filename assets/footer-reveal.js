@@ -99,8 +99,9 @@ if (!customElements.get("footer-reveal")) {
         const request = {};
         this.pending = request;
         try {
-          const { gsap, ScrollTrigger, SplitText } =
-            await ThemeMotion.scrollAnimation();
+          const { gsap, ScrollTrigger } = await ThemeMotion.scrollAnimation({
+            splitText: false,
+          });
           await document.fonts.ready;
           if (signal.aborted || this.selected || !this.isConnected) return;
           const footer = this.closest(".editorial-footer");
@@ -123,32 +124,23 @@ if (!customElements.get("footer-reveal")) {
               const headings = [
                 ...this.querySelectorAll(".editorial-footer__newsletter h2"),
               ];
-              const split = headings.length
-                ? SplitText.create(headings, {
-                    type: "words,chars",
-                    aria: "auto",
-                    wordsClass: "footer-reveal-word",
-                  })
-                : null;
-              const chars = split?.chars || [];
               const wordmark = this.querySelector(
                 ".editorial-footer__wordmark",
               );
-              const paths = [
-                ...(wordmark?.querySelectorAll(
-                  ".editorial-footer__wordmark-vector path",
-                ) || []),
-              ].sort((a, b) => b.getBBox().x - a.getBBox().x);
-              const logo = paths.length
-                ? paths
-                : [...(wordmark?.querySelectorAll("img, p") || [])];
+              // Move the HTML wrapper as one piece; SVG paths keep their original geometry.
+              const logo = wordmark
+                ? [
+                    ...wordmark.querySelectorAll(
+                      ".editorial-footer__wordmark-vector, img, p",
+                    ),
+                  ]
+                : [];
               footer.classList.add("is-motion-ready");
               gsap.set(footer, { "--footer-line-progress": 0 });
               gsap.set(items, { autoAlpha: 0, y: 32 });
-              gsap.set(headings, { y: 24 });
-              gsap.set(chars, { opacity: 0.25 });
+              gsap.set(headings, { autoAlpha: 0, y: 32 });
               gsap.set(newsletter, { autoAlpha: 0, y: 32 });
-              gsap.set(logo, { opacity: 0, yPercent: 110 });
+              gsap.set(logo, { autoAlpha: 0, yPercent: 110 });
               if (gallery)
                 gsap.set(gallery, {
                   autoAlpha: 0,
@@ -160,8 +152,8 @@ if (!customElements.get("footer-reveal")) {
                 scrollTrigger: {
                   trigger: this,
                   start: "top 90%",
-                  end: "bottom bottom",
-                  scrub: 1.2,
+                  toggleActions: "play none none none",
+                  once: true,
                   invalidateOnRefresh: true,
                 },
               });
@@ -183,7 +175,7 @@ if (!customElements.get("footer-reveal")) {
                     duration: 1.3,
                     stagger: { amount: 0.6 },
                   },
-                  0.3,
+                  1.4,
                 );
               if (gallery)
                 timeline.to(
@@ -194,20 +186,10 @@ if (!customElements.get("footer-reveal")) {
                     clipPath: "inset(0% 0 0 0 round 8.528px)",
                     duration: 1.8,
                   },
-                  0.6,
+                  1.5,
                 );
               timeline
-                .to(headings, { y: 0, duration: 1.4 }, 1.5)
-                .to(
-                  chars,
-                  {
-                    opacity: 1,
-                    duration: 1,
-                    stagger: { amount: 1.2 },
-                    ease: "none",
-                  },
-                  1.5,
-                )
+                .to(headings, { autoAlpha: 1, y: 0, duration: 1.4 }, 1.6)
                 .to(
                   newsletter,
                   {
@@ -216,22 +198,12 @@ if (!customElements.get("footer-reveal")) {
                     duration: 1.4,
                     stagger: { amount: 0.25 },
                   },
-                  1.8,
+                  1.7,
                 )
-                .to(
-                  logo,
-                  {
-                    opacity: 1,
-                    yPercent: 0,
-                    duration: 1.8,
-                    stagger: { amount: paths.length ? 1.1 : 0 },
-                  },
-                  3.2,
-                )
-                .to({}, { duration: 0.4 });
+                .to(logo, { autoAlpha: 1, yPercent: 0, duration: 1.8 }, 1.9);
               // A focused newsletter or link must remain visible without scrolling.
               const showForFocus = () => {
-                timeline.scrollTrigger.disable(false);
+                timeline.scrollTrigger?.disable(false);
                 timeline.progress(1);
               };
               this.addEventListener("focusin", showForFocus);
@@ -241,7 +213,6 @@ if (!customElements.get("footer-reveal")) {
                 this.removeEventListener("focusin", showForFocus);
                 timeline.scrollTrigger?.kill();
                 timeline.kill();
-                split?.revert();
                 footer.classList.remove("is-motion-ready");
               };
             },
