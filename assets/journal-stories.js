@@ -291,11 +291,22 @@ if (!customElements.get("journal-stories")) {
                   width: stage.offsetWidth,
                   height: stage.offsetHeight,
                 };
+                // Keep the dividers aligned when longer copy grows the studio row.
+                gsap.set(grid, {
+                  "--journal-studio-end": `${studio.offsetTop + studio.offsetHeight}px`,
+                  "--journal-heading-end": `${heading.offsetTop + heading.offsetHeight}px`,
+                });
               };
               measure();
-              const surroundingCards = this.cards.filter(
-                (card) => !card.classList.contains("is-active"),
-              );
+              const railLeft = this.rail.getBoundingClientRect().left;
+              const railRight = railLeft + this.rail.clientWidth;
+              const offscreenCards = this.cards.filter((card) => {
+                const box = card.getBoundingClientRect();
+                return (
+                  box.left + box.width <= railLeft + 0.5 ||
+                  box.left >= railRight - 0.5
+                );
+              });
               const brown = getComputedStyle(plane).backgroundColor;
               const white = getComputedStyle(plane).color;
               const muted = getComputedStyle(this.numbers[0]).color;
@@ -335,6 +346,9 @@ if (!customElements.get("journal-stories")) {
               gsap.set([topLine, bottomLine], { scaleX: 0 });
               gsap.set(sideLines, { scaleY: 0 });
               gsap.set([this.rail, band, ...arrows], { autoAlpha: 0 });
+              // Keep both visible neighbors stable; only mask loop slides
+              // completely outside the rail until the opening is finished.
+              gsap.set(offscreenCards, { opacity: 0 });
               gsap.set(captions, { opacity: 0 });
               gsap.set(band, {
                 x: () => studio.offsetLeft,
@@ -483,13 +497,6 @@ if (!customElements.get("journal-stories")) {
                   filled + 7.4,
                 )
                 .to(this.rail, { autoAlpha: 1, duration: 0.8 }, filled + 8.4)
-                // Clear every non-center loop slide before the brown panel
-                // contracts. Keep Swiper's positions and 21px gaps untouched.
-                .to(
-                  surroundingCards,
-                  { opacity: 0, duration: 0.5 },
-                  filled + 8.9,
-                )
                 .to(
                   band,
                   {
@@ -503,11 +510,7 @@ if (!customElements.get("journal-stories")) {
                   filled + 9.4,
                 )
                 .to(band, { autoAlpha: 0, duration: 0.6 }, filled + 11.7)
-                .to(
-                  surroundingCards,
-                  { opacity: 1, duration: 1 },
-                  filled + 11.8,
-                )
+                .to(offscreenCards, { opacity: 1, duration: 1 }, filled + 11.8)
                 .to(
                   captions,
                   { opacity: 1, duration: 1.2, stagger: { amount: 0.25 } },

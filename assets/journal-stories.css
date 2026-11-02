@@ -37,15 +37,16 @@
   padding-bottom: 4.687svh;
   display: grid;
   /* Figma 3776:1651: dividers at 268px and 610.8px on a 1091.556px frame. */
-  grid-template-rows: 24.552svh 31.405svh auto;
+  grid-template-rows: minmax(24.552svh, max-content) 31.405svh auto;
   overflow: hidden;
 }
 .journal-stories.is-scroll-scene .journal-stories__studio {
   z-index: 3;
-  grid-template-rows: minmax(0, 1fr) auto;
+  grid-template-rows: minmax(min-content, 1fr) auto;
   min-height: 0;
   padding-block: 3.906svh 1.993svh;
-  gap: 0 var(--grid-gap);
+  /* Figma 3776:1625: approximately 85px between intro copy and numbers. */
+  gap: 5.33rem var(--grid-gap);
 }
 .journal-stories.is-scroll-scene .journal-stories__studio > img {
   align-self: start;
@@ -134,17 +135,17 @@
   transform-origin: center;
 }
 .journal-stories__motion-grid [data-journal-line="top"] {
-  top: 24.552svh;
+  top: var(--journal-studio-end, 24.552svh);
 }
 .journal-stories__motion-grid [data-journal-line="bottom"] {
-  top: 55.957svh;
+  top: var(--journal-heading-end, 55.957svh);
 }
 .journal-stories__motion-grid [data-journal-line="left"],
 .journal-stories__motion-grid [data-journal-line="right"] {
   top: 0;
   width: 1px;
   height: 100%;
-  transform-origin: center 24.552svh;
+  transform-origin: center var(--journal-studio-end, 24.552svh);
 }
 .journal-stories__motion-grid [data-journal-line="left"] {
   left: 0;
