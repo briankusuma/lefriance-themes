@@ -2,8 +2,12 @@
 <script src="{{ 'featured-collections.js' | asset_url }}" defer></script>
 {% assign default_collection_label = 'featured_collections.collection' | t %}
 {% assign default_link_label = 'featured_collections.view_collection' | t %}
-<featured-collections class="featured-collections section-shell color-{{ section.settings.color_scheme }}" data-initial-index="{{ section.settings.initial_tab | minus: 1 }}" style="--featured-ornament-color: {{ section.settings.ornament_color | default: '#E5E3D3' }};">
+<featured-collections data-scroll-reveal="{{ section.settings.enable_scroll_reveal }}" class="featured-collections section-shell color-{{ section.settings.color_scheme }}" data-initial-index="{{ section.settings.initial_tab | minus: 1 }}" style="--featured-ornament-color: {{ section.settings.ornament_color | default: '#E5E3D3' }};">
   <div class="featured-collections__layout container">
+    <div class="featured-collections__motion-lines" aria-hidden="true">
+      <i data-featured-line="horizontal"></i><i data-featured-line="center"></i>
+      <i data-featured-line="left"></i><i data-featured-line="right"></i>
+    </div>
     <div class="featured-collections__tabs" role="tablist" aria-label="{{ 'featured_collections.collections' | t | escape }}" data-featured-tabs hidden>
       {% for block in section.blocks %}
         <button type="button" role="tab" id="CollectionTab-{{ section.id }}-{{ block.id }}" aria-controls="CollectionPanel-{{ section.id }}-{{ block.id }}" aria-selected="false" tabindex="-1" data-featured-tab="{{ forloop.index0 }}">{{ block.settings.label | default: block.settings.collection.title | default: default_collection_label | escape }}</button>
@@ -53,6 +57,7 @@
   "disabled_on": { "groups": ["header", "footer"] },
   "max_blocks": 5,
   "settings": [
+    { "type": "checkbox", "id": "enable_scroll_reveal", "label": "Animate on scroll", "default": true, "info": "Draws the grid before revealing the collection. Reduced motion and selected editor sections show the full layout." },
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-light" },
     { "type": "color", "id": "ornament_color", "label": "Ornament color", "default": "#E5E3D3" },
     { "type": "richtext", "id": "intro", "label": "Introductory text", "default": "<p>Introduce the character and craft behind your collections.</p>" },

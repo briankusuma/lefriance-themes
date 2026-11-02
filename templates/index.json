@@ -261,6 +261,7 @@
       "settings": {
         "color_scheme": "scheme-light",
         "ornament_color": "#e5e3d3",
+        "enable_scroll_reveal": true,
         "intro": "<p>Thoughtfully crafted pieces that bring warmth, balance, and timeless style into your space.</p>",
         "initial_tab": 1,
         "products_to_show": 4
