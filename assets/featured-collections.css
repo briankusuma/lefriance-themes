@@ -337,10 +337,11 @@
 .featured-collections.is-scroll-scene .featured-collections__layout {
   position: sticky;
   top: 0;
-  height: 100svh;
+  min-height: 100svh;
+  height: auto;
   padding-block: 4.67svh;
-  /* A definite tab track keeps Swiper's 100% wrapper out of intrinsic sizing. */
-  grid-template-rows: 14.8svh 27.6svh var(--featured-tabs-row) minmax(0, 1fr);
+  /* Let the stage grow on short screens rather than compressing the photos. */
+  grid-template-rows: 14.8svh minmax(12rem, 1fr) var(--featured-tabs-row) auto;
 }
 .featured-collections.is-scroll-scene .featured-collections__intro {
   min-height: 0;
@@ -385,11 +386,15 @@
   padding-bottom: 0;
 }
 .featured-collections.is-scroll-scene .product-card__media {
-  /* Reserve the actual tab row, including its 26px gap, before sizing photos. */
-  height: max(
-    6rem,
-    min(34.4svh, calc(48.26svh - var(--featured-tabs-row) - 6rem), 24.53vw)
-  );
+  /* Figma 3768:984: 342.177 x 376.288px, independent of viewport height. */
+  height: auto;
+  aspect-ratio: 10 / 11;
+}
+.featured-collections.is-scroll-scene
+  .featured-collections__products
+  > .swiper-wrapper {
+  /* Avoid a percentage-height cycle in the content-sized product row. */
+  height: auto;
 }
 .featured-collections.is-scroll-scene .product-card__media > img,
 .featured-collections.is-scroll-scene .product-card__media > svg {
