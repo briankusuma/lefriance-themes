@@ -12,8 +12,10 @@
     "hero": {
       "type": "hero-editorial",
       "settings": {
-        "use_reference_images": true,
         "enable_intro": true,
+        "intro_background": "#6c7c69",
+        "intro_text_color": "#ffffff",
+        "use_reference_images": true,
         "image_zoom": 106,
         "heading": "LE FRIANCE",
         "use_reference_wordmark": true,
@@ -74,8 +76,8 @@
         "room"
       ],
       "settings": {
-        "color_scheme": "scheme-dark",
         "enable_scroll_reveal": true,
+        "color_scheme": "scheme-dark",
         "heading": "Design freely with",
         "heading_secondary": "a fully modular system",
         "intro": "<p>Fewer parts, fast swaps, and repairable modules cut TCO from day one.</p>",
@@ -162,8 +164,8 @@
         "chairs"
       ],
       "settings": {
-        "color_scheme": "scheme-light",
         "enable_scroll_reveal": true,
+        "color_scheme": "scheme-light",
         "heading": "We design furniture to stand the test of time.",
         "description": "<p>Our furniture is crafted for simple disassembly. Each piece uses robust materials, ensuring easy repairs and a lifetime of use.</p>",
         "use_reference_images": true
@@ -183,9 +185,9 @@
             ],
             "collection": "all",
             "label": "All",
-            "heading": "Furniture for thoughtful spaces.",
-            "description": "",
-            "note": "",
+            "heading": "Chairs designed for comfort and character.",
+            "description": "<p>Each chair is built with premium materials and ergonomic precision, blending natural textures with modern design.&nbsp;</p>",
+            "note": "<p>Be the first to discover new arrivals.</p>",
             "link_label": "View collection"
           }
         },
