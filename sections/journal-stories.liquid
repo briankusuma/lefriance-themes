@@ -4,7 +4,10 @@
   <div class="journal-stories__stage container">
     <div class="journal-stories__motion-plane color-{{ section.settings.card_color_scheme }}" aria-hidden="true"></div>
     <div class="journal-stories__motion-band color-{{ section.settings.card_color_scheme }}" aria-hidden="true"></div>
-    <div class="journal-stories__motion-grid" aria-hidden="true"></div>
+    <div class="journal-stories__motion-grid" aria-hidden="true">
+      <i data-journal-line="top"></i><i data-journal-line="bottom"></i>
+      <i data-journal-line="left"></i><i data-journal-line="right"></i>
+    </div>
     <div class="journal-stories__studio">
       <img src="{{ 'journal-icon.svg' | asset_url }}" width="34.1111" height="34.3776" alt="" loading="lazy">
       <div class="journal-stories__intro rte">{{ section.settings.intro }}</div>

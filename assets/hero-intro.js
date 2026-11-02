@@ -18,6 +18,33 @@ if (!customElements.get("hero-intro")) {
         this.restores = [];
         this.active = true;
         const { signal } = this.controller;
+        // Reload restoration can run after the first scrollTo and move the
+        // document underneath the intro. Own restoration only for this reload.
+        if (performance.getEntriesByType("navigation")[0]?.type === "reload") {
+          if (!this.restoreHistory && "scrollRestoration" in history) {
+            const previous = history.scrollRestoration;
+            history.scrollRestoration = "manual";
+            this.restoreHistory = () => {
+              history.scrollRestoration = previous;
+              this.restoreHistory = null;
+            };
+            window.addEventListener("pagehide", this.restoreHistory, {
+              once: true,
+            });
+          }
+          const reset = () => {
+            if (this.active) this.resetToHeader();
+          };
+          window.addEventListener("load", reset, { signal, once: true });
+          window.addEventListener(
+            "pageshow",
+            (event) => {
+              if (!event.persisted) reset();
+            },
+            { signal },
+          );
+          reset();
+        }
         window.addEventListener("pagehide", () => this.finish(), { signal });
         window.addEventListener("resize", () => this.finish(), { signal });
         this.motion.addEventListener("change", () => this.finish(), { signal });
@@ -53,11 +80,7 @@ if (!customElements.get("hero-intro")) {
         if (!detail || !surface || !skip || !sofa || !green)
           return this.finish();
         this.releaseScroll = window.ThemeMotion.lockScroll(this);
-        window.ThemeMotion.pageScroll?.scrollTo(0, {
-          immediate: true,
-          force: true,
-        });
-        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+        this.resetToHeader();
         this.classList.add("is-intro-running", "is-intro-loading");
         skip.hidden = false;
         skip.addEventListener("click", () => this.finish(), { signal });
@@ -438,6 +461,14 @@ if (!customElements.get("hero-intro")) {
           const eased = fill * fill * (3 - 2 * fill);
           char.style.opacity = String(0.25 + 0.75 * eased);
         });
+      }
+
+      resetToHeader() {
+        window.ThemeMotion?.pageScroll?.scrollTo(0, {
+          immediate: true,
+          force: true,
+        });
+        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
       }
 
       finish() {

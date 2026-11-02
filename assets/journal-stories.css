@@ -13,7 +13,7 @@
 }
 
 .journal-stories.is-scroll-scene {
-  height: 800svh;
+  height: 1100svh;
   padding-block: 0;
   overflow: visible;
 }
@@ -112,7 +112,7 @@
   top: 0;
   left: 0;
   z-index: 2;
-  border-radius: var(--radius-card);
+  border-radius: 10.66px;
 }
 .journal-stories.is-scroll-scene .journal-stories__motion-grid {
   display: block;
@@ -120,30 +120,37 @@
   inset: 0 max(0px, calc(var(--journal-inset) - 1.066rem));
   pointer-events: none;
 }
-.journal-stories__motion-grid::before,
-.journal-stories__motion-grid::after {
-  content: "";
+.journal-stories__motion-grid i {
   position: absolute;
-  inset: 0;
+  display: block;
+  background: var(--journal-ornament-color);
+}
+.journal-stories__motion-grid [data-journal-line="top"],
+.journal-stories__motion-grid [data-journal-line="bottom"] {
+  left: 50%;
+  margin-left: -50vw;
+  width: 100vw;
+  height: 1px;
   transform-origin: center;
 }
-.journal-stories__motion-grid::before {
-  transform: scaleX(var(--journal-line-progress, 0));
-  background:
-    linear-gradient(
-        var(--journal-ornament-color),
-        var(--journal-ornament-color)
-      )
-      center 24.552svh / 100% 1px no-repeat,
-    linear-gradient(
-        var(--journal-ornament-color),
-        var(--journal-ornament-color)
-      )
-      center 55.957svh / 100% 1px no-repeat;
+.journal-stories__motion-grid [data-journal-line="top"] {
+  top: 24.552svh;
 }
-.journal-stories__motion-grid::after {
-  border-inline: 1px solid var(--journal-ornament-color);
-  transform: scaleY(var(--journal-line-progress, 0));
+.journal-stories__motion-grid [data-journal-line="bottom"] {
+  top: 55.957svh;
+}
+.journal-stories__motion-grid [data-journal-line="left"],
+.journal-stories__motion-grid [data-journal-line="right"] {
+  top: 0;
+  width: 1px;
+  height: 100%;
+  transform-origin: center 24.552svh;
+}
+.journal-stories__motion-grid [data-journal-line="left"] {
+  left: 0;
+}
+.journal-stories__motion-grid [data-journal-line="right"] {
+  right: 0;
 }
 .journal-stories::before {
   content: "";

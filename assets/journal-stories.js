@@ -217,6 +217,11 @@ if (!customElements.get("journal-stories")) {
           const plane = this.querySelector(".journal-stories__motion-plane");
           const band = this.querySelector(".journal-stories__motion-band");
           const grid = this.querySelector(".journal-stories__motion-grid");
+          const line = (name) =>
+            grid.querySelector(`[data-journal-line="${name}"]`);
+          const topLine = line("top"),
+            bottomLine = line("bottom");
+          const sideLines = [line("left"), line("right")];
           const studio = this.querySelector(".journal-stories__studio");
           const heading = this.querySelector(".journal-stories__heading");
           const copy = [...heading.children];
@@ -298,9 +303,9 @@ if (!customElements.get("journal-stories")) {
                 autoAlpha: 1,
                 x: 0,
                 y: 0,
-                scaleX: 1,
-                scaleY: 1,
-                borderRadius: 0,
+                width: () => geometry.width,
+                height: () => geometry.height,
+                borderRadius: "10.66px",
                 transformOrigin: "0 0",
               });
               gsap.set(this.numbers, {
@@ -325,18 +330,18 @@ if (!customElements.get("journal-stories")) {
                 y: 60,
                 clipPath: "inset(100% 0 0 0)",
               });
-              gsap.set(grid, {
-                "--journal-line-progress": 0,
-              });
+              gsap.set([topLine, bottomLine], { scaleX: 0 });
+              gsap.set(sideLines, { scaleY: 0 });
               gsap.set([this.rail, band, ...arrows], { autoAlpha: 0 });
               gsap.set(captions, { opacity: 0 });
               gsap.set(band, {
                 x: () => studio.offsetLeft,
-                y: () => geometry.bodyTop - geometry.base.top,
+                y: () =>
+                  geometry.bodyTop -
+                  geometry.base.top +
+                  geometry.card.width / 2,
                 width: () => studio.clientWidth,
-                height: geometry.card.width,
-                scaleX: 1,
-                scaleY: 0,
+                height: 0,
                 transformOrigin: "center",
               });
               gsap.set(this.cards, {
@@ -359,24 +364,24 @@ if (!customElements.get("journal-stories")) {
                 .to(
                   plane,
                   {
-                    scaleX: 0.975,
-                    scaleY: 0.927,
+                    width: () => geometry.width * 0.975,
+                    height: () => geometry.height * 0.927,
                     x: () => geometry.width * 0.0125,
                     y: () => geometry.height * 0.0365,
-                    borderRadius: "10px",
                     duration: 1.2,
+                    ease: "power3.inOut",
                   },
                   0.2,
                 )
                 .to(
                   plane,
                   {
-                    scaleX: () => geometry.size / geometry.width,
-                    scaleY: () => geometry.size / geometry.height,
+                    width: () => geometry.size,
+                    height: () => geometry.size,
                     x: () => (geometry.width - geometry.total) / 2,
                     y: () => (geometry.height - geometry.size) / 2,
-                    borderRadius: "10.66px",
                     duration: 2,
+                    ease: "power3.inOut",
                   },
                   1.4,
                 )
@@ -410,15 +415,13 @@ if (!customElements.get("journal-stories")) {
                   },
                   filled,
                 )
-                .to(
-                  grid,
-                  { "--journal-line-progress": 1, duration: 1.5 },
-                  filled,
-                )
+                .to(topLine, { scaleX: 1, duration: 1.5 }, filled + 1)
+                .to(bottomLine, { scaleX: 1, duration: 1.5 }, filled + 2.5)
+                .to(sideLines, { scaleY: 1, duration: 1.5 }, filled + 4)
                 .to(
                   this.numbers,
                   { x: 0, y: 0, duration: 1.8, stagger: { amount: 0.2 } },
-                  filled + 1.4,
+                  filled + 2.8,
                 )
                 .to(
                   this.numbers,
@@ -429,7 +432,7 @@ if (!customElements.get("journal-stories")) {
                       index === this.activeIndex ? white : muted,
                     duration: 0.8,
                   },
-                  filled + 1.4,
+                  filled + 2.8,
                 )
                 .to(
                   tags,
@@ -439,7 +442,7 @@ if (!customElements.get("journal-stories")) {
                     duration: 1.4,
                     stagger: { amount: 0.25 },
                   },
-                  filled + 2.3,
+                  filled + 4.2,
                 )
                 .to(
                   copy,
@@ -450,39 +453,44 @@ if (!customElements.get("journal-stories")) {
                     duration: 1.6,
                     stagger: 0.25,
                   },
-                  filled + 3.8,
+                  filled + 5.5,
                 )
                 .to(
                   band,
                   {
                     autoAlpha: 1,
-                    scaleY: 1,
+                    height: () => geometry.card.width,
+                    y: () => geometry.bodyTop - geometry.base.top,
                     duration: 1.6,
                     ease: "power3.out",
                   },
-                  filled + 3.8,
+                  filled + 5.5,
                 )
                 .to(
                   band,
                   {
-                    scaleX: () => geometry.card.width / studio.clientWidth,
-                    duration: 1.8,
+                    width: () => geometry.card.width,
+                    x: () => geometry.card.left - geometry.base.left,
+                    height: () => geometry.card.width,
+                    y: () => geometry.bodyTop - geometry.base.top,
+                    duration: 2.2,
+                    ease: "power3.inOut",
                   },
-                  filled + 5.5,
+                  filled + 7.4,
                 )
-                .to(this.rail, { autoAlpha: 1, duration: 0.8 }, filled + 6.6)
-                .to(band, { autoAlpha: 0, duration: 0.8 }, filled + 6.6)
-                .to(this.cards, { x: 0, duration: 1.8 }, filled + 7.3)
+                .to(this.rail, { autoAlpha: 1, duration: 0.9 }, filled + 9.5)
+                .to(band, { autoAlpha: 0, duration: 0.6 }, filled + 10)
+                .to(this.cards, { x: 0, duration: 1.8 }, filled + 10.4)
                 .to(
                   captions,
                   { opacity: 1, duration: 1.2, stagger: { amount: 0.25 } },
-                  filled + 7.8,
+                  filled + 11,
                 )
-                .to(arrows, { autoAlpha: 1, duration: 1.2 }, filled + 7.8)
+                .to(arrows, { autoAlpha: 1, duration: 1.2 }, filled + 11)
                 .to({}, { duration: 0.8 });
               let wasLocked;
               const access = () => {
-                const locked = timeline.time() < filled + 9.2;
+                const locked = timeline.time() < filled + 12.3;
                 if (locked === wasLocked) return;
                 wasLocked = locked;
                 this.classList.toggle("is-journal-opening", locked);
