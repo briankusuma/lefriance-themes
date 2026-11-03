@@ -1,10 +1,12 @@
 # Task aktif
 
-Task aktif: Catalog filter styling, 2026-11-02. Implementasi/validasi lokal selesai; visual browser dan live editor belum diverifikasi.
+Task aktif: Footer gallery autoplay, 2026-11-03. Implementasi lokal selesai; visual browser/live editor belum diverifikasi.
 
-Target: rapikan bar filter/sort koleksi dan search sesuai screenshot masalah dan token katalog existing. CSS scoped di assets/theme-features.css: kontrol44px, font0.875rem, grup filter kompak, sorting rata kanan dengan label inline, divider#E5E3D3, input radius10.66px dan tombol brown existing. Native details/GET/filter/sorting tidak diubah; focus-visible global tetap. Mobile membungkus dua kolom filter dan sorting/tombol full width. Bar active filters kosong tidak menyisakan baris gap.
+Target Figma3660:1410, existing footer-gallery/Swiper. Existing square/blur/caption/active pagination treatment retained. Footer group now has5 editable media blocks reusing material-story-room, journal-workshop, journal-balance, journal-finishing-generated and journal-timber-generated. Uploaded block image overrides selected reference photo; references require existing use_reference_images setting. No new image files. Original design photo remains first; additional photos follow user's explicit reuse instruction.
 
-Validation: CSS formatting/diff checked; no Liquid/JSON or Shopify behavior changes. Browser visual/keyboard/mobile verification pending. Layout responsive diturunkan dari style existing sesuai permintaan pengguna, tanpa frame Figma baru.
+Autoplay5s, existing fade/rewind, editable Rotate photos automatically. Pause/play control; pause while hovered/offscreen/hidden tab, stop on focus until explicit play, reduced motion/editor manual only. Block selection still changes slide. Existing footer reveal and mobile email→heading→brand order preserved.
+
+Validation: Theme Check zero findings; JS syntax, Prettier and git diff clean. VM test with mocked Swiper covers5-slide autoplay configuration, visibility, pause/play, reduced motion, focus, selected slide and cleanup. Asset files/dimensions verified. Prior Liquid/DOM harness unavailable because temporary linkedom dependency was removed; no fresh DOM-render pass claimed. Desktop/mobile visual, native Swiper rendering and Theme Editor tests remain pending. Figma static frame has no timing;5s interval derived.
 
 Carry forward: metadata author/doc/support untuk tema lafrience masih menunggu data pengguna; native commerce additions sudah diuji lokal tetapi live APIs/checkout/editor/a11y/performance belum lulus. Hak distribusi aset Figma dan QA animasi/freeze/cart sebelumnya tetap terbuka. Tidak ada push/publish/deploy.
 

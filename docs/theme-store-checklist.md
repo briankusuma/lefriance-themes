@@ -287,7 +287,7 @@ Working checklist, not a release certificate. Read current official requirements
 
 ## Repository and tooling gates
 
-- [x] Theme Check CLI 4.9.4: zero findings after footer viewport-enter playback and whole-wordmark reveal, 2026-11-02. Rerun after code changes.
+- [x] Theme Check CLI 4.9.4: zero findings after footer gallery blocks/autoplay, 2026-11-03. Rerun after code changes.
 - [ ] No disabled Theme Check rules without justification
 - [ ] Third-party assets and licenses recorded in `docs/third-party-licenses.md`
 - [ ] Intentional design deviations recorded in `docs/project-brief.md`

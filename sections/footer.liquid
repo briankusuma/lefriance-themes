@@ -51,20 +51,29 @@
         <div class="editorial-footer__studio-copy rte">{{ section.settings.studio_text }}</div>
       </div>
       {% if media_blocks.size > 0 or section.settings.use_reference_images %}
-        <footer-gallery class="editorial-footer__gallery">
+        <footer-gallery class="editorial-footer__gallery" data-autoplay="{{ section.settings.gallery_autoplay }}" data-pause-label="{{ 'editorial_footer.pause' | t | escape }}" data-play-label="{{ 'editorial_footer.play' | t | escape }}">
           {% for block in media_blocks %}
             <div class="editorial-footer__slide" id="FooterSlide-{{ section.id }}-{{ block.id }}" data-footer-slide {{ block.shopify_attributes }}>
               {% if block.settings.image != blank %}
                 {{ block.settings.image | image_url: width: 1200 | image_tag: widths: '360, 540, 800, 1200', sizes: '(min-width: 990px) 34vw, 90vw', loading: 'lazy', alt: block.settings.image.alt }}
+              {% elsif section.settings.use_reference_images and block.settings.reference_image != 'none' and block.settings.reference_image != blank %}
+                {% liquid
+                  assign reference_height = 1200
+                  if block.settings.reference_image == 'journal-finishing-generated.jpg' or block.settings.reference_image == 'journal-timber-generated.jpg'
+                    assign reference_height = 960
+                  endif
+                %}
+                <img src="{{ block.settings.reference_image | asset_img_url: '960x' }}" srcset="{{ block.settings.reference_image | asset_img_url: '360x' }} 360w, {{ block.settings.reference_image | asset_img_url: '680x' }} 680w, {{ block.settings.reference_image | asset_img_url: '960x' }} 960w" sizes="(min-width: 990px) 34vw, 90vw" width="960" height="{{ reference_height }}" alt="{{ 'editorial_footer.studio_image' | t | escape }}" loading="lazy">
               {% else %}{{ 'image' | placeholder_svg_tag }}{% endif %}
               {% if block.settings.caption != blank %}<div class="editorial-footer__image-caption rte">{{ block.settings.caption }}</div>{% endif %}
             </div>
           {% else %}
-            <div class="editorial-footer__slide">
+            <div class="editorial-footer__slide" data-footer-slide>
               <img src="{{ 'material-story-room.png' | asset_img_url: '960x' }}" srcset="{{ 'material-story-room.png' | asset_img_url: '360x' }} 360w, {{ 'material-story-room.png' | asset_img_url: '680x' }} 680w, {{ 'material-story-room.png' | asset_img_url: '960x' }} 960w" sizes="(min-width: 990px) 34vw, 90vw" width="960" height="1200" alt="{{ 'editorial_footer.studio_image' | t | escape }}" loading="lazy">
               <div class="editorial-footer__image-caption rte">{{ section.settings.image_caption }}</div>
             </div>
           {% endfor %}
+          <button type="button" class="editorial-footer__autoplay" data-footer-toggle aria-pressed="false" hidden>{{ 'editorial_footer.pause' | t }}</button>
           {% if media_blocks.size > 1 %}
             <div class="editorial-footer__dots" role="group" aria-label="{{ 'editorial_footer.photos' | t | escape }}" data-footer-controls hidden>
               {% for block in media_blocks %}<button type="button" data-footer-select="{{ forloop.index0 }}" aria-controls="FooterSlide-{{ section.id }}-{{ block.id }}" aria-label="{{ 'editorial_footer.show_photo' | t: number: forloop.index | escape }}" aria-pressed="false"><span aria-hidden="true"></span><img src="{{ 'material-story-active.svg' | asset_url }}" width="12.7917" height="12.7917" alt="" loading="lazy"></button>{% endfor %}
@@ -118,6 +127,7 @@
   "max_blocks": 7,
   "settings": [
     { "type": "checkbox", "id": "enable_scroll_reveal", "label": "Animate on scroll", "default": true, "info": "Reveals footer content as visitors scroll. Reduced motion and selected editor sections show the full layout." },
+    { "type": "checkbox", "id": "gallery_autoplay", "label": "Rotate photos automatically", "default": true },
     { "type": "checkbox", "id": "show_follow_on_shop", "label": "Show Follow on Shop", "default": true },
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-footer" },
     { "type": "color", "id": "ornament_color", "label": "Ornament color", "default": "#5B5148" },
@@ -147,6 +157,14 @@
     ] },
     { "type": "media", "name": "Studio photo", "limit": 6, "settings": [
       { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "select", "id": "reference_image", "label": "Reference photo", "default": "none", "info": "Used when reference images are enabled and no image is selected.", "options": [
+        { "value": "none", "label": "None" },
+        { "value": "material-story-room.png", "label": "Studio" },
+        { "value": "journal-workshop.png", "label": "Workshop" },
+        { "value": "journal-balance.png", "label": "Balance" },
+        { "value": "journal-finishing-generated.jpg", "label": "Finishing" },
+        { "value": "journal-timber-generated.jpg", "label": "Timber" }
+      ] },
       { "type": "richtext", "id": "caption", "label": "Caption" }
     ] }
   ],

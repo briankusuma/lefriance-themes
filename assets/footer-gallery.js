@@ -9,6 +9,13 @@ if (!customElements.get("footer-gallery")) {
         this.swiper?.destroy(true, true);
         this.controller = new AbortController();
         const { signal } = this.controller;
+        this.reduced = matchMedia("(prefers-reduced-motion: reduce)");
+        this.paused = false;
+        this.visible = false;
+        this.hovered = false;
+        this.toggle = this.querySelector("[data-footer-toggle]");
+        this.autoEnabled =
+          this.dataset.autoplay === "true" && !window.Shopify?.designMode;
         this.slides = [...this.querySelectorAll("[data-footer-slide]")];
         this.buttons = [...this.querySelectorAll("[data-footer-select]")];
         const controls = this.querySelector("[data-footer-controls]");
@@ -16,6 +23,11 @@ if (!customElements.get("footer-gallery")) {
         this.addEventListener(
           "click",
           (event) => {
+            if (event.target.closest("[data-footer-toggle]")) {
+              this.paused = !this.paused;
+              this.syncAutoplay();
+              return;
+            }
             const button = event.target.closest("[data-footer-select]");
             if (button) this.select(Number(button.dataset.footerSelect));
           },
@@ -49,6 +61,8 @@ if (!customElements.get("footer-gallery")) {
         this.addEventListener(
           "shopify:block:select",
           (event) => {
+            this.paused = true;
+            this.syncAutoplay();
             const index = this.slides.indexOf(
               event.target.closest("[data-footer-slide]"),
             );
@@ -61,6 +75,11 @@ if (!customElements.get("footer-gallery")) {
           effect: "fade",
           fadeEffect: { crossFade: true },
           rewind: true,
+          autoplay: {
+            enabled: false,
+            delay: 5000,
+            disableOnInteraction: false,
+          },
           observer: false,
           observeParents: false,
           on: { slideChange: (swiper) => this.paint(swiper.realIndex) },
@@ -75,6 +94,72 @@ if (!customElements.get("footer-gallery")) {
           return;
         }
         this.select(0);
+        this.addEventListener(
+          "pointerenter",
+          () => {
+            this.hovered = true;
+            this.syncAutoplay();
+          },
+          { signal },
+        );
+        this.addEventListener(
+          "pointerleave",
+          () => {
+            this.hovered = false;
+            this.syncAutoplay();
+          },
+          { signal },
+        );
+        this.addEventListener(
+          "focusin",
+          (event) => {
+            if (event.target.closest("[data-footer-toggle]")) return;
+            this.paused = true;
+            this.syncAutoplay();
+          },
+          { signal },
+        );
+        this.reduced.addEventListener("change", () => this.syncAutoplay(), {
+          signal,
+        });
+        document.addEventListener(
+          "visibilitychange",
+          () => this.syncAutoplay(),
+          { signal },
+        );
+        if ("IntersectionObserver" in window) {
+          this.visibilityObserver = new IntersectionObserver((entries) => {
+            this.visible = entries.some((entry) => entry.isIntersecting);
+            this.syncAutoplay();
+          });
+          this.visibilityObserver.observe(this);
+          signal.addEventListener(
+            "abort",
+            () => this.visibilityObserver.disconnect(),
+            { once: true },
+          );
+        } else this.visible = true;
+        this.syncAutoplay();
+      }
+      syncAutoplay() {
+        const enabled =
+          this.autoEnabled && this.slides.length > 1 && !this.reduced.matches;
+        if (this.toggle) {
+          this.toggle.hidden = !enabled;
+          this.toggle.setAttribute("aria-pressed", String(this.paused));
+          this.toggle.textContent = this.paused
+            ? this.dataset.playLabel
+            : this.dataset.pauseLabel;
+        }
+        if (
+          enabled &&
+          this.visible &&
+          !this.paused &&
+          !this.hovered &&
+          !document.hidden
+        )
+          this.swiper?.autoplay?.start();
+        else this.swiper?.autoplay?.stop();
       }
       select(index) {
         this.swiper?.slideTo(index, ThemeMotion.speed);

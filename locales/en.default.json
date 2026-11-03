@@ -20,6 +20,8 @@
     "show": "Show product media {{ number }}"
   },
   "editorial_footer": {
+    "pause": "Pause slideshow",
+    "play": "Play slideshow",
     "menu": "Footer menu",
     "studio_image": "Furniture studio and workshop",
     "photos": "Studio photos",
