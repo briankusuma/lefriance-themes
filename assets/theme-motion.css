@@ -31,7 +31,8 @@
   inset: 0;
   aspect-ratio: auto;
   opacity: 0;
-  overflow: auto;
+  /* This is a slide face, not a nested scroll area; wheel/touch scroll the page. */
+  overflow: clip;
   pointer-events: none;
   transition: opacity 260ms ease;
 }
