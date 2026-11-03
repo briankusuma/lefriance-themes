@@ -62,11 +62,7 @@
   gap: 10px;
 }
 .journal-stories.is-journal-opening .journal-stories__numbers button {
-  background: linear-gradient(
-    to right,
-    var(--journal-motion-background) calc(var(--journal-fill, 0) * 100%),
-    var(--color-card) 0
-  );
+  background: var(--journal-number-background, var(--color-card));
   color: var(--journal-ink, var(--color-card-text));
 }
 .journal-stories.is-scroll-scene .journal-stories__heading {

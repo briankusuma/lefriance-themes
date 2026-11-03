@@ -321,6 +321,10 @@ if (!customElements.get("journal-stories")) {
               const numberSetters = this.numbers.map((button) => ({
                 fill: gsap.quickSetter(button, "--journal-fill"),
                 ink: gsap.quickSetter(button, "--journal-ink"),
+                background: gsap.quickSetter(
+                  button,
+                  "--journal-number-background",
+                ),
               }));
               const paintNumbers = () => {
                 numberSetters.forEach((setter, index) => {
@@ -336,6 +340,14 @@ if (!customElements.get("journal-stories")) {
                     openingFill +
                     (selectedFill - openingFill) * numberMotion.selection;
                   setter.fill(fill);
+                  // Solid endpoints avoid a pale subpixel seam at the gradient edge.
+                  setter.background(
+                    fill >= 1
+                      ? brown
+                      : fill <= 0
+                        ? "var(--color-card)"
+                        : `linear-gradient(to right, ${brown} ${fill * 100}%, var(--color-card) 0)`,
+                  );
                   setter.ink(
                     fill === 0
                       ? muted

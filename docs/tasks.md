@@ -2,6 +2,8 @@
 
 Task aktif: Journal active-number reverse, 2026-11-03. Perbaikan dan regresi lokal selesai; browser belum diverifikasi.
 
+Follow-up: background tombol nomor memakai warna solid pada fill0/1, gradient hanya selama transisi, agar tidak menyisakan seam terang di sisi kanan. Applied to all number buttons; same active-number regression passes. Browser pixel rendering pending.
+
 Target: angka Journal tidak hilang saat reverse dan brown plane mengecil ke nomor slide aktif (04/06/dll), bukan posisi tetap/default. assets/journal-stories.js: fill/ink dirender melalui quickSetters dari state scalar reversible dan activeIndex, sehingga cached CSS custom property tidak mewariskan warna putih ke kotak terang. Sequential fill dimulai dari active item lalu mengikuti urutan melingkar. Plane collapse memakai dynamic fromTo ke posisi nomor aktif; perubahan selection menginvalidasi collapse/visibility tanpa restart timeline/Swiper. Pilihan slide dan scroll playhead dipertahankan.
 
 Validasi: actual GSAP object timeline regression menguji active02 awal, pindah04/06/01/04, reverse sampai collapse/full plane, fill/ink semua angka terbaca dan posisi plane tepat nomor aktif. Existing card-neighbor/gap21px/final/reverse/fallback/cleanup checks pass. Syntax/Prettier/diff bersih; Theme Check result dicatat di checklist. Tes bukan CSS rendering/scroll browser; visual desktop/mobile/editor masih perlu konfirmasi.
