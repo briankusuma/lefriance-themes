@@ -310,7 +310,41 @@ if (!customElements.get("journal-stories")) {
               };
               const brown = getComputedStyle(plane).backgroundColor;
               const white = getComputedStyle(plane).color;
-              const muted = getComputedStyle(this.numbers[0]).color;
+              const muted = getComputedStyle(
+                this.numbers.find((_, i) => i !== this.activeIndex) ||
+                  this.numbers[0],
+              ).color;
+              // Render both ink and fill from one reversible state. CSS custom
+              // property values from a later selection must never become start values.
+              const numberMotion = { fill: 1, selection: 0 };
+              const mixNumberInk = gsap.utils.interpolate(muted, white);
+              const numberSetters = this.numbers.map((button) => ({
+                fill: gsap.quickSetter(button, "--journal-fill"),
+                ink: gsap.quickSetter(button, "--journal-ink"),
+              }));
+              const paintNumbers = () => {
+                numberSetters.forEach((setter, index) => {
+                  const distance =
+                    (index - this.activeIndex + this.numbers.length) %
+                    this.numbers.length;
+                  const openingFill = Math.max(
+                    0,
+                    Math.min(1, numberMotion.fill - distance),
+                  );
+                  const selectedFill = index === this.activeIndex ? 1 : 0;
+                  const fill =
+                    openingFill +
+                    (selectedFill - openingFill) * numberMotion.selection;
+                  setter.fill(fill);
+                  setter.ink(
+                    fill === 0
+                      ? muted
+                      : fill === 1
+                        ? white
+                        : mixNumberInk(fill),
+                  );
+                });
+              };
               gsap.set(stage, { "--journal-motion-background": brown });
               this.classList.add("is-journal-opening");
               gsap.set(plane, {
@@ -332,12 +366,8 @@ if (!customElements.get("journal-stories")) {
                   geometry.base.top +
                   (geometry.height - geometry.size) / 2 -
                   geometry.buttons[i].top,
-                "--journal-fill": 0,
               });
-              gsap.set(this.numbers[0], {
-                "--journal-fill": 1,
-                "--journal-ink": white,
-              });
+              paintNumbers();
               gsap.set(tags, { autoAlpha: 0, y: 24 });
               gsap.set(copy, {
                 autoAlpha: 0,
@@ -392,36 +422,41 @@ if (!customElements.get("journal-stories")) {
                   },
                   0.2,
                 )
-                .to(
+                .fromTo(
                   plane,
+                  {
+                    width: () => geometry.width * 0.975,
+                    height: () => geometry.height * 0.927,
+                    x: () => geometry.width * 0.0125,
+                    y: () => geometry.height * 0.0365,
+                  },
                   {
                     width: () => geometry.size,
                     height: () => geometry.size,
-                    x: () => (geometry.width - geometry.total) / 2,
+                    x: () =>
+                      (geometry.width - geometry.total) / 2 +
+                      this.activeIndex * (geometry.size + 10),
                     y: () => (geometry.height - geometry.size) / 2,
                     duration: 2,
                     ease: "power3.inOut",
+                    immediateRender: false,
                   },
                   1.4,
-                )
-                .set(
-                  this.numbers[0],
-                  { "--journal-fill": 1, "--journal-ink": white },
-                  3.4,
-                )
-                .set(plane, { autoAlpha: 0 }, 3.4);
-              this.numbers.slice(1).forEach((button, index) => {
-                timeline.to(
-                  button,
-                  {
-                    "--journal-fill": 1,
-                    "--journal-ink": white,
-                    duration: 0.65,
-                  },
-                  3.6 + index * 0.55,
                 );
-              });
+              const numberCollapseTween = timeline.recent();
+              timeline.set(plane, { autoAlpha: 0 }, 3.4);
               const filled = 3.6 + (this.numbers.length - 1) * 0.55 + 0.65;
+              timeline.fromTo(
+                numberMotion,
+                { fill: 1 },
+                {
+                  fill: this.numbers.length,
+                  duration: filled - 3.6,
+                  ease: "none",
+                  immediateRender: false,
+                },
+                3.6,
+              );
               timeline
                 .to(
                   this.numbers,
@@ -443,19 +478,11 @@ if (!customElements.get("journal-stories")) {
                   filled + 2.8,
                 )
                 .fromTo(
-                  this.numbers,
-                  { "--journal-fill": 1, "--journal-ink": white },
-                  {
-                    "--journal-fill": (index) =>
-                      index === this.activeIndex ? 1 : 0,
-                    "--journal-ink": (index) =>
-                      index === this.activeIndex ? white : muted,
-                    duration: 0.8,
-                    immediateRender: false,
-                  },
+                  numberMotion,
+                  { selection: 0 },
+                  { selection: 1, duration: 0.8, immediateRender: false },
                   filled + 2.8,
                 );
-              const selectionTween = timeline.recent();
               timeline
                 .to(
                   tags,
@@ -541,10 +568,11 @@ if (!customElements.get("journal-stories")) {
                 if (wasLocked !== false) return;
                 gsap.set(this.cards, { opacity: visibleOpacity });
                 // Rebind selection values without restarting scroll or Swiper.
-                for (const tween of [selectionTween, visibilityTween]) {
+                for (const tween of [numberCollapseTween, visibilityTween]) {
                   const progress = tween.progress();
                   tween.invalidate().progress(progress, true);
                 }
+                paintNumbers();
               };
               this.syncMotionSelection = syncSelection;
               const access = () => {
@@ -556,7 +584,11 @@ if (!customElements.get("journal-stories")) {
                 carousel.inert = locked;
                 this.swiper.allowTouchMove = !locked;
               };
-              timeline.eventCallback("onUpdate", access);
+              timeline.eventCallback("onUpdate", () => {
+                paintNumbers();
+                access();
+              });
+              paintNumbers();
               access();
               const keyboard = (event) => {
                 if (event.key !== "Tab" || !timeline.scrollTrigger.isActive)

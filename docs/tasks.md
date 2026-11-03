@@ -1,10 +1,10 @@
 # Task aktif
 
-Task aktif: Homepage-only footer motion, 2026-11-03. Implementasi/tes lokal selesai; browser belum diverifikasi.
+Task aktif: Journal active-number reverse, 2026-11-03. Perbaikan dan regresi lokal selesai; browser belum diverifikasi.
 
-Footer reveal dan gallery autoplay hanya aktif ketika request.page_type == 'index', tetap mengikuti checkbox merchant. Halaman lain langsung menampilkan footer statis, tanpa intro/reveal/autoplay. Manual gallery interaction tetap tersedia. footer-reveal.js tidak dimuat pada halaman lain atau ketika reveal dimatikan. Tidak mengubah konten/style atau setting tersimpan; info schema menjelaskan pembatasan homepage.
+Target: angka Journal tidak hilang saat reverse dan brown plane mengecil ke nomor slide aktif (04/06/dll), bukan posisi tetap/default. assets/journal-stories.js: fill/ink dirender melalui quickSetters dari state scalar reversible dan activeIndex, sehingga cached CSS custom property tidak mewariskan warna putih ke kotak terang. Sequential fill dimulai dari active item lalu mengikuti urutan melingkar. Plane collapse memakai dynamic fromTo ke posisi nomor aktif; perubahan selection menginvalidasi collapse/visibility tanpa restart timeline/Swiper. Pilihan slide dan scroll playhead dipertahankan.
 
-Validasi: Liquid fixture10 page types termasuk home locale, checkbox OFF, dan pemuatan script kondisional lulus. Theme Check zero findings; diff bersih. Browser storefront/editor belum diuji langsung.
+Validasi: actual GSAP object timeline regression menguji active02 awal, pindah04/06/01/04, reverse sampai collapse/full plane, fill/ink semua angka terbaca dan posisi plane tepat nomor aktif. Existing card-neighbor/gap21px/final/reverse/fallback/cleanup checks pass. Syntax/Prettier/diff bersih; Theme Check result dicatat di checklist. Tes bukan CSS rendering/scroll browser; visual desktop/mobile/editor masih perlu konfirmasi.
 
 Carry forward: metadata author/doc/support untuk tema lafrience masih menunggu data pengguna; native commerce additions sudah diuji lokal tetapi live APIs/checkout/editor/a11y/performance belum lulus. Hak distribusi aset Figma dan QA animasi/freeze/cart sebelumnya tetap terbuka. Tidak ada push/publish/deploy.
 
