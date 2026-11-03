@@ -6,9 +6,9 @@
     "integrity": "sha512-qw0Xv1+sylM8KCQxWxV2iYAK2G6XjFGPZ/8F1baEsY8DK4A3sTnLx6jUJ0G71rDbVQ05JHMWkcWmJ5NvlxZO0w==",
     "assets": {
       "assets/vendor-swiper-14.3.0.js": {
-        "bytes": 177927,
-        "gzip_bytes": 35267,
-        "sha256": "30e7f8b5c50ca60eb060447bdfa19e1c9d05e90944465a84949a2f8ca6c43b78"
+        "bytes": 188210,
+        "gzip_bytes": 36899,
+        "sha256": "bb86162cbb3ad4feb15dde28426e145a8b94174a839222f89092cc2530bad862"
       },
       "assets/vendor-swiper-14.3.0.css": {
         "bytes": 6476,

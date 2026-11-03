@@ -2,7 +2,7 @@
 
 User-requested migration on 2026-10-27: Swiper 14.3.0 for Journal, Featured collections, Material story and footer gallery; Lenis 1.3.27 for wheel scrolling. Both use the MIT license. No third-party request is made at storefront runtime: scripts and styles are theme assets, loaded once through `theme-motion.js`. Product detail gallery also uses the shared Swiper helper; header menus remain native.
 
-Swiper contains only Core, Navigation, A11y and EffectFade. The readable bundle is about 177KB before transfer compression; its CSS is about 6.5KB. Lenis JS is about 36KB. Total gzip estimate is approximately 46KB for both libraries and CSS, excluding component adapters. Swiper is loaded only when a nonempty carousel initializes. Lenis is not loaded when disabled, in Theme Editor, or when reduced motion is requested. This is a transfer estimate, not a Lighthouse score.
+Swiper contains only Core, Navigation, A11y, EffectFade and Autoplay. The readable bundle is about 189KB before transfer compression; its CSS is about 6.5KB. Lenis JS is about 36KB. Total gzip estimate is approximately 46KB for both libraries and CSS, excluding component adapters. Swiper is loaded only when a nonempty carousel initializes. Lenis is not loaded when disabled, in Theme Editor, or when reduced motion is requested. This is a transfer estimate, not a Lighthouse score.
 
 `motion-libraries.json` records pinned package URLs, verified npm SHA-512 archive integrity, final asset SHA-256 hashes, sizes and gzip estimates. Licenses are included in the distributed JS as well as `docs/licenses/`.
 
@@ -38,3 +38,5 @@ Sources: [ScrollTrigger](https://gsap.com/docs/v3/Plugins/ScrollTrigger/), [Spli
 2026-11-02 Journal: same core-only ScrollTrigger loader and existing Swiper. Native sticky, sequential number fills and band/card reveals; no new asset/vendor/ticker/pin. Geometry measured only at setup/refresh, parent mutation observers disabled, static accessibility/editor/content fallbacks. Local tests do not establish browser performance.
 
 2026-11-02 Footer reuses the core-only ScrollTrigger loader. Viewport-enter playback, reset on upward exit and restart on re-entry: lines then bottom-up content/whole wordmark; no SplitText/scrub/pin/spacer/ticker/new dependency. Original2264-byte inline SVG geometry unchanged; gallery parent mutation observers disabled. Browser rendering/performance unmeasured.
+
+2026-11-03 Footer fix: rebuild pinned Swiper14.3.0 with Autoplay (previous bundle omitted it). Archive SHA512 verified against manifest; local vendor hash/size refreshed. Existing visibility/reduced-motion/focus guards retained. Editor preview can rotate until a block is selected. Actual bundled Autoplay tested advancing and rescheduling6 times; not a browser layout test.

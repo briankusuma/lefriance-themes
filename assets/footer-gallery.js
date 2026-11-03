@@ -13,8 +13,7 @@ if (!customElements.get("footer-gallery")) {
         this.paused = false;
         this.visible = false;
         this.hovered = false;
-        this.autoEnabled =
-          this.dataset.autoplay === "true" && !window.Shopify?.designMode;
+        this.autoEnabled = this.dataset.autoplay === "true";
         this.slides = [...this.querySelectorAll("[data-footer-slide]")];
         this.indicators = [...this.querySelectorAll("[data-footer-indicator]")];
         const controls = this.querySelector("[data-footer-controls]");
@@ -120,9 +119,9 @@ if (!customElements.get("footer-gallery")) {
           !this.paused &&
           !this.hovered &&
           !document.hidden
-        )
-          this.swiper?.autoplay?.start();
-        else this.swiper?.autoplay?.stop();
+        ) {
+          if (!this.swiper?.autoplay?.running) this.swiper?.autoplay?.start();
+        } else if (this.swiper?.autoplay?.running) this.swiper.autoplay.stop();
       }
       select(index) {
         this.swiper?.slideTo(index, ThemeMotion.speed);

@@ -27,28 +27,28 @@
           "type": "media",
           "settings": {
             "reference_image": "journal-balance.png",
-            "caption": "<p>Design volume instead of square meters \u2014 better yield without bigger plans.</p>"
+            "caption": "<p>Find balance in thoughtful proportions, natural textures, and considered details.</p>"
           }
         },
         "studio_photo_2": {
           "type": "media",
           "settings": {
             "reference_image": "journal-workshop.png",
-            "caption": ""
+            "caption": "<p>From raw materials to finished furniture, discover the work behind each piece.</p>"
           }
         },
         "studio_photo_3": {
           "type": "media",
           "settings": {
             "reference_image": "journal-finishing-generated.jpg",
-            "caption": ""
+            "caption": "<p>A closer look at the finishing touches that bring each piece together.</p>"
           }
         },
         "studio_photo_4": {
           "type": "media",
           "settings": {
             "reference_image": "journal-timber-generated.jpg",
-            "caption": ""
+            "caption": "<p>Explore the grain, texture, and character of the wood we work with.</p>"
           }
         }
       },

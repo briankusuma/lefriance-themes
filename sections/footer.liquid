@@ -65,7 +65,8 @@
                 %}
                 <img src="{{ block.settings.reference_image | asset_img_url: '960x' }}" srcset="{{ block.settings.reference_image | asset_img_url: '360x' }} 360w, {{ block.settings.reference_image | asset_img_url: '680x' }} 680w, {{ block.settings.reference_image | asset_img_url: '960x' }} 960w" sizes="(min-width: 990px) 34vw, 90vw" width="960" height="{{ reference_height }}" alt="{{ 'editorial_footer.studio_image' | t | escape }}" loading="lazy">
               {% else %}{{ 'image' | placeholder_svg_tag }}{% endif %}
-              {% if block.settings.caption != blank %}<div class="editorial-footer__image-caption rte">{{ block.settings.caption }}</div>{% endif %}
+              {% assign slide_caption = block.settings.caption | default: section.settings.image_caption %}
+              {% if slide_caption != blank %}<div class="editorial-footer__image-caption rte">{{ slide_caption }}</div>{% endif %}
             </div>
           {% else %}
             <div class="editorial-footer__slide" data-footer-slide>
@@ -164,7 +165,7 @@
         { "value": "journal-finishing-generated.jpg", "label": "Finishing" },
         { "value": "journal-timber-generated.jpg", "label": "Timber" }
       ] },
-      { "type": "richtext", "id": "caption", "label": "Caption" }
+      { "type": "richtext", "id": "caption", "label": "Caption", "default": "<p>Add a short description of this photo.</p>" }
     ] }
   ],
   "presets": [{ "name": "Footer", "blocks": [{ "type": "newsletter" }] }]
