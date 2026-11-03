@@ -14,7 +14,8 @@
   gap: 0.5rem 1rem;
   width: min(
     calc(100% - var(--page-margin) * 2),
-    calc(var(--page-width) - var(--page-margin) * 2)
+    calc(var(--page-width) - var(--page-margin) * 2),
+    var(--container-width)
   );
   height: auto;
   min-height: 4rem;

@@ -1,4 +1,5 @@
 .collection-collage {
+  display: block;
   padding-block: var(--section-spacing) 2.133rem;
   border-bottom: 1.066px solid var(--collage-ornament-color, #e5e3d3);
 }
@@ -169,11 +170,11 @@ collection-collage {
 }
 .collection-collage.is-scroll-scene .collection-collage__stage {
   --collage-cell: min(
-    calc((100vw - var(--page-margin) * 2 - var(--grid-gap) * 3) / 4),
-    31.3svh
+    calc((var(--layout-content-width) - var(--grid-gap) * 3) / 4),
+    calc(var(--motion-vh) * 31.3)
   );
   position: sticky;
-  top: 0;
+  top: max(0px, calc((100svh - var(--motion-stage-height)) / 2));
   width: min(
     calc(100% - var(--page-margin) * 2),
     var(--container-width),
@@ -182,13 +183,13 @@ collection-collage {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 5svh;
-  height: 100svh;
+  gap: calc(var(--motion-vh) * 5);
+  height: calc(var(--motion-vh) * 100);
 }
 .collection-collage.is-scroll-scene .collection-collage__intro {
   position: relative;
   display: block;
-  flex: 0 0 18svh;
+  flex: 0 0 calc(var(--motion-vh) * 18);
   margin-bottom: 0;
 }
 .collection-collage.is-scroll-scene .collection-collage__intro h2 {
@@ -197,7 +198,7 @@ collection-collage {
   left: 0;
   width: min(36%, 32.38rem);
   margin: 0;
-  font-size: clamp(1.5rem, min(3.333vw, 4.9svh), 3.2rem);
+  font-size: clamp(1.5rem, min(3.333vw, calc(var(--motion-vh) * 4.9)), 3.2rem);
   max-height: 100%;
   overflow-y: auto;
 }
@@ -208,7 +209,7 @@ collection-collage {
   width: 24%;
   max-height: 100%;
   overflow-y: auto;
-  font-size: clamp(0.75rem, min(1.25vw, 1.8svh), 1.2rem);
+  font-size: clamp(0.75rem, min(1.25vw, calc(var(--motion-vh) * 1.8)), 1.2rem);
 }
 .collection-collage.is-scroll-scene .collection-collage__grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -238,8 +239,8 @@ collection-collage {
   font-size: clamp(0.875rem, 1.388vw, 1.333rem);
 }
 .collection-collage.is-scroll-scene .collection-collage__plus {
-  width: clamp(1.5rem, 4.58vw, 6.44svh);
-  height: clamp(1.5rem, 4.58vw, 6.44svh);
+  width: clamp(1.5rem, 4.58vw, calc(var(--motion-vh) * 6.44));
+  height: clamp(1.5rem, 4.58vw, calc(var(--motion-vh) * 6.44));
 }
 .collection-collage.is-scroll-scene .collection-collage__plus span {
   width: min(1.86545rem, 50%);

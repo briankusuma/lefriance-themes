@@ -393,11 +393,14 @@
 }
 .material-story.is-scroll-scene .material-story__layout {
   --material-grid-color: #5b5148;
-  --story-card-size: min(43.54vw, 61svh);
+  --story-card-size: min(
+    calc(var(--layout-content-width) * 0.4664),
+    calc(var(--motion-vh) * 61)
+  );
   --story-frame-opacity: 0;
   position: sticky;
-  top: 0;
-  height: 100svh;
+  top: max(0px, calc((100svh - var(--motion-stage-height)) / 2));
+  height: calc(var(--motion-vh) * 100);
   min-height: 0;
   grid-template-columns: minmax(0, 1fr) var(--story-card-size) minmax(0, 1fr);
   grid-template-rows: minmax(0, 1fr) var(--story-card-size) minmax(0, 1fr);
@@ -416,7 +419,7 @@
 .material-story.is-scroll-scene .material-story__heading {
   align-self: center;
   padding: 0;
-  font-size: clamp(1.5rem, min(3.333vw, 5svh), 3.2rem);
+  font-size: clamp(1.5rem, min(3.333vw, calc(var(--motion-vh) * 5)), 3.2rem);
   max-height: 100%;
   overflow-y: auto;
 }

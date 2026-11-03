@@ -1,3 +1,14 @@
+/* Shared content geometry: motion scenes must fit the same width as their content. */
+:root {
+  --layout-content-width: min(
+    calc(100vw - var(--page-margin) * 2),
+    var(--container-width),
+    calc(var(--page-width) - var(--page-margin) * 2)
+  );
+  /* Existing desktop design canvas: 1433px content within a 1092px-high frame. */
+  --motion-stage-height: min(100svh, calc(var(--layout-content-width) * 0.762));
+  --motion-vh: calc(var(--motion-stage-height) / 100);
+}
 /* T00 global primitives. Section compositions are implemented in T01–T08. */
 body {
   font-size: var(--text-body);
@@ -72,7 +83,8 @@ button {
 .page-shell {
   width: min(
     calc(100% - var(--page-margin) * 2),
-    calc(var(--page-width) - var(--page-margin) * 2)
+    calc(var(--page-width) - var(--page-margin) * 2),
+    var(--container-width)
   );
   margin-inline: auto;
   padding-block: 1.5rem;

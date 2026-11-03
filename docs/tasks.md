@@ -1,19 +1,18 @@
 # Task aktif
 
-Task aktif: Footer gallery autoplay, 2026-11-03. Implementasi lokal selesai; visual browser/live editor belum diverifikasi.
+Task aktif: Wide-screen layout consistency, 2026-11-03. Perbaikan kode dan tes lokal selesai; visual browser belum diverifikasi.
 
-Target Figma3660:1410, existing footer-gallery/Swiper. Existing square/blur/caption/active pagination treatment retained. Footer group has4 editable media blocks using only Journal defaults: journal-balance, journal-workshop, journal-finishing-generated and journal-timber-generated. Uploaded block image overrides selected reference photo; references require existing use_reference_images setting. No new image files. Images follow the latest explicit request to reuse Journal assets.
+Scope: audit shared layout and section styles (31 Liquid section files including groups/endpoints), focus on screenshots Material story/Collection collage/Featured collections/Journal. Shared width token follows existing page/container/margins; header and page-shell now also respect container maximum. Full-width backgrounds remain; no merchant width settings overwritten. Four scroll scenes use a bounded desktop frame height derived from existing1433:1092 content/canvas proportions and center vertically on taller viewports. Existing scroll range/sticky/no-pin/Lenis/Swiper behavior retained.
 
-Autoplay5s, existing fade/rewind, editable Rotate photos automatically. No gallery buttons; noninteractive dots track the active slide. Pause while hovered/offscreen/hidden tab; keyboard focus pauses and Space toggles playback. Reduced motion disables autoplay; editor preview rotates until a media block is selected. Block selection still changes slide. Existing footer reveal and mobile email→heading→brand order preserved.
+Fixes: Material card width derives from bounded content, not unrestricted43.54vw; collage cells derive from same content width, not viewport, so4 columns remain square; custom collage host explicitly display:block. Journal initial brown plane uses dynamic fromTo geometry after refresh rather than cached initial set size. Material title/footer initial offsets also refresh through fromTo. Static/mobile sections retain existing grid/breakpoints; support pages/header share the global width limit. Footer, product, commerce and app markup not redesigned.
 
-Fix terbaru: bundle Swiper sebelumnya tidak memuat modul Autoplay meskipun adapter mengonfigurasikannya. Entry/bundle14.3.0 rebuilt dengan Autoplay, archive SHA512 diperiksa dan manifest hash diperbarui. syncAutoplay tidak memulai ulang timer yang sudah berjalan. Caption4 blok terisi; richtext default untuk blok baru dan fallback ke image_caption section untuk caption kosong. Semua tetap editable melalui Studio photo → Caption.
+Validation: all local non-vendor CSS parsed; geometry model63 viewport/settings combinations (990 through3840px, container960/1440/1920, page1280/1535/1800) keeps cards/grid within content and stage within viewport. Actual GSAP Journal/Featured regression tests pass; Journal resize1535→2940 recalculates initial plane and reverse state. JS syntax/Prettier/diff pass; Theme Check CLI4.9.4 zero findings. These are CSS syntax/numeric/VM checks, not browser screenshots or Lighthouse. Live desktop/mobile visual, Theme Editor resize, keyboard and performance remain pending. No new Figma frame; wide-screen behavior derived from existing tokens and user screenshots.
 
-Validation: actual shipped Swiper Autoplay advances6 times across4 slides with rescheduling/stop tested using controlled timers and minimal environment; no mock autoplay object for that test. Adapter visibility/focus/keyboard checks separately mocked. Caption data/schema/assets checked. Theme Check zero findings; syntax/format/diff checked. Browser visual transitions, mobile/editor and Lighthouse still pending. No deployment/push.
-
+Prior scoped work: Apps wrapper implementation retained; no real third-party app installed or tested.
 
 Carry forward: metadata author/doc/support untuk tema lafrience masih menunggu data pengguna; native commerce additions sudah diuji lokal tetapi live APIs/checkout/editor/a11y/performance belum lulus. Hak distribusi aset Figma dan QA animasi/freeze/cart sebelumnya tetap terbuka. Tidak ada push/publish/deploy.
 
-Sumber: [inline_asset_content](https://shopify.dev/docs/api/liquid/filters/inline_asset_content), [checkbox schema](https://shopify.dev/docs/storefronts/themes/architecture/settings/input-settings#checkbox).
+Sumber: [Shopify app blocks dan wrapper](https://shopify.dev/docs/storefronts/themes/architecture/blocks/app-blocks).
 
 ## Isi untuk pekerjaan berikutnya
 

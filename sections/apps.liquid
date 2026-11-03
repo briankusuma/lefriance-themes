@@ -1,0 +1,54 @@
+<div class="apps-section color-{{ section.settings.color_scheme }}">
+  <div class="{% if section.settings.constrain_width %}container {% endif %}{% if section.settings.add_spacing %}section-content{% endif %}">
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when '@app' %}
+          {% render block %}
+        {% when 'custom_liquid' %}
+          <div {{ block.shopify_attributes }}>{{ block.settings.code }}</div>
+      {% endcase %}
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Apps",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "constrain_width",
+      "label": "Match theme content width",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "add_spacing",
+      "label": "Add vertical spacing",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-light"
+    }
+  ],
+  "blocks": [
+    { "type": "@app" },
+    {
+      "type": "custom_liquid",
+      "name": "Custom Liquid",
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "code",
+          "label": "Liquid code",
+          "info": "Add HTML or Liquid code."
+        }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Apps" }]
+}
+{% endschema %}

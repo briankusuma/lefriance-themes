@@ -374,8 +374,14 @@ if (!customElements.get("journal-stories")) {
                 },
               });
               timeline
-                .to(
+                .fromTo(
                   plane,
+                  {
+                    x: 0,
+                    y: 0,
+                    width: () => geometry.width,
+                    height: () => geometry.height,
+                  },
                   {
                     width: () => geometry.width * 0.975,
                     height: () => geometry.height * 0.927,

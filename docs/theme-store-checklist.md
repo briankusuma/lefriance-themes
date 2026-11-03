@@ -287,7 +287,7 @@ Working checklist, not a release certificate. Read current official requirements
 
 ## Repository and tooling gates
 
-- [x] Theme Check CLI 4.9.4: zero findings after footer Autoplay bundle fix and caption defaults, 2026-11-03. Rerun after code changes.
+- [x] Theme Check CLI 4.9.4: zero findings after wide-screen layout fixes, 2026-11-03. Rerun after code changes.
 - [ ] No disabled Theme Check rules without justification
 - [ ] Third-party assets and licenses recorded in `docs/third-party-licenses.md`
 - [ ] Intentional design deviations recorded in `docs/project-brief.md`
@@ -299,3 +299,9 @@ Working checklist, not a release certificate. Read current official requirements
 - [x] Low/high-variant state, section replacement/error/retry, search keyboard/abort, recipient/wallet state, recommendation intent and160px QR exercised in DOM emulation with mocked Shopify APIs.
 - [ ] Live Theme Editor, native APIs/forms/checkout, account/Shop behavior, browser/a11y and Lighthouse verification for these additions.
 - [ ] Replace remaining Skeleton author/documentation/support metadata with confirmed merchant-facing identity and URLs (theme name is now lafrience).
+
+- [x] Apps wrapper @app/preset, width/spacing/color options and Custom Liquid verified locally, 2026-11-03; main-product app render retained.
+- [ ] Install/test a real theme app extension and app embed in Theme Editor/storefront (add/remove/reorder, keyboard/mobile and app-specific behavior).
+
+- [x] Wide-screen CSS syntax/63-case numeric geometry model and Journal resize/Featured GSAP regressions verified locally, 2026-11-03; not a browser visual pass.
+- [ ] Live 1440/1920/2560/3840 desktop and mobile visual/editor resize checks for bounded motion layouts.

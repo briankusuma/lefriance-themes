@@ -339,8 +339,18 @@ if (!customElements.get("material-story")) {
                     },
                     3.5,
                   )
-                  .to(heading, { y: 0, duration: 3 }, 3.5)
-                  .to(footer, { y: 0, duration: 3 }, 3.5)
+                  .fromTo(
+                    heading,
+                    { y: () => centerY(heading) - 90 },
+                    { y: 0, duration: 3 },
+                    3.5,
+                  )
+                  .fromTo(
+                    footer,
+                    { y: () => centerY(footer) + 65 },
+                    { y: 0, duration: 3 },
+                    3.5,
+                  )
                   .fromTo(
                     opening,
                     { value: 0.25 },

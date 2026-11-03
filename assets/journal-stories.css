@@ -29,22 +29,26 @@
     calc((100% - var(--page-width)) / 2 + var(--page-margin))
   );
   position: sticky;
-  top: 0;
+  top: max(0px, calc((100svh - var(--motion-stage-height)) / 2));
   width: 100%;
-  min-height: 100svh;
+  min-height: calc(var(--motion-vh) * 100);
   height: auto;
   padding-inline: var(--journal-inset);
-  padding-bottom: 4.687svh;
+  padding-bottom: calc(var(--motion-vh) * 4.687);
   display: grid;
   /* Figma 3776:1651: dividers at 268px and 610.8px on a 1091.556px frame. */
-  grid-template-rows: minmax(24.552svh, max-content) 31.405svh auto;
+  grid-template-rows:
+    minmax(calc(var(--motion-vh) * 24.552), max-content) calc(
+      var(--motion-vh) * 31.405
+    )
+    auto;
   overflow: hidden;
 }
 .journal-stories.is-scroll-scene .journal-stories__studio {
   z-index: 3;
   grid-template-rows: minmax(min-content, 1fr) auto;
   min-height: 0;
-  padding-block: 3.906svh 1.993svh;
+  padding-block: calc(var(--motion-vh) * 3.906) calc(var(--motion-vh) * 1.993);
   /* Figma 3776:1625: approximately 85px between intro copy and numbers. */
   gap: 5.33rem var(--grid-gap);
 }
@@ -69,11 +73,11 @@
   z-index: 2;
   min-height: 0;
   align-content: center;
-  padding-block: 2svh;
+  padding-block: calc(var(--motion-vh) * 2);
   overflow: hidden;
 }
 .journal-stories.is-scroll-scene .journal-stories__heading h2 {
-  font-size: clamp(1.8rem, min(3.333vw, 4.67svh), 3.2rem);
+  font-size: clamp(1.8rem, min(3.333vw, calc(var(--motion-vh) * 4.67)), 3.2rem);
 }
 .journal-stories.is-scroll-scene .journal-stories__carousel {
   position: relative;
@@ -82,7 +86,7 @@
   width: min(100%, 74.245rem);
   gap: 1.066rem;
   margin-block: 0;
-  padding-top: 3.125svh;
+  padding-top: calc(var(--motion-vh) * 3.125);
   min-height: 0;
 }
 .journal-stories.is-scroll-scene .journal-stories__arrow {
@@ -135,17 +139,18 @@
   transform-origin: center;
 }
 .journal-stories__motion-grid [data-journal-line="top"] {
-  top: var(--journal-studio-end, 24.552svh);
+  top: var(--journal-studio-end, calc(var(--motion-vh) * 24.552));
 }
 .journal-stories__motion-grid [data-journal-line="bottom"] {
-  top: var(--journal-heading-end, 55.957svh);
+  top: var(--journal-heading-end, calc(var(--motion-vh) * 55.957));
 }
 .journal-stories__motion-grid [data-journal-line="left"],
 .journal-stories__motion-grid [data-journal-line="right"] {
   top: 0;
   width: 1px;
   height: 100%;
-  transform-origin: center var(--journal-studio-end, 24.552svh);
+  transform-origin: center
+    var(--journal-studio-end, calc(var(--motion-vh) * 24.552));
 }
 .journal-stories__motion-grid [data-journal-line="left"] {
   left: 0;

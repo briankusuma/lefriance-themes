@@ -336,44 +336,46 @@
 }
 .featured-collections.is-scroll-scene .featured-collections__layout {
   position: sticky;
-  top: 0;
-  min-height: 100svh;
+  top: max(0px, calc((100svh - var(--motion-stage-height)) / 2));
+  min-height: calc(var(--motion-vh) * 100);
   height: auto;
-  padding-block: 4.67svh;
+  padding-block: calc(var(--motion-vh) * 4.67);
   /* Let the stage grow on short screens rather than compressing the photos. */
-  grid-template-rows: 14.8svh minmax(12rem, 1fr) var(--featured-tabs-row) auto;
+  grid-template-rows:
+    calc(var(--motion-vh) * 14.8) minmax(12rem, 1fr) var(--featured-tabs-row)
+    auto;
 }
 .featured-collections.is-scroll-scene .featured-collections__intro {
   min-height: 0;
   overflow: hidden;
-  padding-bottom: 2svh;
+  padding-bottom: calc(var(--motion-vh) * 2);
 }
 .featured-collections.is-scroll-scene .featured-collections__intro h2 {
   margin: 0;
-  font-size: clamp(1.6rem, min(3.333vw, 4.67svh), 3.2rem);
+  font-size: clamp(1.6rem, min(3.333vw, calc(var(--motion-vh) * 4.67)), 3.2rem);
 }
 .featured-collections.is-scroll-scene .featured-collections__brand {
-  font-size: clamp(0.75rem, 1.36svh, 0.933rem);
+  font-size: clamp(0.75rem, calc(var(--motion-vh) * 1.36), 0.933rem);
 }
 .featured-collections.is-scroll-scene .featured-collections__brand img {
-  width: clamp(1.25rem, 3.11svh, 2.132rem);
+  width: clamp(1.25rem, calc(var(--motion-vh) * 3.11), 2.132rem);
   height: auto;
-  margin-bottom: 1.5svh;
+  margin-bottom: calc(var(--motion-vh) * 1.5);
 }
 .featured-collections.is-scroll-scene .featured-collections__details {
   min-height: 0;
   overflow: hidden;
-  padding-block: 2.3svh 3.6svh;
+  padding-block: calc(var(--motion-vh) * 2.3) calc(var(--motion-vh) * 3.6);
 }
 .featured-collections.is-scroll-scene .featured-collections__description {
-  font-size: clamp(0.875rem, 1.75svh, 1.2rem);
+  font-size: clamp(0.875rem, calc(var(--motion-vh) * 1.75), 1.2rem);
 }
 .featured-collections.is-scroll-scene .featured-collections__note {
-  font-size: clamp(0.75rem, 1.36svh, 0.933rem);
+  font-size: clamp(0.75rem, calc(var(--motion-vh) * 1.36), 0.933rem);
 }
 .featured-collections.is-scroll-scene .featured-collections__arrows button {
-  width: clamp(2.5rem, 6.23svh, 4.264rem);
-  height: clamp(2.5rem, 6.23svh, 4.264rem);
+  width: clamp(2.5rem, calc(var(--motion-vh) * 6.23), 4.264rem);
+  height: clamp(2.5rem, calc(var(--motion-vh) * 6.23), 4.264rem);
 }
 .featured-collections.is-scroll-scene .featured-collections__tabs {
   padding: 0;
