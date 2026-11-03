@@ -13,48 +13,19 @@ if (!customElements.get("footer-gallery")) {
         this.paused = false;
         this.visible = false;
         this.hovered = false;
-        this.toggle = this.querySelector("[data-footer-toggle]");
         this.autoEnabled =
           this.dataset.autoplay === "true" && !window.Shopify?.designMode;
         this.slides = [...this.querySelectorAll("[data-footer-slide]")];
-        this.buttons = [...this.querySelectorAll("[data-footer-select]")];
+        this.indicators = [...this.querySelectorAll("[data-footer-indicator]")];
         const controls = this.querySelector("[data-footer-controls]");
         if (controls) controls.hidden = this.slides.length < 2;
         this.addEventListener(
-          "click",
-          (event) => {
-            if (event.target.closest("[data-footer-toggle]")) {
-              this.paused = !this.paused;
-              this.syncAutoplay();
-              return;
-            }
-            const button = event.target.closest("[data-footer-select]");
-            if (button) this.select(Number(button.dataset.footerSelect));
-          },
-          { signal },
-        );
-        this.addEventListener(
           "keydown",
           (event) => {
-            const button = event.target.closest("[data-footer-select]");
-            if (
-              !button ||
-              !["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)
-            )
-              return;
-            let index = this.buttons.indexOf(button);
-            const rtl = getComputedStyle(this).direction === "rtl";
-            if (event.key === "Home") index = 0;
-            else if (event.key === "End") index = this.slides.length - 1;
-            else
-              index =
-                (index +
-                  ((event.key === "ArrowRight") !== rtl ? 1 : -1) +
-                  this.slides.length) %
-                this.slides.length;
+            if (event.target !== this || event.code !== "Space") return;
             event.preventDefault();
-            this.select(index);
-            this.buttons[index].focus();
+            this.paused = !this.paused;
+            this.syncAutoplay();
           },
           { signal },
         );
@@ -113,7 +84,6 @@ if (!customElements.get("footer-gallery")) {
         this.addEventListener(
           "focusin",
           (event) => {
-            if (event.target.closest("[data-footer-toggle]")) return;
             this.paused = true;
             this.syncAutoplay();
           },
@@ -144,13 +114,6 @@ if (!customElements.get("footer-gallery")) {
       syncAutoplay() {
         const enabled =
           this.autoEnabled && this.slides.length > 1 && !this.reduced.matches;
-        if (this.toggle) {
-          this.toggle.hidden = !enabled;
-          this.toggle.setAttribute("aria-pressed", String(this.paused));
-          this.toggle.textContent = this.paused
-            ? this.dataset.playLabel
-            : this.dataset.pauseLabel;
-        }
         if (
           enabled &&
           this.visible &&
@@ -170,8 +133,8 @@ if (!customElements.get("footer-gallery")) {
           slide.inert = i !== index;
           slide.setAttribute("aria-hidden", String(i !== index));
         });
-        this.buttons.forEach((button, i) =>
-          button.setAttribute("aria-pressed", String(i === index)),
+        this.indicators.forEach(
+          (indicator, i) => (indicator.dataset.active = String(i === index)),
         );
       }
       disconnectedCallback() {

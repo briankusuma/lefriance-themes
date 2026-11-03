@@ -26,7 +26,7 @@
         "studio_photo_1": {
           "type": "media",
           "settings": {
-            "reference_image": "material-story-room.png",
+            "reference_image": "journal-balance.png",
             "caption": "<p>Design volume instead of square meters \u2014 better yield without bigger plans.</p>"
           }
         },
@@ -40,18 +40,11 @@
         "studio_photo_3": {
           "type": "media",
           "settings": {
-            "reference_image": "journal-balance.png",
-            "caption": ""
-          }
-        },
-        "studio_photo_4": {
-          "type": "media",
-          "settings": {
             "reference_image": "journal-finishing-generated.jpg",
             "caption": ""
           }
         },
-        "studio_photo_5": {
+        "studio_photo_4": {
           "type": "media",
           "settings": {
             "reference_image": "journal-timber-generated.jpg",
@@ -64,8 +57,7 @@
         "studio_photo_1",
         "studio_photo_2",
         "studio_photo_3",
-        "studio_photo_4",
-        "studio_photo_5"
+        "studio_photo_4"
       ],
       "settings": {
         "color_scheme": "scheme-footer",

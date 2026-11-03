@@ -51,7 +51,7 @@
         <div class="editorial-footer__studio-copy rte">{{ section.settings.studio_text }}</div>
       </div>
       {% if media_blocks.size > 0 or section.settings.use_reference_images %}
-        <footer-gallery class="editorial-footer__gallery" data-autoplay="{{ section.settings.gallery_autoplay }}" data-pause-label="{{ 'editorial_footer.pause' | t | escape }}" data-play-label="{{ 'editorial_footer.play' | t | escape }}">
+        <footer-gallery class="editorial-footer__gallery" data-autoplay="{{ section.settings.gallery_autoplay }}" tabindex="0" role="region" aria-label="{{ 'editorial_footer.gallery_hint' | t | escape }}">
           {% for block in media_blocks %}
             <div class="editorial-footer__slide" id="FooterSlide-{{ section.id }}-{{ block.id }}" data-footer-slide {{ block.shopify_attributes }}>
               {% if block.settings.image != blank %}
@@ -69,14 +69,13 @@
             </div>
           {% else %}
             <div class="editorial-footer__slide" data-footer-slide>
-              <img src="{{ 'material-story-room.png' | asset_img_url: '960x' }}" srcset="{{ 'material-story-room.png' | asset_img_url: '360x' }} 360w, {{ 'material-story-room.png' | asset_img_url: '680x' }} 680w, {{ 'material-story-room.png' | asset_img_url: '960x' }} 960w" sizes="(min-width: 990px) 34vw, 90vw" width="960" height="1200" alt="{{ 'editorial_footer.studio_image' | t | escape }}" loading="lazy">
+              <img src="{{ 'journal-balance.png' | asset_img_url: '960x' }}" srcset="{{ 'journal-balance.png' | asset_img_url: '360x' }} 360w, {{ 'journal-balance.png' | asset_img_url: '680x' }} 680w, {{ 'journal-balance.png' | asset_img_url: '960x' }} 960w" sizes="(min-width: 990px) 34vw, 90vw" width="960" height="1200" alt="{{ 'editorial_footer.studio_image' | t | escape }}" loading="lazy">
               <div class="editorial-footer__image-caption rte">{{ section.settings.image_caption }}</div>
             </div>
           {% endfor %}
-          <button type="button" class="editorial-footer__autoplay" data-footer-toggle aria-pressed="false" hidden>{{ 'editorial_footer.pause' | t }}</button>
           {% if media_blocks.size > 1 %}
-            <div class="editorial-footer__dots" role="group" aria-label="{{ 'editorial_footer.photos' | t | escape }}" data-footer-controls hidden>
-              {% for block in media_blocks %}<button type="button" data-footer-select="{{ forloop.index0 }}" aria-controls="FooterSlide-{{ section.id }}-{{ block.id }}" aria-label="{{ 'editorial_footer.show_photo' | t: number: forloop.index | escape }}" aria-pressed="false"><span aria-hidden="true"></span><img src="{{ 'material-story-active.svg' | asset_url }}" width="12.7917" height="12.7917" alt="" loading="lazy"></button>{% endfor %}
+            <div class="editorial-footer__dots" aria-hidden="true" data-footer-controls hidden>
+              {% for block in media_blocks %}<span class="editorial-footer__indicator" data-footer-indicator data-active="false"><span></span><img src="{{ 'material-story-active.svg' | asset_url }}" width="12.7917" height="12.7917" alt="" loading="lazy"></span>{% endfor %}
             </div>
           {% endif %}
         </footer-gallery>
@@ -157,7 +156,7 @@
     ] },
     { "type": "media", "name": "Studio photo", "limit": 6, "settings": [
       { "type": "image_picker", "id": "image", "label": "Image" },
-      { "type": "select", "id": "reference_image", "label": "Reference photo", "default": "none", "info": "Used when reference images are enabled and no image is selected.", "options": [
+      { "type": "select", "id": "reference_image", "label": "Reference photo", "default": "journal-balance.png", "info": "Used when reference images are enabled and no image is selected.", "options": [
         { "value": "none", "label": "None" },
         { "value": "material-story-room.png", "label": "Studio" },
         { "value": "journal-workshop.png", "label": "Workshop" },
