@@ -79,7 +79,7 @@
           "walnut-accent-chair"
         ],
         "use_catalog_fallback": true,
-        "fallback_collection": "",
+        "fallback_collection": "frontpage",
         "color_scheme": "scheme-light"
       }
     }
