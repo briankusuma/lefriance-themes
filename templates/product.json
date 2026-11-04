@@ -72,7 +72,12 @@
         "heading": "You may also like",
         "intent": "related",
         "limit": 4,
-        "fallback_products": [],
+        "fallback_products": [
+          "contour-upholstered-chair",
+          "modern-walnut-armchair",
+          "sculpted-wood-lounge-chair",
+          "walnut-accent-chair"
+        ],
         "use_catalog_fallback": true,
         "fallback_collection": "",
         "color_scheme": "scheme-light"
