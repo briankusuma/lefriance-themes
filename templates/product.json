@@ -71,24 +71,16 @@
       "settings": {
         "heading": "You may also like",
         "intent": "related",
+        "limit": 4,
+        "fallback_products": [],
         "use_catalog_fallback": true,
-        "limit": 4,
-        "color_scheme": "scheme-light"
-      }
-    },
-    "complementary": {
-      "type": "product-recommendations",
-      "settings": {
-        "heading": "Complete your space",
-        "intent": "complementary",
-        "limit": 4,
+        "fallback_collection": "",
         "color_scheme": "scheme-light"
       }
     }
   },
   "order": [
     "main",
-    "related",
-    "complementary"
+    "related"
   ]
 }
