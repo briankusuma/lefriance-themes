@@ -76,7 +76,8 @@
           "contour-upholstered-chair",
           "modern-walnut-armchair",
           "sculpted-wood-lounge-chair",
-          "walnut-accent-chair"
+          "walnut-accent-chair",
+          "mid-century-arm-chair"
         ],
         "use_catalog_fallback": true,
         "fallback_collection": "frontpage",
