@@ -3,7 +3,10 @@ if (!customElements.get("product-recommendations")) {
     "product-recommendations",
     class extends HTMLElement {
       connectedCallback() {
-        if (this.querySelector("[data-recommendation-content]")) return;
+        const existing = this.querySelector("[data-recommendation-content]");
+        if (existing && existing.dataset.recommendationSource === "native")
+          return;
+        if (this.abort && !this.abort.signal.aborted) return;
         this.abort?.abort();
         this.abort = new AbortController();
         const { signal } = this.abort;
@@ -25,10 +28,14 @@ if (!customElements.get("product-recommendations")) {
               "text/html",
             );
             const content = html.querySelector("[data-recommendation-content]");
-            if (content && !signal.aborted && this.isConnected)
-              this.replaceChildren(content);
+            if (
+              content?.dataset.recommendationSource === "native" &&
+              !signal.aborted &&
+              this.isConnected
+            )
+              this.replaceChildren(document.importNode(content, true));
           } catch {
-            /* Optional recommendations leave no empty placeholder. */
+            /* Keep the server-rendered catalog/merchant fallback on API failure. */
           }
         };
         if ("IntersectionObserver" in window) {

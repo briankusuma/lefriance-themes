@@ -24,6 +24,8 @@ Tema Shopify orisinal untuk merchant furnitur, berbasis Skeleton resmi yang suda
 - Gallery produk memakai Swiper, thumbnail dua kolom, sinkron dengan gambar varian. Blok title/colors/price/variant picker/quantity/buy/tax/description dapat diurutkan/dihapus.
 - Swatch kategori membaca `product.metafields.shopify['color-pattern'].value`: gambar didahulukan, lalu warna solid. Native variant swatches mendapat prioritas pada kartu. Metadata warna bersifat deskriptif, bukan varian/stok.
 
+- Product recommendations (2026-11-04): server-render real card fallback while native API loads; priority native → merchant product list → related-only selected collection/full catalog. Current product excluded and limit retained. Loader keeps fallback on empty/error and upgrades to native when available. Complementary needs native assignment or merchant fallback products, never generic catalog. Actual Liquid card/price and mocked loader regression pass; live Shopify/browser checks pending.
+
 ## Commerce audit remediation — 2026-11-02
 
 - Native filtering/sorting tersedia pada koleksi dan search; predictive search pada halaman search dengan keyboard dan fallback form biasa. Filter yang tampil mengikuti konfigurasi/data Shopify.

@@ -1,16 +1,16 @@
 # Task aktif
 
-Task aktif: Journal active-number reverse, 2026-11-03. Perbaikan dan regresi lokal selesai; browser belum diverifikasi.
+Task aktif: Product recommendation cards, 2026-11-04. Perbaikan dan tes lokal selesai; Shopify/browser live belum diverifikasi.
 
-Follow-up: background tombol nomor memakai warna solid pada fill0/1, gradient hanya selama transisi, agar tidak menyisakan seam terang di sisi kanan. Applied to all number buttons; same active-number regression passes. Browser pixel rendering pending.
+Finding: section previously emitted no card markup until native recommendations API returned nonempty products, with silent empty/error behavior. Public product HTML inspected did not expose the current product/section, so no claim of live API diagnosis. New section renders real product-card fallback server-side: native recommendations first, merchant fallback_products next; related only can use chosen fallback_collection or collections.all (enabled by default and explicit in current product template). Excludes current product, respects limit, no fake/duplicate cards. Complementary does not use generic catalog fallback; assign native complementary or merchant fallback products.
 
-Target: angka Journal tidak hilang saat reverse dan brown plane mengecil ke nomor slide aktif (04/06/dll), bukan posisi tetap/default. assets/journal-stories.js: fill/ink dirender melalui quickSetters dari state scalar reversible dan activeIndex, sehingga cached CSS custom property tidak mewariskan warna putih ke kotak terang. Sequential fill dimulai dari active item lalu mengikuti urutan melingkar. Plane collapse memakai dynamic fromTo ke posisi nomor aktif; perubahan selection menginvalidasi collapse/visibility tanpa restart timeline/Swiper. Pilihan slide dan scroll playhead dipertahankan.
+Loader upgrades rendered fallback to native results, keeps fallback on empty/error, uses locale route, importNode and idempotent connection guard. Merchant can edit fallback products/collection/checkbox via existing section settings. Existing card/grid style reused; no new Figma layout. Empty catalog or catalog-only-current-product renders no fake section.
 
-Validasi: actual GSAP object timeline regression menguji active02 awal, pindah04/06/01/04, reverse sampai collapse/full plane, fill/ink semua angka terbaca dan posisi plane tepat nomor aktif. Existing card-neighbor/gap21px/final/reverse/fallback/cleanup checks pass. Syntax/Prettier/diff bersih; Theme Check result dicatat di checklist. Tes bukan CSS rendering/scroll browser; visual desktop/mobile/editor masih perlu konfirmasi.
+Validation: Theme Check zero findings, JS syntax/Prettier/diff clean. Real Liquid with existing product-card/price snippets verifies native/manual/catalog priority, image/title/price, exclusion, counts/limits, empty/disabled/chosen-collection/complementary states. Loader mock responses verify locale URL, native upgrade, empty/error fallback preservation, no duplicate init and abort/disconnect. Live native recommendations, Theme Editor, browser/mobile/a11y/Lighthouse pending. No publish/push.
 
 Carry forward: metadata author/doc/support untuk tema lafrience masih menunggu data pengguna; native commerce additions sudah diuji lokal tetapi live APIs/checkout/editor/a11y/performance belum lulus. Hak distribusi aset Figma dan QA animasi/freeze/cart sebelumnya tetap terbuka. Tidak ada push/publish/deploy.
 
-Sumber: [Shopify app blocks dan wrapper](https://shopify.dev/docs/storefronts/themes/architecture/blocks/app-blocks).
+Sumber: [Shopify recommendations API](https://shopify.dev/docs/api/ajax/reference/product-recommendations), [recommendations object](https://shopify.dev/docs/api/liquid/objects/recommendations), [input settings](https://shopify.dev/docs/storefronts/themes/architecture/settings/input-settings).
 
 ## Isi untuk pekerjaan berikutnya
 

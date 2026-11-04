@@ -71,6 +71,7 @@
       "settings": {
         "heading": "You may also like",
         "intent": "related",
+        "use_catalog_fallback": true,
         "limit": 4,
         "color_scheme": "scheme-light"
       }

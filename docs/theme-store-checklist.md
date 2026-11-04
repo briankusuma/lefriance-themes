@@ -287,7 +287,7 @@ Working checklist, not a release certificate. Read current official requirements
 
 ## Repository and tooling gates
 
-- [x] Theme Check CLI 4.9.4: zero findings after Journal active-number reverse fix, 2026-11-03. Rerun after code changes.
+- [x] Theme Check CLI 4.9.4: zero findings after recommendation card fallback fix, 2026-11-04. Rerun after code changes.
 - [ ] No disabled Theme Check rules without justification
 - [ ] Third-party assets and licenses recorded in `docs/third-party-licenses.md`
 - [ ] Intentional design deviations recorded in `docs/project-brief.md`
@@ -305,3 +305,5 @@ Working checklist, not a release certificate. Read current official requirements
 
 - [x] Wide-screen CSS syntax/63-case numeric geometry model and Journal resize/Featured GSAP regressions verified locally, 2026-11-03; not a browser visual pass.
 - [ ] Live 1440/1920/2560/3840 desktop and mobile visual/editor resize checks for bounded motion layouts.
+
+- [x] Recommendation native/merchant/catalog priority, current-product exclusion, actual card markup and empty/error loader fallback verified in local fixtures, 2026-11-04. Live Shopify responses/editor still pending.
